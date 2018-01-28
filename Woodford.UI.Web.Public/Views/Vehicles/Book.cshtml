@@ -1,0 +1,102 @@
+﻿@model BookVehicleViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Book | " + Model.Vehicle.PageContent.PageTitle;
+    ViewBag.MetaKeywords = "Book," + Model.Vehicle.PageContent.MetaKeywords;
+    ViewBag.MetaDescription = "Book " + Model.Vehicle.PageContent.MetaDescription;
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Book @Model.Vehicle.Title</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="six columns">
+        @if (Model.Vehicle.FileUploadId.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.Vehicle.VehicleImage.Id, filename = Model.Vehicle.VehicleImage.Title + Model.Vehicle.VehicleImage.FileExtension, width = 500 })" alt="@Model.Vehicle.Title" />
+
+            if (Model.Vehicle.FileUploadId2.HasValue) {
+                <img src="@Url.Action("Index", "Uploads", new { id = Model.Vehicle.VehicleImage2.Id, filename = Model.Vehicle.VehicleImage2.Title + Model.Vehicle.VehicleImage2.FileExtension, width = 500 })" alt="@Model.Vehicle.Title Interior" />
+            }
+
+        } else {
+            <h2>@Model.Vehicle.Title</h2>
+        }
+
+        @{Html.RenderPartial("_VehicleAttributesPartial", Model.Vehicle);}
+    </div>
+    <div class="six columns">
+
+        @using (Html.BeginForm()) {
+
+            @Html.HiddenFor(m => m.SearchCriteria.AirportLocationIds)
+            @Html.HiddenFor(x => x.SearchCriteria.Criteria.VehicleId)
+            @Html.HiddenFor(x => x.SearchCriteria.Criteria.PickUpTimeFullInt)
+            @Html.HiddenFor(x => x.SearchCriteria.Criteria.DropOffTimeFullInt)
+
+
+            <div class="input-form vertical-form">
+
+                <div class="row">
+                    @Html.LabelFor(m => m.SearchCriteria.Criteria.PickUpLocationId, "Pickup Location")
+                    @Html.BranchFor(m => m.SearchCriteria.Criteria.PickUpLocationId)
+                    @Html.ValidationMessageFor(m => m.SearchCriteria.Criteria.PickUpLocationId)
+                </div>
+                <div class="row inline-input">
+                    <input type="checkbox" id="chk-book-return-at-different-location" />
+                    <label class="for-checkbox" for="chk-book-return-at-different-location">Return at a different location</label>
+                </div>
+                <div class="row" id="book-different-return-location" style="display: none;">
+                    @Html.LabelFor(m => m.SearchCriteria.Criteria.DropOffLocationId, "Drop Off Location")
+                    @Html.BranchFor(m => m.SearchCriteria.Criteria.DropOffLocationId)
+                    @Html.ValidationMessageFor(m => m.SearchCriteria.Criteria.DropOffLocationId)
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.SearchCriteria.Criteria.PickupDateTime, "Pickup Date")
+                    @Html.DatePickerFor(m => m.SearchCriteria.PickupDate, new { @class = "datefield" })
+                    @Html.TextBoxFor(x => x.SearchCriteria.Criteria.PickupTimeFull, new { style = "width: 100%;margin-top: 36px;" })
+                    @*@Html.HourOfDayDropDownListFor(m => m.Criteria.PickupTime, new { @class = "timefield" })*@
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.SearchCriteria.Criteria.DropOffDateTime, "Drop Off Date")
+                    @Html.DatePickerFor(m => m.SearchCriteria.DropOffDate, new { @class = "datefield" })
+                    @Html.TextBoxFor(x => x.SearchCriteria.Criteria.DropOffTimeFull, new { style = "width: 100%;margin-top: 36px;" })
+                </div>
+                <div class="row align-right">
+                    <input type="submit" value="Search" />
+                </div>
+            </div>
+
+        }
+       
+
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            cleanDate("SearchCriteria_PickupDate");
+            cleanDate("SearchCriteria_DropOffDate");
+            setUpDatePicker($("#SearchCriteria_PickupDate"));
+            setUpDatePicker($("#SearchCriteria_DropOffDate"));
+            setupTimePicker($("#SearchCriteria_Criteria_PickupTimeFull"));
+            setupTimePicker($("#SearchCriteria_Criteria_DropOffTimeFull"));
+
+            $("#SearchCriteria_Criteria_PickupTimeFull").on("change", function () {
+                $("#SearchCriteria_Criteria_PickupTimeFullInt").val($("#SearchCriteria_Criteria_PickupTimeFull").val().split(":")[0]);
+            });
+
+            $("#SearchCriteria_Criteria_DropOffTimeFull").on("change", function () {
+                $("#SearchCriteria_Criteria_DropOffTimeFullInt").val($("#SearchCriteria_Criteria_DropOffTimeFull").val().split(":")[0]);
+            });
+
+            var searchFunc = new searchFunctions();
+            searchFunc.init("Criteria_PickUpLocationId", "Criteria_DropOffLocationId", "chk-book-return-at-different-location", "AirportLocationIds", "Criteria_PickupTime", "Criteria_Criteria_DropOffTime", "book-different-return-location");
+        });
+        
+    </script>
+}

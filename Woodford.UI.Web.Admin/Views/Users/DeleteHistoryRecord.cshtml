@@ -1,0 +1,42 @@
+﻿@model BookingHistoryModel
+@{
+    ViewBag.Title = "Delete Booking History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Woodford Users</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Delete Booking History Record</h3>
+
+    </div><!-- /.box-header -->
+
+
+
+    @using (Html.BeginForm("DeleteHistoryRecord", "Users", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+        <div class="box-body">
+
+
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.UserId)
+
+            <p>Pick Up: @Model.PickupDate.ToString("d MMM yyyy")</p>
+            <p>Drop Off: @Model.DropOffDate.ToString("d MMM yyyy")</p>
+            <p>Booking Email: @Model.Email</p>
+
+            <p>Are you sure you wish to delete this record?</p>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+
+
+        </div>
+    }
+</div>

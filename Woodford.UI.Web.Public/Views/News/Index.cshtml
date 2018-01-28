@@ -1,0 +1,19 @@
+﻿@model List<NewsCategoryModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "News Categories";
+    ViewBag.MetaKeywords = "";
+    ViewBag.MetaDescription = "";
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>News Categories</h1>
+    </div>
+</div>
+
+@foreach (var c in Model) {
+    <ul>
+        <li><a href="/news/@c.PageUrl">@c.Title</a></li>
+    </ul>
+}            

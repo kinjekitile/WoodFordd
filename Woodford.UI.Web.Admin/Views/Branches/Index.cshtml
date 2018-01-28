@@ -1,0 +1,60 @@
+﻿@model ListOf<BranchModel>
+@{
+    ViewBag.Title = "Branches";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Branches</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Branches</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Branch", "Add", "Branches")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <th scope="col">Branch Name</th>                    
+                    <th scope="col">Airport?</th>
+                    <th scope="col">Page Url</th>
+                    <th scope="col">Archived?</th>
+                </tr>
+
+                @foreach (var b in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "Branches", new { id = b.Id }, null)</td>
+                        <td>
+                            @if (b.FileUploadId.HasValue) {                                
+                                <img src="@Url.Action("Index", "Uploads", new { id = b.BranchImage.Id, filename = b.BranchImage.Title + b.BranchImage.FileExtension, width = 100, height = 100, crop = 1 })" alt="@b.Title" />
+                            }
+                        </td>
+                        <td>@b.Title</td>
+                        <td>@(b.IsAirport ? "Yes" : "No")</td>
+                        <td>@b.PageUrl</td>
+                        <td>@(b.IsArchived ? "Archived" : "Live")</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No branches have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

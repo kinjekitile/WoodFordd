@@ -1,0 +1,53 @@
+﻿@import "vars";
+
+.input-field {
+    margin-bottom: 1.5em;
+}
+
+.input-field.input-submit {
+    margin-bottom: 0;
+}
+
+.input-form div {
+    margin-bottom: 1rem;
+}
+
+.input-form label {
+    display: inline-block;
+    /*width: 200px;*/    
+    padding-top: 0.5em;
+    max-width: 100%;
+    vertical-align: top;
+    width: 200px;
+}
+
+.input-form label.for-upload {
+    padding-top: 0;
+}
+
+.input-form input[type="email"], 
+.input-form input[type="number"], 
+.input-form input[type="search"], 
+.input-form input[type="text"], 
+.input-form input[type="tel"], 
+.input-form input[type="url"], 
+.input-form input[type="password"], 
+.input-form textarea, 
+.input-form select {
+    margin-bottom: 0;
+    margin-right: 10px;
+    max-width: 100%;
+    width: 300px;
+}
+
+.input-form input[type="checkbox"], 
+.input-form input[type="radio"] {
+    margin-top: 0.75em;
+}
+
+.input-form .field-validation-error {
+    color: $error-colour;
+    display: inline-block;
+    padding-top: 0.5em;
+    vertical-align: top;
+}

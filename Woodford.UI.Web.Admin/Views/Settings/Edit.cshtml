@@ -1,0 +1,35 @@
+﻿@model Woodford.Core.DomainModel.Models.SettingModel
+@{
+    ViewBag.Title = "Edit Setting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Application Settings</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit @Model.Type.ToString().Replace("_", " ")</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Edit", "Settings", new { type = Model.Type.ToString() }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {    
+        <div class="box-body">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Value, "Value", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Value, new { placeholder = "Value", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Value)
+                </div>
+            </div>
+           
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Setting</button>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

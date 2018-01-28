@@ -1,0 +1,18 @@
+﻿@model EmailSignatureModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Signature Sent</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+
+        <p>Email signature and instructions have been sent to: @Model.Email</p>
+
+
+    </div>
+</div>

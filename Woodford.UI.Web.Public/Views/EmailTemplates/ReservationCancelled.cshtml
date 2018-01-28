@@ -1,0 +1,28 @@
+﻿@model ReservationInvoiceNotificationModel
+
+<div style="color: #30693F; font-size: 12px; margin-bottom: 10px;">
+    Reservation Number: <span style="color: #333; font-size: 18px; margin-left: 20px;">@Model.Reservation.Id</span>
+</div>
+
+
+<p style="color: #646464; font-size: 18px; line-height: 22px; font-style: italic; padding: 8px 0; margin: 0;">
+    Your booking has been cancelled.
+</p>
+
+@*@if (Model.ShowCancelFee) {
+    <p>You have been charged a cancellation fee of R @Model.CancellationFee.ToString("#,##0.00")</p>
+}
+@if (Model.ShowRefundedAmount) {
+    <p>You have been refunded R @Model.RefundedAmount.ToString("#,##0.00")</p>
+
+    <p>Please allow up to 10 days.</p>
+}*@
+
+<p>
+
+    <h2 style="color: #19963C; border-bottom: 1px solid #999; margin: 0; padding: 5px 0 4px 0;">Hire Dates</h2>
+<p>
+    Pick Up <strong style="margin: 0 10px;">@Model.Reservation.PickupDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Reservation.PickupBranch.Title
+    <br />
+    Drop Off <strong style="margin: 0 10px;">@Model.Reservation.DropOffDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Reservation.DropOffBranch.Title
+</p>

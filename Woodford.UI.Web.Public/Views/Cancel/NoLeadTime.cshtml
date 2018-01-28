@@ -1,0 +1,32 @@
+﻿@model ReservationViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="six columns">
+        <h1>Cancel Reservation</h1>
+    </div>
+</div>
+
+<div class="row">
+    @*<div class="three columns">
+            <div class="nav-block">
+                @{Html.RenderPartial("_UserNavigationPartial"); }
+            </div>
+        </div>*@
+
+
+    <div class="seven columns">
+
+        <div class="reservation-number">
+            <h2>Reservation Number: <span>@Model.Reservation.Id</span></h2>
+        </div>
+
+        <p class="thank-you-message">Bookings must be cancelled at least 24 hours prior to collection. However, the <strong>date of the booking may be deferred</strong> without the booking fee being forfeited. In such a case, the difference in the rental fee will be charged.</p>
+
+        <p>@Html.ActionLink("Click Here", "Index", "Modify") to modify your booking</p>
+
+        
+    </div>
+</div>

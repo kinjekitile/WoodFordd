@@ -1,0 +1,35 @@
+﻿@model EmailSignatureToUserNotificationModel
+
+
+
+<div style="color: #30693F; font-size: 12px; margin-bottom: 10px;">
+    <p>Instructions Below:</p>
+
+    <p><strong>Step 1</strong></p>
+    <p>Unzip the attached email address zipped file.</p>
+
+    <p>There should be a resulting folder called @(Model.Signature.Email)</p>
+
+    <p>Go into the folder and copy all the files and folders within</p>
+
+
+    <p><strong>Step 2</strong></p>
+    <p>Open a second  file explorer and paste the command below into the address location and hit enter</p>
+
+    <p>%appdata%\Microsoft\Signatures</p>
+
+    <p>This should open your signatures folder.</p>
+
+
+    <p><strong>Step 3</strong></p>
+    <p>Now paste the files and folder you copied in step 1 into the folder opened in step 2</p>
+
+    <p><strong>Step 4</strong></p>
+    <p>Once you have done this, close and re-open outlook.</p>
+
+    <p><strong>Step 5</strong></p>
+    <p>Got to signatures, and Select the email address that you want the signature to apply to. Ie. @Model.Signature.Email</p>
+
+    <p>Then for new emails and replies select "Woodford 2017 Dynamic"</p>
+    
+</div>

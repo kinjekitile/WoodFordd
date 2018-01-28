@@ -1,0 +1,121 @@
+﻿/* Media Queries
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*
+Note: The best way to structure the use of media queries is to create the queries
+near the relevant code. For example, if you wanted to change the styles for buttons
+on small devices, paste the mobile query code up in the buttons section and style it
+there.
+*/
+
+.desktop-view {
+    display: block !important;
+}
+
+.mobile-view {
+    display: none !important;
+}
+
+
+/* Larger than mobile */
+@media (min-width: 400px) {
+}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {
+}
+
+/* Larger than tablet */
+@media (min-width: 750px) {
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {
+}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {
+}
+
+@media only screen and (max-width: 1100px) {
+    nav ul li#brandmark-item {
+        width: 100%;
+    }
+
+    nav ul li#brandmark-item a {
+        margin-top: 10px;
+        padding: 0;
+    }
+
+    nav ul li {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .viewport {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .mobile-view {
+        display: block !important;
+    }
+
+    .desktop-view {
+        display: none !important;
+    }
+
+    #search-panel input[type="submit"] {
+        margin: 1rem 0;
+    }
+
+    .search-panel-header-container {
+        height: auto;
+    }
+
+    .search-panel-header {
+        padding: 10px;
+        position: relative;
+        min-height: 20px;
+    }
+
+    .search-panel-header img {
+        height: 25px;
+        left: 5px;
+        position: absolute;
+        top: 7px;
+    }
+
+    .search-panel-header h2 {
+        margin: 0;
+    }
+
+    .input-form label {
+        text-align: left;
+    }
+
+    #brandmark-mobile img {
+        margin: 10px;
+        width: 150px;
+    }
+
+    footer .align-left,
+    footer .align-right {
+        text-align: center;
+    }
+
+    
+}
+
+
+@media (max-width: 549px) {
+    .toggle-search-panel {
+        right: 10px;
+    }
+
+    .search-filters input[type="submit"] {
+        margin-top: 10px;
+        position: static;
+    }
+}

@@ -1,0 +1,61 @@
+﻿@model ListOf<ReservationModel>
+@{
+    ViewBag.Title = "Reservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="four columns">
+        <div class="nav-block">
+            @{Html.RenderPartial("_UserNavigationPartial"); }
+        </div>
+    </div>
+
+
+    <div class="eight columns">
+        <h2>Reservations</h2>
+
+        @if (Model.Items.Count > 0) {
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Booked</th>
+                        <th>Collection</th>
+                        <th>Return</th>
+                        <th>Collected at</th>
+                        <th>Returned to</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items.OrderByDescending(x => x.DateCreated)) {
+                        <tr>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Reservations", new { id = item.Id }, null)
+                            </td>
+                            <td>
+                                @item.DateCreated.ToString("dd MMM yyyy")
+                            </td>
+                            <td>
+                                @item.PickupDate.ToString("dd MMM yyyy")
+                            </td>
+                            <td>
+                                @item.DropOffDate.ToString("dd MMM yyyy")
+                            </td>
+                            <td>
+                                @item.PickupBranch.Title
+                            </td>
+                            <td>
+                                @item.DropOffBranch.Title
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        } else {
+            <p>No current reservations</p>
+        }
+
+    </div>
+</div>

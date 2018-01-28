@@ -1,0 +1,169 @@
+﻿@model LoyaltyTierBenefitViewModel
+@{
+    ViewBag.Title = "Add Benefit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Loyalty</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Benefit</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("AddBenefit", "Loyalty", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Benefit.Title, "Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Benefit.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Benefit.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Benefit.Tier, "Tier", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.LoyaltyBenefitTierFor(m => m.Benefit.Tier, new {  @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Benefit.Tier)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Benefit.BenefitType, "Benefit Type", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.BenefitTypeFor(m => m.Benefit.BenefitType, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Benefit.BenefitType)
+                </div>
+            </div>
+
+            
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Benefit.StartDate, "Start Date", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Benefit.StartDate, new { placeholder = "Start Date", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Benefit.StartDate)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Benefit.EndDate, "End Date", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Benefit.EndDate, new { placeholder = "End Date", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Benefit.EndDate)
+                </div>
+            </div>  
+           
+            <div class="form-group">
+                @Html.LabelFor(m => m.Benefit.Description, "Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Benefit.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Benefit.Description)
+                </div>
+            </div>
+            
+            <div class="benefit-type-1">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Benefit.DropOffGraceHours, "Drop off Grace Hours", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Benefit.DropOffGraceHours, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Benefit.DropOffGraceHours)
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit-type-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Benefit.PickupLocationId, "Pickup Location", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.BranchFor(m => m.Benefit.PickupLocationId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Benefit.PickupLocationId)
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit-type-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Benefit.DropOffLocationId, "Drop off Location", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.BranchFor(m => m.Benefit.DropOffLocationId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Benefit.DropOffLocationId)
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit-type-3">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Benefit.FreeKms, "Free Kms", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Benefit.FreeKms, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Benefit.FreeKms)
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit-type-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Benefit.FreeDays, "Free Days", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Benefit.FreeDays, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Benefit.FreeDays)
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit-type-5">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Benefit.UpgradeId, "Free Upgrade", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.VehicleUpgradeFor(m => m.Benefit.UpgradeId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Benefit.UpgradeId)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Add Benefit</button>
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function showOfferType(offerType) {
+                $(".benefit-type-1,.benefit-type-2,.benefit-type-3,.benefit-type-4,.benefit-type-5,.benefit-type-6,.benefit-type-7").hide();
+                var specialType = $("#Benefit_BenefitType").val();
+                $(".benefit-type-" + specialType).show();
+            }
+            $("#Benefit_BenefitType").on("change", function () {
+                showOfferType();
+            });
+            showOfferType();
+
+            $('#Benefit_StartDate,#Benefit_EndDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+        });
+
+
+
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿@model InterBranchDropOffFeeViewModel
+@{
+    ViewBag.Title = "Edit Inter Branch Drop Off Fee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Inter Branch Drop Off Fees</h1>
+}
+
+@{ Html.RenderAction("RenderAuditContainer", "Audit", new { entityType = Model.DropOff.GetType(), entityIdValue = Model.DropOff.Id }); }
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Inter Branch Drop Off Fee</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Edit", "InterBranchDropOffFees", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+        @Html.HiddenFor(m => m.DropOff.Id)
+        @Html.HiddenFor(m => m.DropOff.IsActive)
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DropOff.Branch1Id, "Branch 1", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.BranchFor(m => m.DropOff.Branch1Id, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DropOff.Branch1Id)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DropOff.Branch2Id, "Branch 2", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.BranchFor(m => m.DropOff.Branch2Id, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DropOff.Branch2Id)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DropOff.Price, "Drop Off Price", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.DropOff.Price, new { placeholder = "Drop Off Price", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DropOff.Price)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Drop Off</button>
+                </div>
+            </div>
+
+        </div>
+        
+    }
+</div>

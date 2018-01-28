@@ -1,0 +1,100 @@
+﻿@model SearchResultsViewModel
+@if (Model.Results.Items.Count() > 0) {
+    foreach (var result in Model.Results.Items) {
+        <div class="row search-result">
+            <div class="three columns">
+                <h3>@result.Vehicle.Title</h3>
+                @if (result.Vehicle.FileUploadId.HasValue) {
+                    <img src="@Url.Action("Index", "Uploads", new { id = result.Vehicle.VehicleImage.Id, filename = result.Vehicle.VehicleImage.Title + result.Vehicle.VehicleImage.FileExtension, width = 200 })" alt="@result.Vehicle.Title" />
+                }
+            </div>
+            <div class="three columns">
+                <h4>@result.VehicleGroupName</h4>
+                @if (!string.IsNullOrEmpty(result.Vehicle.ShortDescription)) {
+                    <p>@result.Vehicle.ShortDescription</p>
+                }
+                <p>
+                    Fuel: Pick up full, return full<br />
+                    Insurance: Standard Cover Included
+                </p>
+                @{Html.RenderPartial("_VehicleAttributesPartial", result.Vehicle);}
+
+            </div>
+            @if (result.Rates.Count() > 0) {
+
+
+                SearchResultItemRateModel firstRate = result.Rates.First();
+
+
+
+                using (Html.BeginForm("Book", "Search")) {
+                    @*@Html.HiddenFor( x => x.Criteria.Criteria.PickUpLocationId)
+                        @Html.HiddenFor(x => x.Criteria.Criteria.DropOffLocationId)
+                        @Html.HiddenFor(x => x.Criteria.Criteria.PickupDateTime)
+                        @Html.HiddenFor(x => x.Criteria.Criteria.DropOffDateTime)*@
+                    @Html.Hidden("vehicleId", result.Vehicle.Id)
+                    @Html.Hidden("pickupBranchId", Model.Criteria.Criteria.PickUpLocationId)
+                    @Html.Hidden("dropOffBranchId", Model.Criteria.Criteria.DropOffLocationId)
+                    @Html.Hidden("pickupDate", Model.Criteria.Criteria.PickupDate)
+                    @Html.Hidden("pickupTime", Model.Criteria.Criteria.PickupTime)
+                    @Html.Hidden("dropOffDate", Model.Criteria.Criteria.DropOffDate)
+                    @Html.Hidden("dropOffTime", Model.Criteria.Criteria.DropOffTime)
+                    @Html.Hidden("pickupTimeFull", Model.Criteria.Criteria.PickupTimeFull)
+                    @Html.Hidden("dropoffTimeFull", Model.Criteria.Criteria.DropOffTimeFull)
+
+                    <div class="three columns">
+                        <h4>Select your Rate</h4>
+                        <div class="rates-selection" data-vehicle-id="@result.Vehicle.Id">
+                            @foreach (var r in result.Rates) {
+                                bool isCountdownRate = false;
+                                if (Model.CountdownSpecial != null) {
+                                    if (Model.CountdownSpecial.SpecialType == CountdownSpecialType.TextOnInvoice) {
+                                        isCountdownRate = r.CanUseCountdownSpecial;
+                                    }
+                                }
+
+                                <div class="inline-input">
+                                    @Html.RadioButton("radRates_" + result.Vehicle.Id, "radRates_" + r.RateId, r.RateId == firstRate.RateId, new { id = "radRates_" + r.RateId + "_" + result.Vehicle.Id, data_total = decimal.Round(r.PriceCalculation.BookingPrice, 2), data_cost = decimal.Round(r.PriceCalculation.AdjustedPrice, 2), data_days = r.PriceCalculation.NumberOfDays, data_tax = decimal.Round(r.PriceCalculation.TaxAmount, 2), data_dropOffFee = r.PriceCalculation.DropOffFee, data_vehicle_id = result.Vehicle.Id, @class = "rate-selector" })
+                                    <label for="radRates_@(r.RateId)_@result.Vehicle.Id" class="@(isCountdownRate ? "count-down-special-rate" : null)">@r.RateCodeTitle</label>
+                                    @if (isCountdownRate) {
+                                        @Html.Hidden("countDownSpecialRate", r.RateId)
+                                        <div class="count-down-special-container">
+                                            Book in the next
+                                            <span class="count-down-special"></span>
+                                            and you will receive <em>@Model.CountdownSpecial.OfferText</em>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="three columns align-right">
+                        @if (Model.CountdownSpecial != null) {
+                            @Html.Hidden("countDownSpecialId", Model.CountdownSpecial.Id)
+                        }
+                        <span class="price" id="rate-price-@result.Vehicle.Id"></span>
+                        <span class="price-context">for @Model.Criteria.Criteria.NumberOfDays day/s</span>
+
+                        <input type="submit" value="Book Now" />
+
+                        <span class="price-fine">Excl @firstRate.PriceCalculation.AdminFee.ToString("R #,##0") Contract Fee</span>
+                        @if (Model.Criteria.Criteria.PickUpLocationId == 4) {
+                            <span class="price-fine">Excl R25 e-toll Daily</span>
+                        }
+
+
+
+                    </div>
+                }
+            }
+
+        </div>
+                        }
+                    }
+                    else {
+                        <div class="row">
+                            <div class="twelve columns">
+                                <p>No results found</p>
+                            </div>
+                        </div>
+                    }

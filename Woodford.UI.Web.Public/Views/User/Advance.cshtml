@@ -1,0 +1,183 @@
+﻿@model AdvanceViewModel
+@{
+    ViewBag.Title = "Advance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section HeadIncludes {
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/advance.css")">
+}
+
+@if (!Model.User.IsLoyaltyMember) {
+    <div class="row">
+        <div class="twelve columns">
+            <p>Enroll in Advance Loyalty Program</p>
+
+            @using (Html.BeginForm("Enroll", "User")) {
+                @Html.AntiForgeryToken()
+                <div class="input-form">
+
+                    <div class="row">
+                        <div class="four columns empty-column">&nbsp;</div>
+                        <div class="eight columns"><input type="submit" value="Enroll in Advance" /></div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+
+@if (Model.User.IsLoyaltyMember) {
+    string levelClass = ((LoyaltyTierLevel)Model.User.LoyaltyTierId).GetDescription().ToLower();
+    <div class="row">
+        <div class="four columns">
+            <div class="nav-block">
+                @{Html.RenderPartial("_UserNavigationPartial"); }
+            </div>
+        </div>
+        <div class="eight columns">
+            <div class="row">
+                <div class="twelve columns">
+                    <h2>Advance</h2>
+                </div>
+            </div>
+            <div class="row advance-info-box">
+                <div class="seven columns" style="border-right: 1px solid #999;padding-left: 10px;">
+                    <h3>Welcome @Model.User.FirstName @Model.User.LastName</h3>
+
+                    <strong>Advance Number:</strong> <strong class="loyalty-tier-@(levelClass)">@Model.User.LoyaltyNumberFull</strong><br />
+                    <strong>Enrolled since:</strong> <strong class="loyalty-tier-@(levelClass)">@Model.User.LoyaltySignUpDate.Value.ToString("ddd, dd MMM yyyy")</strong><br />
+                    <strong>Current Advance Level:</strong> <strong class="loyalty-tier-@(levelClass)">@(((LoyaltyTierLevel)Model.User.LoyaltyTierId).GetDescription())</strong><br />
+                    @if (Model.User.LoyaltyPointsEarned.HasValue) {
+                        <strong>Points Earned:</strong> <strong class="loyalty-tier-@(levelClass)">@(decimal.Round(Model.User.LoyaltyPointsEarned.Value, 2))</strong><br />
+                    }
+                    else {
+                        <strong>Points Earned:</strong> <strong class="loyalty-tier-@(levelClass)">0.00</strong><br />
+                    }
+                    
+                    @if (Model.User.LoyaltyPointsSpent.HasValue) {
+                        <strong>Points Spent:</strong> <strong class="loyalty-tier-@(levelClass)">@(decimal.Round(Model.User.LoyaltyPointsSpent.Value, 2))</strong><br />
+                    }
+                    else {
+                        <strong>Points Spent:</strong> <strong class="loyalty-tier-@(levelClass)">0.00</strong><br />
+                    }
+                    
+                    <strong>Points Remaining:</strong> <strong class="loyalty-tier-@(levelClass)">@(decimal.Round(Model.User.LoyaltyPointsRemaining, 2))</strong><br />
+                    <div class="row">
+                        <div class="four columns" style="padding-top: 10px;">
+                            <img src="@Url.Content("~/Content/images/" + levelClass + "level.png")" />
+                        </div>
+                        <div class="eight columns" style="padding-top: 20px;color:#8c8c8c;">
+                            <p>The more you rent with Woodford Car Hire, the higher your earning percentage on the total value of your rental.</p>
+                        </div>
+                    </div>
+
+                    <h2>@(((LoyaltyTierLevel)Model.User.LoyaltyTierId).GetDescription())</h2>
+                    <p>@Html.ActionLink("View rental history", "Past", "Reservations", null, new { @class = levelClass })</p>
+
+                </div>
+                <div class="five columns">
+                    <h3>advance progress status</h3>
+
+                    <div class="chart-responsive">
+                        <canvas id="pieChart" height="150"></canvas>
+                    </div>
+
+                    <p>You are currently getting @(decimal.Round(Model.LoyaltyTierPointsPercentage * 100, 2))% rebates on all your hires.</p>
+                    <p>
+                        Period: <strong>@Model.User.LoyaltyPeriodStart.Value.ToString("dd MMMM yyyy") -  @Model.User.LoyaltyPeriodEnd.Value.ToString("dd MMMM yyyy")</strong><br />
+                        Hires in this period: <strong>@Model.LoyaltyBookingsPerPeriod</strong><br />
+                        Hires required to stay on this level: <strong>@Model.BookingsToRemainOnCurrentTier</strong><br />
+                        @if (Model.User.LoyaltyTier != LoyaltyTierLevel.Gold) {
+                            <text>Hires to move up a level: <strong>@Model.BookingsToMoveUpTier</strong></text>
+}
+                        
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+                    }
+
+
+
+
+
+
+
+@section scripts {
+
+    <script type="text/javascript" src="@Url.Content("~/Content/js/chartjs/Chart.min.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var bookingRemaining = @(Model.BookingsRequiredForNextLoyaltyTier - Model.LoyaltyBookingsPerPeriod);
+            var bookings = @(Model.LoyaltyBookingsPerPeriod);
+            //-------------
+            //- PIE CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            //green - #00a65a
+            //gold = #b8860b
+            //Silver - 
+            var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+            var pieChart = new Chart(pieChartCanvas);
+            var PieData = [
+
+              {
+                  value: bookings,
+                  color: "#b8860b",
+                  highlight: "#00a65a",
+                  label: "Completed Advance Bookings"
+              },
+              {
+                  value: bookingRemaining,
+                  color: "#d2d6de",
+                  highlight: "#d2d6de",
+                  label: "Bookings Required for Next Tier"
+              }
+            ];
+            var pieOptions = {
+                //Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke: true,
+                //String - The colour of each segment stroke
+                segmentStrokeColor: "#fff",
+                //Number - The width of each segment stroke
+                segmentStrokeWidth: 1,
+                //Number - The percentage of the chart that we cut out of the middle
+                percentageInnerCutout: 50, // This is 0 for Pie charts
+                //Number - Amount of animation steps
+                animationSteps: 100,
+                //String - Animation easing effect
+                animationEasing: "easeOutBounce",
+                //Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate: true,
+                //Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale: false,
+                //Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+                // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                //String - A legend template
+                legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
+                //String - A tooltip template
+                tooltipTemplate: "<%=value %> <%=label%>"
+            };
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            pieChart.Doughnut(PieData, pieOptions);
+            //-----------------
+            //- END PIE CHART -
+            //-----------------
+
+        });
+    </script>
+
+}

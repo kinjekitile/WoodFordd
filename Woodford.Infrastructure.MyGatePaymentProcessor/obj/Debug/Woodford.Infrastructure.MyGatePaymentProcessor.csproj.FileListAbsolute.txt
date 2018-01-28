@@ -1,0 +1,16 @@
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Infrastructure.MyGatePaymentProcessor.dll.config
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Infrastructure.MyGatePaymentProcessor.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Infrastructure.MyGatePaymentProcessor.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Core.ApplicationServices.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Core.DomainModel.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Core.DomainServices.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Core.Interfaces.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Infrastructure.Settings.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Core.ApplicationServices.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Core.DomainModel.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Core.DomainServices.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Core.Interfaces.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\bin\Debug\Woodford.Infrastructure.Settings.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\obj\Debug\Woodford.Infrastructure.MyGatePaymentProcessor.csprojResolveAssemblyReference.cache
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\obj\Debug\Woodford.Infrastructure.MyGatePaymentProcessor.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.MyGatePaymentProcessor\obj\Debug\Woodford.Infrastructure.MyGatePaymentProcessor.pdb

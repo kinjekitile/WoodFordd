@@ -1,0 +1,53 @@
+﻿@model CheckoutSuccessViewModel
+@{
+    ViewBag.Title = "Failed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Failed</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="eight columns">
+
+        <div class="reservation-number">
+            Reservation Number: <span>@Model.Reservation.Id</span>
+        </div>
+
+       
+
+        <p><a class="printquote" href="#">Print</a></p>
+        
+
+        <p>The payment was not processed: @Model.Reservation.PaymentErrorMessage</p>
+
+        <p>@Html.ActionLink("Click Here", "Confirm", "Checkout", new { id = Model.Reservation.Id }, null) to attempt to book again.</p>
+
+    </div>
+
+
+</div>
+
+<div class="row">
+    <hr />
+</div>
+
+<div class="row" style="padding-top: 10px;">
+    <!-- TrustBox widget - 0 -->
+    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="54620ca500006400057b77fe" data-style-height="130px" data-style-width="100%" data-theme="light" data-stars="4,5">
+        <a href="https://uk.trustpilot.com/review/www.woodford.co.za" target="_blank">Trustpilot</a>
+    </div>
+    <!-- End TrustBox widget -->
+</div>
+
+@section scripts {
+
+
+
+ 
+    }

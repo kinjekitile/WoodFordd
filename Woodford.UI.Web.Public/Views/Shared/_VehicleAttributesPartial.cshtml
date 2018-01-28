@@ -1,0 +1,26 @@
+﻿@model VehicleModel
+
+<div class="vehicle-attributes">
+    @if (Model.IsAutomatic) {
+        <div class="attribute automatic" title="Automatic"></div>
+    } else {
+        <div class="attribute manual" title="Manual"></div>
+    }
+    @if (Model.NumberOfPassengers > 0) {
+        <div class="attribute passengers" title="Passengers">
+            x @Model.NumberOfPassengers
+        </div>
+    }
+    @if (Model.NumberOfBaggage > 0) {
+        <div class="attribute luggage-space" title="Baggage Space">
+            x @Model.NumberOfBaggage
+        </div>
+    }
+
+    @if (Model.HasAircon) {
+        <div class="attribute aircon" title="Has Aircon">
+        </div>
+    }
+
+    <div class="clear"></div>
+</div>

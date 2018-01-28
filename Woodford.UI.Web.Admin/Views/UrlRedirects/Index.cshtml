@@ -1,0 +1,112 @@
+﻿@model UrlRedirectSearchModel
+@{
+    ViewBag.Title = "Url Redirects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Branches</h1>
+}
+
+@using (Html.BeginForm()) {
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Search</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.Url, "Url Search", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.Url, new { placeholder = "Url Search", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    
+                </div>
+                <div class="col-lg-4">
+                    
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Url Redirects</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Redirect", "Add", "UrlRedirects")
+        </div>
+    </div>
+    @if (Model.Result.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <td></td>
+                    <th scope="col">Type</th>                    
+                    <th scope="col">Old Url</th>
+                    <th scope="col">New Url</th>
+                    <th></th>
+                </tr>
+
+                @foreach (var b in Model.Result.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "UrlRedirects", new { id = b.Id }, null)</td>
+                        
+                        <td>@b.RedirectType.GetDescription()</td>
+                        
+                        <td>@b.OldUrl</td>
+                        <td>@b.NewUrl</td>
+                        <td>@Html.ActionLink("Delete", "Delete", "UrlRedirects", new { id = b.Id }, null)</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No Redirects have been created yet</p>
+        </div>
+    }
+    @if (Model.Result.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Result.Pagination)
+    }
+</div>

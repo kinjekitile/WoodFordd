@@ -1,0 +1,37 @@
+﻿@model ReservationFilterModel
+@using (Html.BeginForm("ExportAsExcel", "Reservations", FormMethod.Post)) {
+
+
+    @Html.HiddenFor(m => m.DateFilterType)
+
+    @Html.HiddenFor(m => m.DateSearchStart)
+
+    @Html.HiddenFor(m => m.DateSearchEnd)
+
+    @Html.HiddenFor(m => m.Email)
+
+
+    @Html.HiddenFor(m => m.Name)
+
+
+
+
+    @Html.HiddenFor(m => m.PickupBranchId)
+
+
+    @Html.HiddenFor(m => m.CorporateId)
+
+
+
+    @Html.HiddenFor(m => m.Id)
+
+    @Html.HiddenFor(m => m.IsCompletedInvoice)
+
+    @Html.HiddenFor(m => m.HasPayment)
+
+    @Html.HiddenFor(x => x.ExportedToExternalSystem)
+
+    @Html.HiddenFor(x => x.SortBy)
+
+    <input type="submit" value="Export as Excel" />
+}

@@ -1,0 +1,93 @@
+﻿@model DashboardSummaryModel
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+
+        <div class="col-md-6">
+
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-fw fa-calendar"></i>
+                    </span>
+                    <input class="form-control" type="text" id="SummaryStartDate" name="SummaryStartDate">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-fw fa-calendar"></i>
+                    </span>
+                    <input class="form-control" type="text" id="SummaryEndDate" name="SummaryEndDate">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary btn-sm" />
+                Go
+            </div>
+
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-12">
+
+
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-woodford">
+                            <img src="@Url.Content("~/Content/images/dashboard/bookings.png")" alt="" />
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Bookings</span>
+                            <span class="info-box-number">@Model.TotalBookings</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-woodford">
+                            <img src="@Url.Content("~/Content/images/dashboard/signups.png")" alt="" />
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Signups</span>
+                            <span class="info-box-number">@Model.TotalSignUps</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-woodford">
+                            <img src="@Url.Content("~/Content/images/dashboard/quotes.png")" alt="" />
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Quotes</span>
+                            <span class="info-box-number">@Model.TotalQuotes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-woodford">
+                            <img src="@Url.Content("~/Content/images/dashboard/pickups.png")" alt="" />
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Pickups</span>
+                            <span class="info-box-number">@Model.TotalPickups</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

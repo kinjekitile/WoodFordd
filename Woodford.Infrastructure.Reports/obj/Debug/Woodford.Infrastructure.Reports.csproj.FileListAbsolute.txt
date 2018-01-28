@@ -1,0 +1,5 @@
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Reports\bin\Debug\Woodford.Infrastructure.Reports.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Reports\bin\Debug\Woodford.Infrastructure.Reports.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Reports\obj\Debug\Woodford.Infrastructure.Reports.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Reports\obj\Debug\Woodford.Infrastructure.Reports.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Reports\obj\Debug\Woodford.Infrastructure.Reports.csprojResolveAssemblyReference.cache

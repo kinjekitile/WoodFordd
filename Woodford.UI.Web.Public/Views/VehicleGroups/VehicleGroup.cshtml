@@ -1,0 +1,32 @@
+﻿@model VehicleGroupModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.PageContent.PageTitle;
+    ViewBag.MetaKeywords = Model.PageContent.MetaKeywords;
+    ViewBag.MetaDescription = Model.PageContent.MetaDescription;
+}
+
+<h1>@Model.Title</h1>
+<p>@Model.TitleDescription</p>
+@if (Model.FileUploadId.HasValue) {
+    <img src="@Url.Action("Index", "Uploads", new { id = Model.VehicleGroupImage.Id, filename = Model.VehicleGroupImage.Title + Model.VehicleGroupImage.FileExtension, width = 1000})" alt="@Model.Title" />
+}
+@Html.Raw(Model.PageContent.PageContent)
+
+@if (Model.Vehicles.Count() > 0) {
+    <h4>Vehicles in this group</h4>
+    <ul>
+        @foreach (var v in Model.Vehicles) {
+            <li>
+                
+                @if (v.FileUploadId.HasValue) {
+                    <img src="@Url.Action("Index", "Uploads", new { id = v.VehicleImage.Id, filename = v.VehicleImage.Title + v.VehicleImage.FileExtension, width = 100 })" alt="@v.Title" />
+                }
+                <p><strong>@Html.ActionLink(v.Title, "Vehicle", "Vehicles", new { vehicleUrl = v.PageUrl }, null)</strong></p>                                
+                
+
+
+            </li>
+        }
+    </ul>
+}

@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.MetaKeywords = "";
+    ViewBag.MetaDescription = "";
+}
+
+@section HeadIncludes {
+    
+
+
+    }
+
+@section searchpanel {
+    @{Html.RenderPartial("_SearchPanelPartial", SearchCriteriaViewModelFactory.CreateInstance());}
+}
+
+@section herospace {
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns">
+                @{Html.RenderAction("Herospace"); }
+            </div>
+        </div>
+    </div>
+}
+
+<h1 class="hide-from-sighted-users">Woodford Car Hire</h1>
+
+<div class="row quad">
+    <div class="three columns quad-item">
+        <a href="@Url.Action("Index", "Campaigns")">
+            <img src="@Url.Content("~/Content/images/home-quad/latest-deals.png")" alt="Latest Deals" />
+        </a>
+        <h3>@Html.ActionLink("Latest Deals", "Index", "Campaigns")</h3>
+        <p>Unbeatable daily rates and exciting weekend specials.</p>
+    </div>
+    <div class="three columns quad-item">
+        <a href="@Url.Action("Index", "MonthlyRates")">
+            <img src="@Url.Content("~/Content/images/home-quad/monthly-rates.png")" alt="Monthly Rates" />
+        </a>
+        <h3>@Html.ActionLink("Monthly Rates", "Index", "MonthlyRates")</h3>
+        <p>Get more for less with Woodford. Find out how to save on long-term rentals.</p>
+    </div>
+    <div class="three columns quad-item">
+        <a href="/commercial">
+            <img src="@Url.Content("~/Content/images/home-quad/commercial.png")" alt="Commercial" />
+        </a>
+        <h3><a href="/commercial-rentals">Commercial</a></h3>
+        <p>Trucks and Transport for your fleet.</p>
+    </div>
+    <div class="three columns quad-item">
+        <a href="/advance">
+            <img src="@Url.Content("~/Content/images/home-quad/advance.png")" alt="Advance" />
+        </a>
+        <h3><a href="/advance">Advance</a></h3>
+        <p>Woodford Advance Loyalty Program.</p>
+    </div>
+</div>
+
+<div class="row">
+    <hr />
+</div>
+
+<div class="row" style="padding-top: 10px;">
+
+    <div class="row" style="padding-top: 10px;">
+        <!-- TrustBox widget - Carousel -->
+        <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="54620ca500006400057b77fe" data-style-height="130px" data-style-width="100%" data-theme="light" data-stars="4,5" data-schema-type="Organization">
+            <a href="https://uk.trustpilot.com/review/www.woodford.co.za" target="_blank">Trustpilot</a>
+        </div>
+        <!-- End TrustBox widget -->
+    </div>
+</div>
+
+@section scrollToContent {
+    @*blank to prevent scroll*@
+}
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Content/flexslider/jquery.flexslider-min.js")"></script>
+
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: true
+            });
+        });
+    </script>
+
+}

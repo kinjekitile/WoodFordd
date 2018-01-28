@@ -1,0 +1,10 @@
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\bin\Debug\Woodford.Infrastructure.Compression.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\bin\Debug\Woodford.Infrastructure.Compression.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\bin\Debug\Woodford.Core.Interfaces.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\bin\Debug\Woodford.Core.DomainModel.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\bin\Debug\Woodford.Core.Interfaces.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\bin\Debug\Woodford.Core.DomainModel.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\obj\Debug\Woodford.Infrastructure.Compression.csprojResolveAssemblyReference.cache
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\obj\Debug\Woodford.Infrastructure.Compression.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Compression\obj\Debug\Woodford.Infrastructure.Compression.pdb

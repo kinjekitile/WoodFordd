@@ -1,0 +1,64 @@
+﻿@model ReservationModifyDateViewModel
+@{
+    ViewBag.Title = "Modify Reservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="two columns">
+        <div class="nav-block">
+            @*@{Html.RenderPartial("_UserNavigationPartial"); }*@
+        </div>
+    </div>
+
+
+    <div class="eight columns">
+        <h1>Modify Reservation</h1>
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.ReservationId)
+            @Html.HiddenFor(x => x.ReservationPin)
+
+            <div class="input-form vertical-form">
+
+                <div class="row">
+                    @Html.LabelFor(m => m.ModifyPickupDate, "Pickup Date")
+                    @Html.DatePickerFor(m => m.ModifyPickupDate, new { @class = "datefield" })
+                    @Html.HourOfDayDropDownListFor(m => m.ModifyPickupTime, new { @class = "timefield" })
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(m => m.ModifyDropOffDate, "Drop Off Date")
+                    @Html.DatePickerFor(m => m.ModifyDropOffDate, new { @class = "datefield" })
+                    @Html.HourOfDayDropDownListFor(m => m.ModifyDropOffTime, new { @class = "timefield" })
+                </div>
+
+                <div class="row">
+                    <div class="four columns empty-column">&nbsp;</div>
+                    <div class="eight columns">
+                        <div  class="align-right">
+                            <input type="submit" value="Next" />
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="two columns">
+        <div class="nav-block">
+            @*@{Html.RenderPartial("_UserNavigationPartial"); }*@
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        cleanDate("ModifyPickupDate");
+        cleanDate("ModifyDropOffDate");
+        setUpDatePicker($("#ModifyPickupDate"));
+        setUpDatePicker($("#ModifyDropOffDate"));
+    </script>
+    }

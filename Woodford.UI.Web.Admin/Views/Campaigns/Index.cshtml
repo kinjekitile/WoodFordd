@@ -1,0 +1,63 @@
+﻿@model ListOf<CampaignModel>
+@{
+    ViewBag.Title = "Campaigns";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Campaigns</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Campaigns</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Campaign", "Add", "Campaigns")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <th scope="col">Campaign Title</th>                    
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>                    
+                    <th scope="col">Rate Code</th>
+                    <th scope="col">Page Url</th>
+                    <th scope="col">Archived?</th>
+                </tr>
+
+                @foreach (var c in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "Campaigns", new { id = c.Id }, null)</td>
+                        <td>
+                            @if (c.FileUploadId.HasValue) {
+                                <img src="@Url.Action("Index", "Uploads", new { id = c.CampaignImage.Id, filename = c.CampaignImage.Title + c.CampaignImage.FileExtension, width = 100, height = 100, crop = 1 })" alt="@c.Title" />
+                            }
+                        </td>
+                        <td>@c.Title</td>                        
+                        <td>@c.StartDate.ToString("dd/MM/yyyy")</td> 
+                        <td>@c.EndDate.ToString("dd/MM/yyyy")</td>
+                        <td>@c.RateCode.Title</td>
+                        <td>@c.PageUrl</td>
+                        <td>@(c.IsArchived ? "Archived" : "Live")</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No campaigns have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

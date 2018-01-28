@@ -1,0 +1,2 @@
+﻿@model ReservationInvoiceNotificationModel
+Hi @(Model.Reservation.FirstName). we're sorry that you've cancelled. Reservation Id: @(Model.Reservation.Id). @if (Model.ShowCancelFee) { <text>You have been charged a cancellation fee of R @Model.CancellationFee.ToString("#,##0.00")</text>} @if (Model.ShowRefundedAmount) { <text>You have been redunded R @Model.RefundedAmount.ToString("#,##0.00")</text>} . Woodford Car Hire

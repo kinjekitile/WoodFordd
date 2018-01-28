@@ -1,0 +1,27 @@
+﻿@model SubscribeViewModel
+
+@using (Ajax.BeginForm("Signup", "Home", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "subscribe-form", OnBegin = "subscribeBegin", OnComplete = "subscribeComplete" })) {
+    if (Model.Success) {
+        <p>Thank you for subscribing</p>
+    } else {
+
+        <div class="input-form vertical-form">
+            <div>
+                <label for="SubscribeEmail">Get Exclusive Car Hire Deals<br />Right In Your Inbox:</label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.SubscribeEmail, new { placeholder = "Your Email address" })
+                <div class="submit-button">
+                    <input type="submit" value="Go for it" />
+                </div>
+                <div class="spinner"></div>
+                <div>@Html.ValidationMessageFor(m => m.SubscribeEmail)</div>
+            </div>
+        </div>
+
+
+
+
+
+    }
+}

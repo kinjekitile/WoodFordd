@@ -1,0 +1,7 @@
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.Interfaces\bin\Debug\Woodford.Core.Interfaces.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.Interfaces\bin\Debug\Woodford.Core.Interfaces.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.Interfaces\bin\Debug\Woodford.Core.DomainModel.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.Interfaces\bin\Debug\Woodford.Core.DomainModel.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.Interfaces\obj\Debug\Woodford.Core.Interfaces.csprojResolveAssemblyReference.cache
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.Interfaces\obj\Debug\Woodford.Core.Interfaces.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.Interfaces\obj\Debug\Woodford.Core.Interfaces.pdb

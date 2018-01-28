@@ -1,0 +1,80 @@
+﻿@model BranchRateCodeExlusionViewModel
+@{
+    ViewBag.Title = "Add Exclusion | Branch Rate Code Exclusions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Branch Rate Code</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Branch Rate Code Exclusion</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Add", "BranchRateCodeExclusions", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+        
+        @Html.HiddenFor(m => m.Exclusion.BranchId)
+        
+
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <p>
+                Add exclusion for <strong>@Model.Branch.Title</strong>
+            </p>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Exclusion.RateCode, "Rate Code", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.RateCodeFor(m => m.Exclusion.RateCodeId, new { placeholder = "Rate Code", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Exclusion.RateCode)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Exclusion.StartDate, "Start Date", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Exclusion.StartDate, new { placeholder = "Start Date", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Exclusion.StartDate)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Exclusion.EndDate, "End Date", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Exclusion.EndDate, new { placeholder = "Start Date", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Exclusion.EndDate)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Add Exclusion</button>
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            cleanDate('Exclusion_StartDate');
+            cleanDate('Exclusion_EndDate');
+
+            $('#Exclusion_StartDate,#Exclusion_EndDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+        });
+
+    </script>
+}

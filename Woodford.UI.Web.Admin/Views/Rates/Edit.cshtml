@@ -1,0 +1,133 @@
+﻿@model RateUpdateViewModel
+@{
+    ViewBag.Title = "Edit Rate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Edit Rates</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Rates</h3>
+    </div><!-- /.box-header -->
+
+    <div class="form-horizontal">
+        @using (Html.BeginForm("Edit", "Rates", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+
+            <input type="hidden" name="branches" id="branches" value="@ViewBag.Branches" />
+            <input type="hidden" name="ratecodeid" id="ratecodeid" value="@ViewBag.RateCodeId" />
+            <input type="hidden" name="isopenended" id="isopenended" value="@(ViewBag.IsOpenEnded == true ? "true": "false")" />
+            <input type="hidden" name="startdate" id="startdate" value="@ViewBag.StartDate" />
+            <input type="hidden" name="enddate" id="enddate" value="@ViewBag.EndDate" />
+
+            <div class="box-body">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Rate Code</label>
+                    <div class="col-sm-10">
+                        @Model.RateCode.Title
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Selected Branches</label>
+                    <div class="col-sm-10">
+                        @foreach (var b in Model.SelectedBranches) {
+                            <text>@(b.Title),&nbsp; </text>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label for="RateAppliesTo_IsOpenEnded">
+                                @Html.CheckBoxFor(m => m.RateAppliesTo.IsOpenEnded) Is Open Ended
+                            </label>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.RateAppliesTo.IsOpenEnded)
+
+                    </div>
+                </div>
+
+                <div id="rate-dates">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.RateAppliesTo.ValidStartDate, "Start Date", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.RateAppliesTo.ValidStartDate, new { placeholder = "Start Date", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.RateAppliesTo.ValidStartDate)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.RateAppliesTo.ValidEndDate, "End Date", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.RateAppliesTo.ValidEndDate, new { placeholder = "End Date", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.RateAppliesTo.ValidEndDate)
+                        </div>
+                    </div>
+                </div>
+
+                @foreach (var v in Model.VehicleGroups) {
+
+                    List<RateModel> existingRates = Model.Rates.Where(x => x.VehicleGroupId == v.Id).ToList();
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="vg_@(v.Id)">@v.Title Rate</label>
+                        <div class="col-sm-10">
+                            @if (existingRates.Count > 0) {
+                                decimal currentRateValue = existingRates.FirstOrDefault().Price;
+                                decimal currentRatePerKm = existingRates.FirstOrDefault().CostPerKm;
+                                string rateIds = String.Join(",", existingRates.Select(x => x.Id).ToArray());
+                                <input name="vg_@(v.Id)" id="vg_@(v.Id)" type="text" placeholder="@v.Title Rate" value="@currentRateValue" class="form-control" />
+                                    <input type="hidden" id="vg_@(v.Id)_rateids" name="vg_@(v.Id)_rateids" value="@rateIds" />
+                                <input name="vg_@(v.Id)_perkm" id="vg_@(v.Id)_perkm" type="text" placeholder="@(v.Title) Per Km" value="@currentRatePerKm" class="form-control" />
+                            } else {
+                                <input name="vg_@(v.Id)" id="vg_@(v.Id)" type="text" placeholder="@v.Title Rate" value="" class="form-control" />
+                                    <input type="hidden" id="vg_@(v.Id)_rateids" name="vg_@(v.Id)_rateids" value="" />
+                                <input name="vg_@(v.Id)_perkm" id="vg_@(v.Id)_perkm" type="text" placeholder="@(v.Title) Per Km" value="" class="form-control" />
+                            }
+
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Update Rates</button>
+                    </div>
+                </div>
+
+            </div>
+
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $('#RateAppliesTo_ValidStartDate,#RateAppliesTo_ValidEndDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+            $("#RateAppliesTo_IsOpenEnded").on("change", function () {
+                showHideDates();
+            });
+            function showHideDates() {
+                var checked = $("#RateAppliesTo_IsOpenEnded").is(":checked");                
+                if (checked) {
+                    $('#RateAppliesTo_ValidStartDate,#RateAppliesTo_ValidEndDate').val("");
+                    $("#rate-dates").hide();
+                } else {
+                    $("#rate-dates").show();
+                }
+            }
+            showHideDates();
+        });
+
+    </script>
+}

@@ -1,0 +1,2 @@
+﻿@model LoyaltyPointsEarnedNotificationModel
+Thank you for using Woodford Advance. During your rental between @Model.PickupDate.ToString("dd MMMM yyyy h:mm tt") and @Model.DropoffDate.ToString("dd MMMM yyyy h:mm tt"), you earned @decimal.Round(Model.PointsEarned, 2) points. Your current balance is @decimal.Round(Model.PointsRemaining, 2) points. View your complete profile at woodford.co.za/advance

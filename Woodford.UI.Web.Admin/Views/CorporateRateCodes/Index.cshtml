@@ -1,0 +1,87 @@
+﻿@model CorporateRateCodesViewModel
+@{
+    ViewBag.Title = "Corporate Rate Codes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Corporate Rate Codes</h1>
+}
+
+@using (Html.BeginForm("Filter", "CorporateRateCodes", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Filter</h3>
+        </div><!-- /.box-header -->
+
+        <div id="filter" class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CorporateId, "Corporate", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.CorporateFor(m => m.CorporateId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CorporateId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+@if (Model.Filtered) {
+
+    if (Model.Updated) {
+        <p>Updated successfully</p>
+    }
+
+    using (Html.BeginForm("Index", "CorporateRateCodes", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+        @Html.HiddenFor(m => m.CorporateId)
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Rate Codes available to Corporate</h3>
+            </div><!-- /.box-header -->
+
+            <div id="results" class="box-body">
+
+                @foreach (var rateCode in Model.AllRateCodesAvailableToCorporates) {
+
+                    RateCodeModel corpRateCode = Model.CorporateRateCodes.Where(x => x.Id == rateCode.Id).SingleOrDefault();
+                    string checkboxName = "rateCode_" + rateCode.Id;
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="@checkboxName">
+                                    @if (corpRateCode == null) {
+                                        @Html.CheckBox(checkboxName, false) @rateCode.Title
+                                    } else {
+                                        @Html.CheckBox(checkboxName, true) @rateCode.Title
+                                        @Html.Hidden("crcid_for_" + rateCode.Id, corpRateCode.Id)
+                                    }
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+
+}

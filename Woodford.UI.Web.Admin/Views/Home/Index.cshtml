@@ -1,0 +1,111 @@
+﻿@model DashboardViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Woodford Administration Dashboard</h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+}
+<div class="row">
+
+                    @Html.Partial("_DashboardSummaryPartial", Model.Dashboard.Summary)
+               
+</div>
+
+
+<!-- Main content -->
+@*<section class="content">*@
+    <div class="row">
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+
+                <div class="col-md-6">
+
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-fw fa-calendar"></i>
+                            </span>
+                            <input class="form-control" type="text">
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-fw fa-calendar"></i>
+                            </span>
+                            <input class="form-control" type="text">
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary btn-sm" />
+                        Go
+                    </div>
+
+                </div>
+
+
+
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        @Html.Partial("_DashboardChartPartial", Model.Dashboard.Chart)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.Partial("_DashboardPickupsPartial", Model.Dashboard.BranchBookings)
+                    </div>
+                </div>
+
+            </div>
+            <div class="box-footer">
+                @Html.Partial("_DashboardSummaryMetricChangesPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+
+            @Html.Partial("_DashboardRecentBookingsPartial", Model.Dashboard.RecentBookings)
+
+
+        </div>
+        <div class="col-md-4">
+            @Html.Partial("_DashboardRatesPartial")
+        </div>
+    </div>
+
+@*</section>*@
+
+@section scripts {
+
+<script type="text/javascript">
+        $(document).ready(function () {
+          
+            cleanDate('SummaryStartDate');
+            cleanDate('SummaryEndDate');
+
+            $('#SummaryStartDate,#SummaryEndDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+        });
+
+</script>
+
+    @Html.Partial("_DashboardChartJsPartial")
+
+}

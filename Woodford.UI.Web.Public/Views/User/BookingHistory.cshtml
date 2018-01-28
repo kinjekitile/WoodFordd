@@ -1,0 +1,52 @@
+﻿@model ListOf<BookingHistoryModel>
+@{
+    ViewBag.Title = "Booking History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="four columns">
+        <div class="nav-block">
+            @{Html.RenderPartial("_UserNavigationPartial"); }
+        </div>
+    </div>
+
+    <div class="eight columns">
+        <h2>Booking History</h2>
+      
+        @if (Model.Items.Count() > 0) {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Booking Date</th>
+                        <th>Pickup Date</th>
+                        <th>Pickup Location</th>
+                        <th>DropOff Location</th>
+                        <th>Vehicle Group</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items) {
+                        <tr>
+                            <td>@item.ExternalId</td>
+                            <td>@item.DateBooked.ToString("d MMM yyyy")</td>
+                            <td>@item.PickupDate.ToString("d MMM yyyy")</td>
+                            <td>@item.PickupBranchId</td>
+                            <td>@item.ActualDropOffBranchId</td>
+                            <td>@item.VehicleGroupId</td>
+                            <td>@item.RenterTotalBill.Value.ToString("R #,##0")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        } else {
+            <p>You currently do not have any previous bookings</p>
+        }
+
+    </div>
+
+</div>

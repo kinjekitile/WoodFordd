@@ -1,0 +1,77 @@
+﻿@model ReservationSearchViewModel
+@{
+
+    Layout = null;
+}
+
+
+@if (Model.Items != null) {
+    if (Model.Items.Count > 0) {
+
+
+        <table class="table table-bordered table-striped dataTable">
+
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Id</th>
+                <th scope="col">User</th>
+                <th scope="col">Total</th>
+                <th scope="col">Amount Paid</th>
+                <th scope="col">Rate</th>
+                <th scope="col">Kms</th>
+                <th scope="col">Processed to External</th>
+
+
+            </tr>
+
+            @foreach (var item in Model.Items) {
+                <tr id="row_@(item.Id)">
+                    <td>
+                       
+                        <button class="exportLink" id="@(item.Id)" resEmail="@(item.Email)" resPhone="@(item.MobileNumber)" resFName="@(item.FirstName)" resLName="@(item.LastName)" resFrpNumber="@(item.User != null ? item.User.LoyaltyNumberFull : "")" resPickupBranch="@(item.PickupBranchId)" resPickupDate="@(item.PickupDate.ToString("dd/MM/yyyy"))" resPickupTime="@(item.PickupDate.Hour)" resPickupAmPm="@(item.PickupDate.ToString("tt"))" resDropoffBranch="@(item.DropOffBranchId)" resDropoffDate="@(item.DropOffDate.ToString("dd/MM/yyyy"))" resDropoffTime="@(item.DropOffDate.Hour)" resDropoffAmPm="@(item.DropOffDate.ToString("tt"))" resVehicleGroup="@(item.Vehicle.VehicleGroup.Title)" resDays="@(item.NumberOfDays)">
+                            Export
+                            </button>
+</td>
+
+                    <td>@item.Id</td>
+                    <td>
+                        @if (item.UserId.HasValue) {
+                            <text> @Html.ActionLink(item.FirstName + " " + item.LastName, "Details", "Users", new { id = item.UserId }, null)</text>
+                        }
+                        else {
+                            <text>@item.FirstName  @item.LastName</text>
+                        }
+
+                    </td>
+
+                    <td>@String.Format("{0:c}", item.BookingPrice)</td>
+                    <td>
+                        @if (item.Invoice != null) {
+                            if (item.Invoice.HasPayment) {
+                                <text>@String.Format("{0:c}", item.Invoice.AmountPaid)</text>
+                            }
+                            else {
+                                if (item.Invoice.IsMobileCheckout) {
+                                    <text>Mobile</text>
+                                }
+                            }
+
+                        }
+
+                    </td>
+                    <td>@decimal.Round(item.Rate.Price, 2)</td>
+                    <td>@decimal.Round(item.Rate.FreeKms, 2)</td>
+                    <td>
+                        @{  string isChecked = item.AddedToExternalSystem ? "checked" : ""; }
+                        <input class="chkExported" type="checkbox" id="chkExported_@(item.Id)" @(isChecked) /><span id="chkProcessing_@(item.Id)"></span>
+                    </td>
+
+                </tr>
+                            }
+
+        </table>
+
+                                }
+
+                            }
+

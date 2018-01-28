@@ -1,0 +1,269 @@
+﻿@model SearchResultsViewModel
+@{
+    ViewBag.Title = "Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section searchpanel {
+    @{Html.RenderPartial("_SearchPanelPartial", Model.Criteria);}
+}
+
+
+@*<div class="row">
+    <div class="twelve columns">
+        <div class="search-filters">
+            @using (Html.BeginForm("Book", "Search")) {
+                <div class="row">
+                    <div class="eight columns">
+                        <p><strong>Current Filter</strong></p>
+                        <ul>
+                            <li><a href="#">Vehicle: BMW 3 Series</a></li>
+                            <li><a href="#">Campaign: Back to Work</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <input type="submit" value="Reset Filters" />
+            }
+        </div>
+    </div>
+</div>*@
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Search Results</h1>
+    </div>
+</div>
+
+@if (Model.Results.Items.Count() > 0) {
+    foreach (var result in Model.Results.Items) {
+        <div class="row search-result">
+            <div class="three columns" style="position: relative;">
+                <h3>@result.Vehicle.Title</h3>
+                
+                @if (result.Rates.Any(x => x.HasLiveCampaign)) {
+
+                    int? fileId = result.Rates.First(x => x.HasLiveCampaign).LiveCampaignIconFileUploadId;
+                    if (fileId.HasValue) {
+                        <img src="@Url.Action("Index", "Uploads", new { id = fileId, filename = result.Vehicle.VehicleImage.Title + result.Vehicle.VehicleImage.FileExtension, width = 200 })" style="width: 75px; height: 75px;padding-left:150px;position: absolute;z-index: 10;" class="pull-right" />
+
+                        <img src="@Url.Action("Index", "Uploads", new { id = result.Vehicle.VehicleImage.Id, filename = result.Vehicle.VehicleImage.Title + result.Vehicle.VehicleImage.FileExtension, width = 200 })" alt="@result.Vehicle.Title" style="position: relative;padding-top: 35px;" />
+                    }
+                    else {
+                        <img src="@Url.Action("Index", "Uploads", new { id = result.Vehicle.VehicleImage.Id, filename = result.Vehicle.VehicleImage.Title + result.Vehicle.VehicleImage.FileExtension, width = 200 })" alt="@result.Vehicle.Title" />
+                    }
+
+                }
+                else {
+                    if (result.Vehicle.FileUploadId.HasValue) {
+
+                        <img src="@Url.Action("Index", "Uploads", new { id = result.Vehicle.VehicleImage.Id, filename = result.Vehicle.VehicleImage.Title + result.Vehicle.VehicleImage.FileExtension, width = 200 })" alt="@result.Vehicle.Title" style="position: relative;padding-top: 35px;" />
+                    }
+                }
+
+               
+            </div>
+            <div class="three columns">
+                <h4>@result.VehicleGroupName</h4>
+                @if (!string.IsNullOrEmpty(result.Vehicle.ShortDescription)) {
+                    <p>@result.Vehicle.ShortDescription</p>
+                }
+                <p>
+                    Fuel: Pick up full, return full<br />
+                    Insurance: Standard Cover Included
+                </p>
+                @{Html.RenderPartial("_VehicleAttributesPartial", result.Vehicle);}
+
+            </div>
+            @if (result.Rates.Count() > 0) {
+
+
+                SearchResultItemRateModel firstRate = result.Rates.First();
+
+
+
+                using (Html.BeginForm("Book", "Search")) {
+                    @*@Html.HiddenFor( x => x.Criteria.Criteria.PickUpLocationId)
+                        @Html.HiddenFor(x => x.Criteria.Criteria.DropOffLocationId)
+                        @Html.HiddenFor(x => x.Criteria.Criteria.PickupDateTime)
+                        @Html.HiddenFor(x => x.Criteria.Criteria.DropOffDateTime)*@
+                    @Html.Hidden("vehicleId", result.Vehicle.Id)
+                    @Html.Hidden("pickupBranchId", Model.Criteria.Criteria.PickUpLocationId)
+                    @Html.Hidden("dropOffBranchId", Model.Criteria.Criteria.DropOffLocationId)
+                    @Html.Hidden("pickupDate", Model.Criteria.Criteria.PickupDate)
+                    @Html.Hidden("pickupTime", Model.Criteria.Criteria.PickupTime)
+                    @Html.Hidden("dropOffDate", Model.Criteria.Criteria.DropOffDate)
+                    @Html.Hidden("dropOffTime", Model.Criteria.Criteria.DropOffTime)
+                    @Html.Hidden("pickupTimeFull", Model.Criteria.Criteria.PickupTimeFull)
+                    @Html.Hidden("dropoffTimeFull", Model.Criteria.Criteria.DropOffTimeFull)
+
+                    <div class="three columns">
+                        <h4>Select your Rate</h4>
+                        <div class="rates-selection" data-vehicle-id="@result.Vehicle.Id">
+                            @foreach (var r in result.Rates) {
+                                bool isCountdownRate = false;
+                                if (Model.CountdownSpecial != null) {
+                                    if (Model.CountdownSpecial.SpecialType == CountdownSpecialType.TextOnInvoice) {
+                                        isCountdownRate = r.CanUseCountdownSpecial;
+                                    }
+                                    if (Model.CountdownSpecial.SpecialType == CountdownSpecialType.VehicleUpgrade) {
+                                        if (Model.CountdownSpecial.VehicleUpgradeFromId == result.Vehicle.Id) {
+                                            isCountdownRate = r.CanUseCountdownSpecial;
+                                        }
+                                    }
+                                }
+
+                                <div class="inline-input">
+                                    @Html.RadioButton("radRates_" + result.Vehicle.Id, "radRates_" + r.RateId, r.RateId == firstRate.RateId, new { id = "radRates_" + r.RateId + "_" + result.Vehicle.Id, data_total = decimal.Round(r.PriceCalculation.BookingPrice, 2), data_cost = decimal.Round(r.PriceCalculation.AdjustedPrice, 2), data_days = r.PriceCalculation.NumberOfDays, data_tax = decimal.Round(r.PriceCalculation.TaxAmount, 2), data_dropOffFee = r.PriceCalculation.DropOffFee, data_vehicle_id = result.Vehicle.Id, @class = "rate-selector" })
+                                    @if (string.IsNullOrEmpty(r.RateCodeColor)) {
+                                        <label for="radRates_@(r.RateId)_@result.Vehicle.Id" class="@(isCountdownRate ? "count-down-special-rate" : null)">@r.RateCodeTitle</label>
+                                    }
+                                    else {
+                                        <label style="color: @(r.RateCodeColor);" for="radRates_@(r.RateId)_@result.Vehicle.Id" class="@(isCountdownRate ? "count-down-special-rate" : null)">@r.RateCodeTitle</label>
+                                    }
+
+                                    @if (isCountdownRate) {
+                                        @Html.Hidden("countDownSpecialRate", r.RateId)
+                                        <div class="count-down-special-container">
+                                            Book in the next
+                                            <span class="count-down-special"></span>
+                                            and you will receive <em>@Model.CountdownSpecial.OfferText</em>
+                                            
+                                          
+                                            
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="three columns align-right">
+                        @if (Model.CountdownSpecial != null) {
+                            @Html.Hidden("countDownSpecialId", Model.CountdownSpecial.Id)
+                        }
+                        <span class="price" id="rate-price-@result.Vehicle.Id"></span>
+                        <span class="price-context">for @Model.Criteria.Criteria.NumberOfDays day/s</span>
+
+                        <input type="submit" value="Book Now" />
+
+                        <span class="price-fine">Excl @firstRate.PriceCalculation.AdminFee.ToString("R #,##0") Contract Fee</span>
+
+                        @if (Model.Criteria.Criteria.PickUpLocationId == 4) {
+                            @*<span class="price-fine">Excl R25 e-toll Daily</span>*@
+                        }
+                        
+
+
+
+                    </div>
+                }
+            }
+
+        </div>
+                        }
+                    } else {
+                        <div class="row">
+                            <div class="twelve columns">
+                                <p>No results found</p>
+                            </div>
+                        </div>
+                    }
+
+
+
+<div class="row">
+    <hr />
+</div>
+
+<div class="row" style="padding-top: 10px;">
+    <!-- TrustBox widget - Carousel -->
+    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="54620ca500006400057b77fe" data-style-height="130px" data-style-width="100%" data-theme="light" data-stars="4,5" data-schema-type="Organization">
+        <a href="https://uk.trustpilot.com/review/www.woodford.co.za" target="_blank">Trustpilot</a>
+    </div>
+    <!-- End TrustBox widget -->
+</div>
+@section scripts {
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.countdown.js")"></script>
+
+
+    @{
+        int expirySeconds = 0;
+        if (Model.CountdownSpecial != null) {
+            expirySeconds = Convert.ToInt32((Model.CountDownSpecialExpiry - DateTime.Now).TotalSeconds);
+        }
+    }
+    @if (expirySeconds > 0) {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".count-down-special-container").show();
+
+                $('.count-down-special').countdown({
+                    until: +@expirySeconds,
+                    format: 'MS',
+                    compact: true,
+                    onExpiry: function () {
+                        $('.count-down-special-container').hide();
+                        $("label").removeClass("count-down-special-rate");
+                    }
+                });
+            });
+        </script>
+    } else {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".count-down-special-container").hide();
+                $("label").removeClass("count-down-special-rate");
+            });
+        </script>
+    }
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.format-1.3.min.js")"></script>
+
+    @if (Model.Results != null) {
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+
+
+                function setPriceForVehicle(selectedRate) {
+                    var vehicleId = selectedRate.attr("data-vehicle-id");
+                    var total = selectedRate.attr("data-total");
+                    var cost = selectedRate.attr("data-cost");
+                    var days = selectedRate.attr("data-days");
+                    var tax = selectedRate.attr("data-tax");
+                    var dropOffFee = selectedRate.attr("data-dropOffFee");
+
+
+                    var tooltipText = "Rental: R " + $.format.number(cost, '#,##0.00') + " x " + days + " days\n";
+                    tooltipText += " + Tax: R " + $.format.number(tax, '#,##0.00') + "\n";
+                    if (dropOffFee > 0) {
+                        tooltipText += " + Drop Off fee: R " + $.format.number(dropOffFee, '#,##0.00') + "\n";
+                    }
+                    tooltipText += "=================\n"
+                    tooltipText += "R " + $.format.number(total, '#,##0.00');
+
+                    //$("#rate-price-" + vehicleId).html("R " + $.format.number(total, '#,##0.00')).attr("title", tooltipText);;
+                    $("#rate-price-" + vehicleId).html("R " + total).attr("title", tooltipText);;
+                }
+
+                $("input[type='radio'].rate-selector").on("change", function () {
+                    var vehicleId = $(this).attr("data-vehicle-id");
+                    setPriceForVehicle($(this));
+                    //var cost = $(this).attr("data-cost");
+                    //$("#rate-price-" + vehicleId).html("R " + $.format.number(cost, '#,##0.00'));
+                });
+
+                $("div.rates-selection").each(function () {
+                    var vehicleId = $(this).attr("data-vehicle-id");
+                    var selectedRate = $("input[name='radRates_" + vehicleId + "']:checked");
+                    setPriceForVehicle(selectedRate);
+
+
+                    //var cost = selectedRate.attr("data-cost");
+                    //$("#rate-price-" + vehicleId).html("R " + $.format.number(cost, '#,##0.00'));
+                });
+
+            });
+        </script>
+    }
+}

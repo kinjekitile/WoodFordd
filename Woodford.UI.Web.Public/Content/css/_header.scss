@@ -1,0 +1,44 @@
+﻿@import "vars";
+
+.user-panel { 
+    background-color: #333;
+    border-bottom: 1px solid #232323;
+    border-top: 1px solid #232323;
+    text-align: right;
+    font-size: 1.3rem;
+}
+
+.user-panel ul li a {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+}
+
+.user-panel form, .user-panel ul, .user-panel ul li {
+    margin: 0;
+}
+
+.header {
+    background-color: #fff;
+    /*border-bottom: 5px solid #b1c630;*/
+    /*padding-top: 5px;*/
+}
+
+.user-panel a, .user-panel a:active, .user-panel a:visited {
+    color: #fff;
+}
+
+.user-panel a:hover {
+    color: #ccc;
+}
+
+.header span {
+    color: #fff;
+}
+.flexslider .slides > li {
+    margin-right: 0;
+}
+
+
+/*.header .login-header {
+    text-align: right;
+}*/

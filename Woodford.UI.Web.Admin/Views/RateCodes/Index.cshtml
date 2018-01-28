@@ -1,0 +1,47 @@
+﻿@model ListOf<RateCodeModel>
+@{
+    ViewBag.Title = "Rate Codes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Rate Codes</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Rate Codes</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Rate Code", "Add", "RateCodes")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+                <tr>
+                    <td></td>                    
+                    <th scope="col">Rate Code Name</th>                    
+                </tr>
+
+                @foreach (var r in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "RateCodes", new { id = r.Id }, null)</td>                        
+                        <td>@r.Title.ToString()</td>                                                                        
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No rate codes have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

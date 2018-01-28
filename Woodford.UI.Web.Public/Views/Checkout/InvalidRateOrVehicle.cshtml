@@ -1,0 +1,22 @@
+﻿@model CheckoutViewModelBase
+@{
+    ViewBag.Title = "Invalid Rate or Vehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="twelve columns">
+        @switch (Model.ErrorState) {
+            
+            case CheckoutReservationErrors.Continue_From_Email_Lead_Time_Error:
+                <h1>This quote is no longer available</h1>
+                    <p>We're sorry, but the quote is no longer available. Please use the search tools above to find another deal.</p>
+                break;
+
+            default:
+                <h1>Vehicle Rate no longer available</h1>
+                <p>We're sorry, but the rate you selected is no longer available. Please use the search tools above to find another deal.</p>
+                break;
+        }
+    </div>
+</div>

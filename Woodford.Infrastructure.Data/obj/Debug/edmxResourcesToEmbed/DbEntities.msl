@@ -1,0 +1,896 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Woodford2015ModelStoreContainer" CdmEntityContainer="Woodford2015Entities">
+    <EntitySetMapping Name="AppSettings">
+      <EntityTypeMapping TypeName="Woodford2015Model.AppSetting">
+        <MappingFragment StoreEntitySet="AppSettings">
+          <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BranchVehicleExclusions">
+      <EntityTypeMapping TypeName="Woodford2015Model.BranchVehicleExclusion">
+        <MappingFragment StoreEntitySet="BranchVehicleExclusions">
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="BranchVehicleId" ColumnName="BranchVehicleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BranchVehicles">
+      <EntityTypeMapping TypeName="Woodford2015Model.BranchVehicle">
+        <MappingFragment StoreEntitySet="BranchVehicles">
+          <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Campaigns">
+      <EntityTypeMapping TypeName="Woodford2015Model.Campaign">
+        <MappingFragment StoreEntitySet="Campaigns">
+          <ScalarProperty Name="SearchResultIconFileUploadId" ColumnName="SearchResultIconFileUploadId" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="FileUploadId" ColumnName="FileUploadId" />
+          <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="RateCodeId" ColumnName="RateCodeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Corporates">
+      <EntityTypeMapping TypeName="Woodford2015Model.Corporate">
+        <MappingFragment StoreEntitySet="Corporates">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DynamicPages">
+      <EntityTypeMapping TypeName="Woodford2015Model.DynamicPage">
+        <MappingFragment StoreEntitySet="DynamicPages">
+          <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="AdminDescription" ColumnName="AdminDescription" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileUploads">
+      <EntityTypeMapping TypeName="Woodford2015Model.FileUpload">
+        <MappingFragment StoreEntitySet="FileUploads">
+          <ScalarProperty Name="IsStandalone" ColumnName="IsStandalone" />
+          <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+          <ScalarProperty Name="FileContext" ColumnName="FileContext" />
+          <ScalarProperty Name="DateUploaded" ColumnName="DateUploaded" />
+          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+          <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HerospaceItems">
+      <EntityTypeMapping TypeName="Woodford2015Model.HerospaceItem">
+        <MappingFragment StoreEntitySet="HerospaceItems">
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="FileUploadId" ColumnName="FileUploadId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterBranchDropOffFees">
+      <EntityTypeMapping TypeName="Woodford2015Model.InterBranchDropOffFee">
+        <MappingFragment StoreEntitySet="InterBranchDropOffFees">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Branch2Id" ColumnName="Branch2Id" />
+          <ScalarProperty Name="Branch1Id" ColumnName="Branch1Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoices">
+      <EntityTypeMapping TypeName="Woodford2015Model.Invoice">
+        <MappingFragment StoreEntitySet="Invoices">
+          <ScalarProperty Name="HasPaymentError" ColumnName="HasPaymentError" />
+          <ScalarProperty Name="PaymentErrorCode" ColumnName="PaymentErrorCode" />
+          <ScalarProperty Name="IsCorporateCheckout" ColumnName="IsCorporateCheckout" />
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="IsMobileCheckout" ColumnName="IsMobileCheckout" />
+          <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoyaltyTierBenefits">
+      <EntityTypeMapping TypeName="Woodford2015Model.LoyaltyTierBenefit">
+        <MappingFragment StoreEntitySet="LoyaltyTierBenefits">
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="ExtraPriceOverride" ColumnName="ExtraPriceOverride" />
+          <ScalarProperty Name="ExtraId" ColumnName="ExtraId" />
+          <ScalarProperty Name="UpgradeId" ColumnName="UpgradeId" />
+          <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
+          <ScalarProperty Name="FreeKms" ColumnName="FreeKms" />
+          <ScalarProperty Name="DropOffLocationId" ColumnName="DropOffLocationId" />
+          <ScalarProperty Name="PickupLocationId" ColumnName="PickupLocationId" />
+          <ScalarProperty Name="DropOffGraceHours" ColumnName="DropOffGraceHours" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="BenefitTypeId" ColumnName="BenefitTypeId" />
+          <ScalarProperty Name="LoyaltyTierId" ColumnName="LoyaltyTierId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PageContents">
+      <EntityTypeMapping TypeName="Woodford2015Model.PageContent">
+        <MappingFragment StoreEntitySet="PageContent">
+          <ScalarProperty Name="VehicleManufacturerId" ColumnName="VehicleManufacturerId" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="CampaignId" ColumnName="CampaignId" />
+          <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+          <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+          <ScalarProperty Name="VehicleGroupId" ColumnName="VehicleGroupId" />
+          <ScalarProperty Name="DynamicPageId" ColumnName="DynamicPageId" />
+          <ScalarProperty Name="PageContent1" ColumnName="PageContent" />
+          <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+          <ScalarProperty Name="MetaKeywords" ColumnName="MetaKeywords" />
+          <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RateAdjustments">
+      <EntityTypeMapping TypeName="Woodford2015Model.RateAdjustment">
+        <MappingFragment StoreEntitySet="RateAdjustments">
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="AdjustmentPercentage" ColumnName="AdjustmentPercentage" />
+          <ScalarProperty Name="NumberOfBookings" ColumnName="NumberOfBookings" />
+          <ScalarProperty Name="RateCodeId" ColumnName="RateCodeId" />
+          <ScalarProperty Name="VehicleGroupId" ColumnName="VehicleGroupId" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="AdjustmentTypeEnum" ColumnName="AdjustmentTypeEnum" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReservationsLoyaltyTierBenefits">
+      <EntityTypeMapping TypeName="Woodford2015Model.ReservationsLoyaltyTierBenefit">
+        <MappingFragment StoreEntitySet="ReservationsLoyaltyTierBenefits">
+          <ScalarProperty Name="ExtraPriceOverride" ColumnName="ExtraPriceOverride" />
+          <ScalarProperty Name="ExtraId" ColumnName="ExtraId" />
+          <ScalarProperty Name="UpgradeId" ColumnName="UpgradeId" />
+          <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
+          <ScalarProperty Name="FreeKms" ColumnName="FreeKms" />
+          <ScalarProperty Name="DropOffGraceHours" ColumnName="DropOffGraceHours" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="BenefitTypeId" ColumnName="BenefitTypeId" />
+          <ScalarProperty Name="LoyaltyTierBenefitId" ColumnName="LoyaltyTierBenefitId" />
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReservationsVehicleExtras">
+      <EntityTypeMapping TypeName="Woodford2015Model.ReservationsVehicleExtra">
+        <MappingFragment StoreEntitySet="ReservationsVehicleExtras">
+          <ScalarProperty Name="ReservationLoyaltyTierBenefitId" ColumnName="ReservationLoyaltyTierBenefitId" />
+          <ScalarProperty Name="ExtraTitle" ColumnName="ExtraTitle" />
+          <ScalarProperty Name="ExtraPrice" ColumnName="ExtraPrice" />
+          <ScalarProperty Name="VehicleExtraId" ColumnName="VehicleExtraId" />
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleExtras">
+      <EntityTypeMapping TypeName="Woodford2015Model.VehicleExtra">
+        <MappingFragment StoreEntitySet="VehicleExtras">
+          <ScalarProperty Name="ImageClass" ColumnName="ImageClass" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleGroups">
+      <EntityTypeMapping TypeName="Woodford2015Model.VehicleGroup">
+        <MappingFragment StoreEntitySet="VehicleGroups">
+          <ScalarProperty Name="VehicleGroupTypeId" ColumnName="VehicleGroupTypeId" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+          <ScalarProperty Name="TitleDescription" ColumnName="TitleDescription" />
+          <ScalarProperty Name="FileUploadId" ColumnName="FileUploadId" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vehicles">
+      <EntityTypeMapping TypeName="Woodford2015Model.Vehicle">
+        <MappingFragment StoreEntitySet="Vehicles">
+          <ScalarProperty Name="VehicleManufacturerId" ColumnName="VehicleManufacturerId" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="DepositAmount" ColumnName="DepositAmount" />
+          <ScalarProperty Name="ExcessAmount" ColumnName="ExcessAmount" />
+          <ScalarProperty Name="IsAutomatic" ColumnName="IsAutomatic" />
+          <ScalarProperty Name="HasPowerSteering" ColumnName="HasPowerSteering" />
+          <ScalarProperty Name="HasRadio" ColumnName="HasRadio" />
+          <ScalarProperty Name="HasAircon" ColumnName="HasAircon" />
+          <ScalarProperty Name="IsPetrol" ColumnName="IsPetrol" />
+          <ScalarProperty Name="NumberOfBaggage" ColumnName="NumberOfBaggage" />
+          <ScalarProperty Name="NumberOfPassengers" ColumnName="NumberOfPassengers" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+          <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+          <ScalarProperty Name="FileUploadId2" ColumnName="FileUploadId2" />
+          <ScalarProperty Name="FileUploadId" ColumnName="FileUploadId" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="VehicleGroupId" ColumnName="VehicleGroupId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vouchers">
+      <EntityTypeMapping TypeName="Woodford2015Model.Voucher">
+        <MappingFragment StoreEntitySet="Vouchers">
+          <ScalarProperty Name="IsMultiUse" ColumnName="IsMultiUse" />
+          <ScalarProperty Name="VoucherDiscountPercentage" ColumnName="VoucherDiscountPercentage" />
+          <ScalarProperty Name="VoucherReward" ColumnName="VoucherReward" />
+          <ScalarProperty Name="VoucherDiscount" ColumnName="VoucherDiscount" />
+          <ScalarProperty Name="VoucherRewardType" ColumnName="VoucherRewardType" />
+          <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="DateRedeemed" ColumnName="DateRedeemed" />
+          <ScalarProperty Name="DateExpiry" ColumnName="DateExpiry" />
+          <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+          <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="RequireClientValidation" ColumnName="RequireClientValidation" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageQueues">
+      <EntityTypeMapping TypeName="Woodford2015Model.MessageQueue">
+        <MappingFragment StoreEntitySet="MessageQueue">
+          <ScalarProperty Name="AttachementPath" ColumnName="AttachementPath" />
+          <ScalarProperty Name="HasAttachment" ColumnName="HasAttachment" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+          <ScalarProperty Name="ErrorOccurred" ColumnName="ErrorOccurred" />
+          <ScalarProperty Name="TimesTried" ColumnName="TimesTried" />
+          <ScalarProperty Name="DateSent" ColumnName="DateSent" />
+          <ScalarProperty Name="Processing" ColumnName="Processing" />
+          <ScalarProperty Name="Sent" ColumnName="Sent" />
+          <ScalarProperty Name="EmailBody" ColumnName="EmailBody" />
+          <ScalarProperty Name="EmailSubject" ColumnName="EmailSubject" />
+          <ScalarProperty Name="EmailBcc" ColumnName="EmailBcc" />
+          <ScalarProperty Name="EmailCc" ColumnName="EmailCc" />
+          <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
+          <ScalarProperty Name="SenderProcess" ColumnName="SenderProcess" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Waivers">
+      <EntityTypeMapping TypeName="Woodford2015Model.Waiver">
+        <MappingFragment StoreEntitySet="Waivers">
+          <ScalarProperty Name="Liability" ColumnName="Liability" />
+          <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
+          <ScalarProperty Name="VehicleGroupId" ColumnName="VehicleGroupId" />
+          <ScalarProperty Name="WaiverType" ColumnName="WaiverType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branches">
+      <EntityTypeMapping TypeName="Woodford2015Model.Branch">
+        <MappingFragment StoreEntitySet="Branches">
+          <ScalarProperty Name="BookingLeadTimeNight" ColumnName="BookingLeadTimeNight" />
+          <ScalarProperty Name="BookingLeadTimeDay" ColumnName="BookingLeadTimeDay" />
+          <ScalarProperty Name="WeatherApiId" ColumnName="WeatherApiId" />
+          <ScalarProperty Name="BranchRequestCallbackPageContent" ColumnName="BranchRequestCallbackPageContent" />
+          <ScalarProperty Name="BranchRequestCallbackMetaDescription" ColumnName="BranchRequestCallbackMetaDescription" />
+          <ScalarProperty Name="BranchRequestCallbackMetaKeywords" ColumnName="BranchRequestCallbackMetaKeywords" />
+          <ScalarProperty Name="BranchRequestCallbackPageTitle" ColumnName="BranchRequestCallbackPageTitle" />
+          <ScalarProperty Name="BranchContactPageContent" ColumnName="BranchContactPageContent" />
+          <ScalarProperty Name="BranchContactMetaDescription" ColumnName="BranchContactMetaDescription" />
+          <ScalarProperty Name="BranchContactMetaKeywords" ColumnName="BranchContactMetaKeywords" />
+          <ScalarProperty Name="BranchContactPageTitle" ColumnName="BranchContactPageTitle" />
+          <ScalarProperty Name="BranchShortDescription" ColumnName="BranchShortDescription" />
+          <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+          <ScalarProperty Name="BranchSubTitle" ColumnName="BranchSubTitle" />
+          <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+          <ScalarProperty Name="AfterHoursTelephoneNumber" ColumnName="AfterHoursTelephoneNumber" />
+          <ScalarProperty Name="MapEmbed" ColumnName="MapEmbed" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="IsAirport" ColumnName="IsAirport" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="FileUploadId" ColumnName="FileUploadId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CountdownSpecials">
+      <EntityTypeMapping TypeName="Woodford2015Model.CountdownSpecial">
+        <MappingFragment StoreEntitySet="CountdownSpecials">
+          <ScalarProperty Name="VehicleUpgradeAmountOverride" ColumnName="VehicleUpgradeAmountOverride" />
+          <ScalarProperty Name="VehicleUpgradeId" ColumnName="VehicleUpgradeId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="OfferType" ColumnName="OfferType" />
+          <ScalarProperty Name="OfferDiscount" ColumnName="OfferDiscount" />
+          <ScalarProperty Name="OfferText" ColumnName="OfferText" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleUpgrades">
+      <EntityTypeMapping TypeName="Woodford2015Model.VehicleUpgrade">
+        <MappingFragment StoreEntitySet="VehicleUpgrades">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="UpdateAmount" ColumnName="UpdateAmount" />
+          <ScalarProperty Name="ToVehicleId" ColumnName="ToVehicleId" />
+          <ScalarProperty Name="FromVehicleId" ColumnName="FromVehicleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewsCategories">
+      <EntityTypeMapping TypeName="Woodford2015Model.NewsCategory">
+        <MappingFragment StoreEntitySet="NewsCategories">
+          <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+          <ScalarProperty Name="MetaKeywords" ColumnName="MetaKeywords" />
+          <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+          <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="Woodford2015Model.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+          <ScalarProperty Name="NewsCategoryId" ColumnName="NewsCategoryId" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="FileUploadId" ColumnName="FileUploadId" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+          <ScalarProperty Name="SubHeadline" ColumnName="SubHeadline" />
+          <ScalarProperty Name="Headline" ColumnName="Headline" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UrlRedirects">
+      <EntityTypeMapping TypeName="Woodford2015Model.UrlRedirect">
+        <MappingFragment StoreEntitySet="UrlRedirects">
+          <ScalarProperty Name="HttpStatusCode" ColumnName="HttpStatusCode" />
+          <ScalarProperty Name="NewUrl" ColumnName="NewUrl" />
+          <ScalarProperty Name="OldUrl" ColumnName="OldUrl" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuditItems">
+      <EntityTypeMapping TypeName="Woodford2015Model.AuditItem">
+        <MappingFragment StoreEntitySet="AuditItem">
+          <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="EntityType" ColumnName="EntityType" />
+          <ScalarProperty Name="EntityId" ColumnName="EntityId" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuditItemProperties">
+      <EntityTypeMapping TypeName="Woodford2015Model.AuditItemProperty">
+        <MappingFragment StoreEntitySet="AuditItemProperty">
+          <ScalarProperty Name="FieldType" ColumnName="FieldType" />
+          <ScalarProperty Name="OriginalValue" ColumnName="OriginalValue" />
+          <ScalarProperty Name="CurrentValue" ColumnName="CurrentValue" />
+          <ScalarProperty Name="AuditField" ColumnName="AuditField" />
+          <ScalarProperty Name="AuditEntityId" ColumnName="AuditEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RateRules">
+      <EntityTypeMapping TypeName="Woodford2015Model.RateRule">
+        <MappingFragment StoreEntitySet="RateRules">
+          <ScalarProperty Name="RateTypeId" ColumnName="RateTypeId" />
+          <ScalarProperty Name="FreeKmsPerDay" ColumnName="FreeKmsPerDay" />
+          <ScalarProperty Name="MaxDays" ColumnName="MaxDays" />
+          <ScalarProperty Name="MinDays" ColumnName="MinDays" />
+          <ScalarProperty Name="DaysOfWeek" ColumnName="DaysOfWeek" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RateCodes">
+      <EntityTypeMapping TypeName="Woodford2015Model.RateCode">
+        <MappingFragment StoreEntitySet="RateCodes">
+          <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
+          <ScalarProperty Name="IsSticky" ColumnName="IsSticky" />
+          <ScalarProperty Name="CanHaveUpgradeApplied" ColumnName="CanHaveUpgradeApplied" />
+          <ScalarProperty Name="RateRuleId" ColumnName="RateRuleId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IsNotAdjustable" ColumnName="IsNotAdjustable" />
+          <ScalarProperty Name="AvailableToCorporate" ColumnName="AvailableToCorporate" />
+          <ScalarProperty Name="AvailableToLoyalty" ColumnName="AvailableToLoyalty" />
+          <ScalarProperty Name="AvailableToPublic" ColumnName="AvailableToPublic" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BranchSurcharges">
+      <EntityTypeMapping TypeName="Woodford2015Model.BranchSurcharge">
+        <MappingFragment StoreEntitySet="BranchSurcharges">
+          <ScalarProperty Name="MaximumCharge" ColumnName="MaximumCharge" />
+          <ScalarProperty Name="IsOnceOff" ColumnName="IsOnceOff" />
+          <ScalarProperty Name="SurchargeAmount" ColumnName="SurchargeAmount" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rates">
+      <EntityTypeMapping TypeName="Woodford2015Model.Rate">
+        <MappingFragment StoreEntitySet="Rates">
+          <ScalarProperty Name="HasUnlimitedKms" ColumnName="HasUnlimitedKms" />
+          <ScalarProperty Name="FreeKms" ColumnName="FreeKms" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CostPerKm" ColumnName="CostPerKm" />
+          <ScalarProperty Name="IsOpenEnded" ColumnName="IsOpenEnded" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ValidEndDate" ColumnName="ValidEndDate" />
+          <ScalarProperty Name="ValidStartDate" ColumnName="ValidStartDate" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="RateCodeId" ColumnName="RateCodeId" />
+          <ScalarProperty Name="VehicleGroupId" ColumnName="VehicleGroupId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CorporateRateCodes">
+      <EntityTypeMapping TypeName="Woodford2015Model.CorporateRateCode">
+        <MappingFragment StoreEntitySet="CorporateRateCodes">
+          <ScalarProperty Name="RateCodeId" ColumnName="RateCodeId" />
+          <ScalarProperty Name="CorporateId" ColumnName="CorporateId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoyaltyTiers">
+      <EntityTypeMapping TypeName="Woodford2015Model.LoyaltyTier">
+        <MappingFragment StoreEntitySet="LoyaltyTiers">
+          <ScalarProperty Name="PointsEarnedPerRandSpent" ColumnName="PointsEarnedPerRandSpent" />
+          <ScalarProperty Name="RandSpent" ColumnName="RandSpent" />
+          <ScalarProperty Name="BookingThresholdPerPeriod" ColumnName="BookingThresholdPerPeriod" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BranchRateCodeExclusions">
+      <EntityTypeMapping TypeName="Woodford2015Model.BranchRateCodeExclusion">
+        <MappingFragment StoreEntitySet="BranchRateCodeExclusions">
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="RateCodeId" ColumnName="RateCodeId" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfiles">
+      <EntityTypeMapping TypeName="Woodford2015Model.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfiles">
+          <ScalarProperty Name="IsLoyaltyTierLocked" ColumnName="IsLoyaltyTierLocked" />
+          <ScalarProperty Name="IsAccountDisabled" ColumnName="IsAccountDisabled" />
+          <ScalarProperty Name="HasExistingLoyaltyNumber" ColumnName="HasExistingLoyaltyNumber" />
+          <ScalarProperty Name="ExistingLoyaltyNumber" ColumnName="ExistingLoyaltyNumber" />
+          <ScalarProperty Name="LoyaltySignUpDate" ColumnName="LoyaltySignUpDate" />
+          <ScalarProperty Name="IsLoyaltyMember" ColumnName="IsLoyaltyMember" />
+          <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+          <ScalarProperty Name="LoyaltyPeriodEnd" ColumnName="LoyaltyPeriodEnd" />
+          <ScalarProperty Name="LoyaltyPeriodStart" ColumnName="LoyaltyPeriodStart" />
+          <ScalarProperty Name="LoyaltyTierId" ColumnName="LoyaltyTierId" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CorporateId" ColumnName="CorporateId" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReservationBranchSurcharges">
+      <EntityTypeMapping TypeName="Woodford2015Model.ReservationBranchSurcharge">
+        <MappingFragment StoreEntitySet="ReservationBranchSurcharges">
+          <ScalarProperty Name="MaximumCharge" ColumnName="MaximumCharge" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="IsOnceOff" ColumnName="IsOnceOff" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="BranchSurchargeId" ColumnName="BranchSurchargeId" />
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingHistories">
+      <EntityTypeMapping TypeName="Woodford2015Model.BookingHistory">
+        <MappingFragment StoreEntitySet="BookingHistory">
+          <ScalarProperty Name="SendLoyaltyPointsEarnedEmail" ColumnName="SendLoyaltyPointsEarnedEmail" />
+          <ScalarProperty Name="LoyaltyPointsEarnedEmailSent" ColumnName="LoyaltyPointsEarnedEmailSent" />
+          <ScalarProperty Name="CanEarnPoints" ColumnName="CanEarnPoints" />
+          <ScalarProperty Name="LoyaltyPointTier" ColumnName="LoyaltyPointTier" />
+          <ScalarProperty Name="TotalForLoyaltyAward" ColumnName="TotalForLoyaltyAward" />
+          <ScalarProperty Name="LoyaltyPointsEarned" ColumnName="LoyaltyPointsEarned" />
+          <ScalarProperty Name="TotalBill" ColumnName="TotalBill" />
+          <ScalarProperty Name="KmsRate" ColumnName="KmsRate" />
+          <ScalarProperty Name="FreeKms" ColumnName="FreeKms" />
+          <ScalarProperty Name="KmsDriven" ColumnName="KmsDriven" />
+          <ScalarProperty Name="RentalDays" ColumnName="RentalDays" />
+          <ScalarProperty Name="RateCodeId" ColumnName="RateCodeId" />
+          <ScalarProperty Name="RateCode" ColumnName="RateCode" />
+          <ScalarProperty Name="VehicleGroupId" ColumnName="VehicleGroupId" />
+          <ScalarProperty Name="RateClass" ColumnName="RateClass" />
+          <ScalarProperty Name="EstimatedKms" ColumnName="EstimatedKms" />
+          <ScalarProperty Name="DropOffDate" ColumnName="DropOffDate" />
+          <ScalarProperty Name="PickupDate" ColumnName="PickupDate" />
+          <ScalarProperty Name="DateBooked" ColumnName="DateBooked" />
+          <ScalarProperty Name="DropoffBranchId" ColumnName="DropoffBranchId" />
+          <ScalarProperty Name="PickupBranchId" ColumnName="PickupBranchId" />
+          <ScalarProperty Name="AlternateId" ColumnName="AlternateId" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LicenseExpiration" ColumnName="LicenseExpiration" />
+          <ScalarProperty Name="LicenseState" ColumnName="LicenseState" />
+          <ScalarProperty Name="LicenseNumber" ColumnName="LicenseNumber" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="webpages_Roles">
+      <EntityTypeMapping TypeName="Woodford2015Model.webpages_Roles">
+        <MappingFragment StoreEntitySet="webpages_Roles">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="Woodford2015Model.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+      <EndProperty Name="UserProfile">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="webpages_Roles">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="Woodford2015Model.Report">
+        <MappingFragment StoreEntitySet="Reports">
+          <ScalarProperty Name="ReportFilter" ColumnName="ReportFilter" />
+          <ScalarProperty Name="DateUnitType" ColumnName="DateUnitType" />
+          <ScalarProperty Name="DateUnitsToAdd" ColumnName="DateUnitsToAdd" />
+          <ScalarProperty Name="UseCurrentDateAsStartDate" ColumnName="UseCurrentDateAsStartDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ReportType" ColumnName="ReportType" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailSignatures">
+      <EntityTypeMapping TypeName="Woodford2015Model.EmailSignature">
+        <MappingFragment StoreEntitySet="EmailSignatures">
+          <ScalarProperty Name="ShowSidePanel" ColumnName="ShowSidePanel" />
+          <ScalarProperty Name="DirectorEmail" ColumnName="DirectorEmail" />
+          <ScalarProperty Name="DirectorName" ColumnName="DirectorName" />
+          <ScalarProperty Name="SeniorEmail" ColumnName="SeniorEmail" />
+          <ScalarProperty Name="SeniorCellContact" ColumnName="SeniorCellContact" />
+          <ScalarProperty Name="SeniorFixedContact" ColumnName="SeniorFixedContact" />
+          <ScalarProperty Name="SeniorName" ColumnName="SeniorName" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CellContact" ColumnName="CellContact" />
+          <ScalarProperty Name="FixedContact" ColumnName="FixedContact" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailSignatureCampaigns">
+      <EntityTypeMapping TypeName="Woodford2015Model.EmailSignatureCampaign">
+        <MappingFragment StoreEntitySet="EmailSignatureCampaigns">
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="IsLive" ColumnName="IsLive" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="UnderlineContentFileUploadId" ColumnName="UnderlineContentFileUploadId" />
+          <ScalarProperty Name="SidePanelContentFileUploadId" ColumnName="SidePanelContentFileUploadId" />
+          <ScalarProperty Name="FooterContentFileUploadId" ColumnName="FooterContentFileUploadId" />
+          <ScalarProperty Name="FooterContentNarrowFileUploadId" ColumnName="FooterContentNarrowFileUploadId" />
+          <ScalarProperty Name="MainContentFileUploadId" ColumnName="MainContentFileUploadId" />
+          <ScalarProperty Name="MainContentNarrowFileUploadId" ColumnName="MainContentNarrowFileUploadId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MyGateRefundTransactions">
+      <EntityTypeMapping TypeName="Woodford2015Model.MyGateRefundTransaction">
+        <MappingFragment StoreEntitySet="MyGateRefundTransactions">
+          <ScalarProperty Name="FSPMessage" ColumnName="FSPMessage" />
+          <ScalarProperty Name="MyGateTransactionID" ColumnName="MyGateTransactionID" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Refunds">
+      <EntityTypeMapping TypeName="Woodford2015Model.Refund">
+        <MappingFragment StoreEntitySet="Refunds">
+          <ScalarProperty Name="RefundedDate" ColumnName="RefundedDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingClaims">
+      <EntityTypeMapping TypeName="Woodford2015Model.BookingClaim">
+        <MappingFragment StoreEntitySet="BookingClaims">
+          <ScalarProperty Name="BookingDropOffBranchId" ColumnName="BookingDropOffBranchId" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="BookingPickupBranchId" ColumnName="BookingPickupBranchId" />
+          <ScalarProperty Name="BookingDropoffDate" ColumnName="BookingDropoffDate" />
+          <ScalarProperty Name="BookingPickupDate" ColumnName="BookingPickupDate" />
+          <ScalarProperty Name="ClaimState" ColumnName="ClaimState" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrustPilotReviewInvites">
+      <EntityTypeMapping TypeName="Woodford2015Model.TrustPilotReviewInvite">
+        <MappingFragment StoreEntitySet="TrustPilotReviewInvites">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="VoucherSentDate" ColumnName="VoucherSentDate" />
+          <ScalarProperty Name="VoucherSent" ColumnName="VoucherSent" />
+          <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleManufacturers">
+      <EntityTypeMapping TypeName="Woodford2015Model.VehicleManufacturer">
+        <MappingFragment StoreEntitySet="VehicleManufacturers">
+          <ScalarProperty Name="FileUploadId" ColumnName="FileUploadId" />
+          <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservations">
+      <EntityTypeMapping TypeName="Woodford2015Model.Reservation">
+        <MappingFragment StoreEntitySet="Reservations">
+          <ScalarProperty Name="PaymentErrorMessage" ColumnName="PaymentErrorMessage" />
+          <ScalarProperty Name="HasPaymentError" ColumnName="HasPaymentError" />
+          <ScalarProperty Name="PaymentErrorCode" ColumnName="PaymentErrorCode" />
+          <ScalarProperty Name="PaymentProviderType" ColumnName="PaymentProviderType" />
+          <ScalarProperty Name="RefundedAmount" ColumnName="RefundedAmount" />
+          <ScalarProperty Name="CancellationFee" ColumnName="CancellationFee" />
+          <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="ConfirmedDate" ColumnName="ConfirmedDate" />
+          <ScalarProperty Name="AddedToExternalSystem" ColumnName="AddedToExternalSystem" />
+          <ScalarProperty Name="QuoteReminderSent" ColumnName="QuoteReminderSent" />
+          <ScalarProperty Name="IsQuote" ColumnName="IsQuote" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="HasBeenModified" ColumnName="HasBeenModified" />
+          <ScalarProperty Name="QuoteSentDate" ColumnName="QuoteSentDate" />
+          <ScalarProperty Name="QuoteReference" ColumnName="QuoteReference" />
+          <ScalarProperty Name="LoyaltyTierAtTimeOfBooking" ColumnName="LoyaltyTierAtTimeOfBooking" />
+          <ScalarProperty Name="LoyaltyPointsSpent" ColumnName="LoyaltyPointsSpent" />
+          <ScalarProperty Name="LoyaltyPointsEarned" ColumnName="LoyaltyPointsEarned" />
+          <ScalarProperty Name="LoyaltyPointsAssigned" ColumnName="LoyaltyPointsAssigned" />
+          <ScalarProperty Name="ThankYouSent" ColumnName="ThankYouSent" />
+          <ScalarProperty Name="ReminderSMSSent" ColumnName="ReminderSMSSent" />
+          <ScalarProperty Name="ReminderSent" ColumnName="ReminderSent" />
+          <ScalarProperty Name="CorporateId" ColumnName="CorporateId" />
+          <ScalarProperty Name="IsCorporate" ColumnName="IsCorporate" />
+          <ScalarProperty Name="BranchSurchageTotalPrice" ColumnName="BranchSurchageTotalPrice" />
+          <ScalarProperty Name="BranchSurchageText" ColumnName="BranchSurchageText" />
+          <ScalarProperty Name="BranchSurchargeId" ColumnName="BranchSurchargeId" />
+          <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+          <ScalarProperty Name="ReservationState" ColumnName="ReservationState" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="VoucherRewardDiscountPercentage" ColumnName="VoucherRewardDiscountPercentage" />
+          <ScalarProperty Name="VoucherRewardDiscount" ColumnName="VoucherRewardDiscount" />
+          <ScalarProperty Name="VoucherRewardText" ColumnName="VoucherRewardText" />
+          <ScalarProperty Name="VoucherRewardType" ColumnName="VoucherRewardType" />
+          <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
+          <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CountdownSpecialVehicleUpgradePriceOverride" ColumnName="CountdownSpecialVehicleUpgradePriceOverride" />
+          <ScalarProperty Name="CountdownSpecialDiscount" ColumnName="CountdownSpecialDiscount" />
+          <ScalarProperty Name="CountdownSpecialOfferText" ColumnName="CountdownSpecialOfferText" />
+          <ScalarProperty Name="CountdownSpecialType" ColumnName="CountdownSpecialType" />
+          <ScalarProperty Name="CountdownSpecialId" ColumnName="CountdownSpecialId" />
+          <ScalarProperty Name="VehicleUpgradePrice" ColumnName="VehicleUpgradePrice" />
+          <ScalarProperty Name="UpgradedVehicleId" ColumnName="UpgradedVehicleId" />
+          <ScalarProperty Name="VehicleUpgradeId" ColumnName="VehicleUpgradeId" />
+          <ScalarProperty Name="DropOffFee" ColumnName="DropOffFee" />
+          <ScalarProperty Name="ContractFee" ColumnName="ContractFee" />
+          <ScalarProperty Name="RateAdjustmentPercentage" ColumnName="RateAdjustmentPercentage" />
+          <ScalarProperty Name="RateAdjustmentType" ColumnName="RateAdjustmentType" />
+          <ScalarProperty Name="RateAdjustmentId" ColumnName="RateAdjustmentId" />
+          <ScalarProperty Name="RatePrice" ColumnName="RatePrice" />
+          <ScalarProperty Name="RateCodeTitle" ColumnName="RateCodeTitle" />
+          <ScalarProperty Name="RateCodeId" ColumnName="RateCodeId" />
+          <ScalarProperty Name="RateId" ColumnName="RateId" />
+          <ScalarProperty Name="VehicleDeposit" ColumnName="VehicleDeposit" />
+          <ScalarProperty Name="VehicleExcess" ColumnName="VehicleExcess" />
+          <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+          <ScalarProperty Name="DropOffBranchId" ColumnName="DropOffBranchId" />
+          <ScalarProperty Name="PickupBranchId" ColumnName="PickupBranchId" />
+          <ScalarProperty Name="DropOffDate" ColumnName="DropOffDate" />
+          <ScalarProperty Name="PickupDate" ColumnName="PickupDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MyGateTransactions">
+      <EntityTypeMapping TypeName="Woodford2015Model.MyGateTransaction">
+        <MappingFragment StoreEntitySet="MyGateTransactions">
+          <ScalarProperty Name="MyGate3DParEq" ColumnName="MyGate3DParEq" />
+          <ScalarProperty Name="MyGateTransactionID" ColumnName="MyGateTransactionID" />
+          <ScalarProperty Name="MyGateAuthorisationIDCapt" ColumnName="MyGateAuthorisationIDCapt" />
+          <ScalarProperty Name="MyGateAuthorisationIDAuth" ColumnName="MyGateAuthorisationIDAuth" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReservationsAdmins">
+      <EntityTypeMapping TypeName="Woodford2015Model.ReservationsAdmin">
+        <MappingFragment StoreEntitySet="ReservationsAdmin">
+          <ScalarProperty Name="PaymentErrorMessage" ColumnName="PaymentErrorMessage" />
+          <ScalarProperty Name="PaymentErrorCode" ColumnName="PaymentErrorCode" />
+          <ScalarProperty Name="HasPaymentError" ColumnName="HasPaymentError" />
+          <ScalarProperty Name="RefundedAmount" ColumnName="RefundedAmount" />
+          <ScalarProperty Name="CancellationFee" ColumnName="CancellationFee" />
+          <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
+          <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+          <ScalarProperty Name="ConfirmedDate" ColumnName="ConfirmedDate" />
+          <ScalarProperty Name="AddedToExternalSystem" ColumnName="AddedToExternalSystem" />
+          <ScalarProperty Name="QuoteReminderSent" ColumnName="QuoteReminderSent" />
+          <ScalarProperty Name="UpgradedVehicleId" ColumnName="UpgradedVehicleId" />
+          <ScalarProperty Name="ReminderSMSSent" ColumnName="ReminderSMSSent" />
+          <ScalarProperty Name="IsQuote" ColumnName="IsQuote" />
+          <ScalarProperty Name="MyGate3DParEq" ColumnName="MyGate3DParEq" />
+          <ScalarProperty Name="MyGateTransactionID" ColumnName="MyGateTransactionID" />
+          <ScalarProperty Name="MyGateAuthorisationIDCapt" ColumnName="MyGateAuthorisationIDCapt" />
+          <ScalarProperty Name="MyGateAuthorisationIDAuth" ColumnName="MyGateAuthorisationIDAuth" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="IsCorporateCheckout" ColumnName="IsCorporateCheckout" />
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="IsMobileCheckout" ColumnName="IsMobileCheckout" />
+          <ScalarProperty Name="InvoiceDateCreated" ColumnName="InvoiceDateCreated" />
+          <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="HasBeenModified" ColumnName="HasBeenModified" />
+          <ScalarProperty Name="QuoteSentDate" ColumnName="QuoteSentDate" />
+          <ScalarProperty Name="QuoteReference" ColumnName="QuoteReference" />
+          <ScalarProperty Name="LoyaltyTierAtTimeOfBooking" ColumnName="LoyaltyTierAtTimeOfBooking" />
+          <ScalarProperty Name="LoyaltyPointsSpent" ColumnName="LoyaltyPointsSpent" />
+          <ScalarProperty Name="LoyaltyPointsEarned" ColumnName="LoyaltyPointsEarned" />
+          <ScalarProperty Name="LoyaltyPointsAssigned" ColumnName="LoyaltyPointsAssigned" />
+          <ScalarProperty Name="ThankYouSent" ColumnName="ThankYouSent" />
+          <ScalarProperty Name="ReminderSent" ColumnName="ReminderSent" />
+          <ScalarProperty Name="CorporateId" ColumnName="CorporateId" />
+          <ScalarProperty Name="IsCorporate" ColumnName="IsCorporate" />
+          <ScalarProperty Name="BranchSurchageTotalPrice" ColumnName="BranchSurchageTotalPrice" />
+          <ScalarProperty Name="BranchSurchageText" ColumnName="BranchSurchageText" />
+          <ScalarProperty Name="BranchSurchargeId" ColumnName="BranchSurchargeId" />
+          <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+          <ScalarProperty Name="ReservationState" ColumnName="ReservationState" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="VoucherRewardDiscountPercentage" ColumnName="VoucherRewardDiscountPercentage" />
+          <ScalarProperty Name="VoucherRewardDiscount" ColumnName="VoucherRewardDiscount" />
+          <ScalarProperty Name="VoucherRewardText" ColumnName="VoucherRewardText" />
+          <ScalarProperty Name="VoucherRewardType" ColumnName="VoucherRewardType" />
+          <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
+          <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CountdownSpecialVehicleUpgradePriceOverride" ColumnName="CountdownSpecialVehicleUpgradePriceOverride" />
+          <ScalarProperty Name="CountdownSpecialDiscount" ColumnName="CountdownSpecialDiscount" />
+          <ScalarProperty Name="CountdownSpecialOfferText" ColumnName="CountdownSpecialOfferText" />
+          <ScalarProperty Name="CountdownSpecialType" ColumnName="CountdownSpecialType" />
+          <ScalarProperty Name="CountdownSpecialId" ColumnName="CountdownSpecialId" />
+          <ScalarProperty Name="VehicleUpgradePrice" ColumnName="VehicleUpgradePrice" />
+          <ScalarProperty Name="VehicleUpgradeId" ColumnName="VehicleUpgradeId" />
+          <ScalarProperty Name="DropOffFee" ColumnName="DropOffFee" />
+          <ScalarProperty Name="ContractFee" ColumnName="ContractFee" />
+          <ScalarProperty Name="RateAdjustmentPercentage" ColumnName="RateAdjustmentPercentage" />
+          <ScalarProperty Name="RateAdjustmentType" ColumnName="RateAdjustmentType" />
+          <ScalarProperty Name="RateAdjustmentId" ColumnName="RateAdjustmentId" />
+          <ScalarProperty Name="RatePrice" ColumnName="RatePrice" />
+          <ScalarProperty Name="RateCodeTitle" ColumnName="RateCodeTitle" />
+          <ScalarProperty Name="RateCodeId" ColumnName="RateCodeId" />
+          <ScalarProperty Name="RateId" ColumnName="RateId" />
+          <ScalarProperty Name="VehicleDeposit" ColumnName="VehicleDeposit" />
+          <ScalarProperty Name="VehicleExcess" ColumnName="VehicleExcess" />
+          <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+          <ScalarProperty Name="DropOffBranchId" ColumnName="DropOffBranchId" />
+          <ScalarProperty Name="PickupBranchId" ColumnName="PickupBranchId" />
+          <ScalarProperty Name="DropOffDate" ColumnName="DropOffDate" />
+          <ScalarProperty Name="PickupDate" ColumnName="PickupDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

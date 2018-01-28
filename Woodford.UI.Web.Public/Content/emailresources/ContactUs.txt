@@ -1,0 +1,7 @@
+﻿Name: ##fullname##
+Email: ##email##
+Contact Number: ##contactnumber##
+Country: ##country##
+Branch: ##branch##
+Subject: ##subject##
+Message: ##message##

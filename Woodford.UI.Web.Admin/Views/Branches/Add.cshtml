@@ -1,0 +1,277 @@
+﻿@model BranchViewModel
+@{
+    ViewBag.Title = "Add Branch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Branches</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Branch</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Add", "Branches", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+        
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.Title, "Branch Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.Title, new { placeholder = "Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchSubTitle, "Branch Sub Title", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.BranchSubTitle, new { placeholder = "Branch Sub Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchSubTitle)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchAddress, "Branch Address", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.BranchAddress, new { placeholder = "Branch Address", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchAddress)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Branch_IsAirport">
+                            @*@Html.LabelFor(m => m.Branch.IsAirport, "Is Airport", new { @class = "col-sm-2 control-label" })*@
+                            @Html.CheckBoxFor(m => m.Branch.IsAirport) Is Airport
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Branch.IsAirport)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.Email, "Branch Email", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.Email, new { placeholder = "Branch Email Address", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.Email)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.MobileNumber, "Branch Cell", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.MobileNumber, new { placeholder = "Branch Cell Number", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.MobileNumber)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.TelephoneNumber, "Branch Telephone", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.TelephoneNumber, new { placeholder = "Branch Telephone Number", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.TelephoneNumber)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.FaxNumber, "Branch Fax", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.FaxNumber, new { placeholder = "Branch Fax Number", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.FaxNumber)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.AfterHoursTelephoneNumber, "Branch After Hours Telephone", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.AfterHoursTelephoneNumber, new { placeholder = "Branch After Hours Telephone Number", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.AfterHoursTelephoneNumber)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.WeatherApiId, "Weather API ID", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.WeatherApiId, new { placeholder = "Weather API ID", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.WeatherApiId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchShortDescription, "Branch Short Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.BranchShortDescription, new { placeholder = "Branch Short Description", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchShortDescription)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.MapEmbed, "Branch Map Embed Code", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.MapEmbed, new { placeholder = "Branch Map Embed Code", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.MapEmbed)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.BranchImage, "Branch Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <input type="file" id="BranchImage" name="BranchImage" />
+                    <p class="help-block">Please upload a valid image file.</p>
+                    @Html.ValidationMessageFor(m => m.BranchImage)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.PageUrl, "Page Url", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.PageUrl, new { placeholder = "Page Url", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.PageUrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.PageContent.PageTitle, "Page Title", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.PageContent.PageTitle, new { placeholder = "Page Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.PageContent.PageTitle)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.PageContent.MetaKeywords, "Meta Keywords", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.PageContent.MetaKeywords, new { placeholder = "Meta Keywords", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.Branch.PageContent.MetaKeywords)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.PageContent.MetaDescription, "Meta Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.PageContent.MetaDescription, new { placeholder = "Meta Description", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.Branch.PageContent.MetaDescription)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.PageContent.PageContent, "Page Content", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.PageContent.PageContent, new { @class = "form-control", rows = "10", cols = "80" })
+                    @Html.ValidationMessageFor(m => m.Branch.PageContent.PageContent)
+                </div>
+            </div>
+
+            <h3>Branch Contact Page</h3>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchContactPageTitle, "Contact Page Title", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.BranchContactPageTitle, new { placeholder = "Contact Page Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchContactPageTitle)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchContactMetaKeywords, "Contact Page Meta Keywords", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.BranchContactMetaKeywords, new { placeholder = "Contact Page Meta Keywords", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchContactMetaKeywords)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchContactMetaDescription, "Contact Page Meta Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.BranchContactMetaDescription, new { placeholder = "Contact Page Meta Description", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchContactMetaDescription)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchContactPageContent, "Contact Page Content", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.BranchContactPageContent, new { @class = "form-control", rows = "10", cols = "80" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchContactPageContent)
+                </div>
+            </div>
+
+            <h3>Branch Request Callback Page</h3>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchRequestCallbackPageTitle, "Request Callback Page Title", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.BranchRequestCallbackPageTitle, new { placeholder = "Request Callback Page Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchRequestCallbackPageTitle)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchRequestCallbackMetaKeywords, "Request Callback Meta Keywords", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.BranchRequestCallbackMetaKeywords, new { placeholder = "Contact Page Meta Keywords", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchRequestCallbackMetaKeywords)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchRequestCallbackMetaDescription, "Request Callback Page Meta Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.BranchRequestCallbackMetaDescription, new { placeholder = "Request Callback Page Meta Description", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchRequestCallbackMetaDescription)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BranchRequestCallbackPageContent, "Request Callback Page Content", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Branch.BranchRequestCallbackPageContent, new { @class = "form-control", rows = "10", cols = "80" })
+                    @Html.ValidationMessageFor(m => m.Branch.BranchRequestCallbackPageContent)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BookingLeadTimeDay, "Lead Time (Day)", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.BookingLeadTimeDay, new { placeholder = "Lead Time (Day)", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.BookingLeadTimeDay)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Branch.BookingLeadTimeNight, "Lead Time (Night)", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Branch.BookingLeadTimeNight, new { placeholder = "Lead Time (Night)", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Branch.BookingLeadTimeNight)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Add Branch</button>
+                </div>
+            </div>
+
+        </div>
+        
+    }
+</div>
+
+@section scripts {
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+    <script types="text/javascript">
+        $(function () {
+            CKEDITOR.replace('Branch_PageContent_PageContent');
+            CKEDITOR.replace('Branch_BranchShortDescription');
+            CKEDITOR.replace('Branch_BranchContactPageContent');
+            CKEDITOR.replace('Branch_BranchRequestCallbackPageContent');
+        });
+    </script>
+}

@@ -1,0 +1,70 @@
+﻿@model BookingHistoryViewModel
+@{
+    ViewBag.Title = "Past Reservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="four columns">
+        <div class="nav-block">
+            @{Html.RenderPartial("_UserNavigationPartial"); }
+        </div>
+    </div>
+
+
+    <div class="eight columns">
+        <h2>Past Reservations</h2>
+
+        @if (Model.Result.Items.Count > 0) {
+            <table>
+                <thead>
+                    <tr>
+
+
+                        <th>Collection</th>
+                        <th>Return</th>
+                        <th>Collected at</th>
+                        <th>Returned to</th>
+                        @if (Model.ShowLoyaltyPointsEarned) {
+                            <th>Advance Points</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Result.Items.OrderByDescending(x => x.PickupDate)) {
+                        <tr>
+
+                            <td>
+                                @item.PickupDate.ToString("dd MMM yyyy")
+                            </td>
+                            <td>
+                                @item.DropOffDate.ToString("dd MMM yyyy")
+                            </td>
+                            <td>
+                                @item.PickupBranch.Title
+                            </td>
+                            <td>
+                                @item.DropoffBranch.Title
+                            </td>
+                            @if (Model.ShowLoyaltyPointsEarned) {
+                                <td>
+                                    @if (item.LoyaltyPointsEarned.HasValue) {
+                                        <text>@decimal.Round(item.LoyaltyPointsEarned.Value, 2)</text>
+                                    } else {
+                                        <text>0.00</text>
+                                    }
+
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else {
+            <p>No past reservations</p>
+        }
+
+    </div>
+</div>

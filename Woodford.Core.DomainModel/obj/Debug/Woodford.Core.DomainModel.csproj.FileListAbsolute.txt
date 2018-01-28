@@ -1,0 +1,5 @@
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.DomainModel\bin\Debug\Woodford.Core.DomainModel.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.DomainModel\bin\Debug\Woodford.Core.DomainModel.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.DomainModel\obj\Debug\Woodford.Core.DomainModel.csprojResolveAssemblyReference.cache
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.DomainModel\obj\Debug\Woodford.Core.DomainModel.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.DomainModel\obj\Debug\Woodford.Core.DomainModel.pdb

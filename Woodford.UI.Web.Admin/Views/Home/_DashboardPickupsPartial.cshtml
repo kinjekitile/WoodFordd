@@ -1,0 +1,12 @@
+﻿@model DashboardBranchesModel
+<h4>Pickups</h4>
+
+@foreach (var branch in Model.Branches) {
+    <div class="clearfix">
+        <span class="pull-left">@branch.Title</span>
+        <small class="pull-right">@branch.TotalPickups</small>
+        @*<div class="progress xs">
+            <div class="progress-bar progress-bar-green" style="width: 80%;"></div>
+        </div>*@
+    </div>
+}

@@ -1,0 +1,39 @@
+﻿@model SearchCriteriaViewModel
+
+@using (Html.BeginForm("Results", "Search", FormMethod.Get)) {
+
+    @Html.HiddenFor(m => m.AirportLocationIds)
+    @Html.HiddenFor(x => x.Criteria.VehicleId)
+    <div class="input-form vertical-form">
+
+        <div class="row">
+            @Html.LabelFor(m => m.Criteria.PickUpLocationId, "Pickup Location")
+            @Html.BranchFor(m => m.Criteria.PickUpLocationId)
+            @Html.ValidationMessageFor(m => m.Criteria.PickUpLocationId)
+        </div>
+        <div class="row inline-input">
+            <input type="checkbox" id="chk-book-return-at-different-location" />
+            <label class="for-checkbox" for="chk-book-return-at-different-location">Return at a different location</label>
+        </div>
+        <div class="row" id="book-different-return-location" style="display: none;">
+            @Html.LabelFor(m => m.Criteria.DropOffLocationId, "Drop Off Location")
+            @Html.BranchFor(m => m.Criteria.DropOffLocationId)
+            @Html.ValidationMessageFor(m => m.Criteria.DropOffLocationId)
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Criteria.PickupDateTime, "Pickup Date")
+            @Html.DatePickerFor(m => m.PickupDate, new { @class = "datefield" })
+            @Html.TextBoxFor(x => x.Criteria.PickupTimeFull, new { style = "width: 100%;margin-top: 36px;" })
+            @*@Html.HourOfDayDropDownListFor(m => m.Criteria.PickupTime, new { @class = "timefield" })*@
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Criteria.DropOffDateTime, "Drop Off Date")
+            @Html.DatePickerFor(m => m.DropOffDate, new { @class = "datefield" })
+            @Html.TextBoxFor(x => x.Criteria.DropOffTimeFull, new { style = "width: 100%;margin-top: 36px;" })
+        </div>
+        <div class="row align-right">
+            <input type="submit" value="Search" />
+        </div>
+    </div>
+
+}

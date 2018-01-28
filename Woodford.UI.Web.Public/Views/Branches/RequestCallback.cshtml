@@ -1,0 +1,50 @@
+﻿@model BranchRequestCallbackViewModel
+@{
+    ViewBag.Title = Model.Branch.BranchRequestCallbackPageTitle;
+    ViewBag.MetaKeywords = Model.Branch.BranchRequestCallbackMetaKeywords;
+    ViewBag.MetaDescription = Model.Branch.BranchRequestCallbackMetaDescription;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Request a Callback from the @Model.Branch.Title branch</h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="six columns">
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="input-form vertical-form">
+                <div class="row">
+                    @Html.LabelFor(m => m.RequestCallback.FullName, "Full Name")
+                    @Html.TextBoxFor(m => m.RequestCallback.FullName, new { placeholder = "Full Name" })
+                    @Html.ValidationMessageFor(m => m.RequestCallback.FullName)
+                </div>                
+                <div class="row">
+                    @Html.LabelFor(m => m.RequestCallback.PhoneNumber, "Phone Number")
+                    @Html.TextBoxFor(m => m.RequestCallback.PhoneNumber, new { placeholder = "Phone Number" })
+                    @Html.ValidationMessageFor(m => m.RequestCallback.PhoneNumber)
+                </div>                
+                <div class="row">
+                    <input type="submit" value="Submit" />
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="six columns">
+        @if (Model.Branch.FileUploadId.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.Branch.BranchImage.Id, filename = Model.Branch.BranchImage.Title + Model.Branch.BranchImage.FileExtension, width = 600 })" alt="@Model.Branch.Title" />
+        }
+        <div class="rich-text">
+            @Html.Raw(Model.Branch.BranchRequestCallbackPageContent)
+            @Html.ActionLink("Read More", "Branch", "Branches", new { branchUrl = Model.Branch.PageUrl }, null)
+        </div>
+    </div>
+</div>
+
+

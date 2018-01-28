@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Woodford.Core.DomainModel.Enums;
+using Woodford.Core.DomainModel.Models;
+using Woodford.Core.Interfaces;
+
+
+namespace Woodford.Core.ApplicationServices.Commands {
+    public class CorporateAddCommand : ICommand {
+        public CorporateModel Model { get; set; }
+    }
+
+    public class CorporateAddCommandHandler : ICommandHandler<CorporateAddCommand> {
+        private readonly ICorporateService _corpService;
+        public CorporateAddCommandHandler(ICorporateService corpService) {
+            _corpService = corpService;
+        }
+        public void Handle(CorporateAddCommand command) {
+            command.Model = _corpService.Create(command.Model);
+        }
+    }
+}

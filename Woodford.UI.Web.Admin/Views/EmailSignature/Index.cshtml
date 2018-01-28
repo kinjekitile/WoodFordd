@@ -1,0 +1,62 @@
+﻿@model ListOf<EmailSignatureModel>
+
+@{
+    ViewBag.Title = "Email Signatures";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Email Signatures</h1>
+    <ol class="breadcrumb">
+        <li class="active"><a href="@Url.Action("Index", "EmailSignature")"> Email Signatures</a></li>
+    </ol>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Email Signatures</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add Email Signature", "Add", "EmailSignature")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <td></td>
+                    <th scope="col">Email</th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "EmailSignature", new { id = item.Id }, null)</td>
+                       
+                        <td>
+                           @item.Email
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("SendSignature", "EmailSignature", new { id = item.Id })) {
+                                <input type="submit" value="Send Signature" />
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    }
+    else {
+        <div class="box-body">
+            <p>No email signatures have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0 && Model.Pagination != null) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

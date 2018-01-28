@@ -1,0 +1,12 @@
+﻿.nav-block {    
+    /*border-right: 1px solid #333;*/
+    padding: 10px 10px 10px 0;
+}
+
+.nav-block ul li.active a {
+    font-weight: bold;
+}
+
+.nav-block ul li {
+    display: block;
+}

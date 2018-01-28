@@ -1,0 +1,162 @@
+﻿@model VoucherFilterAndResultsViewModel
+@{
+    ViewBag.Title = "Vouchers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Vouchers</h1>
+}
+
+@using (Html.BeginForm("Filter", "Vouchers", FormMethod.Get, new { @class = "form-horizontal", role = "form" })) {
+
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+
+        </div><!-- /.box-header -->
+        <div class="box-body">
+            @Html.ActionLink("Issue new voucher", "Add", "Vouchers")
+        </div>
+    </div>
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Filter</h3>
+        </div><!-- /.box-header -->
+
+        <div id="filter" class="box-body">
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="IsExpired">
+                            @Html.CheckBoxFor(m => m.IsExpired) Is Expired
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.IsExpired)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="IsRedeemed">
+                            @Html.CheckBoxFor(m => m.IsRedeemed) Is Redeemed
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.IsRedeemed)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="IsMultiUse">
+                            @Html.CheckBoxFor(m => m.IsMultiUse) Is MultiUse
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.IsMultiUse)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+@if (Model.IsFiltered) {
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Vouchers</h3>
+        </div><!-- /.box-header -->
+
+        @if (Model.Vouchers.Items.Count() > 0) {
+            <div id="results" class="box-body">
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Voucher</td>
+                            <td>Type</td>
+                            <td>Value</td>
+                            @if (!Model.IsMultiUse) {
+                                <td>Client Name</td>
+                                <td>Client Email</td>
+                            }
+                            <td>Date Issued</td>
+                            <td>Date Redeemed</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var v in Model.Vouchers.Items) {
+                            <tr>
+                                <td>@Html.ActionLink("Edit", "Edit", "Vouchers", new { id = v.Id }, null)</td>
+                                <td>@v.VoucherNumber</td>
+                                <td>@v.VoucherRewardType.GetDescription()</td>
+                                <td>
+                                    @switch (v.VoucherRewardType) {
+                                        case Woodford.Core.DomainModel.Enums.VoucherRewardType.DiscountPercentage:
+                                            <text>@(decimal.Round(v.VoucherDiscountPercentage.Value, 0)) %</text>
+                                            break;
+                                        case Woodford.Core.DomainModel.Enums.VoucherRewardType.DiscountValue:
+                                            <text>@(string.Format("{0:c}", v.VoucherDiscount))</text>
+                                            break;
+                                        case Woodford.Core.DomainModel.Enums.VoucherRewardType.TextReward:
+                                            <text>@v.VoucherReward</text>
+                                            break;
+                                    }
+                                </td>
+                                @if (!Model.IsMultiUse) {
+                                    <td>@v.ClientName</td>
+                                    <td>@v.ClientEmail</td>
+                                }
+                                <td>@v.DateIssued</td>
+                                <td>
+                                    @v.DateRedeemed
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("DownloadVoucher", "Vouchers")) {
+                                        @Html.Hidden("id", v.Id)
+                                        <button type="submit" class="btn btn-primary">Download Voucher</button>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!v.DateRedeemed.HasValue && v.IsMultiUse) {
+                                        using (Html.BeginForm("EmailVoucher", "Vouchers", new { id = v.Id } ,FormMethod.Get)) {
+                                            @Html.Hidden("id", v.Id)
+                                            <button type="submit" class="btn btn-primary">Email Voucher</button>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+        } else {
+            <p>No vouchers found</p>
+        }
+    </div>
+
+    if (Model.Vouchers.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Vouchers.Pagination)
+    }
+
+}

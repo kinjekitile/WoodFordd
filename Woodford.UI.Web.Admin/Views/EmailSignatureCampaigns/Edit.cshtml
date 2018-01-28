@@ -1,0 +1,171 @@
+﻿@model EmailSignatureCampaignViewModel
+@{
+    ViewBag.Title = "Edit Signature Campaign";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Email Signature Campaign</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Edit", "EmailSignatureCampaigns", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+        @Html.HiddenFor(x => x.Signature.Id)
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Signature.CampaignName, "Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Signature.CampaignName, new { placeholder = "Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Signature.CampaignName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Signature_IsDefault">
+                            @Html.CheckBoxFor(m => m.Signature.IsDefault) Is Default
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Signature.IsDefault)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Signature_IsLive">
+                            @Html.CheckBoxFor(m => m.Signature.IsLive) Is Live
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Signature.IsLive)
+                </div>
+            </div>
+
+            @Html.HiddenFor(x => x.Signature.MainContentFileUploadId)
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.MainContentImage, "Main Content Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <p class="help-block">
+
+                        <img src="@Url.Action("Index", "Uploads", new { id = Model.Signature.MainContentFileUploadId, filename = Model.Signature.MainContentFile.Title + Model.Signature.MainContentFile.FileExtension, width = 100 })" alt="@Model.Signature.CampaignName" />
+
+                        Please upload a valid image file if you would like the image to change.
+                    </p>
+                    <input type="file" id="MainContentImage" name="MainContentImage" />
+                    @Html.ValidationMessageFor(m => m.MainContentImage)
+                </div>
+            </div>
+
+
+            @Html.HiddenFor(x => x.Signature.MainContentNarrowFileUploadId)
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.MainContentNarrowImage, "Main Content Narrow Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <p class="help-block">
+
+                        <img src="@Url.Action("Index", "Uploads", new { id = Model.Signature.MainContentNarrowFileUploadId, filename = Model.Signature.MainContentNarrowFile.Title + Model.Signature.MainContentNarrowFile.FileExtension, width = 100 })" alt="@Model.Signature.CampaignName" />
+
+                        Please upload a valid image file if you would like the image to change.
+                    </p>
+                    <input type="file" id="MainContentNarrowImage" name="MainContentNarrowImage" />
+                    @Html.ValidationMessageFor(m => m.MainContentNarrowImage)
+                </div>
+            </div>
+
+            @Html.HiddenFor(x => x.Signature.FooterContentFileUploadId)
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FooterContentImage, "Footer Content Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <p class="help-block">
+
+                        <img src="@Url.Action("Index", "Uploads", new { id = Model.Signature.FooterContentFileUploadId, filename = Model.Signature.FooterContentFile.Title + Model.Signature.FooterContentFile.FileExtension, width = 100 })" alt="@Model.Signature.CampaignName" />
+
+                        Please upload a valid image file if you would like the image to change.
+                    </p>
+                    <input type="file" id="FooterContentImage" name="FooterContentImage" />
+                    @Html.ValidationMessageFor(m => m.FooterContentImage)
+                </div>
+            </div>
+
+            @Html.HiddenFor(x => x.Signature.FooterContentNarrowFileUploadId)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FooterContentNarrowImage, "Footer Content Narrow Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <p class="help-block">
+
+                        <img src="@Url.Action("Index", "Uploads", new { id = Model.Signature.FooterContentNarrowFileUploadId, filename = Model.Signature.FooterContentNarrowFile.Title + Model.Signature.FooterContentNarrowFile.FileExtension, width = 100 })" alt="@Model.Signature.CampaignName" />
+
+                        Please upload a valid image file if you would like the image to change.
+                    </p>
+                    <input type="file" id="FooterContentNarrowImage" name="FooterContentNarrowImage" />
+                    @Html.ValidationMessageFor(m => m.FooterContentNarrowImage)
+                </div>
+            </div>
+
+
+            @Html.HiddenFor(x => x.Signature.SidePanelContentFileUploadId)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SideContentImage, "Side Content Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <p class="help-block">
+
+                        <img src="@Url.Action("Index", "Uploads", new { id = Model.Signature.SidePanelContentFileUploadId, filename = Model.Signature.SidePanelContentFile.Title + Model.Signature.SidePanelContentFile.FileExtension, width = 100 })" alt="@Model.Signature.CampaignName" />
+
+
+
+                        Please upload a valid image file if you would like the image to change.
+                    </p>
+                    <input type="file" id="SideContentImage" name="SideContentImage" />
+                    @Html.ValidationMessageFor(m => m.SideContentImage)
+                </div>
+            </div>
+
+
+            @Html.HiddenFor(x => x.Signature.UnderlineContentFileUploadId)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.UnderlineContentImage, "Underline Content Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <p class="help-block">
+
+                        <img src="@Url.Action("Index", "Uploads", new { id = Model.Signature.UnderlineContentFileUploadId, filename = Model.Signature.UnderlineContentFile.Title + Model.Signature.UnderlineContentFile.FileExtension, width = 100 })" alt="@Model.Signature.CampaignName" />
+
+
+
+                        Please upload a valid image file if you would like the image to change.
+                    </p>
+                    <input type="file" id="SideContentImage" name="SideContentImage" />
+                    @Html.ValidationMessageFor(m => m.SideContentImage)
+                </div>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Email Signature Campaign</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    }
+</div>

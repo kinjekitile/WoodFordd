@@ -1,0 +1,84 @@
+﻿@model LoyaltyTierViewModel
+@{
+    ViewBag.Title = "Edit Benefit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Loyalty</h1>
+}
+
+@{ Html.RenderAction("RenderAuditContainer", "Audit", new { entityType = Model.Tier.GetType(), entityIdValue = Model.Tier.Id }); }
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Benefit</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Edit", "Loyalty", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+        @Html.HiddenFor(x => x.Tier.Id)
+        @Html.HiddenFor(x => x.Tier.TierLevel)
+        <div class="box-body">
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tier.Title, "Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Tier.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Tier.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tier.Description, "Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Tier.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Tier.Description)
+                </div>
+            </div>
+
+
+
+
+            <div class="benefit-type-1">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tier.BookingThresholdPerPeriod, "Booking Threshold per period", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Tier.BookingThresholdPerPeriod, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Tier.BookingThresholdPerPeriod)
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit-type-1">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tier.RandSpent, "Rand Spent", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Tier.RandSpent, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Tier.RandSpent)
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit-type-1">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tier.PointsEarnedPerRandSpent, "Points Earned per Rand Spent", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Tier.PointsEarnedPerRandSpent, "{0:0.00}", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Tier.PointsEarnedPerRandSpent)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Benefit</button>
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+

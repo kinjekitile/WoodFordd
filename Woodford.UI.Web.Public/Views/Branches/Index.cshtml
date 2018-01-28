@@ -1,0 +1,58 @@
+﻿@model ListOf<BranchModel>
+@{
+    ViewBag.Title = "Branches";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int itemIndex = 0;
+    int itemsPerRow = 1;
+}
+
+@helper RenderIf(bool ifCondition, string renderHtml) {
+if (ifCondition) {
+        <text>@Html.Raw(renderHtml)</text>
+}
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Branches</h1>
+    </div>
+</div>
+
+@if (Model.Items.Count > 0) {
+    <div class="grid-of-items">
+        @{
+            bool newRow = false;
+        }
+        @foreach (var b in Model.Items) {
+            newRow = (itemIndex % itemsPerRow == 0);
+            @RenderIf(newRow, "<div class='row' style='border-bottom:none;'>")
+
+            <div class="twelve columns">
+                @{ Html.RenderPartial("_BranchItemPartial", b);}
+            </div>
+                    itemIndex++;
+                    bool newRowNext = (itemIndex % itemsPerRow == 0);
+                    @RenderIf(newRowNext, "</div>")
+                    }
+        @RenderIf(newRow, "</div>")
+    </div>
+                    } else {
+                        <div class="row">
+                            <div class="twelve columns">
+                                <p>No branches have been found</p>
+                            </div>
+                        </div>
+
+                    }
+
+
+@section scripts {
+   
+    <script type="text/javascript">
+        $("iframe").each(function () {
+            
+            $(this).attr('style', 'width:308px;height:308px;');
+        });
+    </script>
+     }

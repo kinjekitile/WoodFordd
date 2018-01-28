@@ -1,0 +1,84 @@
+﻿@model ListOf<CountdownSpecialModel>
+@{
+    ViewBag.Title = "Countdown Specials";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Countdown Specials</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Countdown Specials</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Countdown Special", "Add", "CountdownSpecials")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+                <tr>
+                    <td></td>
+                    <th scope="col">Title</th>
+                    <th scope="col">Special Type</th>
+                    <th scope="col">Reward</th>    
+                    <th scope="col">Vehicle Upgrade Amount Override</th>    
+                    <th scope="col">Active?</th>
+                </tr>
+
+                @foreach (var c in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "CountdownSpecials", new { id = c.Id, p = Model.Pagination.CurrentPage }, null)</td>
+                        <td>@c.Title</td>
+                        <td>@c.SpecialType.ToString()</td>
+                        <td>
+                            @switch (c.SpecialType) {
+                                @*case Woodford.Core.DomainModel.Enums.CountdownSpecialType.DiscountAmount:
+                                    <text>@c.OfferDiscount</text>
+                                    break;*@
+                                case Woodford.Core.DomainModel.Enums.CountdownSpecialType.TextOnInvoice:
+                                    <text>@c.OfferText</text>
+                                    break;
+                                case Woodford.Core.DomainModel.Enums.CountdownSpecialType.VehicleUpgrade:
+                                    <text>Vehicle Upgrade</text>
+                                    break;
+                            }
+                        </td>
+                        <td>@c.VehicleUpgradeAmountOverride</td>
+                        <td>
+                            @if (c.IsActive) {
+                                <text>Active</text>
+                                using (Html.BeginForm("MarkAsInactive", "CountdownSpecials")) {
+                                    @Html.Hidden("id", c.Id)
+                                    @Html.Hidden("p", Model.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Inactive</button>
+                                }
+                            } else {
+                                <text>Inactive</text>
+                                using (Html.BeginForm("MarkAsActive", "CountdownSpecials")) {
+                                    @Html.Hidden("id", c.Id)
+                                    @Html.Hidden("p", Model.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Active</button>
+                                }
+}
+                        </td>
+                        
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No count down specials have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

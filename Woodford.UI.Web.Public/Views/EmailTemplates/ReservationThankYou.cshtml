@@ -1,0 +1,37 @@
+﻿@model ReservationInvoiceNotificationModel
+
+<div style="color: #30693F; font-size: 12px; margin-bottom: 10px;">
+    Reservation Number: <span style="color: #333; font-size: 18px; margin-left: 20px;">@Model.Reservation.Id</span>
+</div>
+
+<p style="color: #646464; font-size: 18px; line-height: 22px; font-style: italic; padding: 8px 0; margin: 0;">
+    Dear @Model.Reservation.FirstName
+</p>
+
+
+
+<p>I’d like to personally thank you for booking with Woodford Car Hire.</p>
+
+<p>The Woodford Group prides itself on the service it provides to its customers and we’re always looking to improve in any way we can based on your suggestions and recommendations. That’s why we’d love to hear about your experience with Woodford Car Hire. Your feedback means that we will be able to reward our staff for exceptional performance, replicate positive experiences and enhance our services to you so that we can surpass expectations the next time you book with Woodford Car Hire.</p>
+
+
+@if (Model.ShowReviewSection) {
+
+    <p>We'd love to hear about your experience with Woodford Car Hire through our online review partner, Trust Pilot.</p>
+
+    <p>Provide your review and rating by clicking the link below and we'll provide you with a <strong style="color: #19963c;">10%-OFF VOUCHER</strong> on any future rental with Woodford (You may insert this voucher on the Extras step of the checkout process).</p>
+
+
+    <p><a href="@Model.ReviewUrl">Click Here</a> to leave us a review on TrustPilot. Once you have submitted your review you will be redirected to your voucher.</p>
+
+}
+
+<p>
+    We look forward to meeting you again in the near future.
+</p>
+
+<p>
+    Yours sincerly,<br /><br />
+    Essa Suleman<br />
+    Operations Director
+</p>

@@ -1,0 +1,641 @@
+﻿@model ReservationSearchViewModel
+@{
+    ViewBag.Title = "Reservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Reservations</h1>
+}
+
+@using (Html.BeginForm("GoToReservation", "Reservations", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Search</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.Id, "Reservation Number", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.Id, new { placeholder = "Reservatiion Number", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Go to Reservation</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+@using (Html.BeginForm("Filter", "Reservations", FormMethod.Get, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Search</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.DateFilterType, "Date Search", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.ReservationDateFilterTypeFor(m => m.Filter.DateFilterType, new { placeholder = "Date Search", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.DateSearchStart, "Start Date", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.DateSearchStart, new { placeholder = "Start Date", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Filter.DateSearchStart)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.DateSearchEnd, "End Date", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.DateSearchEnd, new { placeholder = "End Date", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Filter.DateSearchEnd)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.Email, "Email", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.Email, new { placeholder = "Email", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.Name, "Name", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.Name, new { placeholder = "Name", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.IsArchived, "Is Archived", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(m => m.Filter.IsArchived, new { placeholder = "Is Archived", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.PickupBranchId, "Pickup Branch", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.BranchFor(m => m.Filter.PickupBranchId, new { placeholder = "Pickup Branch", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.CorporateId, "Corporate", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.CorporateFor(m => m.Filter.CorporateId, new { placeholder = "Corporate", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="Filter_IsQuote">
+                                    @Html.EditorFor(m => m.Filter.IsQuote) Is Quote
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Filter.IsQuote)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.Id, "Id", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.Id, new { placeholder = "Id", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="Filter_IsCompletedInvoice">
+                                    @Html.EditorFor(m => m.Filter.IsCompletedInvoice) Is Completed
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Filter.IsCompletedInvoice)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="Filter_HasPayment">
+                                    @Html.EditorFor(m => m.Filter.HasPayment) Has Payment
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Filter.HasPayment)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="Filter_SortBy">
+                                    @Html.ReservationSortByFor(m => m.Filter.SortBy) Sort By
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Filter.SortBy)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="Filter_ExportedToExternalSystem">
+                                    @Html.EditorFor(m => m.Filter.ExportedToExternalSystem) Is Exported
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Filter.ExportedToExternalSystem)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="Filter_IsCancelled">
+                                    @Html.EditorFor(m => m.Filter.IsCancelled) Is Cancelled
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Filter.IsCancelled)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("SaveReport", "Reservations", FormMethod.Get, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+    @Html.HiddenFor(x => x.Filter.Id)
+    @Html.HiddenFor(x => x.Filter.IsQuote)
+    @Html.HiddenFor(x => x.Filter.BookingDate)
+    @Html.HiddenFor(x => x.Filter.CorporateId)
+    @Html.HiddenFor(x => x.Filter.DateFilterType)
+    @Html.HiddenFor(x => x.Filter.DateSearchEnd)
+    @Html.HiddenFor(x => x.Filter.DateSearchStart)
+    @Html.HiddenFor(x => x.Filter.PickupBranchId)
+    @Html.HiddenFor(x => x.Filter.Email)
+    @Html.HiddenFor(x => x.Filter.Name)
+    @Html.HiddenFor(x => x.Filter.HasPayment)
+    @Html.HiddenFor(x => x.Filter.IsCompletedInvoice)
+    @Html.HiddenFor(x => x.Filter.ExportedToExternalSystem)
+    @Html.HiddenFor(x => x.Filter.SortBy)
+    @Html.HiddenFor(x => x.Filter.IsArchived)
+    @Html.HiddenFor(x => x.Filter.IsCancelled)
+
+
+
+    <div class="box box-primary collapsed-box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Report Options</h3>
+            <div class="box-tools pull-right">
+
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+
+            </div>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            @Html.LabelFor(m => m.Report.Title, "Title", new { @class = "form-label" })
+                        </div>
+
+
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Report.Title, new { placeholder = "Title", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Report.Title)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-10">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+
+                            @Html.LabelFor(m => m.Report.UseCurrentDateAsStartDate, "Use Current Date as Start Date", new { @class = "form-label" })
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.CheckBoxFor(m => m.Report.UseCurrentDateAsStartDate, new { style = "margin-top: 10px;" })
+                            @Html.ValidationMessageFor(x => x.Report.UseCurrentDateAsStartDate)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-10">
+                            Leaving this option unchecked will mean the report will use the start and end dates set in the search tool
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            Start Date
+
+                        </div>
+
+                        <div class="col-sm-6">
+                            Current Date plus:
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(m => m.Report.DateUnitsToAdd)
+                            @Html.ValidationMessageFor(x => x.Report.DateUnitsToAdd)
+
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.ReportDateUnitTypeFor(m => m.Report.DateUnitType)
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-2">
+
+                            @Html.ValidationMessageFor(x => x.Report.DateUnitType)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+
+                        <div class="col-sm-2">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-10">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Save Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Reservations</h3>
+    </div><!-- /.box-header -->
+    @if (Model.Items != null) {
+                if (Model.Items.Count > 0) {
+            <p>
+                @{ Html.RenderPartial("_ExportAsExcelPartial", Model.Filter); }
+            </p>
+            <div class="box-body no-padding">
+                <table class="table table-bordered table-striped dataTable">
+
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">Id</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Date Created</th>
+                        <th scope="col">Collection</th>
+                        <th scope="col">Collection Branch</th>
+                        <th scope="col">Return Branch</th>
+                        <th scope="col">Vehicle</th>
+                        <th scope="col">Rate Code</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Points Spent</th>
+                        <th scope="col">Amount Paid</th>
+
+                        @if (Model.Filter.IsQuote.HasValue) {
+                            <th scope="col">Is Quote</th>
+                        }
+                        @if (Model.Filter.IsCancelled.HasValue) {
+                            <th scope="col">Cancel Fee</th>
+                            <th scope="col">Refunded</th>
+                        }
+                        <th scope="col">Processed to External</th>
+
+
+                    </tr>
+
+                    @foreach (var item in Model.Items) {
+                        <tr>
+                            <td>
+                                @if (item.AddedToExternalSystem) {
+                                    <span id="spnAlert_@(item.Id)" class="label label-success">Exported</span>
+                                }
+                                else {
+                                    <span id="spnAlert_@(item.Id)" class="label label-warning">Not Exported</span>
+                                }
+
+                            </td>
+                            <td>@Html.ActionLink("Details", "Details", "Reservations", new { id = item.Id }, null)</td>
+                            <td>@item.Id</td>
+                            <td>
+                                @if (item.UserId.HasValue) {
+                                    <text> @Html.ActionLink(item.FirstName + " " + item.LastName, "Details", "Users", new { id = item.UserId }, null)</text>
+                                }
+                                else {
+                                    <text>@item.FirstName  @item.LastName</text>
+                                }
+
+                            </td>
+                            <td>@item.DateCreated.ToString("d MMM yyyy")</td>
+                            <td>@item.PickupDate.ToString("d MMM yyyy")</td>
+                            <td>@item.PickupBranch.Title</td>
+                            <td>@item.DropOffBranch.Title</td>
+                            <td>@item.Vehicle.Title - @item.Vehicle.VehicleGroup.Title</td>
+                            <td>@item.RateCodeTitle</td>
+                            <td>@String.Format("{0:c}", item.BookingPrice)</td>
+                            <td>
+                                @if (item.LoyaltyPointsSpent.HasValue) {
+                                    <text>@decimal.Round(item.LoyaltyPointsSpent.Value, 2)</text>
+                                }
+                            </td>
+                            <td>
+                                @if (item.Invoice != null) {
+                                    if (item.Invoice.HasPayment) {
+                                        <text>@String.Format("{0:c}", item.Invoice.AmountPaid)</text>
+                                    }
+                                    else {
+                                        if (item.Invoice.IsMobileCheckout) {
+                                            <text>Mobile</text>
+                                        }
+                                        if (item.CorporateId.HasValue) {
+                                            <text>Corporate</text>
+                                        }
+                                    }
+
+                                }
+
+                            </td>
+
+                            @if (Model.Filter.IsQuote.HasValue) {
+                                <td>@item.IsQuote</td>
+                            }
+                            @if (Model.Filter.IsCancelled.HasValue) {
+                                <td>
+                                    @if (item.CancellationFee.HasValue) {
+                                        <text>@String.Format("{0:c}", item.CancellationFee.Value)</text>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.RefundedAmount.HasValue) {
+                                        <text>@String.Format("{0:c}", item.RefundedAmount.Value)</text>
+                                    }
+                                </td>
+                            }
+                            <td>
+                                @{  string isChecked = item.AddedToExternalSystem ? "checked" : ""; }
+                                <input type="checkbox" id="chkExported_@(item.Id)" @(isChecked) onclick="markAsCopied(@item.Id)" /><span id="chkProcessing_@(item.Id)"></span>
+                            </td>
+
+                        </tr>
+                                    }
+
+                </table>
+            </div>
+                                    }
+                                    if (Model.Items.Count() > 0) {
+                                        @Html.Partial("_PaginationPartial", Model.Pagination)
+                                        }
+
+                                    }
+
+
+
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            @*cleanDate('Search_StartDate');
+            cleanDate('Search_EndDate');
+
+            @if (Model.Results != null) {
+
+                   <text>cleanDate('UpdateDateRange_ValidStartDate');</text>
+                   <text>cleanDate('UpdateDateRange_ValidEndDate');</text>
+
+           }*@
+
+
+            $('#Filter_DateSearchStart,#Filter_DateSearchEnd').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+
+
+
+
+        });
+
+        function markAsCopied(id) {
+            $("#chkProcessing_" + id).html("Processing...");
+            var exported = false;
+            if ($("#chkExported_" + id).is(':checked')) {
+
+                exported = true;
+            }
+
+            $.ajax({
+                url: "/Reservations/AddedToExternalSystem/" + id,
+                type: "POST",
+                data: JSON.stringify({ 'id': id, 'addedToExternalSystem': exported }),
+                dataType: "json",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    // perform your save call here
+                    //alert(data.status);
+                    if (data.status == "success") {
+                        if ($("#chkExported_" + id).is(':checked')) {
+                            $("#spnAlert_" + id).attr("class", "label label-success");
+                            $("#spnAlert_" + id).html("Exported");
+                            $("#chkProcessing_" + id).html("");
+
+                        } else {
+                            $("#spnAlert_" + id).attr("class", "label label-warning");
+                            $("#spnAlert_" + id).html("Not Exported");
+                            $("#chkProcessing_" + id).html("");
+                        }
+
+                        //alert("Done");
+                    } else {
+                        alert("Error occurs on the Database level!");
+                        $("#chkProcessing_" + id).html("");
+                    }
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                    $("#chkProcessing_" + id).html("");
+                }
+            });
+
+
+        }
+
+
+    </script>
+}

@@ -1,0 +1,65 @@
+﻿@model UrlRedirectViewModel
+@{
+    ViewBag.Title = "Edit Url Redirect";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Url Redirects</h1>
+}
+
+@{ Html.RenderAction("RenderAuditContainer", "Audit", new { entityType = Model.Redirect.GetType(), entityIdValue = Model.Redirect.Id }); }
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Url Redirect</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Edit", "UrlRedirects", FormMethod.Post, new { id = Model.Redirect.Id, enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+        @Html.HiddenFor(m => m.Redirect.Id)
+        
+        <div class="box-body">
+
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Redirect.OldUrl, "Old Url", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Redirect.OldUrl, new { placeholder = "Old Url", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Redirect.OldUrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Redirect.NewUrl, "New Url", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Redirect.NewUrl, new { placeholder = "New Url", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Redirect.NewUrl)
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                @Html.LabelFor(m => m.Redirect.RedirectType, "Redirect Type", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.RedirectTypeFor(m => m.Redirect.RedirectType, new { placeholder = "Redirect Type", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Redirect.RedirectType)
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Redirect</button>
+                </div>
+            </div>
+
+        </div>
+        
+    }
+</div>
+
+@section scripts {
+
+}

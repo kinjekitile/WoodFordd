@@ -1,0 +1,81 @@
+﻿<div class="container-footer">
+    <div class="container">
+        <footer>
+
+            <div class="row">
+                <div class="four columns">
+                    @*<div class="align-left">*@
+
+                        <ul class="social-icons" style="margin-top: 0px;">
+                            <li style="font-size: 15px;margin-left: 0px;"><span style="display: table-cell;vertical-align: middle;"><strong>STAY CONNECTED</strong></span></li>
+                            <li><a href="https://www.facebook.com/WoodfordCarHire/"><img src="@Url.Content("~/Content/images/social/facebook.png")" alt="Facebook" /></a></li>
+                            <li><a href="https://twitter.com/woodford_group"><img src="@Url.Content("~/Content/images/social/twitter.png")" alt="Twitter" /></a></li>
+                            <li><a href="#"><img src="@Url.Content("~/Content/images/social/googleplus.png")" alt="Google+" /></a></li>
+                        </ul>
+
+                        <h3>Book by phone</h3>
+                        <p class="impact-text">0860 966 33673</p>
+
+                        <ul>
+                            <li>@Html.ActionLink("Modify Reservation", "Index", "Modify")</li>
+                            <li>@Html.ActionLink("Cancel Reservation", "Index", "Cancel")</li>
+                            <li>
+                                <a href="/accidents-and-breakdowns">Accidents and Break downs</a>
+                            </li>
+                            <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
+                        </ul>
+
+                      
+
+                    @*</div>*@
+                </div>
+                <div class="four columns">
+                    <div class="col-padding">
+                        <div id="subscribe-form">
+                            @{Html.RenderPartial("_SignupPartial", new SubscribeViewModel());}
+                        </div>
+                    </div>
+                </div>
+                <div class="four columns">
+                    <div class="align-right">
+                        
+                        <!-- TrustBox widget -->
+                        <div class="trustpilot-widget" data-locale="en-GB" data-template-id="539ad0ffdec7e10e686debd7" data-businessunit-id="54620ca500006400057b77fe" data-style-height="350px" data-style-width="100%" data-theme="light" data-stars="4,5">
+                            <a href="https://uk.trustpilot.com/review/www.woodford.co.za" target="_blank">Trustpilot</a>
+                        </div>
+                        <!-- End TrustBox widget -->
+                      
+                     
+                    </div>
+                </div>
+            </div>
+
+
+        </footer>
+    </div>
+</div>
+
+<div class="container-sub-footer">
+    <div class="container">
+        <div class="row">
+            <div class="six columns">
+                <span>&copy; @DateTime.Now.Year - Woodford Car Hire</span><span> | </span><span><a href="/terms-and-conditions">Terms and Conditions</a></span> | </span><span><a href="/privacy-policy">Privacy Policy</a></span>
+            </div>
+
+            <div class="six columns">
+                <div class="col-padding align-right">
+                    <img src="@Url.Content("~/Content/images/creditcards.jpg")" alt="VISA, Mastercard, Diners, Amex" />&nbsp;&nbsp;<img src="@Url.Content("~/Content/images/thawte.jpg")" alt="Thawt" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="container">
+        <div class="row">
+            <div class="twelve columns">
+                <span>&copy; @DateTime.Now.Year - Woodford Car Hire</span>
+            </div>
+        </div>
+    </div>*@
+

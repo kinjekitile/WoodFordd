@@ -1,0 +1,86 @@
+﻿@model SearchCriteriaViewModel
+@{
+    bool isMinimised = false;
+    if (ViewBag.PanelMinimised != null) {
+        isMinimised = Convert.ToBoolean(ViewBag.PanelMinimised);
+    }
+}
+
+<div class="container">
+    <div id="search-panel" class="row@(isMinimised ? " panel-minimised" : "")">
+        @using (Html.BeginForm("Results", "Search", FormMethod.Get)) {
+            <div class="three columns search-panel-header-container" id="search-panel-container">
+
+                <div class="search-panel-header">
+
+                    <img src="@Url.Content("~/Content/images/search-and-book.png")" alt="" />
+                    <h2>
+                        
+                            Search &amp; Book
+                        
+                    </h2>
+
+                </div>
+
+            </div>
+            @*<div class="search-panel-expanded-view">*@
+            <div class="four columns search-panel-expanded-view">
+                @Html.LabelFor(m => m.Criteria.PickUpLocationId, "Pickup Location")
+                @Html.BranchFor(m => m.Criteria.PickUpLocationId)
+                @*<input type="checkbox" id="Criteria_IsReturnDifferentLocation" />*@
+                @Html.CheckBoxFor(x=>x.IsReturnDifferentLocation)
+                <label class="for-checkbox" for="IsReturnDifferentLocation">Return at a different location</label>
+                
+                <div id="different-return-location" style="display: none;">
+                   @Html.BranchFor(m => m.Criteria.DropOffLocationId)
+                </div>
+            </div>
+
+            <div class="three columns search-panel-expanded-view">
+                @Html.LabelFor(m => m.Criteria.PickupDateTime, "Pickup Date")
+                @Html.DatePickerFor(m => m.PickupDate, new { @class = "datefield" })
+                @Html.HourOfDayDropDownListFor(m => m.Criteria.PickupTime, new { @class = "timefield" })
+
+                @Html.LabelFor(m => m.Criteria.DropOffDate, "Drop Off Date")
+                @Html.DatePickerFor(m => m.DropOffDate, new { @class = "datefield" })
+                @Html.HourOfDayDropDownListFor(m => m.Criteria.DropOffTime, new { @class = "timefield" })
+            </div>
+            <div class="two columns search-panel-expanded-view">
+                <input type="submit" value="Search" />
+
+            </div>
+            
+            @Html.HiddenFor(m => m.AirportLocationIds)
+            @*</div>*@
+            <a href="#" class="toggle-search-panel">
+                <i></i>
+            </a>
+        }
+
+    </div>
+
+    @if (ViewBag.ShowError != null) {
+        if (ViewBag.ShowError) {
+            <div class="row">
+                @*search-panel-expanded-view*@
+                <div class="three columns">
+                    &nbsp;
+                </div>
+                <div class="seven columns">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="two columns">
+                    &nbsp;
+                </div>
+            </div>
+        }
+    }
+   
+    <div class="row">
+
+            <hr style="border-top:1px solid #999;" />
+       
+
+    </div>
+
+</div>

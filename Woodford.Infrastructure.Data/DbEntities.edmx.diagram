@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6c241cf861ec4837a2dac5b223a7d28e" Name="Diagram1" ZoomLevel="68">
+        <EntityTypeShape EntityType="Woodford2015Model.AppSetting" Width="1.5" PointX="1.25" PointY="0.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.BranchVehicleExclusion" Width="1.5" PointX="12.75" PointY="25.875" />
+        <EntityTypeShape EntityType="Woodford2015Model.BranchVehicle" Width="1.5" PointX="10.5" PointY="29.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.Campaign" Width="1.5" PointX="3" PointY="23.125" />
+        <EntityTypeShape EntityType="Woodford2015Model.Corporate" Width="1.5" PointX="3" PointY="38.375" />
+        <EntityTypeShape EntityType="Woodford2015Model.DynamicPage" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.FileUpload" Width="1.5" PointX="0.75" PointY="24.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.HerospaceItem" Width="1.5" PointX="3" PointY="20.125" />
+        <EntityTypeShape EntityType="Woodford2015Model.InterBranchDropOffFee" Width="1.5" PointX="5.25" PointY="64.125" />
+        <EntityTypeShape EntityType="Woodford2015Model.Invoice" Width="1.5" PointX="9.75" PointY="21.5" />
+        <EntityTypeShape EntityType="Woodford2015Model.LoyaltyTierBenefit" Width="1.5" PointX="12.75" PointY="28.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.PageContent" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.RateAdjustment" Width="1.5" PointX="10.25" PointY="33.25" />
+        <EntityTypeShape EntityType="Woodford2015Model.ReservationsLoyaltyTierBenefit" Width="1.5" PointX="9.75" PointY="37.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.ReservationsVehicleExtra" Width="1.5" PointX="12.75" PointY="34.625" />
+        <EntityTypeShape EntityType="Woodford2015Model.VehicleExtra" Width="1.5" PointX="10.5" PointY="42.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.VehicleGroup" Width="1.5" PointX="3" PointY="27" />
+        <EntityTypeShape EntityType="Woodford2015Model.Vehicle" Width="1.5" PointX="5.25" PointY="24.625" />
+        <EntityTypeShape EntityType="Woodford2015Model.Voucher" Width="1.5" PointX="4.75" PointY="3.75" />
+        <AssociationConnector Association="Woodford2015Model.FK_BranchVehicleExclusions_BranchVehicles" />
+        <AssociationConnector Association="Woodford2015Model.FK_BranchVehicles_Vehicles" />
+        <AssociationConnector Association="Woodford2015Model.FK_Campaigns_FileUploads" />
+        <AssociationConnector Association="Woodford2015Model.FK_HerospaceItems_FileUploads" />
+        <AssociationConnector Association="Woodford2015Model.FK_VehicleGroups_FileUploads" />
+        <AssociationConnector Association="Woodford2015Model.FK_Vehicles_FileUploads" />
+        <AssociationConnector Association="Woodford2015Model.FK_Vehicles_FileUploads1" />
+        <AssociationConnector Association="Woodford2015Model.FK_LoyaltyTierBenefits_VehicleExtras" />
+        <AssociationConnector Association="Woodford2015Model.FK_RateAdjustments_VehicleGroups" />
+        <AssociationConnector Association="Woodford2015Model.FK_ReservationsVehicleExtras_VehicleExtras" />
+        <AssociationConnector Association="Woodford2015Model.FK_Vehicles_VehicleGroups" />
+        <EntityTypeShape EntityType="Woodford2015Model.MessageQueue" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.Waiver" Width="1.5" PointX="5.25" PointY="21.625" />
+        <AssociationConnector Association="Woodford2015Model.FK_Waivers_VehicleGroups" />
+        <EntityTypeShape EntityType="Woodford2015Model.Branch" Width="1.5" PointX="3" PointY="44.75" />
+        <AssociationConnector Association="Woodford2015Model.FK_Branches_FileUploads" />
+        <AssociationConnector Association="Woodford2015Model.FK_BranchVehicles_Branches" />
+        <AssociationConnector Association="Woodford2015Model.FK_InterBranchDropOffFees_Branches" />
+        <AssociationConnector Association="Woodford2015Model.FK_InterBranchDropOffFees_Branches1" />
+        <AssociationConnector Association="Woodford2015Model.FK_LoyaltyTierBenefits_BranchesDropOff" />
+        <AssociationConnector Association="Woodford2015Model.FK_LoyaltyTierBenefits_BranchesPickup" />
+        <AssociationConnector Association="Woodford2015Model.FK_RateAdjustments_Branches" />
+        <EntityTypeShape EntityType="Woodford2015Model.CountdownSpecial" Width="1.5" PointX="9.75" PointY="46.125" />
+        <EntityTypeShape EntityType="Woodford2015Model.VehicleUpgrade" Width="1.5" PointX="7.5" PointY="36.75" />
+        <AssociationConnector Association="Woodford2015Model.FK_VehicleUpgrades_Branches" />
+        <AssociationConnector Association="Woodford2015Model.FK_CountdownSpecials_VehicleUpgrades" />
+        <AssociationConnector Association="Woodford2015Model.FK_LoyaltyTierBenefits_VehicleUpgrades" />
+        <AssociationConnector Association="Woodford2015Model.FK_VehicleUpgrades_Vehicles" />
+        <AssociationConnector Association="Woodford2015Model.FK_VehicleUpgrades_Vehicles1" />
+        <EntityTypeShape EntityType="Woodford2015Model.NewsCategory" Width="1.5" PointX="7.375" PointY="6.5" />
+        <EntityTypeShape EntityType="Woodford2015Model.News" Width="1.5" PointX="9.625" PointY="15.875" />
+        <AssociationConnector Association="Woodford2015Model.FK_News_FileUploads" />
+        <AssociationConnector Association="Woodford2015Model.FK_News_NewsCategories" />
+        <EntityTypeShape EntityType="Woodford2015Model.UrlRedirect" Width="1.5" PointX="3.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.AuditItem" Width="1.5" PointX="14.875" PointY="1.125" />
+        <EntityTypeShape EntityType="Woodford2015Model.AuditItemProperty" Width="1.5" PointX="17.125" PointY="1.125" />
+        <AssociationConnector Association="Woodford2015Model.FK_AuditItemProperty_AuditItem" />
+        <EntityTypeShape EntityType="Woodford2015Model.RateRule" Width="1.5" PointX="0.625" PointY="16.625" />
+        <EntityTypeShape EntityType="Woodford2015Model.RateCode" Width="1.5" PointX="2.875" PointY="31.375" />
+        <AssociationConnector Association="Woodford2015Model.FK_Campaigns_RateCodes" />
+        <AssociationConnector Association="Woodford2015Model.FK_RateAdjustments_RateCodes" />
+        <AssociationConnector Association="Woodford2015Model.FK_RateCodes_RateRules" />
+        <EntityTypeShape EntityType="Woodford2015Model.BranchSurcharge" Width="1.5" PointX="1.375" PointY="54.25" />
+        <AssociationConnector Association="Woodford2015Model.FK_BranchSurcharges_Branches" />
+        <EntityTypeShape EntityType="Woodford2015Model.Rate" Width="1.5" PointX="5.25" PointY="33.875" />
+        <AssociationConnector Association="Woodford2015Model.FK_Rates_Branches" />
+        <AssociationConnector Association="Woodford2015Model.FK_Rates_RateCodes" />
+        <AssociationConnector Association="Woodford2015Model.FK_Rates_VehicleGroups" />
+        <EntityTypeShape EntityType="Woodford2015Model.CorporateRateCode" Width="1.5" PointX="12.25" PointY="37.75" />
+        <AssociationConnector Association="Woodford2015Model.FK_CorporateRateCodes_Corporates" />
+        <AssociationConnector Association="Woodford2015Model.FK_CorporateRateCodes_RateCodes" />
+        <EntityTypeShape EntityType="Woodford2015Model.LoyaltyTier" Width="1.5" PointX="0.75" PointY="34.625" />
+        <AssociationConnector Association="Woodford2015Model.FK_LoyaltyTierBenefits_LoyaltyTiers" />
+        <EntityTypeShape EntityType="Woodford2015Model.BranchRateCodeExclusion" Width="1.5" PointX="5.25" PointY="44" />
+        <AssociationConnector Association="Woodford2015Model.FK_BranchRateCodeExclusions_Branches" />
+        <AssociationConnector Association="Woodford2015Model.FK_BranchRateCodeExclusions_RateCodes" />
+        <AssociationConnector Association="Woodford2015Model.FK_ReservationsVehicleExtras_ReservationsLoyaltyTierBenefits" />
+        <EntityTypeShape EntityType="Woodford2015Model.UserProfile" Width="1.5" PointX="13.25" PointY="41.375" />
+        <AssociationConnector Association="Woodford2015Model.FK_UserProfiles_Corporates" />
+        <AssociationConnector Association="Woodford2015Model.FK_UserProfiles_LoyaltyTiers" />
+        <EntityTypeShape EntityType="Woodford2015Model.ReservationBranchSurcharge" Width="1.5" PointX="15.75" PointY="42" />
+        <AssociationConnector Association="Woodford2015Model.FK_ReservationBranchSurcharges_BranchSurcharges" />
+        <EntityTypeShape EntityType="Woodford2015Model.BookingHistory" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.webpages_Roles" Width="1.5" PointX="9.375" PointY="0.875" />
+        <AssociationConnector Association="Woodford2015Model.webpages_UsersInRoles" />
+        <EntityTypeShape EntityType="Woodford2015Model.Report" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.EmailSignature" Width="1.5" PointX="7.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Woodford2015Model.EmailSignatureCampaign" Width="1.5" PointX="3" PointY="14" />
+        <AssociationConnector Association="Woodford2015Model.FK_EmailSignatureCampaigns_FooterContent" />
+        <AssociationConnector Association="Woodford2015Model.FK_EmailSignatureCampaigns_FooterContentNarrow" />
+        <AssociationConnector Association="Woodford2015Model.FK_EmailSignatureCampaigns_MainContent" />
+        <AssociationConnector Association="Woodford2015Model.FK_EmailSignatureCampaigns_MainContentNarrow" />
+        <AssociationConnector Association="Woodford2015Model.FK_EmailSignatureCampaigns_SidePanelContent" />
+        <AssociationConnector Association="Woodford2015Model.FK_EmailSignatureCampaigns_Underline" />
+        <EntityTypeShape EntityType="Woodford2015Model.MyGateRefundTransaction" Width="1.5" PointX="12" PointY="18.125" />
+        <EntityTypeShape EntityType="Woodford2015Model.Refund" Width="1.5" PointX="20.75" PointY="33.25" />
+        <AssociationConnector Association="Woodford2015Model.FK_MyGateRefundTransactions_Invoices" />
+        <AssociationConnector Association="Woodford2015Model.FK_Refunds_Invoices" />
+        <EntityTypeShape EntityType="Woodford2015Model.BookingClaim" Width="1.5" PointX="15.5" PointY="46.375" />
+        <AssociationConnector Association="Woodford2015Model.FK_BookingClaims_UserProfiles" />
+        <EntityTypeShape EntityType="Woodford2015Model.TrustPilotReviewInvite" Width="1.5" PointX="7" PointY="15.5" />
+        <AssociationConnector Association="Woodford2015Model.FK_TrustPilotReviewInvites_Vouchers" />
+        <EntityTypeShape EntityType="Woodford2015Model.VehicleManufacturer" Width="1.5" PointX="9.5" PointY="7.875" />
+        <AssociationConnector Association="Woodford2015Model.FK_Vehicles_VehicleManufacturers" />
+        <AssociationConnector Association="Woodford2015Model.FK_VehicleManufacturers_FileUploads" />
+        <AssociationConnector Association="Woodford2015Model.FK_Campaigns_FileUploadsSearchResultIcon" />
+        <EntityTypeShape EntityType="Woodford2015Model.Reservation" Width="1.5" PointX="18.5" PointY="30.75" />
+        <AssociationConnector Association="Woodford2015Model.FK_Reservations_Branches" />
+        <AssociationConnector Association="Woodford2015Model.FK_Reservations_Branches1" />
+        <AssociationConnector Association="Woodford2015Model.FK_Invoices_Reservations" />
+        <AssociationConnector Association="Woodford2015Model.FK_Refunds_Reservations" />
+        <AssociationConnector Association="Woodford2015Model.FK_Refunds_Reservations1" />
+        <AssociationConnector Association="Woodford2015Model.FK_ReservationBranchSurcharges_Reservations" />
+        <AssociationConnector Association="Woodford2015Model.FK_Reservations_UserProfiles" />
+        <AssociationConnector Association="Woodford2015Model.FK_Reservations_Vehicles" />
+        <AssociationConnector Association="Woodford2015Model.FK_Reservations_VehicleUpgrades" />
+        <AssociationConnector Association="Woodford2015Model.FK_ReservationsLoyaltyTierBenefits_Reservations" />
+        <AssociationConnector Association="Woodford2015Model.FK_ReservationsVehicleExtras_Reservations" />
+        <AssociationConnector Association="Woodford2015Model.FK_TrustPilotReviewInvites_Reservations" />
+        <EntityTypeShape EntityType="Woodford2015Model.MyGateTransaction" Width="1.5" PointX="12" PointY="22.125" />
+        <AssociationConnector Association="Woodford2015Model.FK_MyGateTransactions_Invoices" />
+        <EntityTypeShape EntityType="Woodford2015Model.ReservationsAdmin" Width="1.5" PointX="14.375" PointY="4.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

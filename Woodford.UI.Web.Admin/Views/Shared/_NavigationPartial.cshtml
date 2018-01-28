@@ -1,0 +1,327 @@
+﻿@{
+    string currentSectionFromUrl = "";
+    string currentUrl = Request.Url.PathAndQuery;
+    string[] urlSplit = currentUrl.Split('/');
+    if (urlSplit.Length > 0) {
+        currentSectionFromUrl = urlSplit[1].ToLower();
+    }
+}
+
+@helper  IsActive(string linkSection, string currentSectionFromUrl, string otherClass) {
+    if (linkSection.Contains(",") && currentSectionFromUrl != "") {
+        if (linkSection.Contains(currentSectionFromUrl)) {
+                <text>class="active @otherClass"</text>
+        }
+        else {
+                <text>class="@otherClass"</text>
+        }
+    }
+    else {
+        if (linkSection == currentSectionFromUrl) {
+                <text>class="active @otherClass"</text>
+        }
+        else {
+                <text>class="@otherClass"</text>
+        }
+    }
+}
+
+<!-- sidebar menu: : style can be found in sidebar.less -->
+
+@if (Roles.IsUserInRole("Administrator")) {
+    <ul class="sidebar-menu">
+        <li class="header">ADMINISTRATION</li>
+        <li @(IsActive("", currentSectionFromUrl, ""))>
+            <a href="@Url.Action("Index", "Home")">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+        </li>
+        <li @(IsActive("reservations", currentSectionFromUrl, ""))>
+            <a href="@Url.Action("Index", "Reservations")">
+                <i class="fa fa-book"></i> <span>Reservations</span>
+            </a>
+        </li>
+        <li @(IsActive("reports", currentSectionFromUrl, ""))>
+            <a href="@Url.Action("Index", "Reports")">
+                <i class="fa fa-book"></i> <span>Reports</span>
+            </a>
+        </li>
+        <li @(IsActive("raterules,ratecodes,findrates,rateupdate", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "RateRules")">
+                <i class="fa fa-file-image-o"></i><span>Rates</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("raterules", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "RateRules")"><i class="fa fa-circle-o"></i> Rate Rules</a></li>
+                <li @(IsActive("ratecodes", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "RateCodes")"><i class="fa fa-circle-o"></i> Rate Codes</a></li>
+                @*<li><a href="@Url.Action("Index", "Rates")"><i class="fa fa-circle-o"></i> Rates (To be removed)</a></li>*@
+                <li @(IsActive("findrates", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "FindRates")"><i class="fa fa-circle-o"></i> Find Rates</a></li>
+                <li @(IsActive("rateupdate", currentSectionFromUrl, ""))><a href="@Url.Action("Update", "RateUpdate")"><i class="fa fa-circle-o"></i> Rate Update</a></li>
+            </ul>
+        </li>
+        <li @(IsActive("rateadjustments", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "RateAdjustments")">
+                <i class="fa fa-file-image-o"></i><span>Rate Adjustments</span><i class="fa fa-angle-left pull-right"></i>
+
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("rateadjustments", currentSectionFromUrl, ""))><a href="@Url.Action("AdjustmentsByBranch", "RateAdjustments")"><i class="fa fa-circle-o"></i> by Branch</a></li>
+                <li @(IsActive("rateadjustments", currentSectionFromUrl, ""))><a href="@Url.Action("AdjustmentsByVehicleGroup", "RateAdjustments")"><i class="fa fa-circle-o"></i> by Vehicle Group</a></li>
+                <li @(IsActive("rateadjustments", currentSectionFromUrl, ""))><a href="@Url.Action("AdjustmentsByRateCode", "RateAdjustments")"><i class="fa fa-circle-o"></i> by Rate Code</a></li>
+                <li @(IsActive("rateadjustments", currentSectionFromUrl, ""))><a href="@Url.Action("AdjustmentsByDemand", "RateAdjustments")"><i class="fa fa-circle-o"></i> by Demand</a></li>
+            </ul>
+        </li>
+        <li @(IsActive("branches,interbranchdropofffees", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Branches")">
+                <i class="fa fa-map-marker"></i><span>Branches</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("branches", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "Branches")"><i class="fa fa-circle-o"></i> View Branches</a></li>
+                <li @(IsActive("interbranchdropofffees", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "InterBranchDropOffFees")"><i class="fa fa-circle-o"></i> Drop Off Fees </a></li>
+            </ul>
+        </li>
+        <li @(IsActive("dynamicpages", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "DynamicPages")">
+                <i class="fa fa-file-image-o"></i><span>Dynamic Pages</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("dynamicpages", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "DynamicPages")"><i class="fa fa-circle-o"></i> View Pages</a></li>
+                <li @(IsActive("dynamicpages", currentSectionFromUrl, ""))><a href="@Url.Action("Add", "DynamicPages")"><i class="fa fa-circle-o"></i> Add Page</a></li>
+            </ul>
+        </li>
+        <li @(IsActive("campaigns,vehicleupgrades,countdownspecials", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Campaigns")">
+                <i class="fa fa-car"></i><span>Campaigns & Specials</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("campaigns", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "Campaigns")"><i class="fa fa-circle-o"></i> Campaigns</a></li>
+                <li @(IsActive("vehicleupgrades", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "VehicleUpgrades")"><i class="fa fa-circle-o"></i> Vehicle Upgrades</a></li>
+                <li @(IsActive("countdownspecials", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "CountDownSpecials")"><i class="fa fa-circle-o"></i> Countdown Specials</a></li>
+            </ul>
+        </li>
+        <li @(IsActive("corporates,corporateratecodes", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Campaigns")">
+                <i class="fa fa-car"></i><span>Corporates</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("corporates", currentSectionFromUrl, ""))>
+                    <a href="@Url.Action("Index", "Corporates")">
+                        <i class="fa fa-circle-o"></i>Corporates
+                    </a>
+                </li>
+                <li @(IsActive("corporateratecodes", currentSectionFromUrl, ""))>
+                    <a href="@Url.Action("Index", "CorporateRateCodes")">
+                        <i class="fa fa-circle-o"></i>Corporate Rate Codes
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+        <li @(IsActive("vehicleavailabilityexclusions,branchratecodeexclusions", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Campaigns")">
+                <i class="fa fa-lock"></i><span>Exclusions</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("branchratecodeexclusions", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "BranchRateCodeExclusions")"><i class="fa fa-circle-o"></i> Rate Code Exclusions</a></li>
+
+                <li @(IsActive("vehicleavailabilityexclusions", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "VehicleAvailabilityExclusions")"><i class="fa fa-circle-o"></i> Vehicle Availability Exclusions</a></li>
+            </ul>
+        </li>
+
+        <li @(IsActive("bookinghistoryimport", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Campaigns")">
+                <i class="fa fa-lock"></i><span>Data Imports</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("bookinghistoryimport", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "BookingHistoryImport")"><i class="fa fa-circle-o"></i> Booking History Import</a></li>
+
+
+            </ul>
+        </li>
+
+        <li @(IsActive("loyalty", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Loyalty")">
+                <i class="fa fa-star"></i><span>Advance</span>
+            </a>
+        </li>
+
+        <li @(IsActive("emailsignature,emailsignaturecampaign", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Campaigns")">
+                <i class="fa fa-lock"></i><span>Email Signatures</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("emailsignature", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "EmailSignature")"><i class="fa fa-circle-o"></i> Email Signatures</a></li>
+
+                <li @(IsActive("vehicleaemailsignaturecampaignvailabilityexclusions", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "EmailSignatureCampaigns")"><i class="fa fa-circle-o"></i> Email Signature Campaigns</a></li>
+            </ul>
+        </li>
+
+
+        <li @(IsActive("vehiclegroups,vehicles,vehicleavailability,vehicleextras,waivers", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "VehicleGroups")">
+                <i class="fa fa-car"></i><span>Vehicles & Groups</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("vehiclegroups", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "VehicleGroups")"><i class="fa fa-circle-o"></i> Vehicle Groups</a></li>
+                <li @(IsActive("vehicles", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "Vehicles")"><i class="fa fa-circle-o"></i> Vehicles</a></li>
+                <li @(IsActive("vehicleavailability", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "VehicleAvailability")"><i class="fa fa-circle-o"></i> Vehicle Availability</a></li>
+                @*<li @(IsActive("vehicleavailabilityexclusions", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "VehicleAvailabilityExclusions")"><i class="fa fa-circle-o"></i> Vehicle Availability Exclusions</a></li>*@
+                <li @(IsActive("vehicleextras", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "VehicleExtras")"><i class="fa fa-circle-o"></i> Vehicle Extras</a></li>
+                <li @(IsActive("waivers", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "Waivers")"><i class="fa fa-circle-o"></i> Waivers</a></li>
+                <li @(IsActive("vehiclemanufacturers", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "VehicleManufacturers")"><i class="fa fa-circle-o"></i> Vehicle Manufacturer</a></li>
+            </ul>
+        </li>
+
+        @*<li @(IsActive("vehiclegroups", currentSectionFromUrl, "treeview"))>
+                <a href="@Url.Action("Index", "VehicleGroups")">
+                    <i class="fa fa-car"></i><span>Vehicle Groups</span>
+                </a>
+            </li>
+            <li @(IsActive("vehicles", currentSectionFromUrl, "treeview"))>
+                <a href="@Url.Action("Index", "Vehicles")">
+                    <i class="fa fa-car"></i><span>Vehicles</span>
+                </a>
+            </li>*@
+
+        <li @(IsActive("vouchers", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Vouchers")">
+                <i class="fa fa-upload"></i><span>Manage Vouchers</span>
+            </a>
+        </li>
+
+        <li @(IsActive("herospace", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Herospace")">
+                <i class="fa fa-upload"></i><span>Manage Herospace</span>
+            </a>
+        </li>
+
+        <li @(IsActive("news", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "NewsCategory")">
+                <i class="fa fa-upload"></i><span>Manage News</span>
+            </a>
+        </li>
+
+        <li @(IsActive("fileuploads", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "FileUploads")">
+                <i class="fa fa-upload"></i><span>File Uploads</span>
+            </a>
+        </li>
+        <li @(IsActive("users,useractivity", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Users")">
+                <i class="fa fa-users"></i><span>Users</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("users", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "Users")"><i class="fa fa-circle-o"></i> Users</a></li>
+
+                <li @(IsActive("useractivity", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "UserActivity")"><i class="fa fa-circle-o"></i> User Activity</a></li>
+            </ul>
+        </li>
+        <li @(IsActive("reviewinvites", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "ReviewInvites")">
+                <i class="fa fa-envelope"></i><span>Review Invites</span>
+            </a>
+        </li>
+        <li @(IsActive("settings", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Settings")">
+                <i class="fa fa-check"></i><span>Settings</span>
+            </a>
+        </li>
+        <li @(IsActive("emails", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Emails")">
+                <i class="fa fa-envelope-o"></i>
+                <span>Emails</span>
+
+            </a>
+
+        </li>
+        <li @(IsActive("urlredirects", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "UrlRedirects")">
+                <i class="fa fa-arrow-right"></i><span>Url Redirects</span>
+            </a>
+        </li>
+
+    </ul>
+}
+
+@if (Roles.IsUserInRole("Branch")) {
+    <ul class="sidebar-menu">
+        <li class="header">ADMINISTRATION</li>
+
+        <li @(IsActive("users", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Users")">
+                <i class="fa fa-users"></i><span>Users</span>
+            </a>
+        </li>
+
+
+
+    </ul>
+}
+
+@if (Roles.IsUserInRole("Operations")) {
+    <ul class="sidebar-menu">
+        <li class="header">ADMINISTRATION</li>
+
+        <li @(IsActive("reservations", currentSectionFromUrl, ""))>
+            <a href="@Url.Action("Index", "Reservations")">
+                <i class="fa fa-book"></i> <span>Reservations</span>
+            </a>
+        </li>
+
+        <li @(IsActive("users", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Users")">
+                <i class="fa fa-users"></i><span>Users</span>
+            </a>
+        </li>
+
+
+
+    </ul>
+}
+
+@if (Roles.IsUserInRole("SEO")) {
+    <ul class="sidebar-menu">
+        <li class="header">ADMINISTRATION</li>
+
+        <li @(IsActive("herospace", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "Herospace")">
+                <i class="fa fa-upload"></i><span>Manage Herospace</span>
+            </a>
+        </li>
+        <li @(IsActive("campaigns", currentSectionFromUrl, ""))>
+            <a href="@Url.Action("Index", "Campaigns")"><i class="fa fa-circle-o"></i> Campaigns</a>
+        </li>
+        <li @(IsActive("news", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "NewsCategory")">
+                <i class="fa fa-upload"></i><span>Manage News</span>
+            </a>
+        </li>
+        <li @(IsActive("urlredirects", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "UrlRedirects")">
+                <i class="fa fa-arrow-right"></i><span>Url Redirects</span>
+            </a>
+        </li>
+        <li @(IsActive("dynamicpages", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "DynamicPages")">
+                <i class="fa fa-arrow-right"></i><span>Dynamic Pages</span>
+            </a>
+        </li>
+        <li @(IsActive("emailsignaturecampaigns", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "EmailSignatureCampaigns")">
+                <i class="fa fa-arrow-right"></i><span>Email Signature Campaigns</span>
+            </a>
+        </li>
+        <li @(IsActive("vehiclegroups,vehicles,vehicleavailability,vehicleextras,waivers", currentSectionFromUrl, "treeview"))>
+            <a href="@Url.Action("Index", "VehicleGroups")">
+                <i class="fa fa-car"></i><span>Vehicles & Groups</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li @(IsActive("vehiclegroups", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "VehicleGroups")"><i class="fa fa-circle-o"></i> Vehicle Groups</a></li>
+                <li @(IsActive("vehicles", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "Vehicles")"><i class="fa fa-circle-o"></i> Vehicles</a></li>
+                <li @(IsActive("vehiclemanufacturers", currentSectionFromUrl, ""))><a href="@Url.Action("Index", "VehicleManufacturers")"><i class="fa fa-circle-o"></i> Vehicle Manufacturer</a></li>
+
+            </ul>
+        </li>
+
+    </ul>
+}

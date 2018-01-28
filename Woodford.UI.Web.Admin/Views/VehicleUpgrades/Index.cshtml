@@ -1,0 +1,72 @@
+﻿@model ListOf<VehicleUpgradeModel>
+@{
+    ViewBag.Title = "Vehicle Upgrades";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Vehicle Upgrades</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Vehicle Upgrades</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Vehicle Upgrade", "Add", "VehicleUpgrades")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+                <tr>
+                    <td></td>
+                    <th scope="col">From Vehicle</th>
+                    <th scope="col">To Vehicle</th>
+                    <th scope="col">Branch</th>
+                    <th scope="col">Upgrade Amount</th>
+                    <th scope="col">Active?</th>
+                </tr>
+
+                @foreach (var v in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "VehicleUpgrades", new { id = v.Id, p = Model.Pagination.CurrentPage }, null)</td>
+                        <td>@v.FromVehicle.Title</td>
+                        <td>@v.ToVehicle.Title</td>
+                        <td>@v.Branch.Title</td>
+                        <td>@v.UpgradeAmount</td>
+                        <td>
+                            @if (v.IsActive) {
+                                <text>Active</text>
+                                using (Html.BeginForm("MarkAsInactive", "VehicleUpgrades")) {
+                                    @Html.Hidden("id", v.Id)
+                                    @Html.Hidden("p", Model.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Inactive</button>
+                                }
+                            } else {
+                                <text>Inactive</text>
+                                using (Html.BeginForm("MarkAsActive", "VehicleUpgrades")) {
+                                    @Html.Hidden("id", v.Id)
+                                    @Html.Hidden("p", Model.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Active</button>
+                                }
+}
+                        </td>
+                        
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No vehicle upgrades have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

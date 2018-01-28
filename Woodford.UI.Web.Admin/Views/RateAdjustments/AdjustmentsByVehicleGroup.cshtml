@@ -1,0 +1,63 @@
+﻿@model RateAdjustmentListViewModel
+@{
+    ViewBag.Title = "Rate Adjustments By Vehicle Group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Rate Adjustments By Vehicle Group</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Rate Adjustments by Vehicle Group</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons pull-left">
+            @Html.ActionLink("Add Rate Adjustment", "AdjustmentsByVehicleGroupAdd", "RateAdjustments")
+        </div>
+        <div class="pull-right">
+            @using (Html.BeginForm()) {
+                @Html.CheckBoxFor(x => x.ShowPastAdjustments) <label for="ShowPastAdjustments">Show past adjustments</label>
+
+                <input type="submit" value="Update" />
+            }
+
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+                <tr>
+                    <td></td>                    
+                    <th scope="col">Branch</th>
+                    <th scope="col">Vehicle Group</th>
+                    <th scope="col">Date Range</th>                    
+                    <th scope="col">Adjustment Percentage</th>
+                    <th>Archived</th>
+                </tr>
+
+                @foreach (var a in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "AdjustmentsByVehicleGroupEdit", "RateAdjustments", new { id = a.Id }, null)</td>                        
+                        <td>@a.Branch.Title</td>
+                        <td>@a.VehicleGroup.Title</td>
+                        <td>@a.StartDate.ToString("dd/MM/yyyy") - @a.EndDate.ToString("dd/MM/yyyy")</td>
+                        <td>@a.AdjustmentPercentage</td>
+                        <td>@a.IsArchived</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No rate adjustments by vehicle group have been created yet</p>
+        </div>
+    }
+    @*@if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }*@
+</div>

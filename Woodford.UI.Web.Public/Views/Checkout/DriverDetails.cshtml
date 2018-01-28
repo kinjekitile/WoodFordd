@@ -1,0 +1,76 @@
+﻿@model CheckoutConfirmViewModel
+@{
+    ViewBag.Title = "DriverDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Driver Details</h2>
+
+@section searchpanel {
+    @{Html.RenderPartial("_SearchPanelPartial", Model.Criteria);}
+}
+
+
+<div class="row">
+    <div class="twelve columns">
+
+        @if (ViewBag.IsMobile) {
+            <ul class="progressbar-mobile-view">
+                <li class="active">&nbsp;</li>
+                <li class="active">&nbsp;</li>
+                <li class="active">&nbsp;</li>
+                <li class="active">Book</li>
+                <li>&nbsp;</li>
+
+            </ul>
+        }
+        else {
+            <ul class="progressbar desktop-view">
+                <li class="active">Search</li>
+                <li class="active">Customer Details</li>
+                <li class="active">Extras</li>
+                <li class="active">Confirm</li>
+                <li>Payment</li>
+
+            </ul>
+        }
+
+
+
+    </div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="twelve columns">
+
+        <div class="input-form vertical-form">
+            <div class="row">
+                @Html.LabelFor(m => m.Reservation.FirstName, "First Name")
+                @Html.TextBoxFor(m => m.Reservation.FirstName, new { placeholder = "First Name" })
+                @Html.ValidationMessageFor(m => m.Reservation.FirstName)
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.Reservation.LastName, "Last Name")
+                @Html.TextBoxFor(m => m.Reservation.LastName, new { placeholder = "Last Name" })
+                @Html.ValidationMessageFor(m => m.Reservation.LastName)
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(m => m.Reservation.Email, "E")
+                @Html.TextBoxFor(m => m.Reservation.LastName, new { placeholder = "Last Name" })
+                @Html.ValidationMessageFor(m => m.Reservation.LastName)
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(m => m.Reservation.LastName, "Last Name")
+                @Html.TextBoxFor(m => m.Reservation.LastName, new { placeholder = "Last Name" })
+                @Html.ValidationMessageFor(m => m.Reservation.LastName)
+            </div>
+
+        </div>
+
+    </div>
+</div>

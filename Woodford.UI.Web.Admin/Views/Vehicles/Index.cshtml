@@ -1,0 +1,65 @@
+﻿@model ListOf<VehicleModel>
+@{
+    ViewBag.Title = "Vehicles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Vehicles</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Vehicles</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Vehicle", "Add", "Vehicles")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th scope="col">Vehicle Name</th>
+                    <th scope="col">Vehicle Group</th>
+                    <th scope="col">Page Url</th>                    
+                    <th scope="col">Archived?</th>
+                </tr>
+
+                @foreach (var g in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "Vehicles", new { id = g.Id }, null)</td>
+                        <td>
+                            @if (g.FileUploadId.HasValue) {
+                                <img src="@Url.Action("Index", "Uploads", new { id = g.VehicleImage.Id, filename = g.VehicleImage.Title + g.VehicleImage.FileExtension, width = 100 })" alt="@g.Title" />
+                            }
+                        </td>
+                        <td>
+                            @if (g.FileUploadId2.HasValue) {
+                                <img src="@Url.Action("Index", "Uploads", new { id = g.VehicleImage2.Id, filename = g.VehicleImage2.Title + g.VehicleImage2.FileExtension, width = 100 })" alt="@g.Title" />
+                            }
+                        </td>
+                        <td>@g.Title</td>
+                        <td>@g.VehicleGroup.Title</td>
+                        <td>@g.PageUrl</td>
+                        <td>@(g.IsArchived ? "Archived" : "Live")</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No vehicles have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

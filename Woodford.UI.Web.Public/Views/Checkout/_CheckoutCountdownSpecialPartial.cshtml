@@ -1,0 +1,27 @@
+﻿@model CheckoutCountdownSpecialModel
+
+@if (Model.IsValidCountdownSpecial) {
+    if (Model.Expires > DateTime.Now) {
+        @Html.HiddenFor(x => x.Id)
+        <div class="count-down-special-container">
+            Book in the next
+            <span class="count-down-special"></span>
+            and you will receive
+            @switch (Model.CountdownSpecialType) {
+                case CountdownSpecialType.TextOnInvoice:
+                    <em>@Model.TextReward</em>
+                    break;
+
+                case CountdownSpecialType.VehicleUpgrade:
+                    if (Model.Amount > 0) {
+                        <em>a vehicle upgrade @Model.VehicleUpdateTitle for only @string.Format("{0:c}", Model.Amount)</em>
+                    }
+                    else {
+                        <em>a free vehicle upgrade to @Model.VehicleUpdateTitle</em>
+                    }
+
+                    break;
+            }
+        </div>
+    }
+}

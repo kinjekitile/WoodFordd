@@ -1,0 +1,283 @@
+﻿@model ReservationUserLoginOrRegistrationViewModel
+@{
+    ViewBag.Title = "User Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int reservationId = Convert.ToInt32(ViewBag.ReservationId);
+}
+
+@*<div class="row">
+        <div class="twelve columns">
+            <h1>Customer details</h1>
+        </div>
+    </div>*@
+
+
+<div class="row">
+    <div class="twelve columns">
+
+        @if (ViewBag.IsMobile) {
+            <ul class="progressbar-mobile-view">
+                <li class="active">&nbsp;</li>
+                <li class="active">Customer Details</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+
+            </ul>
+        } else {
+            <ul class="progressbar">
+                <li class="active">Search</li>
+                <li class="active">Customer Details</li>
+                <li>Extras</li>
+                <li>Confirm</li>
+                <li>Payment</li>
+
+            </ul>
+        }
+
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="six columns">
+
+        <h3>@Model.Reservation.RateCodeTitle</h3>
+
+        <h4>Cost Summary</h4>
+        <table class="cost-summary">
+            <tr class="graytext">
+                <th scope="row">Rental</th>
+                <td>@String.Format("{0:c}", Model.Reservation.AdjustedPrice)</td>
+            </tr>
+            <tr class="graytext">
+                <th scope="row">Tax</th>
+                <td>@String.Format("{0:c}", Model.Reservation.TaxAmount)</td>
+            </tr>
+            
+            <tr class="graytext">
+                <th scope="row"><strong>Total</strong></th>
+                <td><strong>@String.Format("{0:c}", Model.Reservation.AdjustedPrice + Model.Reservation.TaxAmount)</strong></td>
+            </tr>
+            @if (Model.Reservation.DropOffFee > 0) {
+            <tr class="graytext">
+                <th scope="row">Drop Off Fee</th>
+                <td>@String.Format("{0:c}", Model.Reservation.DropOffFee)</td>
+            </tr>
+            }
+            <tr class="graytext">
+                <th scope="row">Admin Fee</th>
+                <td>@String.Format("{0:c}", Model.Reservation.ContractFee)</td>
+            </tr>
+          @foreach (var surcharge in Model.Reservation.BranchSurcharges) {
+
+              if (surcharge.IsOnceOff) {
+                <tr class="graytext">
+                    <th scope="row">@surcharge.Title</th>
+                    <td>@String.Format("{0:c}", surcharge.SurchargePrice)</td>
+                </tr>
+              } else {
+                <tr class="graytext">
+                    <th scope="row">@surcharge.Title (@String.Format("{0:c}", surcharge.SurchargePrice) per day)</th>
+                    <td>@String.Format("{0:c}", surcharge.SurchargePrice * Model.Reservation.NumberOfDays)</td>
+                </tr>
+              }
+
+          }
+            <tr class="total total-row">
+                <th scope="row"><strong>Final Payment</strong></th>
+                <td id="total-price" data-total-price-excluding-extras="@Model.Reservation.BookingPriceWithoutExtras.ToString("#.##").Replace(",", ".")">
+                    @String.Format("{0:c}", Model.Reservation.BookingPriceWithoutExtras)
+                </td>
+            </tr>
+            <tr class="total-days">
+                <td></td>
+                <td class="numeric-field">For @Model.Reservation.NumberOfDays.ToString() Days</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <strong style="font-size: larger;">@Html.ActionLink("Email Quote", "SendQuoteContactDetails", new { id = Model.Reservation.Id }, new { @class = "align right", style = "color: #b73537;" })</strong>
+                </td>
+            </tr>
+        </table>
+
+        <p>Select extras and start booking on the next page</p>
+
+        @if (Model.Vehicle.FileUploadId.HasValue) {
+        <img src="@Url.Action("Index", "Uploads", new { id = Model.Vehicle.VehicleImage.Id, filename = Model.Vehicle.VehicleImage.Title + Model.Vehicle.VehicleImage.FileExtension, width = 300})" alt="@Model.Vehicle.Title" style="width: 300px;" />
+        }
+
+        @*@if (Model.Vehicle.FileUploadId2.HasValue) {
+                <img src="@Url.Action("Index", "Uploads", new { id = Model.Vehicle.VehicleImage2.Id, filename = Model.Vehicle.VehicleImage2.Title + Model.Vehicle.VehicleImage2.FileExtension, width = 350})" alt="@Model.Vehicle.Title Interior" />
+            }*@
+
+
+
+    </div>
+    <div class="six columns">
+        @*<h2>Customer details</h2>*@
+
+        <div class="row">
+            <div class="inline-input">
+                @Html.CheckBoxFor(m => m.IsLoginUser)
+                @Html.LabelFor(m => m.IsLoginUser, "Do you have login details?", new { @class = "for-checkbox" })
+            </div>
+        </div>
+
+        <div class="login-form">
+            @using (Html.BeginForm("Login", "Checkout", new { id = Model.ReservationId }, FormMethod.Post, new { id = "login" })) {
+                @Html.HiddenFor(m => m.ReservationId)
+
+                @Html.CheckBoxFor(m => m.IsLoginUser, new { @class = "isLoginUser", style = "display: none; " })
+
+                @Html.AntiForgeryToken()
+                <div class="input-form vertical-form">
+                    <div class="row">
+                        @Html.LabelFor(m => m.LoginDetails.Email, "Email")
+                        @Html.TextBoxFor(m => m.LoginDetails.Email, new { placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.LoginDetails.Email)
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(m => m.LoginDetails.Password, "Password")
+                        @Html.PasswordFor(m => m.LoginDetails.Password, new { placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.LoginDetails.Password)
+                    </div>
+                    <div class="row  align-right">
+                        <input type="submit" value="Next" />
+                    </div>
+                    <div class="row">
+                        <p>@Html.ActionLink("Forgot Password?", "ForgotPassword", "User")</p>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+        <div class="register-form">
+            @using (Html.BeginForm("EnterDetails", "Checkout", new { id = Model.ReservationId }, FormMethod.Post, new { id = "enterdetails" })) {
+                @Html.HiddenFor(m => m.ReservationId)
+                @Html.CheckBoxFor(m => m.IsLoginUser, new { @class = "isLoginUser", style = "display: none; " })
+                @Html.AntiForgeryToken()
+                <div class="input-form vertical-form">
+                    <div class="row">
+                        @Html.LabelFor(m => m.User.Email, "Email")
+                        @Html.TextBoxFor(m => m.User.Email, new { placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.User.Email)
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(m => m.User.FirstName, "First Name")
+                        @Html.TextBoxFor(m => m.User.FirstName, new { placeholder = "First Name" })
+                        @Html.ValidationMessageFor(m => m.User.FirstName)
+
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(m => m.User.LastName, "Last Name")
+                        @Html.TextBoxFor(m => m.User.LastName, new { placeholder = "Last Name" })
+                        @Html.ValidationMessageFor(m => m.User.LastName)
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(m => m.User.MobileNumber, "Cell")
+                        @Html.TextBoxFor(m => m.User.MobileNumber, new { placeholder = "Cell" })
+                        @Html.ValidationMessageFor(m => m.User.MobileNumber)
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(m => m.User.IdNumber, "ID / Passport Number")
+                        @Html.TextBoxFor(m => m.User.IdNumber, new { placeholder = "Id Number" })
+                        @Html.ValidationMessageFor(m => m.User.IdNumber)
+                    </div>
+                    <div class="row">
+                        <div class="inline-input">
+                            @Html.CheckBoxFor(m => m.IsCreateAccount)
+                            @Html.LabelFor(m => m.IsCreateAccount, "Create Account?", new { @class = "for-checkbox" })
+                        </div>
+                    </div>
+                    <div class="create-account-password">
+                        <div class="row">
+                            @Html.LabelFor(m => m.Password, "Password")
+                            @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password")
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                        </div>
+                    </div>
+                    <div class="row align-right">
+
+                        <input type="submit" value="Next" />
+
+                    </div>
+                </div>
+            }
+        </div>
+
+
+    </div>
+</div>
+
+<div class="row">
+    <hr />
+</div>
+
+<div class="row" style="padding-top: 10px;">
+    <!-- TrustBox widget - 0 -->
+    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="54620ca500006400057b77fe" data-style-height="130px" data-style-width="100%" data-theme="light" data-stars="4,5">
+        <a href="https://uk.trustpilot.com/review/www.woodford.co.za" target="_blank">Trustpilot</a>
+    </div>
+    <!-- End TrustBox widget -->
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function showHidePassword() {
+                var selected = $("#IsCreateAccount").is(":checked");
+                var showHideDiv = $(".create-account-password");
+                if (selected)
+                    showHideDiv.show();
+                else
+                    showHideDiv.hide();
+            }
+
+            function showHideLogin() {
+                var selected = $("#IsLoginUser").is(":checked");
+                var showHideDiv = $(".login-form");
+                if (selected)
+                    showHideDiv.show();
+                else
+                    showHideDiv.hide();
+            }
+
+            function showHideRegister() {
+                var selected = $("#IsLoginUser").is(":checked");
+                var showHideDiv = $(".register-form");
+                if (selected)
+                    showHideDiv.hide();
+                else
+                    showHideDiv.show();
+            }
+
+            $("#IsCreateAccount").on("change", function () {
+                showHidePassword();
+            });
+            $("#IsLoginUser").on("change", function () {
+                showHideLogin();
+                showHideRegister();
+            });
+            showHidePassword();
+            showHideLogin();
+            showHideRegister();
+            $("form").on("submit", function (e) {
+                var chk = $(".isLoginUser");
+                if ($(this).attr("id") == "login") {
+                    chk.prop("checked", true);
+                } else {
+                    chk.prop("checked", false);
+                }
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,247 @@
+﻿@model CheckoutVehicleUpgradeViewModel
+@{
+    ViewBag.Title = "Vehicle Upgrades | Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section searchpanel {
+    @{Html.RenderPartial("_SearchPanelPartial", Model.Criteria);}
+}
+
+
+<div class="row">
+    <div class="twelve columns">
+
+
+        @if (ViewBag.IsMobile) {
+            <ul class="progressbar-mobile-view">
+                <li class="active">&nbsp;</li>
+                <li class="active">&nbsp;</li>
+                <li class="active">Extras</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+
+            </ul>
+        } else {
+            <ul class="progressbar">
+                <li class="active">Search</li>
+                <li class="active">Customer Details</li>
+                <li class="active">Extras</li>
+                <li>Confirm</li>
+                <li>Payment</li>
+
+            </ul>
+        }
+
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>@Model.Reservation.Vehicle.Title</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="four columns">
+
+        @if (Model.Vehicle.FileUploadId.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.Vehicle.VehicleImage.Id, filename = Model.Vehicle.VehicleImage.Title + Model.Vehicle.VehicleImage.FileExtension, width = 300})" alt="@Model.Vehicle.Title" />
+        }
+
+        @*@if (Model.Vehicle.FileUploadId2.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.Vehicle.VehicleImage2.Id, filename = Model.Vehicle.VehicleImage2.Title + Model.Vehicle.VehicleImage2.FileExtension, width = 300})" alt="@Model.Vehicle.Title Interior" />
+        }*@
+
+    </div>
+
+    <div class="four columns">
+        <h2>Upgrades</h2>
+        <p>Would you like to upgrade?</p>
+
+
+        @foreach (var e in Model.VehicleUpgrades) {
+            <div class="inline-input vehicle-upgrade">
+                @{ string dataPrice = (e.UpgradeAmount * Model.Criteria.Criteria.NumberOfDays).ToString("#,##0.00"); }
+                @if (e.LoyaltyBenefit != null) {
+                    dataPrice = "0.00";
+                }
+                @Html.RadioButtonFor(m => m.VehicleUpgradeId, e.Id, new { id = "Upgrade_" + e.Id, @class = "vehicle-upgrade-option", data_price = dataPrice, data_text = e.ToVehicle.Title })
+                <label for="Upgrade_@e.Id">
+                    <strong>@e.ToVehicle.Title</strong><br />
+                    @if (e.LoyaltyBenefit != null) {
+                        
+                        <text>Advance - Free upgrade </text>
+                    } else {
+                        @String.Format("{0:c}", e.UpgradeAmount)<text> per day</text>
+                    }
+                    @*@String.Format("{0:c}", e.UpgradeAmount) per day*@
+                    @if (e.ToVehicle.FileUploadId.HasValue) {
+                        <img src="@Url.Action("Index", "Uploads", new { id = e.ToVehicle.VehicleImage.Id, filename = e.ToVehicle.VehicleImage.Title + e.ToVehicle.VehicleImage.FileExtension, height = 60 })" alt="@e.ToVehicle.Title" />
+                        <br />
+                    }
+
+                </label>
+            </div>
+        }
+        <div class="inline-input vehicle-upgrade">
+            @Html.RadioButtonFor(m => m.VehicleUpgradeId, 0, new { id = "Upgrade_0", @class = "vehicle-upgrade-option", data_price = 0 })
+            <label for="Upgrade_0">No Upgrade</label>
+        </div>
+    </div>
+
+    <div class="four columns" style="border-left: 1px solid #999; padding-left: 30px;">
+        <h3>@Model.Reservation.RateCodeTitle</h3>
+
+        <h4>Cost Summary</h4>
+        <table class="cost-summary">
+            <tr>
+                <th scope="row">Rental</th>
+                <td>@String.Format("{0:c}", Model.Reservation.AdjustedPrice)</td>
+            </tr>
+            <tr>
+                <th scope="row">Tax</th>
+                <td>@String.Format("{0:c}", Model.Reservation.TaxAmount)</td>
+            </tr>
+            <tr>
+                <th scope="row"><strong>Total</strong></th>
+                <td><strong>@String.Format("{0:c}", Model.Reservation.AdjustedPrice + Model.Reservation.TaxAmount)</strong></td>
+            </tr>
+            @if (Model.Reservation.DropOffFee > 0) {
+                <tr>
+                    <th scope="row">Drop Off Fee</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.DropOffFee)</td>
+                </tr>
+            }
+            <tr>
+                <th scope="row">Admin Fee</th>
+                <td>@String.Format("{0:c}", Model.Reservation.ContractFee)</td>
+            </tr>
+            @foreach (var surcharge in Model.Reservation.BranchSurcharges) {
+
+                if (surcharge.IsOnceOff) {
+                    <tr>
+                        <th scope="row">@surcharge.Title</th>
+                        <td>@String.Format("{0:c}", surcharge.SurchargePrice)</td>
+                    </tr>
+                } else {
+                    <tr>
+                        <th scope="row">@surcharge.Title (@String.Format("{0:c}", surcharge.SurchargePrice) per day)</th>
+                        <td>@String.Format("{0:c}", surcharge.SurchargePrice * Model.Reservation.NumberOfDays)</td>
+                    </tr>
+                }
+
+            }
+            @foreach (var x in Model.Reservation.VehicleExtras) {
+                <tr>
+                    <th scope="row">@x.ExtraTitle</th>
+                    @if (x.ReservationLoyaltyBenefitId.HasValue) {
+                        <td>Advance - Free</td>
+                    } else {
+                        
+                        <td>@String.Format("{0:c}", x.ExtraPrice * Model.Reservation.NumberOfDays)</td>
+                    }
+                    
+                </tr>
+            }
+
+            <tr class="total total-row">
+                <th scope="row"><strong>Final</strong></th>
+                <td id="total-price" data-total-price-upgrades="@Model.Reservation.BookingPrice.ToString("#.##")">
+                    @String.Format("{0:c}", Model.Reservation.BookingPriceWithoutUpgrade)
+                </td>
+            </tr>
+            <tr class="total-days">
+                <td></td>
+                <td class="numeric-field">For @Model.Reservation.NumberOfDays.ToString() Days</td>
+            </tr>
+
+        </table>
+
+        @using (Html.BeginForm("VehicleUpgrade", "Checkout", FormMethod.Post)) {
+            <div style="display: none;">
+                @Html.TextBoxFor(m => m.VehicleUpgradeId)
+            </div>
+            <div class="submit-button-container">
+                <input type="submit" value="Book" />
+            </div>
+
+            <div>
+                @{Html.RenderPartial("_CheckoutCountdownSpecialPartial", Model.CountdownSpecial);}
+            </div>
+                    }
+    </div>
+</div>
+
+<div class="row">
+    <hr />
+</div>
+
+<div class="row" style="padding-top: 10px;">
+    <!-- TrustBox widget - 0 -->
+    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="54620ca500006400057b77fe" data-style-height="130px" data-style-width="100%" data-theme="light" data-stars="4,5">
+        <a href="https://uk.trustpilot.com/review/www.woodford.co.za" target="_blank">Trustpilot</a>
+    </div>
+    <!-- End TrustBox widget -->
+</div>
+
+@section scripts {
+
+    @{Html.RenderPartial("_CheckoutCountdownSpecialJavascriptPartial", Model.CountdownSpecial);}
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.format-1.3.min.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function setUpgradeInSummary() {
+                var upgradeId = $('input[name=VehicleUpgradeId]:checked').val();
+                $("#VehicleUpgradeId").val(upgradeId);
+                var priceValue = getPriceForUpgrade(upgradeId);
+                var upgradeText = 'Upgrade to ' + getTextForUpgrade(upgradeId);
+
+                $("#selected-upgrade").remove();
+                if (upgradeId > 0) {
+                    $("<tr class='summary-extra' id='selected-upgrade'><th scope='row'>" + upgradeText + "</th><td>R " + priceValue + "</td><tr>").insertBefore("tr.total-row");
+                }
+
+            }
+
+            function getTextForUpgrade(upgradeId) {
+                return $("#Upgrade_" + upgradeId).attr("data-text");
+            }
+
+            function getPriceForUpgrade(upgradeId) {
+                //not a normal space. space is 32
+                var replaceSpaceCode = String.fromCharCode(160);
+
+                var priceText = $("#Upgrade_" + upgradeId).attr("data-price");
+                priceText = priceText.replace(' ', '').replace(replaceSpaceCode, '');
+                return parseFloat(priceText);
+            }
+
+            function calculateTotal() {
+                var totalAmountExcludingUpgrades = parseFloat($("#total-price").attr("data-total-price-upgrades"));
+                var newTotal = totalAmountExcludingUpgrades;
+
+                var upgradeId = $('input[name=VehicleUpgradeId]:checked').val();
+                vehicleUpgradePrice = getPriceForUpgrade(upgradeId);
+
+                newTotal += vehicleUpgradePrice;
+
+                $("#total-price").html("R " + $.format.number(newTotal, '#,##0.00'));
+            }
+
+            $(".vehicle-upgrade-option").on("change", function () {
+                setUpgradeInSummary();
+                calculateTotal();
+            });
+
+            setUpgradeInSummary();
+            calculateTotal();
+        });
+
+
+    </script>
+}

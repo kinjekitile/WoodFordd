@@ -1,0 +1,70 @@
+﻿@model ListOf<NewsCategoryModel>
+@{
+    ViewBag.Title = "News Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>News Categories</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">News Categories</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new News Category", "Add", "NewsCategory")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <th scope="col">Category Name</th>                                        
+                    <th scope="col">Page Url</th>
+                    <th scope="col">Archived?</th>
+                </tr>
+
+                @foreach (var c in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "NewsCategory", new { id = c.Id }, null)</td>
+                        <td>@Html.ActionLink("Manage Articles", "Index", "News", new { categoryId = c.Id }, null)</td>
+                        <td>@c.Title</td>                       
+                        <td>@c.PageUrl</td>
+                        <td>
+                            @if (c.IsArchived) {
+                                <text>Archived</text>
+                                using (Html.BeginForm("MarkAsActive", "NewsCategory")) {
+                                    @Html.Hidden("id", c.Id)
+                                    @Html.Hidden("p", Model.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Active</button>
+                                }
+                            } else {
+                                <text>Active</text>
+                                using (Html.BeginForm("MarkAsArchived", "NewsCategory")) {
+                                    @Html.Hidden("id", c.Id)
+                                    @Html.Hidden("p", Model.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Archived</button>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No news categories have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

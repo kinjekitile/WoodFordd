@@ -1,0 +1,58 @@
+﻿@model ReportModel
+@{
+    ViewBag.Title = "Delete Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Delete Report</h1>
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Reservations</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm()) {
+
+        @Html.HiddenFor(x => x.Id)
+        <p>Are you sure you wish to delete the report: @Model.Title ?</p>
+
+        <input type="submit" value="Delete" />
+    }
+
+
+
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            @*cleanDate('Search_StartDate');
+            cleanDate('Search_EndDate');
+
+            @if (Model.Results != null) {
+
+                   <text>cleanDate('UpdateDateRange_ValidStartDate');</text>
+                   <text>cleanDate('UpdateDateRange_ValidEndDate');</text>
+
+           }*@
+
+
+            $('#Filter_DateSearchStart,#Filter_DateSearchEnd').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+
+
+
+
+        });
+
+
+    </script>
+}

@@ -1,0 +1,35 @@
+﻿.hide-from-sighted-users {
+	position: absolute;
+	text-indent: -9999em;
+}
+
+div.empty-column {
+    height: 1px;
+}
+
+.allow-line-breaks {
+    white-space: pre-wrap;
+}
+
+.rich-text li {
+    display: list-item;
+    list-style: outside none disc;
+    margin-left: 3rem;
+}
+
+.spinner {
+	background-image: url(../images/spinner.gif);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	display: none;	
+	height: 30px;	
+	width: 25px;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}

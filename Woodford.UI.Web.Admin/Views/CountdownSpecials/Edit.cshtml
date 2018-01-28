@@ -1,0 +1,106 @@
+﻿@model CountdownSpecialViewModel
+@{
+    ViewBag.Title = "Edit Countdown Special";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Countdown Specials</h1>
+}
+
+@{ Html.RenderAction("RenderAuditContainer", "Audit", new { entityType = Model.CountdownSpecial.GetType(), entityIdValue = Model.CountdownSpecial.Id }); }
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Countdown Special</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Edit", "CountdownSpecials", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+
+        @Html.HiddenFor(m => m.CountdownSpecial.Id)
+        @Html.HiddenFor(m => m.CountdownSpecial.IsActive)
+        @Html.HiddenFor(m => m.p)
+
+        <div class="box-body">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CountdownSpecial.Title, "Title", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.CountdownSpecial.Title, new { placeholder = "Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CountdownSpecial.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CountdownSpecial.SpecialType, "Special Type", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.CountdownSpecialTypeFor(m => m.CountdownSpecial.SpecialType, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CountdownSpecial.SpecialType)
+                </div>
+            </div>
+            
+            <div id="special-type-1">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CountdownSpecial.OfferText, "Offer Text", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.CountdownSpecial.OfferText, new { placeholder = "Offer Text", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CountdownSpecial.OfferText)
+                    </div>
+                </div>
+            </div>
+
+            <div id="special-type-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CountdownSpecial.VehicleUpgradeId, "Vehicle Upgrade", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.VehicleUpgradeFor(m => m.CountdownSpecial.VehicleUpgradeId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CountdownSpecial.VehicleUpgradeId)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CountdownSpecial.VehicleUpgradeAmountOverride, "Upgrade amount", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.CountdownSpecial.VehicleUpgradeAmountOverride, new { placeholder = "Upgrade amount", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CountdownSpecial.VehicleUpgradeAmountOverride)
+                    </div>
+                </div>
+            </div>
+
+            <div id="special-type-3">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CountdownSpecial.OfferDiscount, "Offer Discount", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.CountdownSpecial.OfferDiscount, new { placeholder = "Offer Discount", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CountdownSpecial.OfferDiscount)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+
+        </div>
+        
+    }
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function showOfferType(offerType) {
+                $("#special-type-1,#special-type-2,#special-type-3").hide();
+                var specialType = $("#CountdownSpecial_SpecialType").val();
+                $("#special-type-" + specialType).show();                
+            }
+            $("#CountdownSpecial_SpecialType").on("change", function () {
+                showOfferType();
+            });
+            showOfferType();
+        });
+
+    </script>
+}

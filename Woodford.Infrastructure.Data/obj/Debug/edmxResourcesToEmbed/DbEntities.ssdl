@@ -1,0 +1,2145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Woodford2015Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AppSettings">
+    <Key>
+      <PropertyRef Name="Title" />
+    </Key>
+    <Property Name="Title" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="SettingValue" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="AuditItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Action" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EntityId" Type="int" Nullable="false" />
+    <Property Name="EntityType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="ActionDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AuditItemProperty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuditEntityId" Type="int" Nullable="false" />
+    <Property Name="AuditField" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CurrentValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OriginalValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FieldType" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookingClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ClaimState" Type="int" Nullable="false" />
+    <Property Name="BookingPickupDate" Type="datetime" Nullable="false" />
+    <Property Name="BookingDropoffDate" Type="datetime" Nullable="false" />
+    <Property Name="BookingPickupBranchId" Type="int" Nullable="false" />
+    <Property Name="BookingDropOffBranchId" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="IdNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="BookingHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExternalId" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="LicenseNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="LicenseState" Type="nvarchar" MaxLength="50" />
+    <Property Name="LicenseExpiration" Type="datetime" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="AlternateId" Type="nvarchar" MaxLength="50" />
+    <Property Name="PickupBranchId" Type="int" Nullable="false" />
+    <Property Name="DropoffBranchId" Type="int" Nullable="false" />
+    <Property Name="DateBooked" Type="datetime" />
+    <Property Name="PickupDate" Type="datetime" Nullable="false" />
+    <Property Name="DropOffDate" Type="datetime" Nullable="false" />
+    <Property Name="EstimatedKms" Type="int" />
+    <Property Name="RateClass" Type="nvarchar" MaxLength="50" />
+    <Property Name="VehicleGroupId" Type="int" />
+    <Property Name="RateCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="RateCodeId" Type="int" />
+    <Property Name="RentalDays" Type="int" />
+    <Property Name="KmsDriven" Type="int" />
+    <Property Name="FreeKms" Type="int" />
+    <Property Name="KmsRate" Type="money" />
+    <Property Name="TotalBill" Type="money" />
+    <Property Name="LoyaltyPointsEarned" Type="money" />
+    <Property Name="TotalForLoyaltyAward" Type="money" />
+    <Property Name="LoyaltyPointTier" Type="int" />
+    <Property Name="CanEarnPoints" Type="bit" Nullable="false" />
+    <Property Name="LoyaltyPointsEarnedEmailSent" Type="bit" Nullable="false" />
+    <Property Name="SendLoyaltyPointsEarnedEmail" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Branches">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FileUploadId" Type="int" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="IsAirport" Type="bit" Nullable="false" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="MobileNumber" Type="varchar" MaxLength="50" />
+    <Property Name="TelephoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="50" />
+    <Property Name="MapEmbed" Type="nvarchar" MaxLength="2000" />
+    <Property Name="AfterHoursTelephoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="PageUrl" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="BranchSubTitle" Type="nvarchar" MaxLength="100" />
+    <Property Name="BranchAddress" Type="nvarchar" MaxLength="250" />
+    <Property Name="BranchShortDescription" Type="nvarchar" MaxLength="4000" />
+    <Property Name="BranchContactPageTitle" Type="nvarchar" MaxLength="250" />
+    <Property Name="BranchContactMetaKeywords" Type="nvarchar" MaxLength="250" />
+    <Property Name="BranchContactMetaDescription" Type="nvarchar" MaxLength="250" />
+    <Property Name="BranchContactPageContent" Type="nvarchar(max)" />
+    <Property Name="BranchRequestCallbackPageTitle" Type="nvarchar" MaxLength="250" />
+    <Property Name="BranchRequestCallbackMetaKeywords" Type="nvarchar" MaxLength="250" />
+    <Property Name="BranchRequestCallbackMetaDescription" Type="nvarchar" MaxLength="250" />
+    <Property Name="BranchRequestCallbackPageContent" Type="nvarchar(max)" />
+    <Property Name="WeatherApiId" Type="nvarchar" MaxLength="50" />
+    <Property Name="BookingLeadTimeDay" Type="int" />
+    <Property Name="BookingLeadTimeNight" Type="int" />
+  </EntityType>
+  <EntityType Name="BranchRateCodeExclusions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="RateCodeId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BranchSurcharges">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="SurchargeAmount" Type="money" Nullable="false" />
+    <Property Name="IsOnceOff" Type="bit" Nullable="false" />
+    <Property Name="MaximumCharge" Type="money" />
+  </EntityType>
+  <EntityType Name="BranchVehicleExclusions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchVehicleId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BranchVehicles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="VehicleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Campaigns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RateCodeId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="text" />
+    <Property Name="PageUrl" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FileUploadId" Type="int" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="SearchResultIconFileUploadId" Type="int" />
+  </EntityType>
+  <EntityType Name="CorporateRateCodes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CorporateId" Type="int" Nullable="false" />
+    <Property Name="RateCodeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Corporates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CountdownSpecials">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OfferText" Type="nvarchar" MaxLength="50" />
+    <Property Name="OfferDiscount" Type="money" />
+    <Property Name="OfferType" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="VehicleUpgradeId" Type="int" />
+    <Property Name="VehicleUpgradeAmountOverride" Type="money" />
+  </EntityType>
+  <EntityType Name="DynamicPages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdminDescription" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="PageUrl" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmailSignatureCampaigns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CampaignName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="MainContentNarrowFileUploadId" Type="int" Nullable="false" />
+    <Property Name="MainContentFileUploadId" Type="int" Nullable="false" />
+    <Property Name="FooterContentNarrowFileUploadId" Type="int" Nullable="false" />
+    <Property Name="FooterContentFileUploadId" Type="int" Nullable="false" />
+    <Property Name="SidePanelContentFileUploadId" Type="int" Nullable="false" />
+    <Property Name="UnderlineContentFileUploadId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="IsLive" Type="bit" Nullable="false" />
+    <Property Name="IsDefault" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmailSignatures">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FixedContact" Type="nvarchar" MaxLength="50" />
+    <Property Name="CellContact" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" />
+    <Property Name="SeniorName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SeniorFixedContact" Type="nvarchar" MaxLength="50" />
+    <Property Name="SeniorCellContact" Type="nvarchar" MaxLength="50" />
+    <Property Name="SeniorEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="DirectorName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DirectorEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShowSidePanel" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FileUploads">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FileContent" Type="varbinary(max)" Nullable="false" />
+    <Property Name="FileExtension" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="DateUploaded" Type="datetime" Nullable="false" />
+    <Property Name="FileContext" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MimeType" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="IsStandalone" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HerospaceItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FileUploadId" Type="int" Nullable="false" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="LinkUrl" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InterBranchDropOffFees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Branch1Id" Type="int" Nullable="false" />
+    <Property Name="Branch2Id" Type="int" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Invoices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservationId" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="AmountPaid" Type="money" Nullable="false" />
+    <Property Name="IsMobileCheckout" Type="bit" Nullable="false" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="IsCorporateCheckout" Type="bit" Nullable="false" />
+    <Property Name="PaymentErrorCode" Type="nchar" MaxLength="10" />
+    <Property Name="HasPaymentError" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoyaltyTierBenefits">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoyaltyTierId" Type="int" Nullable="false" />
+    <Property Name="BenefitTypeId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="DropOffGraceHours" Type="int" />
+    <Property Name="PickupLocationId" Type="int" />
+    <Property Name="DropOffLocationId" Type="int" />
+    <Property Name="FreeKms" Type="int" />
+    <Property Name="FreeDays" Type="int" />
+    <Property Name="UpgradeId" Type="int" />
+    <Property Name="ExtraId" Type="int" />
+    <Property Name="ExtraPriceOverride" Type="money" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LoyaltyTiers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="BookingThresholdPerPeriod" Type="int" Nullable="false" />
+    <Property Name="RandSpent" Type="int" Nullable="false" />
+    <Property Name="PointsEarnedPerRandSpent" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MessageQueue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SenderProcess" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmailTo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmailCc" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmailBcc" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmailSubject" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmailBody" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sent" Type="bit" Nullable="false" />
+    <Property Name="Processing" Type="bit" Nullable="false" />
+    <Property Name="DateSent" Type="datetime" />
+    <Property Name="TimesTried" Type="int" Nullable="false" />
+    <Property Name="ErrorOccurred" Type="bit" />
+    <Property Name="ErrorMessage" Type="nvarchar" MaxLength="200" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="HasAttachment" Type="bit" Nullable="false" />
+    <Property Name="AttachementPath" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="MyGateRefundTransactions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="MyGateTransactionID" Type="uniqueidentifier" />
+    <Property Name="FSPMessage" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="MyGateTransactions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="MyGateAuthorisationIDAuth" Type="nvarchar" MaxLength="50" />
+    <Property Name="MyGateAuthorisationIDCapt" Type="nvarchar" MaxLength="50" />
+    <Property Name="MyGateTransactionID" Type="uniqueidentifier" />
+    <Property Name="MyGate3DParEq" Type="ntext" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Headline" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="SubHeadline" Type="nvarchar" MaxLength="500" />
+    <Property Name="ShortDescription" Type="nvarchar" MaxLength="1000" />
+    <Property Name="FileUploadId" Type="int" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Author" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="NewsCategoryId" Type="int" Nullable="false" />
+    <Property Name="PageUrl" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NewsCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="PageUrl" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PageTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="MetaKeywords" Type="nvarchar" MaxLength="250" />
+    <Property Name="MetaDescription" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="PageContent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PageTitle" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="MetaKeywords" Type="nvarchar" MaxLength="500" />
+    <Property Name="MetaDescription" Type="nvarchar" MaxLength="500" />
+    <Property Name="PageContent" Type="ntext" />
+    <Property Name="DynamicPageId" Type="int" />
+    <Property Name="VehicleGroupId" Type="int" />
+    <Property Name="VehicleId" Type="int" />
+    <Property Name="NewsId" Type="int" />
+    <Property Name="CampaignId" Type="int" />
+    <Property Name="BranchId" Type="int" />
+    <Property Name="VehicleManufacturerId" Type="int" />
+  </EntityType>
+  <EntityType Name="RateAdjustments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdjustmentTypeEnum" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="VehicleGroupId" Type="int" />
+    <Property Name="RateCodeId" Type="int" />
+    <Property Name="NumberOfBookings" Type="int" />
+    <Property Name="AdjustmentPercentage" Type="money" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RateCodes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AvailableToPublic" Type="bit" Nullable="false" />
+    <Property Name="AvailableToLoyalty" Type="bit" Nullable="false" />
+    <Property Name="AvailableToCorporate" Type="bit" Nullable="false" />
+    <Property Name="IsNotAdjustable" Type="bit" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="RateRuleId" Type="int" Nullable="false" />
+    <Property Name="CanHaveUpgradeApplied" Type="bit" Nullable="false" />
+    <Property Name="IsSticky" Type="bit" Nullable="false" />
+    <Property Name="ColorCode" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="RateRules">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DaysOfWeek" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="MinDays" Type="int" Nullable="false" />
+    <Property Name="MaxDays" Type="int" Nullable="false" />
+    <Property Name="FreeKmsPerDay" Type="int" />
+    <Property Name="RateTypeId" Type="int" />
+  </EntityType>
+  <EntityType Name="Rates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleGroupId" Type="int" Nullable="false" />
+    <Property Name="RateCodeId" Type="int" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="ValidStartDate" Type="datetime" />
+    <Property Name="ValidEndDate" Type="datetime" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="IsOpenEnded" Type="bit" Nullable="false" />
+    <Property Name="CostPerKm" Type="money" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="FreeKms" Type="int" Nullable="false" />
+    <Property Name="HasUnlimitedKms" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Refunds">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="ReservationId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="RefundedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ReportType" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="UseCurrentDateAsStartDate" Type="bit" Nullable="false" />
+    <Property Name="DateUnitsToAdd" Type="int" />
+    <Property Name="DateUnitType" Type="int" />
+    <Property Name="ReportFilter" Type="nvarchar" MaxLength="4000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReservationBranchSurcharges">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservationId" Type="int" Nullable="false" />
+    <Property Name="BranchSurchargeId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="IsOnceOff" Type="bit" Nullable="false" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="MaximumCharge" Type="money" />
+  </EntityType>
+  <EntityType Name="Reservations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PickupDate" Type="datetime" Nullable="false" />
+    <Property Name="DropOffDate" Type="datetime" Nullable="false" />
+    <Property Name="PickupBranchId" Type="int" Nullable="false" />
+    <Property Name="DropOffBranchId" Type="int" Nullable="false" />
+    <Property Name="VehicleId" Type="int" Nullable="false" />
+    <Property Name="VehicleExcess" Type="money" Nullable="false" />
+    <Property Name="VehicleDeposit" Type="money" Nullable="false" />
+    <Property Name="RateId" Type="int" Nullable="false" />
+    <Property Name="RateCodeId" Type="int" Nullable="false" />
+    <Property Name="RateCodeTitle" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="RatePrice" Type="money" Nullable="false" />
+    <Property Name="RateAdjustmentId" Type="int" />
+    <Property Name="RateAdjustmentType" Type="int" />
+    <Property Name="RateAdjustmentPercentage" Type="money" />
+    <Property Name="ContractFee" Type="money" Nullable="false" />
+    <Property Name="DropOffFee" Type="money" Nullable="false" />
+    <Property Name="VehicleUpgradeId" Type="int" />
+    <Property Name="UpgradedVehicleId" Type="int" />
+    <Property Name="VehicleUpgradePrice" Type="money" />
+    <Property Name="CountdownSpecialId" Type="int" />
+    <Property Name="CountdownSpecialType" Type="int" />
+    <Property Name="CountdownSpecialOfferText" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountdownSpecialDiscount" Type="money" />
+    <Property Name="CountdownSpecialVehicleUpgradePriceOverride" Type="money" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="VoucherId" Type="int" />
+    <Property Name="VoucherNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="VoucherRewardType" Type="int" />
+    <Property Name="VoucherRewardText" Type="nvarchar" MaxLength="50" />
+    <Property Name="VoucherRewardDiscount" Type="money" />
+    <Property Name="VoucherRewardDiscountPercentage" Type="money" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="ReservationState" Type="int" Nullable="false" />
+    <Property Name="TaxRate" Type="money" Nullable="false" />
+    <Property Name="BranchSurchargeId" Type="int" />
+    <Property Name="BranchSurchageText" Type="nvarchar" MaxLength="100" />
+    <Property Name="BranchSurchageTotalPrice" Type="money" />
+    <Property Name="IsCorporate" Type="bit" Nullable="false" />
+    <Property Name="CorporateId" Type="int" />
+    <Property Name="ReminderSent" Type="bit" Nullable="false" />
+    <Property Name="ReminderSMSSent" Type="bit" Nullable="false" />
+    <Property Name="ThankYouSent" Type="bit" Nullable="false" />
+    <Property Name="LoyaltyPointsAssigned" Type="bit" Nullable="false" />
+    <Property Name="LoyaltyPointsEarned" Type="money" />
+    <Property Name="LoyaltyPointsSpent" Type="money" />
+    <Property Name="LoyaltyTierAtTimeOfBooking" Type="int" />
+    <Property Name="QuoteReference" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuoteSentDate" Type="datetime" />
+    <Property Name="HasBeenModified" Type="bit" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsQuote" Type="bit" Nullable="false" />
+    <Property Name="QuoteReminderSent" Type="bit" Nullable="false" />
+    <Property Name="AddedToExternalSystem" Type="bit" Nullable="false" />
+    <Property Name="ConfirmedDate" Type="datetime" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="IsCancelled" Type="bit" Nullable="false" />
+    <Property Name="CancellationFee" Type="money" />
+    <Property Name="RefundedAmount" Type="money" />
+    <Property Name="PaymentProviderType" Type="int" Nullable="false" />
+    <Property Name="PaymentErrorCode" Type="nchar" MaxLength="10" />
+    <Property Name="HasPaymentError" Type="bit" Nullable="false" />
+    <Property Name="PaymentErrorMessage" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ReservationsLoyaltyTierBenefits">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservationId" Type="int" Nullable="false" />
+    <Property Name="LoyaltyTierBenefitId" Type="int" Nullable="false" />
+    <Property Name="BenefitTypeId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="DropOffGraceHours" Type="int" />
+    <Property Name="FreeKms" Type="int" />
+    <Property Name="FreeDays" Type="int" />
+    <Property Name="UpgradeId" Type="int" />
+    <Property Name="ExtraId" Type="int" />
+    <Property Name="ExtraPriceOverride" Type="money" />
+  </EntityType>
+  <EntityType Name="ReservationsVehicleExtras">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservationId" Type="int" Nullable="false" />
+    <Property Name="VehicleExtraId" Type="int" Nullable="false" />
+    <Property Name="ExtraPrice" Type="money" Nullable="false" />
+    <Property Name="ExtraTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ReservationLoyaltyTierBenefitId" Type="int" />
+  </EntityType>
+  <EntityType Name="TrustPilotReviewInvites">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservationId" Type="int" />
+    <Property Name="VoucherId" Type="int" />
+    <Property Name="VoucherSent" Type="bit" Nullable="false" />
+    <Property Name="VoucherSentDate" Type="datetime" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UrlRedirects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OldUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="NewUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="HttpStatusCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProfiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CorporateId" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MobileNumber" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="LoyaltyTierId" Type="int" Nullable="false" />
+    <Property Name="LoyaltyPeriodStart" Type="datetime" />
+    <Property Name="LoyaltyPeriodEnd" Type="datetime" />
+    <Property Name="IdNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsLoyaltyMember" Type="bit" Nullable="false" />
+    <Property Name="LoyaltySignUpDate" Type="datetime" />
+    <Property Name="ExistingLoyaltyNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="HasExistingLoyaltyNumber" Type="bit" Nullable="false" />
+    <Property Name="IsAccountDisabled" Type="bit" Nullable="false" />
+    <Property Name="IsLoyaltyTierLocked" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleExtras">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="ImageClass" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VehicleGroups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleGroupTypeId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="FileUploadId" Type="int" />
+    <Property Name="TitleDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PageUrl" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleManufacturers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="PageUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FileUploadId" Type="int" />
+  </EntityType>
+  <EntityType Name="Vehicles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="VehicleManufacturerId" Type="int" />
+    <Property Name="VehicleGroupId" Type="int" Nullable="false" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="FileUploadId" Type="int" />
+    <Property Name="FileUploadId2" Type="int" />
+    <Property Name="PageUrl" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ShortDescription" Type="nvarchar" MaxLength="250" />
+    <Property Name="NumberOfPassengers" Type="int" Nullable="false" />
+    <Property Name="NumberOfBaggage" Type="int" Nullable="false" />
+    <Property Name="IsPetrol" Type="bit" Nullable="false" />
+    <Property Name="HasAircon" Type="bit" Nullable="false" />
+    <Property Name="HasRadio" Type="bit" Nullable="false" />
+    <Property Name="HasPowerSteering" Type="bit" Nullable="false" />
+    <Property Name="IsAutomatic" Type="bit" Nullable="false" />
+    <Property Name="ExcessAmount" Type="money" Nullable="false" />
+    <Property Name="DepositAmount" Type="money" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleUpgrades">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FromVehicleId" Type="int" Nullable="false" />
+    <Property Name="ToVehicleId" Type="int" Nullable="false" />
+    <Property Name="UpdateAmount" Type="money" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vouchers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequireClientValidation" Type="bit" Nullable="false" />
+    <Property Name="ClientName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ClientEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="DateIssued" Type="datetime" Nullable="false" />
+    <Property Name="DateExpiry" Type="datetime" Nullable="false" />
+    <Property Name="DateRedeemed" Type="datetime" />
+    <Property Name="ReservationId" Type="int" />
+    <Property Name="VoucherNumber" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="VoucherRewardType" Type="int" Nullable="false" />
+    <Property Name="VoucherDiscount" Type="money" />
+    <Property Name="VoucherReward" Type="nvarchar" MaxLength="50" />
+    <Property Name="VoucherDiscountPercentage" Type="money" />
+    <Property Name="IsMultiUse" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Waivers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WaiverType" Type="int" Nullable="false" />
+    <Property Name="VehicleGroupId" Type="int" Nullable="false" />
+    <Property Name="CostPerDay" Type="money" />
+    <Property Name="Liability" Type="money" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_UsersInRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Woodford2015.dbo.ReservationsAdmin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ReservationsAdmin">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="PickupDate" />
+      <PropertyRef Name="DropOffDate" />
+      <PropertyRef Name="PickupBranchId" />
+      <PropertyRef Name="DropOffBranchId" />
+      <PropertyRef Name="VehicleId" />
+      <PropertyRef Name="VehicleExcess" />
+      <PropertyRef Name="VehicleDeposit" />
+      <PropertyRef Name="RateId" />
+      <PropertyRef Name="RateCodeId" />
+      <PropertyRef Name="RateCodeTitle" />
+      <PropertyRef Name="RatePrice" />
+      <PropertyRef Name="ContractFee" />
+      <PropertyRef Name="DropOffFee" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="ReservationState" />
+      <PropertyRef Name="TaxRate" />
+      <PropertyRef Name="IsCorporate" />
+      <PropertyRef Name="ReminderSent" />
+      <PropertyRef Name="ThankYouSent" />
+      <PropertyRef Name="LoyaltyPointsAssigned" />
+      <PropertyRef Name="HasBeenModified" />
+      <PropertyRef Name="IsQuote" />
+      <PropertyRef Name="ReminderSMSSent" />
+      <PropertyRef Name="QuoteReminderSent" />
+      <PropertyRef Name="AddedToExternalSystem" />
+      <PropertyRef Name="IsArchived" />
+      <PropertyRef Name="IsCancelled" />
+      <PropertyRef Name="HasPaymentError" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="PickupDate" Type="datetime" Nullable="false" />
+    <Property Name="DropOffDate" Type="datetime" Nullable="false" />
+    <Property Name="PickupBranchId" Type="int" Nullable="false" />
+    <Property Name="DropOffBranchId" Type="int" Nullable="false" />
+    <Property Name="VehicleId" Type="int" Nullable="false" />
+    <Property Name="VehicleExcess" Type="money" Nullable="false" />
+    <Property Name="VehicleDeposit" Type="money" Nullable="false" />
+    <Property Name="RateId" Type="int" Nullable="false" />
+    <Property Name="RateCodeId" Type="int" Nullable="false" />
+    <Property Name="RateCodeTitle" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="RatePrice" Type="money" Nullable="false" />
+    <Property Name="RateAdjustmentId" Type="int" />
+    <Property Name="RateAdjustmentType" Type="int" />
+    <Property Name="RateAdjustmentPercentage" Type="money" />
+    <Property Name="ContractFee" Type="money" Nullable="false" />
+    <Property Name="DropOffFee" Type="money" Nullable="false" />
+    <Property Name="VehicleUpgradeId" Type="int" />
+    <Property Name="VehicleUpgradePrice" Type="money" />
+    <Property Name="CountdownSpecialId" Type="int" />
+    <Property Name="CountdownSpecialType" Type="int" />
+    <Property Name="CountdownSpecialOfferText" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountdownSpecialDiscount" Type="money" />
+    <Property Name="CountdownSpecialVehicleUpgradePriceOverride" Type="money" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="VoucherId" Type="int" />
+    <Property Name="VoucherNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="VoucherRewardType" Type="int" />
+    <Property Name="VoucherRewardText" Type="nvarchar" MaxLength="50" />
+    <Property Name="VoucherRewardDiscount" Type="money" />
+    <Property Name="VoucherRewardDiscountPercentage" Type="money" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="ReservationState" Type="int" Nullable="false" />
+    <Property Name="TaxRate" Type="money" Nullable="false" />
+    <Property Name="BranchSurchargeId" Type="int" />
+    <Property Name="BranchSurchageText" Type="nvarchar" MaxLength="100" />
+    <Property Name="BranchSurchageTotalPrice" Type="money" />
+    <Property Name="IsCorporate" Type="bit" Nullable="false" />
+    <Property Name="CorporateId" Type="int" />
+    <Property Name="ReminderSent" Type="bit" Nullable="false" />
+    <Property Name="ThankYouSent" Type="bit" Nullable="false" />
+    <Property Name="LoyaltyPointsAssigned" Type="bit" Nullable="false" />
+    <Property Name="LoyaltyPointsEarned" Type="money" />
+    <Property Name="LoyaltyPointsSpent" Type="money" />
+    <Property Name="LoyaltyTierAtTimeOfBooking" Type="int" />
+    <Property Name="QuoteReference" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuoteSentDate" Type="datetime" />
+    <Property Name="HasBeenModified" Type="bit" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="InvoiceId" Type="int" />
+    <Property Name="ReservationId" Type="int" />
+    <Property Name="AmountPaid" Type="money" />
+    <Property Name="InvoiceDateCreated" Type="datetime" />
+    <Property Name="IsMobileCheckout" Type="bit" />
+    <Property Name="IsCompleted" Type="bit" />
+    <Property Name="IsCorporateCheckout" Type="bit" />
+    <Property Name="TransactionId" Type="int" />
+    <Property Name="MyGateAuthorisationIDAuth" Type="nvarchar" MaxLength="50" />
+    <Property Name="MyGateAuthorisationIDCapt" Type="nvarchar" MaxLength="50" />
+    <Property Name="MyGateTransactionID" Type="uniqueidentifier" />
+    <Property Name="MyGate3DParEq" Type="ntext" />
+    <Property Name="IsQuote" Type="bit" Nullable="false" />
+    <Property Name="ReminderSMSSent" Type="bit" Nullable="false" />
+    <Property Name="UpgradedVehicleId" Type="int" />
+    <Property Name="QuoteReminderSent" Type="bit" Nullable="false" />
+    <Property Name="AddedToExternalSystem" Type="bit" Nullable="false" />
+    <Property Name="ConfirmedDate" Type="datetime" />
+    <Property Name="IsArchived" Type="bit" Nullable="false" />
+    <Property Name="IsCancelled" Type="bit" Nullable="false" />
+    <Property Name="CancellationFee" Type="money" />
+    <Property Name="RefundedAmount" Type="money" />
+    <Property Name="HasPaymentError" Type="bit" Nullable="false" />
+    <Property Name="PaymentErrorCode" Type="nchar" MaxLength="10" />
+    <Property Name="PaymentErrorMessage" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_AuditItemProperty_AuditItem">
+    <End Role="AuditItem" Type="Self.AuditItem" Multiplicity="1" />
+    <End Role="AuditItemProperty" Type="Self.AuditItemProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuditItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AuditItemProperty">
+        <PropertyRef Name="AuditEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookingClaims_UserProfiles">
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="1" />
+    <End Role="BookingClaims" Type="Self.BookingClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfiles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookingClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branches_FileUploads">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="0..1" />
+    <End Role="Branches" Type="Self.Branches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Branches">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BranchRateCodeExclusions_Branches">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="BranchRateCodeExclusions" Type="Self.BranchRateCodeExclusions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchRateCodeExclusions">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BranchRateCodeExclusions_RateCodes">
+    <End Role="RateCodes" Type="Self.RateCodes" Multiplicity="1" />
+    <End Role="BranchRateCodeExclusions" Type="Self.BranchRateCodeExclusions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCodes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchRateCodeExclusions">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BranchSurcharges_Branches">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="BranchSurcharges" Type="Self.BranchSurcharges" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchSurcharges">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BranchVehicleExclusions_BranchVehicles">
+    <End Role="BranchVehicles" Type="Self.BranchVehicles" Multiplicity="1" />
+    <End Role="BranchVehicleExclusions" Type="Self.BranchVehicleExclusions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BranchVehicles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchVehicleExclusions">
+        <PropertyRef Name="BranchVehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BranchVehicles_Branches">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="BranchVehicles" Type="Self.BranchVehicles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchVehicles">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BranchVehicles_Vehicles">
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
+    <End Role="BranchVehicles" Type="Self.BranchVehicles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchVehicles">
+        <PropertyRef Name="VehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Campaigns_FileUploads">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="0..1" />
+    <End Role="Campaigns" Type="Self.Campaigns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Campaigns">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Campaigns_FileUploadsSearchResultIcon">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="0..1" />
+    <End Role="Campaigns" Type="Self.Campaigns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Campaigns">
+        <PropertyRef Name="SearchResultIconFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Campaigns_RateCodes">
+    <End Role="RateCodes" Type="Self.RateCodes" Multiplicity="1" />
+    <End Role="Campaigns" Type="Self.Campaigns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCodes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Campaigns">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CorporateRateCodes_Corporates">
+    <End Role="Corporates" Type="Self.Corporates" Multiplicity="1" />
+    <End Role="CorporateRateCodes" Type="Self.CorporateRateCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Corporates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CorporateRateCodes">
+        <PropertyRef Name="CorporateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CorporateRateCodes_RateCodes">
+    <End Role="RateCodes" Type="Self.RateCodes" Multiplicity="1" />
+    <End Role="CorporateRateCodes" Type="Self.CorporateRateCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCodes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CorporateRateCodes">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CountdownSpecials_VehicleUpgrades">
+    <End Role="VehicleUpgrades" Type="Self.VehicleUpgrades" Multiplicity="0..1" />
+    <End Role="CountdownSpecials" Type="Self.CountdownSpecials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleUpgrades">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CountdownSpecials">
+        <PropertyRef Name="VehicleUpgradeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_FooterContent">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="1" />
+    <End Role="EmailSignatureCampaigns" Type="Self.EmailSignatureCampaigns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaigns">
+        <PropertyRef Name="FooterContentFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_FooterContentNarrow">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="1" />
+    <End Role="EmailSignatureCampaigns" Type="Self.EmailSignatureCampaigns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaigns">
+        <PropertyRef Name="FooterContentNarrowFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_MainContent">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="1" />
+    <End Role="EmailSignatureCampaigns" Type="Self.EmailSignatureCampaigns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaigns">
+        <PropertyRef Name="MainContentFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_MainContentNarrow">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="1" />
+    <End Role="EmailSignatureCampaigns" Type="Self.EmailSignatureCampaigns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaigns">
+        <PropertyRef Name="MainContentNarrowFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_SidePanelContent">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="1" />
+    <End Role="EmailSignatureCampaigns" Type="Self.EmailSignatureCampaigns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaigns">
+        <PropertyRef Name="SidePanelContentFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_Underline">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="1" />
+    <End Role="EmailSignatureCampaigns" Type="Self.EmailSignatureCampaigns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaigns">
+        <PropertyRef Name="UnderlineContentFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HerospaceItems_FileUploads">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="1" />
+    <End Role="HerospaceItems" Type="Self.HerospaceItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HerospaceItems">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InterBranchDropOffFees_Branches">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="InterBranchDropOffFees" Type="Self.InterBranchDropOffFees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterBranchDropOffFees">
+        <PropertyRef Name="Branch1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InterBranchDropOffFees_Branches1">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="InterBranchDropOffFees" Type="Self.InterBranchDropOffFees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterBranchDropOffFees">
+        <PropertyRef Name="Branch2Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoices_Reservations">
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="1" />
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyaltyTierBenefits_BranchesDropOff">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+    <End Role="LoyaltyTierBenefits" Type="Self.LoyaltyTierBenefits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefits">
+        <PropertyRef Name="DropOffLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyaltyTierBenefits_BranchesPickup">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+    <End Role="LoyaltyTierBenefits" Type="Self.LoyaltyTierBenefits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefits">
+        <PropertyRef Name="PickupLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyaltyTierBenefits_LoyaltyTiers">
+    <End Role="LoyaltyTiers" Type="Self.LoyaltyTiers" Multiplicity="1" />
+    <End Role="LoyaltyTierBenefits" Type="Self.LoyaltyTierBenefits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoyaltyTiers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefits">
+        <PropertyRef Name="LoyaltyTierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyaltyTierBenefits_VehicleExtras">
+    <End Role="VehicleExtras" Type="Self.VehicleExtras" Multiplicity="0..1" />
+    <End Role="LoyaltyTierBenefits" Type="Self.LoyaltyTierBenefits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleExtras">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefits">
+        <PropertyRef Name="ExtraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyaltyTierBenefits_VehicleUpgrades">
+    <End Role="VehicleUpgrades" Type="Self.VehicleUpgrades" Multiplicity="0..1" />
+    <End Role="LoyaltyTierBenefits" Type="Self.LoyaltyTierBenefits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleUpgrades">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefits">
+        <PropertyRef Name="UpgradeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyGateRefundTransactions_Invoices">
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="1" />
+    <End Role="MyGateRefundTransactions" Type="Self.MyGateRefundTransactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoices">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MyGateRefundTransactions">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyGateTransactions_Invoices">
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="1" />
+    <End Role="MyGateTransactions" Type="Self.MyGateTransactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoices">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MyGateTransactions">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_FileUploads">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="0..1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_NewsCategories">
+    <End Role="NewsCategories" Type="Self.NewsCategories" Multiplicity="1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsCategories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="NewsCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateAdjustments_Branches">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="RateAdjustments" Type="Self.RateAdjustments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RateAdjustments">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateAdjustments_RateCodes">
+    <End Role="RateCodes" Type="Self.RateCodes" Multiplicity="0..1" />
+    <End Role="RateAdjustments" Type="Self.RateAdjustments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCodes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RateAdjustments">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateAdjustments_VehicleGroups">
+    <End Role="VehicleGroups" Type="Self.VehicleGroups" Multiplicity="0..1" />
+    <End Role="RateAdjustments" Type="Self.RateAdjustments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleGroups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RateAdjustments">
+        <PropertyRef Name="VehicleGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateCodes_RateRules">
+    <End Role="RateRules" Type="Self.RateRules" Multiplicity="1" />
+    <End Role="RateCodes" Type="Self.RateCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateRules">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RateCodes">
+        <PropertyRef Name="RateRuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rates_Branches">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="Rates" Type="Self.Rates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rates">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rates_RateCodes">
+    <End Role="RateCodes" Type="Self.RateCodes" Multiplicity="1" />
+    <End Role="Rates" Type="Self.Rates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCodes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rates">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rates_VehicleGroups">
+    <End Role="VehicleGroups" Type="Self.VehicleGroups" Multiplicity="1" />
+    <End Role="Rates" Type="Self.Rates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleGroups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rates">
+        <PropertyRef Name="VehicleGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Refunds_Invoices">
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="1" />
+    <End Role="Refunds" Type="Self.Refunds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoices">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Refunds">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Refunds_Reservations">
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="1" />
+    <End Role="Refunds" Type="Self.Refunds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Refunds">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Refunds_Reservations1">
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="1" />
+    <End Role="Refunds" Type="Self.Refunds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Refunds">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationBranchSurcharges_BranchSurcharges">
+    <End Role="BranchSurcharges" Type="Self.BranchSurcharges" Multiplicity="1" />
+    <End Role="ReservationBranchSurcharges" Type="Self.ReservationBranchSurcharges" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BranchSurcharges">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationBranchSurcharges">
+        <PropertyRef Name="BranchSurchargeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationBranchSurcharges_Reservations">
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="1" />
+    <End Role="ReservationBranchSurcharges" Type="Self.ReservationBranchSurcharges" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationBranchSurcharges">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Branches">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="PickupBranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Branches1">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="DropOffBranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_UserProfiles">
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfiles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Vehicles">
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="VehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_VehicleUpgrades">
+    <End Role="VehicleUpgrades" Type="Self.VehicleUpgrades" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleUpgrades">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="VehicleUpgradeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationsLoyaltyTierBenefits_Reservations">
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="1" />
+    <End Role="ReservationsLoyaltyTierBenefits" Type="Self.ReservationsLoyaltyTierBenefits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationsLoyaltyTierBenefits">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationsVehicleExtras_Reservations">
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="1" />
+    <End Role="ReservationsVehicleExtras" Type="Self.ReservationsVehicleExtras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationsVehicleExtras">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationsVehicleExtras_ReservationsLoyaltyTierBenefits">
+    <End Role="ReservationsLoyaltyTierBenefits" Type="Self.ReservationsLoyaltyTierBenefits" Multiplicity="0..1" />
+    <End Role="ReservationsVehicleExtras" Type="Self.ReservationsVehicleExtras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservationsLoyaltyTierBenefits">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationsVehicleExtras">
+        <PropertyRef Name="ReservationLoyaltyTierBenefitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationsVehicleExtras_VehicleExtras">
+    <End Role="VehicleExtras" Type="Self.VehicleExtras" Multiplicity="1" />
+    <End Role="ReservationsVehicleExtras" Type="Self.ReservationsVehicleExtras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleExtras">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationsVehicleExtras">
+        <PropertyRef Name="VehicleExtraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_RoleId">
+    <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+    <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="webpages_Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="webpages_UsersInRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrustPilotReviewInvites_Reservations">
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="0..1" />
+    <End Role="TrustPilotReviewInvites" Type="Self.TrustPilotReviewInvites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrustPilotReviewInvites">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrustPilotReviewInvites_Vouchers">
+    <End Role="Vouchers" Type="Self.Vouchers" Multiplicity="0..1" />
+    <End Role="TrustPilotReviewInvites" Type="Self.TrustPilotReviewInvites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vouchers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrustPilotReviewInvites">
+        <PropertyRef Name="VoucherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserId">
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="1" />
+    <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfiles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="webpages_UsersInRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfiles_Corporates">
+    <End Role="Corporates" Type="Self.Corporates" Multiplicity="0..1" />
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Corporates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProfiles">
+        <PropertyRef Name="CorporateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfiles_LoyaltyTiers">
+    <End Role="LoyaltyTiers" Type="Self.LoyaltyTiers" Multiplicity="1" />
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoyaltyTiers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProfiles">
+        <PropertyRef Name="LoyaltyTierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleGroups_FileUploads">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="0..1" />
+    <End Role="VehicleGroups" Type="Self.VehicleGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleGroups">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleManufacturers_FileUploads">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="0..1" />
+    <End Role="VehicleManufacturers" Type="Self.VehicleManufacturers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleManufacturers">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicles_FileUploads">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="0..1" />
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vehicles">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicles_FileUploads1">
+    <End Role="FileUploads" Type="Self.FileUploads" Multiplicity="0..1" />
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUploads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vehicles">
+        <PropertyRef Name="FileUploadId2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicles_VehicleGroups">
+    <End Role="VehicleGroups" Type="Self.VehicleGroups" Multiplicity="1" />
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleGroups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vehicles">
+        <PropertyRef Name="VehicleGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicles_VehicleManufacturers">
+    <End Role="VehicleManufacturers" Type="Self.VehicleManufacturers" Multiplicity="0..1" />
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleManufacturers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vehicles">
+        <PropertyRef Name="VehicleManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleUpgrades_Branches">
+    <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+    <End Role="VehicleUpgrades" Type="Self.VehicleUpgrades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleUpgrades">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleUpgrades_Vehicles">
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
+    <End Role="VehicleUpgrades" Type="Self.VehicleUpgrades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleUpgrades">
+        <PropertyRef Name="FromVehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleUpgrades_Vehicles1">
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
+    <End Role="VehicleUpgrades" Type="Self.VehicleUpgrades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleUpgrades">
+        <PropertyRef Name="ToVehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Waivers_VehicleGroups">
+    <End Role="VehicleGroups" Type="Self.VehicleGroups" Multiplicity="1" />
+    <End Role="Waivers" Type="Self.Waivers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleGroups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Waivers">
+        <PropertyRef Name="VehicleGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Woodford2015ModelStoreContainer">
+    <EntitySet Name="AppSettings" EntityType="Self.AppSettings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AuditItem" EntityType="Self.AuditItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AuditItemProperty" EntityType="Self.AuditItemProperty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingClaims" EntityType="Self.BookingClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingHistory" EntityType="Self.BookingHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BranchRateCodeExclusions" EntityType="Self.BranchRateCodeExclusions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BranchSurcharges" EntityType="Self.BranchSurcharges" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BranchVehicleExclusions" EntityType="Self.BranchVehicleExclusions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BranchVehicles" EntityType="Self.BranchVehicles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Campaigns" EntityType="Self.Campaigns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CorporateRateCodes" EntityType="Self.CorporateRateCodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Corporates" EntityType="Self.Corporates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CountdownSpecials" EntityType="Self.CountdownSpecials" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DynamicPages" EntityType="Self.DynamicPages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmailSignatureCampaigns" EntityType="Self.EmailSignatureCampaigns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmailSignatures" EntityType="Self.EmailSignatures" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FileUploads" EntityType="Self.FileUploads" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HerospaceItems" EntityType="Self.HerospaceItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InterBranchDropOffFees" EntityType="Self.InterBranchDropOffFees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoyaltyTierBenefits" EntityType="Self.LoyaltyTierBenefits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoyaltyTiers" EntityType="Self.LoyaltyTiers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MessageQueue" EntityType="Self.MessageQueue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MyGateRefundTransactions" EntityType="Self.MyGateRefundTransactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MyGateTransactions" EntityType="Self.MyGateTransactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NewsCategories" EntityType="Self.NewsCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PageContent" EntityType="Self.PageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RateAdjustments" EntityType="Self.RateAdjustments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RateCodes" EntityType="Self.RateCodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RateRules" EntityType="Self.RateRules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Refunds" EntityType="Self.Refunds" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReservationBranchSurcharges" EntityType="Self.ReservationBranchSurcharges" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReservationsLoyaltyTierBenefits" EntityType="Self.ReservationsLoyaltyTierBenefits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReservationsVehicleExtras" EntityType="Self.ReservationsVehicleExtras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrustPilotReviewInvites" EntityType="Self.TrustPilotReviewInvites" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UrlRedirects" EntityType="Self.UrlRedirects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfiles" EntityType="Self.UserProfiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleExtras" EntityType="Self.VehicleExtras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleGroups" EntityType="Self.VehicleGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleManufacturers" EntityType="Self.VehicleManufacturers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleUpgrades" EntityType="Self.VehicleUpgrades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vouchers" EntityType="Self.Vouchers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Waivers" EntityType="Self.Waivers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReservationsAdmin" EntityType="Self.ReservationsAdmin" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ReservationsAdmin].[Id] AS [Id], 
+    [ReservationsAdmin].[PickupDate] AS [PickupDate], 
+    [ReservationsAdmin].[DropOffDate] AS [DropOffDate], 
+    [ReservationsAdmin].[PickupBranchId] AS [PickupBranchId], 
+    [ReservationsAdmin].[DropOffBranchId] AS [DropOffBranchId], 
+    [ReservationsAdmin].[VehicleId] AS [VehicleId], 
+    [ReservationsAdmin].[VehicleExcess] AS [VehicleExcess], 
+    [ReservationsAdmin].[VehicleDeposit] AS [VehicleDeposit], 
+    [ReservationsAdmin].[RateId] AS [RateId], 
+    [ReservationsAdmin].[RateCodeId] AS [RateCodeId], 
+    [ReservationsAdmin].[RateCodeTitle] AS [RateCodeTitle], 
+    [ReservationsAdmin].[RatePrice] AS [RatePrice], 
+    [ReservationsAdmin].[RateAdjustmentId] AS [RateAdjustmentId], 
+    [ReservationsAdmin].[RateAdjustmentType] AS [RateAdjustmentType], 
+    [ReservationsAdmin].[RateAdjustmentPercentage] AS [RateAdjustmentPercentage], 
+    [ReservationsAdmin].[ContractFee] AS [ContractFee], 
+    [ReservationsAdmin].[DropOffFee] AS [DropOffFee], 
+    [ReservationsAdmin].[VehicleUpgradeId] AS [VehicleUpgradeId], 
+    [ReservationsAdmin].[VehicleUpgradePrice] AS [VehicleUpgradePrice], 
+    [ReservationsAdmin].[CountdownSpecialId] AS [CountdownSpecialId], 
+    [ReservationsAdmin].[CountdownSpecialType] AS [CountdownSpecialType], 
+    [ReservationsAdmin].[CountdownSpecialOfferText] AS [CountdownSpecialOfferText], 
+    [ReservationsAdmin].[CountdownSpecialDiscount] AS [CountdownSpecialDiscount], 
+    [ReservationsAdmin].[CountdownSpecialVehicleUpgradePriceOverride] AS [CountdownSpecialVehicleUpgradePriceOverride], 
+    [ReservationsAdmin].[UserId] AS [UserId], 
+    [ReservationsAdmin].[FirstName] AS [FirstName], 
+    [ReservationsAdmin].[LastName] AS [LastName], 
+    [ReservationsAdmin].[Email] AS [Email], 
+    [ReservationsAdmin].[IdNumber] AS [IdNumber], 
+    [ReservationsAdmin].[MobileNumber] AS [MobileNumber], 
+    [ReservationsAdmin].[VoucherId] AS [VoucherId], 
+    [ReservationsAdmin].[VoucherNumber] AS [VoucherNumber], 
+    [ReservationsAdmin].[VoucherRewardType] AS [VoucherRewardType], 
+    [ReservationsAdmin].[VoucherRewardText] AS [VoucherRewardText], 
+    [ReservationsAdmin].[VoucherRewardDiscount] AS [VoucherRewardDiscount], 
+    [ReservationsAdmin].[VoucherRewardDiscountPercentage] AS [VoucherRewardDiscountPercentage], 
+    [ReservationsAdmin].[DateCreated] AS [DateCreated], 
+    [ReservationsAdmin].[ReservationState] AS [ReservationState], 
+    [ReservationsAdmin].[TaxRate] AS [TaxRate], 
+    [ReservationsAdmin].[BranchSurchargeId] AS [BranchSurchargeId], 
+    [ReservationsAdmin].[BranchSurchageText] AS [BranchSurchageText], 
+    [ReservationsAdmin].[BranchSurchageTotalPrice] AS [BranchSurchageTotalPrice], 
+    [ReservationsAdmin].[IsCorporate] AS [IsCorporate], 
+    [ReservationsAdmin].[CorporateId] AS [CorporateId], 
+    [ReservationsAdmin].[ReminderSent] AS [ReminderSent], 
+    [ReservationsAdmin].[ThankYouSent] AS [ThankYouSent], 
+    [ReservationsAdmin].[LoyaltyPointsAssigned] AS [LoyaltyPointsAssigned], 
+    [ReservationsAdmin].[LoyaltyPointsEarned] AS [LoyaltyPointsEarned], 
+    [ReservationsAdmin].[LoyaltyPointsSpent] AS [LoyaltyPointsSpent], 
+    [ReservationsAdmin].[LoyaltyTierAtTimeOfBooking] AS [LoyaltyTierAtTimeOfBooking], 
+    [ReservationsAdmin].[QuoteReference] AS [QuoteReference], 
+    [ReservationsAdmin].[QuoteSentDate] AS [QuoteSentDate], 
+    [ReservationsAdmin].[HasBeenModified] AS [HasBeenModified], 
+    [ReservationsAdmin].[ModifiedDate] AS [ModifiedDate], 
+    [ReservationsAdmin].[InvoiceId] AS [InvoiceId], 
+    [ReservationsAdmin].[ReservationId] AS [ReservationId], 
+    [ReservationsAdmin].[AmountPaid] AS [AmountPaid], 
+    [ReservationsAdmin].[InvoiceDateCreated] AS [InvoiceDateCreated], 
+    [ReservationsAdmin].[IsMobileCheckout] AS [IsMobileCheckout], 
+    [ReservationsAdmin].[IsCompleted] AS [IsCompleted], 
+    [ReservationsAdmin].[IsCorporateCheckout] AS [IsCorporateCheckout], 
+    [ReservationsAdmin].[TransactionId] AS [TransactionId], 
+    [ReservationsAdmin].[MyGateAuthorisationIDAuth] AS [MyGateAuthorisationIDAuth], 
+    [ReservationsAdmin].[MyGateAuthorisationIDCapt] AS [MyGateAuthorisationIDCapt], 
+    [ReservationsAdmin].[MyGateTransactionID] AS [MyGateTransactionID], 
+    [ReservationsAdmin].[MyGate3DParEq] AS [MyGate3DParEq], 
+    [ReservationsAdmin].[IsQuote] AS [IsQuote], 
+    [ReservationsAdmin].[ReminderSMSSent] AS [ReminderSMSSent], 
+    [ReservationsAdmin].[UpgradedVehicleId] AS [UpgradedVehicleId], 
+    [ReservationsAdmin].[QuoteReminderSent] AS [QuoteReminderSent], 
+    [ReservationsAdmin].[AddedToExternalSystem] AS [AddedToExternalSystem], 
+    [ReservationsAdmin].[ConfirmedDate] AS [ConfirmedDate], 
+    [ReservationsAdmin].[IsArchived] AS [IsArchived], 
+    [ReservationsAdmin].[IsCancelled] AS [IsCancelled], 
+    [ReservationsAdmin].[CancellationFee] AS [CancellationFee], 
+    [ReservationsAdmin].[RefundedAmount] AS [RefundedAmount], 
+    [ReservationsAdmin].[HasPaymentError] AS [HasPaymentError], 
+    [ReservationsAdmin].[PaymentErrorCode] AS [PaymentErrorCode], 
+    [ReservationsAdmin].[PaymentErrorMessage] AS [PaymentErrorMessage]
+    FROM [dbo].[ReservationsAdmin] AS [ReservationsAdmin]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_AuditItemProperty_AuditItem" Association="Self.FK_AuditItemProperty_AuditItem">
+      <End Role="AuditItem" EntitySet="AuditItem" />
+      <End Role="AuditItemProperty" EntitySet="AuditItemProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookingClaims_UserProfiles" Association="Self.FK_BookingClaims_UserProfiles">
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+      <End Role="BookingClaims" EntitySet="BookingClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branches_FileUploads" Association="Self.FK_Branches_FileUploads">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="Branches" EntitySet="Branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BranchRateCodeExclusions_Branches" Association="Self.FK_BranchRateCodeExclusions_Branches">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="BranchRateCodeExclusions" EntitySet="BranchRateCodeExclusions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BranchRateCodeExclusions_RateCodes" Association="Self.FK_BranchRateCodeExclusions_RateCodes">
+      <End Role="RateCodes" EntitySet="RateCodes" />
+      <End Role="BranchRateCodeExclusions" EntitySet="BranchRateCodeExclusions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BranchSurcharges_Branches" Association="Self.FK_BranchSurcharges_Branches">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="BranchSurcharges" EntitySet="BranchSurcharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BranchVehicleExclusions_BranchVehicles" Association="Self.FK_BranchVehicleExclusions_BranchVehicles">
+      <End Role="BranchVehicles" EntitySet="BranchVehicles" />
+      <End Role="BranchVehicleExclusions" EntitySet="BranchVehicleExclusions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BranchVehicles_Branches" Association="Self.FK_BranchVehicles_Branches">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="BranchVehicles" EntitySet="BranchVehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BranchVehicles_Vehicles" Association="Self.FK_BranchVehicles_Vehicles">
+      <End Role="Vehicles" EntitySet="Vehicles" />
+      <End Role="BranchVehicles" EntitySet="BranchVehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Campaigns_FileUploads" Association="Self.FK_Campaigns_FileUploads">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="Campaigns" EntitySet="Campaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Campaigns_FileUploadsSearchResultIcon" Association="Self.FK_Campaigns_FileUploadsSearchResultIcon">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="Campaigns" EntitySet="Campaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Campaigns_RateCodes" Association="Self.FK_Campaigns_RateCodes">
+      <End Role="RateCodes" EntitySet="RateCodes" />
+      <End Role="Campaigns" EntitySet="Campaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CorporateRateCodes_Corporates" Association="Self.FK_CorporateRateCodes_Corporates">
+      <End Role="Corporates" EntitySet="Corporates" />
+      <End Role="CorporateRateCodes" EntitySet="CorporateRateCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CorporateRateCodes_RateCodes" Association="Self.FK_CorporateRateCodes_RateCodes">
+      <End Role="RateCodes" EntitySet="RateCodes" />
+      <End Role="CorporateRateCodes" EntitySet="CorporateRateCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CountdownSpecials_VehicleUpgrades" Association="Self.FK_CountdownSpecials_VehicleUpgrades">
+      <End Role="VehicleUpgrades" EntitySet="VehicleUpgrades" />
+      <End Role="CountdownSpecials" EntitySet="CountdownSpecials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_FooterContent" Association="Self.FK_EmailSignatureCampaigns_FooterContent">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaigns" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_FooterContentNarrow" Association="Self.FK_EmailSignatureCampaigns_FooterContentNarrow">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaigns" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_MainContent" Association="Self.FK_EmailSignatureCampaigns_MainContent">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaigns" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_MainContentNarrow" Association="Self.FK_EmailSignatureCampaigns_MainContentNarrow">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaigns" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_SidePanelContent" Association="Self.FK_EmailSignatureCampaigns_SidePanelContent">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaigns" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_Underline" Association="Self.FK_EmailSignatureCampaigns_Underline">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaigns" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HerospaceItems_FileUploads" Association="Self.FK_HerospaceItems_FileUploads">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="HerospaceItems" EntitySet="HerospaceItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InterBranchDropOffFees_Branches" Association="Self.FK_InterBranchDropOffFees_Branches">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="InterBranchDropOffFees" EntitySet="InterBranchDropOffFees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InterBranchDropOffFees_Branches1" Association="Self.FK_InterBranchDropOffFees_Branches1">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="InterBranchDropOffFees" EntitySet="InterBranchDropOffFees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoices_Reservations" Association="Self.FK_Invoices_Reservations">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyaltyTierBenefits_BranchesDropOff" Association="Self.FK_LoyaltyTierBenefits_BranchesDropOff">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="LoyaltyTierBenefits" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyaltyTierBenefits_BranchesPickup" Association="Self.FK_LoyaltyTierBenefits_BranchesPickup">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="LoyaltyTierBenefits" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyaltyTierBenefits_LoyaltyTiers" Association="Self.FK_LoyaltyTierBenefits_LoyaltyTiers">
+      <End Role="LoyaltyTiers" EntitySet="LoyaltyTiers" />
+      <End Role="LoyaltyTierBenefits" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyaltyTierBenefits_VehicleExtras" Association="Self.FK_LoyaltyTierBenefits_VehicleExtras">
+      <End Role="VehicleExtras" EntitySet="VehicleExtras" />
+      <End Role="LoyaltyTierBenefits" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyaltyTierBenefits_VehicleUpgrades" Association="Self.FK_LoyaltyTierBenefits_VehicleUpgrades">
+      <End Role="VehicleUpgrades" EntitySet="VehicleUpgrades" />
+      <End Role="LoyaltyTierBenefits" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyGateRefundTransactions_Invoices" Association="Self.FK_MyGateRefundTransactions_Invoices">
+      <End Role="Invoices" EntitySet="Invoices" />
+      <End Role="MyGateRefundTransactions" EntitySet="MyGateRefundTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyGateTransactions_Invoices" Association="Self.FK_MyGateTransactions_Invoices">
+      <End Role="Invoices" EntitySet="Invoices" />
+      <End Role="MyGateTransactions" EntitySet="MyGateTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_FileUploads" Association="Self.FK_News_FileUploads">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_NewsCategories" Association="Self.FK_News_NewsCategories">
+      <End Role="NewsCategories" EntitySet="NewsCategories" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateAdjustments_Branches" Association="Self.FK_RateAdjustments_Branches">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="RateAdjustments" EntitySet="RateAdjustments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateAdjustments_RateCodes" Association="Self.FK_RateAdjustments_RateCodes">
+      <End Role="RateCodes" EntitySet="RateCodes" />
+      <End Role="RateAdjustments" EntitySet="RateAdjustments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateAdjustments_VehicleGroups" Association="Self.FK_RateAdjustments_VehicleGroups">
+      <End Role="VehicleGroups" EntitySet="VehicleGroups" />
+      <End Role="RateAdjustments" EntitySet="RateAdjustments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateCodes_RateRules" Association="Self.FK_RateCodes_RateRules">
+      <End Role="RateRules" EntitySet="RateRules" />
+      <End Role="RateCodes" EntitySet="RateCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rates_Branches" Association="Self.FK_Rates_Branches">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="Rates" EntitySet="Rates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rates_RateCodes" Association="Self.FK_Rates_RateCodes">
+      <End Role="RateCodes" EntitySet="RateCodes" />
+      <End Role="Rates" EntitySet="Rates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rates_VehicleGroups" Association="Self.FK_Rates_VehicleGroups">
+      <End Role="VehicleGroups" EntitySet="VehicleGroups" />
+      <End Role="Rates" EntitySet="Rates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Refunds_Invoices" Association="Self.FK_Refunds_Invoices">
+      <End Role="Invoices" EntitySet="Invoices" />
+      <End Role="Refunds" EntitySet="Refunds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Refunds_Reservations" Association="Self.FK_Refunds_Reservations">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="Refunds" EntitySet="Refunds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Refunds_Reservations1" Association="Self.FK_Refunds_Reservations1">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="Refunds" EntitySet="Refunds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationBranchSurcharges_BranchSurcharges" Association="Self.FK_ReservationBranchSurcharges_BranchSurcharges">
+      <End Role="BranchSurcharges" EntitySet="BranchSurcharges" />
+      <End Role="ReservationBranchSurcharges" EntitySet="ReservationBranchSurcharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationBranchSurcharges_Reservations" Association="Self.FK_ReservationBranchSurcharges_Reservations">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="ReservationBranchSurcharges" EntitySet="ReservationBranchSurcharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Branches" Association="Self.FK_Reservations_Branches">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Branches1" Association="Self.FK_Reservations_Branches1">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_UserProfiles" Association="Self.FK_Reservations_UserProfiles">
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Vehicles" Association="Self.FK_Reservations_Vehicles">
+      <End Role="Vehicles" EntitySet="Vehicles" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_VehicleUpgrades" Association="Self.FK_Reservations_VehicleUpgrades">
+      <End Role="VehicleUpgrades" EntitySet="VehicleUpgrades" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationsLoyaltyTierBenefits_Reservations" Association="Self.FK_ReservationsLoyaltyTierBenefits_Reservations">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="ReservationsLoyaltyTierBenefits" EntitySet="ReservationsLoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationsVehicleExtras_Reservations" Association="Self.FK_ReservationsVehicleExtras_Reservations">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="ReservationsVehicleExtras" EntitySet="ReservationsVehicleExtras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationsVehicleExtras_ReservationsLoyaltyTierBenefits" Association="Self.FK_ReservationsVehicleExtras_ReservationsLoyaltyTierBenefits">
+      <End Role="ReservationsLoyaltyTierBenefits" EntitySet="ReservationsLoyaltyTierBenefits" />
+      <End Role="ReservationsVehicleExtras" EntitySet="ReservationsVehicleExtras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationsVehicleExtras_VehicleExtras" Association="Self.FK_ReservationsVehicleExtras_VehicleExtras">
+      <End Role="VehicleExtras" EntitySet="VehicleExtras" />
+      <End Role="ReservationsVehicleExtras" EntitySet="ReservationsVehicleExtras" />
+    </AssociationSet>
+    <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+      <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrustPilotReviewInvites_Reservations" Association="Self.FK_TrustPilotReviewInvites_Reservations">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="TrustPilotReviewInvites" EntitySet="TrustPilotReviewInvites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrustPilotReviewInvites_Vouchers" Association="Self.FK_TrustPilotReviewInvites_Vouchers">
+      <End Role="Vouchers" EntitySet="Vouchers" />
+      <End Role="TrustPilotReviewInvites" EntitySet="TrustPilotReviewInvites" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+      <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfiles_Corporates" Association="Self.FK_UserProfiles_Corporates">
+      <End Role="Corporates" EntitySet="Corporates" />
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfiles_LoyaltyTiers" Association="Self.FK_UserProfiles_LoyaltyTiers">
+      <End Role="LoyaltyTiers" EntitySet="LoyaltyTiers" />
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleGroups_FileUploads" Association="Self.FK_VehicleGroups_FileUploads">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="VehicleGroups" EntitySet="VehicleGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleManufacturers_FileUploads" Association="Self.FK_VehicleManufacturers_FileUploads">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="VehicleManufacturers" EntitySet="VehicleManufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicles_FileUploads" Association="Self.FK_Vehicles_FileUploads">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="Vehicles" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicles_FileUploads1" Association="Self.FK_Vehicles_FileUploads1">
+      <End Role="FileUploads" EntitySet="FileUploads" />
+      <End Role="Vehicles" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicles_VehicleGroups" Association="Self.FK_Vehicles_VehicleGroups">
+      <End Role="VehicleGroups" EntitySet="VehicleGroups" />
+      <End Role="Vehicles" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicles_VehicleManufacturers" Association="Self.FK_Vehicles_VehicleManufacturers">
+      <End Role="VehicleManufacturers" EntitySet="VehicleManufacturers" />
+      <End Role="Vehicles" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleUpgrades_Branches" Association="Self.FK_VehicleUpgrades_Branches">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="VehicleUpgrades" EntitySet="VehicleUpgrades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleUpgrades_Vehicles" Association="Self.FK_VehicleUpgrades_Vehicles">
+      <End Role="Vehicles" EntitySet="Vehicles" />
+      <End Role="VehicleUpgrades" EntitySet="VehicleUpgrades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleUpgrades_Vehicles1" Association="Self.FK_VehicleUpgrades_Vehicles1">
+      <End Role="Vehicles" EntitySet="Vehicles" />
+      <End Role="VehicleUpgrades" EntitySet="VehicleUpgrades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Waivers_VehicleGroups" Association="Self.FK_Waivers_VehicleGroups">
+      <End Role="VehicleGroups" EntitySet="VehicleGroups" />
+      <End Role="Waivers" EntitySet="Waivers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

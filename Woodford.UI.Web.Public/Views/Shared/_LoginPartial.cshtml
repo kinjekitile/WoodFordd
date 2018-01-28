@@ -1,0 +1,44 @@
+﻿@model UserModel
+<div class="login-header">
+    @if (Request.IsAuthenticated) {
+        using (Html.BeginForm("LogOff", "User", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+
+            <ul>
+                <li class="u-pull-left" style="margin-left: -15px;">
+                    <a href="/User/Advance">
+                        My Profile
+                        @*<img src="@Url.Content("~/Content/images/advancelogo.png")" />*@
+                    </a>
+                </li>
+                <li>
+                    @Html.ActionLink("Modify / Cancel", "Option", "Modify")
+                </li>
+                <li>
+                    | 
+                    @if (Model.IsLoyaltyMember) {
+                        <text>@Html.ActionLink("Hello " + Model.FirstName + "!", "Advance", "User", routeValues: null, htmlAttributes: new { title = "Profile" })</text>
+                    } else {
+                        <text>@Html.ActionLink("Hello " + Model.FirstName + "!", "Profile", "User", routeValues: null, htmlAttributes: new { title = "Profile" })</text>
+}
+                    
+                </li>
+                <li>| <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>
+        }
+    } else {
+        <ul>
+            <li class="u-pull-left" style="margin-left: -15px;">
+                <a href="/woodford-advance-faq">
+                    <img src="@Url.Content("~/Content/images/advancelogo.png")" />
+                </a>
+            </li>
+            <li>
+                @Html.ActionLink("Modify / Cancel", "Option", "Modify")
+            </li>
+            <li>| @Html.ActionLink("Register", "Register", "User", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>| @Html.ActionLink("Log in", "Login", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            
+        </ul>
+    }
+</div>

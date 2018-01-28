@@ -1,0 +1,101 @@
+﻿@import "vars";
+
+.input-form div.row {
+    margin-bottom: 1.5rem;
+}
+
+.input-form label {
+    display: block;
+    /*width: 200px;*/
+    vertical-align: top;
+    padding-top: 0.5em;
+    text-align: right;
+}
+
+.input-form.vertical-form label {
+    text-align: left;
+}
+
+label.for-checkbox {
+    cursor: pointer;
+    display: inline-block !important;
+    margin: 0 0 5px 0 !important;
+}
+
+.input-form input[type="email"], 
+.input-form input[type="number"], 
+.input-form input[type="search"], 
+.input-form input[type="text"], 
+.input-form input[type="tel"], 
+.input-form input[type="url"], 
+.input-form input[type="password"], 
+.input-form textarea, 
+.input-form select {
+    margin-bottom: 0;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.input-form .field-validation-error {
+    color: $error-colour;
+    display: inline-block;
+    padding-top: 0.5em;
+    vertical-align: top;
+}
+
+label.required {    
+    padding: 0.5em 0.5em 0;
+}
+
+.inline-input input[type="checkbox"],
+.inline-input input[type="radio"],
+.inline-input input[type="text"],
+.inline-input input[type="email"],
+.inline-input label,
+.inline-input select {
+	display: inline;
+	margin: 0 10px 0 0;
+	vertical-align: middle;
+}
+
+input[type="email"].readonly, 
+input[type="number"].readonly, 
+input[type="search"].readonly, 
+input[type="text"].readonly, 
+input[type="tel"].readonly, 
+input[type="url"].readonly, 
+input[type="password"].readonly, 
+textarea.readonly, 
+select.readonly {
+    background-color:#eee;
+}
+
+input.datefield[type="text"] {
+    display: inline-block;
+    margin-right: 0;
+    width: 50%;
+}
+
+select.timefield {
+    display: inline-block;
+    float: right;
+    margin-right: 0;
+    width: 45%;
+}
+
+.validation-summary-errors {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+}
+
+.validation-summary-errors ul {
+    margin: 0;
+}
+
+.validation-summary-errors ul li {
+    color: #ff0000;
+    display: block;
+    margin: 0;
+}

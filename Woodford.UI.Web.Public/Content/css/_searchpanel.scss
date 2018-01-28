@@ -1,0 +1,122 @@
+﻿@import "vars";
+
+#search-panel {
+    border-top: 1px solid $brand-colour-dark;
+    min-height: 170px;
+    transition: all 0.5s;
+}
+
+#search-panel form {
+    margin: 0;
+}
+
+.search-panel-header-container {
+    background-color: $brand-colour-alternate;
+    height: 170px;
+}
+
+.search-panel-header {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.search-panel-header img {
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 1rem;
+}
+
+.search-panel-header h2 {
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Open Sans', Arial, sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#search-panel label {
+    margin: 1rem 0 0.5rem 0.5rem !important;
+}
+
+#search-panel input[type="text"],
+#search-panel select {
+    display: block;
+    width: 100%;
+}
+
+#search-panel input[type="text"].datefield {
+    display: inline-block;
+    width: 50%;
+}
+
+#search-panel select.timefield {
+    display: inline-block;
+    float: right;
+    width: 45%;
+}
+
+#search-panel input[type="submit"] {
+    margin-top: 110px;
+    padding: 0;
+    width: 100%;
+}
+
+#search-panel.panel-minimised {
+    min-height: 0;
+}
+
+#search-panel.panel-minimised .search-panel-expanded-view {
+    display: none;
+}
+
+.search-panel-minimised-view {
+    background-color: $brand-colour-alternate;
+    display: none;
+}
+
+#search-panel.panel-minimised .search-panel-minimised-view {
+    display: block;
+}
+
+.panel-minimised .search-panel-header-container {
+    height: auto;
+    width: 100%;
+}
+
+.panel-minimised .search-panel-header {
+    padding: 10px;
+    position: relative;
+    min-height: 20px;
+}
+
+.panel-minimised .search-panel-header img {
+    height: 25px;
+    left: 5px;
+    position: absolute;
+    top: 7px;
+}
+
+.panel-minimised .search-panel-header h2 {
+    margin: 0;
+}
+
+.toggle-search-panel {
+    padding: 15px;
+    position: absolute;
+    right: 0;
+    top: 0;   
+    text-indent: -999em;
+}
+
+.toggle-search-panel i {
+    background-image: url(../images/expand.png);
+    background-position: 0 0;
+     height: 8px;
+    width: 18px;
+    display: block;
+    
+}
+
+.toggle-search-panel.expand i {
+    background-position: -19px 0;    
+}

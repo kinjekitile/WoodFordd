@@ -1,0 +1,52 @@
+﻿@model ListOf<CorporateModel>
+@{
+    ViewBag.Title = "Corporates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Corporates</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Corporates</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Corporate", "Add", "Corporates")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    
+                    <td></td>
+                    <th scope="col">Corporate Name</th>                    
+                    
+                </tr>
+
+                @foreach (var b in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "Corporates", new { id = b.Id }, null)</td>
+                        
+                        <td>@b.Title</td>
+                        
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No corporates have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

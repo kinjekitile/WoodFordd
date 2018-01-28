@@ -1,0 +1,172 @@
+﻿@model VoucherViewModel
+@{
+    ViewBag.Title = "Add Voucher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Vouchers</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Voucher</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Add", "Vouchers", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Voucher_IsMultiUse">
+                            @Html.CheckBoxFor(m => m.Voucher.IsMultiUse) Is Multi Use
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Voucher.IsMultiUse)
+
+                </div>
+            </div>
+
+            <div id="single-use">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label for="Voucher_RequireClientValidation">
+                                @Html.CheckBoxFor(m => m.Voucher.RequireClientValidation) Require Client Validation
+                            </label>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Voucher.RequireClientValidation)
+
+                    </div>
+                </div>
+
+                <div id="client-details">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Voucher.ClientName, "Client Name", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Voucher.ClientName, new { placeholder = "Client Name", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Voucher.ClientName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Voucher.ClientEmail, "Client Email", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Voucher.ClientEmail, new { placeholder = "Client Email", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Voucher.ClientEmail)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="multi-use">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Voucher.VoucherNumber, "Voucher Number", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Voucher.VoucherNumber, new { placeholder = "Voucher Number", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Voucher.VoucherNumber)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Voucher.VoucherRewardType, "Voucher Reward Type", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.VoucherRewardTypeFor(m => m.Voucher.VoucherRewardType, new {  @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Voucher.VoucherRewardType)
+                </div>
+            </div>
+
+            <div id="reward-type-1">
+                @*DiscountValue*@    
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Voucher.VoucherDiscount, "Voucher Discount Value", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Voucher.VoucherDiscount, new { placeholder = "Voucher Discount Value", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Voucher.VoucherDiscount)
+                    </div>
+                </div>            
+            </div>
+
+            <div id="reward-type-2">
+                @*DiscountPercentage*@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Voucher.VoucherDiscountPercentage, "Voucher Discount Percentage", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Voucher.VoucherDiscountPercentage, new { placeholder = "Voucher Discount Percentage", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Voucher.VoucherDiscountPercentage)
+                    </div>
+                </div>
+            </div>
+
+            <div id="reward-type-3">
+                @*TextReward*@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Voucher.VoucherReward, "Voucher Reward", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Voucher.VoucherReward, new { placeholder = "Voucher Reward", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Voucher.VoucherReward)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Issue Voucher</button>
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function showHideMultiUse() {
+                var isMultiUse = $("#Voucher_IsMultiUse").is(":checked");
+                if (isMultiUse) {
+                    $("#single-use").hide();
+                    $("#multi-use").show();
+                } else {
+                    $("#single-use").show();
+                    $("#multi-use").hide();
+                }
+            }
+
+            function showRequireClientValidation() {
+                var requires = $("#Voucher_RequireClientValidation").is(":checked");
+                if (requires) {
+                    $("#client-details").show();                    
+                } else {
+                    $("#client-details").hide();
+                }
+            }
+
+            function changeVoucherType() {
+                var voucherType = $("#Voucher_VoucherRewardType").val();
+                $("#reward-type-1,#reward-type-2,#reward-type-3").hide();
+                $("#reward-type-" + voucherType).show();
+            }
+
+            $("#Voucher_IsMultiUse").on("change", function () {
+                showHideMultiUse();
+            });
+            $("#Voucher_RequireClientValidation").on("change", function () {
+                showRequireClientValidation();
+            });
+            $("#Voucher_VoucherRewardType").on("change", function () {
+                changeVoucherType();
+            });
+
+            showHideMultiUse();
+            showRequireClientValidation();
+            changeVoucherType();
+        });
+    </script>
+}

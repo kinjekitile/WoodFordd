@@ -1,0 +1,184 @@
+﻿@model ReservationInvoiceNotificationModel
+
+<div style="color: #30693F; font-size: 12px; margin-bottom: 10px;">
+    Quotation: <span style="color: #333; font-size: 18px; margin-left: 20px;">@Model.Reservation.Id</span>
+</div>
+
+<div style="color: #30693F; font-size: 12px; margin-bottom: 10px;">
+    Booking PIN: <span style="color: #333; font-size: 18px; margin-left: 20px;">@Model.Reservation.QuoteReference</span>
+</div>
+
+<p style="color: #646464; font-size: 18px; line-height: 22px; font-style: italic; padding: 8px 0; margin: 0;">
+    Thank you for considering Woodford Car Hire.<br />.
+</p>
+
+
+    @if (Model.QuoteSentStep == 2) {
+        <p>
+            <a href="@(Model.SiteDomain)Checkout/UserDetails/@Model.Reservation.Id">Click here</a> to view your quote.
+        </p>
+        
+    }
+    else {
+        <p>
+            <a href="@(Model.SiteDomain)Checkout/Options?id=@Model.Reservation.Id">Click here</a> to view your quote.
+        </p>
+    }
+
+    
+
+
+<h2 style="color: #19963C; border-bottom: 1px solid #999; margin: 0; padding: 5px 0 4px 0;">Booking Details</h2>
+
+@if (Model.Reservation.UserId != null || (!string.IsNullOrEmpty(Model.Reservation.FirstName) && !string.IsNullOrEmpty(Model.Reservation.LastName))) {
+
+    <table style="width: 100%; font-size: 12px; margin-bottom: 10px;" cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width: 50%;">
+                    @if (Model.Reservation.UserId == null) {
+                    if (!string.IsNullOrEmpty(Model.Reservation.FirstName) || (!string.IsNullOrEmpty(Model.Reservation.LastName))) {
+                            <text>Full Name: </text><strong>@Model.Reservation.FirstName @Model.Reservation.LastName</strong><br />
+                        }
+                        <text> Email: </text> <strong>@Model.Reservation.Email</strong><br />
+                        if (!string.IsNullOrEmpty(Model.Reservation.MobileNumber)) {
+                            <text>Cell: </text><strong>@Model.Reservation.MobileNumber</strong><br />
+                        }
+                        if (!string.IsNullOrEmpty(Model.Reservation.IdNumber)) {
+                            <text>ID No: </text><strong>@Model.Reservation.IdNumber</strong>
+                        }
+                    }
+                    else {
+                        if (!string.IsNullOrEmpty(Model.Reservation.User.FirstName) || (!string.IsNullOrEmpty(Model.Reservation.User.LastName))) {
+                            <text>Full Name: </text><strong>@Model.Reservation.FirstName @Model.Reservation.LastName</strong><br />
+                        }
+                        <text> Email: </text> <strong>@Model.Reservation.User.Email</strong><br />
+                        if (!string.IsNullOrEmpty(Model.Reservation.User.MobileNumber)) {
+                            <text>Cell: </text><strong>@Model.Reservation.User.MobileNumber</strong><br />
+                        }
+                        if (!string.IsNullOrEmpty(Model.Reservation.User.IdNumber)) {
+                            <text>ID No: </text><strong>@Model.Reservation.User.IdNumber</strong>
+                        }
+                    }
+                </td>
+
+                <td style="text-align: right; width: 50%;">
+                    @if (Model.Reservation.VehicleUpgradeId != null) {
+                        <text>Vehicle: </text><strong>@Model.Reservation.VehicleUpgrade.Title</strong><br />
+                        <text>Upgraded from: </text><strong>@Model.Reservation.Vehicle.Title</strong><br />
+                    }
+                    else {
+                        <text>Vehicle: </text><strong>@Model.Reservation.Vehicle.Title</strong><br />
+                    }
+                    Rate: <strong>@Model.Reservation.RateCodeTitle</strong>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+}
+
+
+<h2 style="color: #19963C; border-bottom: 1px solid #999; margin: 0; padding: 5px 0 4px 0;">Hire Dates</h2>
+<p>
+    Pick Up <strong style="margin: 0 10px;">@Model.Reservation.PickupDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Reservation.PickupBranch.Title
+    <br />
+    Drop Off <strong style="margin: 0 10px;">@Model.Reservation.DropOffDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Reservation.DropOffBranch.Title
+</p>
+
+<h2 style="color: #19963C; border-bottom: 1px solid #999; margin: 0; padding: 5px 0 4px 0;">Costing</h2>
+<table style="width: 100%; font-size: 12px; margin-bottom: 10px;" cellpadding="0" cellspacing="0">
+    <tbody>
+        <tr>
+            <td>Fee @Model.Reservation.NumberOfDays days @@ R @Model.Reservation.AdjustedPricePerDay.ToString("#,##0.00"):</td>
+            <td style="text-align: right;">R @Model.Reservation.AdjustedPrice.ToString("#,##0.00")</td>
+        </tr>
+        <tr>
+            <td>Tax:</td>
+            <td style="text-align: right;">@Model.Reservation.TaxAmount.ToString("#,##0.00")</td>
+        </tr>
+        <tr>
+            <td style="border-top: 1px solid #ccc; padding-bottom: 10px;"><strong>Total</strong></td>
+            <td style="border-top: 1px solid #ccc; padding-bottom: 10px; text-align: right;"><strong>R @((Model.Reservation.AdjustedPrice + Model.Reservation.TaxAmount).ToString("#,##0.00")) </strong></td>
+        </tr>
+        @if (Model.Reservation.DropOffFee > 0) {
+            <tr>
+                <td>Drop Off Fee</td>
+                <td style="text-align: right;">R @Model.Reservation.DropOffFee.ToString("#,##0.00")</td>
+            </tr>
+        }
+        <tr>
+            <td>Admin</td>
+            <td style="text-align: right;">R @Model.Reservation.ContractFee.ToString("#,##0.00")</td>
+        </tr>
+        @if (Model.Reservation.LoyaltyPointsSpent.HasValue) {
+            <tr>
+                <td style="border-top: 1px solid #ccc;color:#187546;">Advance Points Used</td>
+                <td style="text-align: right;border-top: 1px solid #ccc;">@String.Format("{0:c}", Model.Reservation.LoyaltyPointsSpent)</td>
+            </tr>
+        }
+        @foreach (var surcharge in Model.Reservation.BranchSurcharges) {
+
+                if (surcharge.IsOnceOff) {
+                <tr>
+                    <td>@surcharge.Title</td>
+                    <td style="text-align: right;">@String.Format("{0:c}", surcharge.SurchargePrice)</td>
+                </tr>
+            } else {
+                <tr>
+                    <td>@surcharge.Title (@String.Format("{0:c}", surcharge.SurchargePrice) per day)</td>
+                    <td style="text-align: right;">@String.Format("{0:c}", surcharge.SurchargePrice * Model.Reservation.NumberOfDays)</td>
+                </tr>
+            }
+
+        }
+        @foreach (var e in Model.Reservation.VehicleExtras) {
+            <tr>
+                <td>@e.ExtraTitle</td>
+                <td style="text-align: right;">R @((e.ExtraPrice * Model.Reservation.NumberOfDays).ToString("#,##0.00"))</td>
+            </tr>
+        }
+
+        <tr>
+            <td style="border-top: 1px solid #ccc; padding-bottom: 10px;"><strong>Final</strong></td>
+            <td style="border-top: 1px solid #ccc; padding-bottom: 10px; text-align: right;"><strong>R @Model.Reservation.BookingPrice.ToString("#,##0.00")</strong></td>
+        </tr>
+
+      
+
+    </tbody>
+</table>
+
+
+<h2 style="color: #19963C; border-bottom: 1px solid #999; margin: 0; padding: 5px 0 4px 0;">Authorisation Upon Collection</h2>
+<p>
+    The insurance excess on this vehicle is R @Model.Reservation.Vehicle.ExcessAmount.ToString("#,##0.00").<br />
+
+    Upon collection you would be required to pay a credit card deposit of R @Model.Reservation.Vehicle.DepositAmount.ToString("#,##0.00") for the duration. Upon return of the vehicle in the same condition the deposit will be refunded.
+
+</p>
+<p style="margin: 10px 0;">If you would like peace of mind, we offer top up waivers, super waivers and tire & glass cover. Please enquire at the rental counter.</p>
+
+<h2 style="color: #19963C; border-bottom: 1px solid #999; margin: 0; padding: 5px 0 4px 0;">Important Information</h2>
+<p>Drivers must be 23 years or older, and must have a driver's license valid for at least 3 years.</p>
+
+<table style="width: 100%; font-size: 12px; margin-bottom: 10px;" cellpadding="0" cellspacing="0">
+    <tbody>
+        <tr>
+            <td style="width: 50%;">
+                <strong>Rental Price Includes:</strong><br />
+                Insurance against damage or theft<br />
+                Airport Surcharge<br />
+                Tourism Levy / VAT
+            </td>
+            <td style="text-align: right; width: 50%;">
+                <strong>Rental Price Excludes:</strong><br />
+                Security Deposit<br />
+                Fuel top up on drop off
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    For a full list of our <a href="##siteDomain##/TermsAndConditions">Terms and Conditions</a> please visit the Woodford website.
+</p>

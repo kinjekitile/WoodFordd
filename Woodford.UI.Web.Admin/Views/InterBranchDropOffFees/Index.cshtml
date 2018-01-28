@@ -1,0 +1,72 @@
+﻿@model ListOf<InterBranchDropOffFeeModel>
+@{
+    ViewBag.Title = "Inter Branch Drop Off Fees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Inter Branch Drop Off Fees</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Inter Branch Drop Off Fees</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Drop Off Fee", "Add", "InterBranchDropOffFees")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <td></td>                    
+                    <th scope="col">Branch 1</th>                    
+                    <th scope="col">Branch 2</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Is Active?</th>                    
+                </tr>
+
+                @foreach (var f in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "InterBranchDropOffFees", new { id = f.Id }, null)</td>
+                        
+                        <td>@f.Branch1.Title</td>
+                        <td>@f.Branch2.Title</td>                        
+                        <td>@f.Price</td> 
+                        
+                        <td>
+                            @if (f.IsActive) {
+                                <text>Active</text>
+                                using (Html.BeginForm("MarkAsInactive", "InterBranchDropOffFees")) {
+                                    @Html.Hidden("id", f.Id)
+                                    @Html.Hidden("p", Model.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Inactive</button>
+                                }
+                            } else {
+                                <text>Inactive</text>
+                                using (Html.BeginForm("MarkAsActive", "InterBranchDropOffFees")) {
+                                    @Html.Hidden("id", f.Id)
+                                    @Html.Hidden("p", Model.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Active</button>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No inter branch drop off fees have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

@@ -1,0 +1,19 @@
+﻿@model RateSearchAndUpdateViewModel
+
+@using (Html.BeginForm("Filter", "RateUpdate")) {
+    @Html.HiddenFor(m => m.SelectedBranchIdsString)    
+    @Html.HiddenFor(m => m.Search.RateCodeId)
+    @Html.HiddenFor(m => m.Search.IsOpenEnded)
+    @Html.HiddenFor(m => m.Search.StartDate)
+    @Html.HiddenFor(m => m.Search.EndDate)
+    <button type="submit" class="btn btn-primary">Edit</button>
+}
+
+@using (Html.BeginForm("DeleteFilter", "RateUpdate")) {
+    @Html.HiddenFor(m => m.SelectedBranchIdsString)
+    @Html.HiddenFor(m => m.Search.RateCodeId)
+    @Html.HiddenFor(m => m.Search.IsOpenEnded)
+    @Html.HiddenFor(m => m.Search.StartDate)
+    @Html.HiddenFor(m => m.Search.EndDate)
+    <button type="submit" class="btn btn-primary">Delete</button>
+}

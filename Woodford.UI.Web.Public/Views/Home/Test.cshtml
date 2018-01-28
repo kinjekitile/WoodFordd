@@ -1,0 +1,60 @@
+﻿@model SearchCriteriaViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@Html.TextBoxFor(x=>x.Foobar)*@
+
+<input type="text" id="Foobar" name="Foobar" value="2017-02-15" />
+
+<br />
+
+<br />
+<input type="text" id="time" name="time" value="07:00 AM" />
+<br />
+<br />
+
+<input type="text" id="auto" name="auto" value="" placeholder="Enter Pickup Location" />
+
+@section scripts {
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        //cleanDate("Foobar");
+        $("#Foobar").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+
+        $('#time').timepicki({
+            min_hour_value: 6,
+            step_size_minutes: 30,
+            start_time: ["07", "00", "AM"],
+            overflow_minutes: true
+        });
+        
+        $("#auto").autocomplete({
+            source: [{ label: "King Shaka International", value: "1" }, { label: "Cape Town International", value: "2" }, { label: "OR Tambo International", value: "3" }],
+            minLength: 0,
+            select: function (event, ui) {
+                $("#auto").val(ui.item.label);
+               // alert(ui.item.value);
+                return false;
+            },
+            focus: function (event, ui) {
+                $("#auto").val(ui.item.label);
+                return false;
+            }
+        }).focus(function () {
+            $(this).autocomplete('search', $(this).val())
+        });
+
+        
+    });
+
+</script>
+    
+}
+

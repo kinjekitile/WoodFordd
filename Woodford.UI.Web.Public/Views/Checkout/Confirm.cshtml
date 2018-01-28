@@ -1,0 +1,372 @@
+﻿@model CheckoutConfirmViewModel
+@{
+    ViewBag.Title = "Confirm | Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section searchpanel {
+    @{Html.RenderPartial("_SearchPanelPartial", Model.Criteria);}
+}
+
+@*<div class="row">
+        <div class="twelve columns">
+            <h1>Confirm your booking</h1>
+        </div>
+    </div>*@
+
+<div class="row">
+    <div class="twelve columns">
+
+        @if (ViewBag.IsMobile) {
+            <ul class="progressbar-mobile-view">
+                <li class="active">&nbsp;</li>
+                <li class="active">&nbsp;</li>
+                <li class="active">&nbsp;</li>
+                <li class="active">Book</li>
+                <li>&nbsp;</li>
+
+            </ul>
+        } else {
+            <ul class="progressbar desktop-view">
+                <li class="active">Search</li>
+                <li class="active">Customer Details</li>
+                <li class="active">Extras</li>
+                <li class="active">Confirm</li>
+                <li>Payment</li>
+
+            </ul>
+        }
+
+
+
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="six columns">
+        @if (Model.UpgradeToVehicle != null) {
+            <h2>@Model.UpgradeToVehicle.Title</h2>
+
+        } else {
+            <h2>@Model.Vehicle.Title</h2>
+
+
+
+        }
+
+        <h4>IMPORTANT NOTICE</h4>
+
+        <p class="graytext">PLEASE NOTE: Drivers must be 23 years or older, and must have a driver's license valid for at least 3 years.</p>
+
+        @if (Model.Reservation.VehicleUpgradeId != null) {
+
+            <p class="graytext">
+                Credit Card Deposit required upon collection: <strong>R @Model.Reservation.VehicleUpgrade.DepositAmount.ToString("#,##0.00")</strong><br />
+                Maximum Liability (excess): <strong>R @Model.Reservation.VehicleUpgrade.ExcessAmount.ToString("#,##0.00")</strong><br />
+                NB. Deposit will be reimbursed in full upon safe return of the vehicle.
+            </p>
+        }
+        else {
+            <p class="graytext">
+                Credit Card Deposit required upon collection: <strong>R @Model.Reservation.Vehicle.DepositAmount.ToString("#,##0.00")</strong><br />
+                Maximum Liability (excess): <strong>R @Model.Reservation.Vehicle.ExcessAmount.ToString("#,##0.00")</strong><br />
+                NB. Deposit will be reimbursed in full upon safe return of the vehicle.
+            </p>
+        }
+
+       <hr style="margin-top: 5px;margin-bottom:8px;" />
+
+        <h4><strong>Excess Protection - Prepare for the unexpected</strong></h4>
+
+        <p>
+            If you would like peace of mind, we offer top up waivers, super waivers & tire & glass cover<br />
+            Please enquire at the rental counter.
+        </p>
+        @if (Model.Waivers != null) {
+            if (Model.Waivers.Count() > 0) {
+                <div class="row">
+                    <div class="four columns">
+                        &nbsp;
+                    </div>
+                    <div class="four columns">
+                        Cost per day
+                    </div>
+                    <div class="four columns">
+                        Max Liability
+                    </div>
+                </div>
+                foreach (var item in Model.Waivers) {
+                    <div class="row">
+                        <div class="four columns">
+                            @item.WaiverType.GetDescription()
+                        </div>
+                        <div class="four columns">
+                            @string.Format("{0:c}", item.CostPerDay)
+                        </div>
+                        <div class="four columns">
+                            @string.Format("{0:c}", item.Liability)
+                        </div>
+                    </div>
+                }
+            }
+
+        }
+
+        <p>Exceptions apply, full details can be found in our <a href="/terms-and-conditions">Terms and Conditions</a></p>
+
+        <p><strong>Rental Price Includes:</strong> Insurance against damage or theft, Airport Surcharge, Tourism Levy / VAT</p>
+
+        <p><strong>Rental Price Excludes:</strong> Security Deposit, Fuel top up on drop off, Excess km, Excess liability, Toll fees</p>
+
+
+        <table style="width: 100%; font-size: 12px; margin-bottom: 10px;display:none;" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td style="width: 50%;">
+                        <strong>Rental Price Includes:</strong><br />
+                        Insurance against damage or theft<br />
+                        Airport Surcharge<br />
+                        Tourism Levy / VAT<br />
+                        <br /><br />
+                    </td>
+                    <td style="text-align: right; width: 50%;">
+                        <strong>Rental Price Excludes:</strong><br />
+                        Security Deposit<br />
+                        Fuel top up on drop off<br />
+                        Excess km<br />
+                        Excess liability<br />
+                        Toll fees
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="six columns" style="border-left: 1px solid #999; padding-left: 30px;">
+
+        <h3>@Model.Reservation.RateCodeTitle</h3>
+
+        <div class="row">
+            <div class="six columns">
+
+                <strong style="color:#187546;">Pickup</strong><br />
+                @Model.Reservation.PickupBranch.Title<br />
+                @Model.Reservation.PickupDate.ToString("ddd, dd MMM yyyy hh:mm tt")<br />
+               
+            </div>
+            <div class="six columns">
+
+                <strong style="color:#187546;">Dropoff</strong><br />
+                @Model.Reservation.DropOffBranch.Title<br />
+                @Model.Reservation.DropOffDate.ToString("ddd, dd MMM yyyy hh:mm tt")<br />
+
+            </div>
+        </div>
+
+        
+
+        
+
+        <h4 style="margin-top: 20px;">Cost Summary</h4>
+        <table class="cost-summary">
+            <tr class="graytext">
+                <th scope="row">Rental</th>
+
+                <td>@String.Format("{0:c}", Model.Reservation.AdjustedPrice)</td>
+            </tr>
+            @if (Model.Reservation.VoucherId.HasValue) {
+                <tr class="graytext">
+                    <th scope="row">Voucher</th>
+
+                    @switch (Model.Reservation.VoucherRewardType) {
+                        default:
+                            <td>
+                                @(String.Format("{0:c}", -1 * Model.Reservation.VoucherDiscountAmount))
+                            </td>
+                            break;
+                        case VoucherRewardType.TextReward:
+                            <td>
+                                @(Model.Reservation.VoucherRewardText)
+                            </td>
+                            break;
+                    }
+
+                </tr>
+            }
+            <tr class="graytext">
+                <th scope="row">Tax</th>
+                <td>@String.Format("{0:c}", Model.Reservation.TaxAmount)</td>
+            </tr>
+            <tr class="graytext">
+                <th scope="row"><strong>Total</strong></th>
+                <td><strong>@String.Format("{0:c}", (Model.Reservation.AdjustedPrice - Model.Reservation.VoucherDiscountAmount + Model.Reservation.TaxAmount))</strong></td>
+            </tr>
+            @if (Model.Reservation.DropOffFee > 0) {
+                <tr class="graytext">
+                    <th scope="row">Drop Off Fee</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.DropOffFee)</td>
+                </tr>
+            }
+            <tr class="graytext">
+                <th scope="row">Admin Fee</th>
+                <td>@String.Format("{0:c}", Model.Reservation.ContractFee)</td>
+            </tr>
+            @if (Model.Reservation.LoyaltyPointsSpent.HasValue) {
+                <tr>
+                    <th scope="row" style="border-top: 1px solid #ccc;color:#187546;">Advance Points Used</th>
+                    <td style="border-top: 1px solid #ccc;">@decimal.Round(Model.Reservation.LoyaltyPointsSpent.Value, 2)</td>
+                </tr>
+            }
+            @foreach (var surcharge in Model.Reservation.BranchSurcharges) {
+
+                if (surcharge.IsOnceOff) {
+                    <tr class="graytext">
+                        <th scope="row">@surcharge.Title</th>
+                        <td>@String.Format("{0:c}", surcharge.SurchargePrice)</td>
+                    </tr>
+                } else {
+                    <tr class="graytext">
+                        <th scope="row">@surcharge.Title (@String.Format("{0:c}", surcharge.SurchargePrice) per day)</th>
+                        <td>@String.Format("{0:c}", surcharge.SurchargePrice * Model.Reservation.NumberOfDays)</td>
+                    </tr>
+                }
+
+            }
+            @foreach (var x in Model.Reservation.VehicleExtras) {
+                <tr class="graytext">
+                    <th scope="row">@x.ExtraTitle</th>
+                    @if (x.ReservationLoyaltyBenefitId.HasValue) {
+                        <td>Advance - Free</td>
+                    } else {
+
+                        <td>@String.Format("{0:c}", x.ExtraPrice * Model.Reservation.NumberOfDays)</td>
+                    }
+
+                </tr>
+            }
+            @if (Model.Reservation.VehicleUpgradeId != null) {
+                <tr>
+                    <th scope="row">Upgrade to @Model.UpgradeToVehicle.Title</th>
+                    @if (Model.Reservation.Benefits.Select(x => x.UpgradeId).Contains(Model.Reservation.VehicleUpgradeId)) {
+                        <td>Advance - Free</td>
+                    } else {
+                        <td>@String.Format("{0:c}", Model.Reservation.VehicleUpgradePriceAmount)</td>
+                    }
+                </tr>
+            }
+
+            <tr class="total total-row">
+                <th scope="row"><strong>Final Payment</strong></th>
+                <td id="total-price">
+                    @String.Format("{0:c}", Model.Reservation.BookingPrice)
+                </td>
+            </tr>
+            <tr class="total-days">
+                <td></td>
+                <td class="numeric-field">For @Model.Reservation.NumberOfDays.ToString() Days</td>
+            </tr>
+
+        </table>
+        <p class="align-right">
+
+            <strong style="font-size: larger;">@Html.ActionLink("Email Quote", "SendQuote", new { id = Model.Reservation.Id }, new { @class = "align right", style = "color: #b73537;" })</strong>
+
+
+        </p>
+
+        @using (Html.BeginForm("Confirm", "Checkout", FormMethod.Post)) {
+         
+           
+
+            <p>@Html.ValidationSummary()</p>
+
+            if (ViewBag.ShowReturnToOptions) {
+                <p>@Html.ActionLink("Click here to select new Advance amount","Options", new { id = Model.Reservation.Id }, null)</p>
+            }
+            if (Model.IsMobile || Model.IsCorporate || Model.Reservation.BookingPrice == 0) {
+                @Html.HiddenFor(x=>x.Reservation.Id)
+                if (Model.IsCorporate) {
+                    <h4>Driver Details</h4>
+                    <p>Please ensure the details below are correct for the driver of the vehicle</p>
+                    <div class="input-form vertical-form">
+                        <div class="row">
+                            @Html.LabelFor(m => m.Reservation.FirstName, "First Name")
+                            @Html.TextBoxFor(m => m.Reservation.FirstName, new { placeholder = "First Name" })
+                            @Html.ValidationMessageFor(m => m.Reservation.FirstName)
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(m => m.Reservation.LastName, "Last Name")
+                            @Html.TextBoxFor(m => m.Reservation.LastName, new { placeholder = "Last Name" })
+                            @Html.ValidationMessageFor(m => m.Reservation.LastName)
+                        </div>
+
+                        <div class="row">
+                            @Html.LabelFor(m => m.Reservation.Email, "Email")
+                            @Html.TextBoxFor(m => m.Reservation.Email, new { placeholder = "Email" })
+                            @Html.ValidationMessageFor(m => m.Reservation.Email)
+                        </div>
+
+                        <div class="row">
+                            @Html.LabelFor(m => m.Reservation.MobileNumber, "Mobile")
+                            @Html.TextBoxFor(m => m.Reservation.MobileNumber, new { placeholder = "Mobile" })
+                            @Html.ValidationMessageFor(m => m.Reservation.MobileNumber)
+                        </div>
+
+                        <div class="row">
+                            @Html.LabelFor(m => m.Reservation.IdNumber, "ID Number")
+                            @Html.TextBoxFor(m => m.Reservation.IdNumber, new { placeholder = "ID Number" })
+                            @Html.ValidationMessageFor(m => m.Reservation.IdNumber)
+                        </div>
+                    </div>
+                }
+
+
+
+                <div class="submit-button-container align-right">
+                    @Html.HiddenFor(x => x.IsCorporate)
+                    @Html.HiddenFor(x => x.IsMobile)
+
+                    <input type="submit" name="confirmNoPayment" value="Book" />
+                </div>
+            } else {
+                <div class="submit-button-container align-right">
+                    <input type="submit" name="confirmFull" value="Pay @String.Format("{0:c}", Model.Reservation.BookingPrice) to confirm" style="padding: 5px 6px;" />
+                    @if (Model.Reservation.BookingPrice > Model.RentalDepositAmount) {
+
+                        <input type="submit" name="confirmDeposit" value="Pay @String.Format("{0:c}", Model.RentalDepositAmount) Deposit to confirm" style="padding: 5px 6px;" />
+                    }
+
+                </div>
+            }
+
+            <p style="margin-top: 30px;">A fee of R 250.00 will be charged in case of a reservation being cancelled.</p>
+
+            <div>
+                <br />
+                @{Html.RenderPartial("_CheckoutCountdownSpecialPartial", Model.CountdownSpecial);}
+            </div>
+                    }
+
+
+    </div>
+</div>
+
+<div class="row">
+    <hr />
+</div>
+
+<div class="row" style="padding-top: 10px;">
+    <!-- TrustBox widget - 0 -->
+    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="54620ca500006400057b77fe" data-style-height="130px" data-style-width="100%" data-theme="light" data-stars="4,5">
+        <a href="https://uk.trustpilot.com/review/www.woodford.co.za" target="_blank">Trustpilot</a>
+    </div>
+    <!-- End TrustBox widget -->
+</div>
+
+@section scripts {
+    @{Html.RenderPartial("_CheckoutCountdownSpecialJavascriptPartial", Model.CountdownSpecial);}
+}

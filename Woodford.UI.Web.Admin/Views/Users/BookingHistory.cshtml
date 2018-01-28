@@ -1,0 +1,50 @@
+﻿@model ListOf<BookingHistoryModel>
+@{
+    ViewBag.Title = "User Booking History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>User Booking History</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">User Booking History</h3>
+
+    </div><!-- /.box-header -->
+    <div class="box-body">
+
+
+        <table class="table table-bordered table-striped dataTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Pickup Date</th>
+                    <th>Pickup Location</th>
+                    <th>DropOff Location</th>
+                    <th>Points Earned</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items) {
+                    <tr>
+                        <td>@item.ExternalId</td>
+
+                        <td>@item.PickupDate.ToString("d MMM yyyy")</td>
+                        <td>@item.PickupBranchId</td>
+                        <td>@item.DropoffBranchId</td>
+                        <td>@string.Format("{0:c}", item.LoyaltyPointsEarned)</td>
+                        <td>@string.Format("{0:c}", item.TotalAmount)</td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeleteHistoryRecord", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

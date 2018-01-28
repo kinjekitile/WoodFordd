@@ -1,0 +1,97 @@
+﻿@model ReportSearchViewModel
+@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Reports</h1>
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Reports</h3>
+    </div><!-- /.box-header -->
+    @if (Model.Items != null) {
+        if (Model.Items.Count > 0) {
+
+
+            <div class="box-body no-padding">
+                <table class="table table-bordered table-striped dataTable">
+
+                    <tr>
+                        <th scope="col"></th>
+                        
+                        <th scope="col">Title</th>
+                        <th scope="col">Created Date</th>
+                        <th scope="col">Type</th>
+                        
+                      
+
+                    </tr>
+
+                    @foreach (var item in Model.Items) {
+                        <tr>
+                            @if (item.ReportType == Woodford.Core.DomainModel.Enums.ReportType.Reservation) {
+                                <td><a href="/Reservations/Filter?@item.ReportFilterUrl">View Report</a></td>
+                            }
+                            @if (item.ReportType == Woodford.Core.DomainModel.Enums.ReportType.User) {
+                                <td><a href="/Users/Filter?@item.ReportFilterUrl">View Report</a></td>
+                            }
+                            
+                            <td>
+                               @item.Title
+                            </td>
+                            <td>@item.CreatedDate.ToString("d MMM yyyy")</td>
+                            <td>@item.ReportType</td>
+                           
+
+
+
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        }
+        @*if (Model.Items.Count() > 0) {
+            @Html.Partial("_PaginationPartial", Model.Pagination)
+        }*@
+
+    }
+
+
+
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            @*cleanDate('Search_StartDate');
+            cleanDate('Search_EndDate');
+
+            @if (Model.Results != null) {
+
+                   <text>cleanDate('UpdateDateRange_ValidStartDate');</text>
+                   <text>cleanDate('UpdateDateRange_ValidEndDate');</text>
+
+           }*@
+
+
+            $('#Filter_DateSearchStart,#Filter_DateSearchEnd').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+
+
+
+
+        });
+
+
+    </script>
+}

@@ -1,0 +1,44 @@
+﻿@model BookingClaimNotificationModel
+
+<p>User: @Model.User.FirstName @Model.User.LastName has made a booking claim.</p>
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                Pickup Date:
+            </td>
+            <td>
+                @Model.Claim.BookingPickupDate.ToString("dd MM yyyy")
+            </td>
+        </tr>
+        <tr>
+            <td>Dropoff Date:</td>
+            <td>@Model.Claim.BookingDropoffDate.ToString("dd MM yyyy")</td>
+        </tr>
+        <tr>
+            <td>Collection Branch:</td>
+            <td>@Model.Claim.PickupBranch.Title</td>
+        </tr>
+        <tr>
+            <td>Claim Email:</td>
+            <td>@Model.Claim.Email</td>
+        </tr>
+        <tr>
+            <td>Claim Id Number:</td>
+            <td>@Model.Claim.IdNumber</td>
+        </tr>
+        <tr>
+            <td>Claim Firstname:</td>
+            <td>@Model.Claim.FirstName</td>
+        </tr>
+        <tr>
+            <td>Claim Lastname:</td>
+            <td>@Model.Claim.LastName</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    <a href="@(Model.AdminSiteDomain)BookingClaims/Details/@(Model.Claim.Id)">Click here</a> to verify claim
+</p>

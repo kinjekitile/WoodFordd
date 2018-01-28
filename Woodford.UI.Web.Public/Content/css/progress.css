@@ -1,0 +1,130 @@
+﻿
+.progressbar {
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+  padding-left: 180px;
+  margin-bottom: 90px;
+  /*margin-top: 40px;*/
+}
+
+.progressbar li {
+  list-style-type: none;
+  
+  width: 15%;
+  float: left;
+  font-size: 17px;
+  
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  color: #8c8c8c;
+  margin-right: 0rem;
+}
+
+
+
+.progressbar li:before {
+  width: 30px;
+  height: 30px;
+  content: counter(step);
+  counter-increment: step;
+  line-height: 30px;
+  border: 5px solid #8c8c8c;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
+}
+.progressbar li:after {
+  width: 100%;
+  height: 3px;
+  content: '';
+  position: absolute;
+  background-color: #8c8c8c;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.active {
+  color: green;
+
+
+}
+.progressbar li.active:before {
+  border-color: #19963c;
+}
+.progressbar li.active + li:after {
+  background-color: #19963c;
+
+}
+
+
+
+
+.progressbar-mobile-view {
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+  padding-left: 40px;
+  margin-bottom: 20px;
+  /*margin-top: 40px;*/
+}
+
+.progressbar-mobile-view li {
+  list-style-type: none;
+  
+  width: 15%;
+  float: left;
+  font-size: 17px;
+  
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  color: #8c8c8c;
+  margin-right: 0rem;
+}
+
+.progressbar-mobile-view li:before {
+  width: 25px;
+  height: 25px;
+  content: counter(step);
+  counter-increment: step;
+  line-height: 20px;
+  border: 3px solid #8c8c8c;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
+}
+.progressbar-mobile-view li:after {
+  width: 100%;
+  height: 5px;
+  content: '';
+  position: absolute;
+  background-color: #8c8c8c;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+.progressbar-mobile-view li:first-child:after {
+  content: none;
+}
+.progressbar, .mobile-view li.active {
+  color: green;
+
+
+}
+.progressbar-mobile-view li.active:before {
+  border-color: #19963c;
+}
+.progressbar-mobile-view li.active + li:after {
+  background-color: #19963c;
+
+}
+

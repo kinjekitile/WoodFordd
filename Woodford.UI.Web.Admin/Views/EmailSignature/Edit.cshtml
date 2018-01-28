@@ -1,0 +1,131 @@
+﻿@model EmailSignatureModel
+@{
+    ViewBag.Title = "Edit Signature";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Email Signature</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm()) {
+
+        @Html.HiddenFor(x=>x.Id)
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="ShowSidePanel">
+                            @Html.CheckBoxFor(m => m.ShowSidePanel) Show Side Panel
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ShowSidePanel)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, "Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Name, new { placeholder = "Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Department, "Title", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Department, new { placeholder = "Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Department)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FixedContact, "Landline", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.FixedContact, new { placeholder = "Landline", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FixedContact)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CellContact, "Cell Contact", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.CellContact, new { placeholder = "Cell Contact", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CellContact)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, "Email", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SeniorName, "Senior Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.SeniorName, new { placeholder = "Senior Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.SeniorName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SeniorCellContact, "Senior Cell", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.SeniorCellContact, new { placeholder = "Senior Cell", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.SeniorCellContact)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SeniorFixedContact, "Senior Landline", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.SeniorFixedContact, new { placeholder = "Senior Landline", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.SeniorFixedContact)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SeniorEmail, "Senior Email", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.SeniorEmail, new { placeholder = "Senior Email", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.SeniorEmail)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DirectorName, "Director Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.DirectorName, new { placeholder = "Director Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DirectorName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DirectorEmail, "Director Email", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.DirectorEmail, new { placeholder = "Director Email", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DirectorEmail)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Signature</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    }
+</div>

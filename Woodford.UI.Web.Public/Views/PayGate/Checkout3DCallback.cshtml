@@ -1,0 +1,26 @@
+﻿@model Woodford.UI.Web.Public.Controllers.PayGate3D
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Checkout3DCallback</title>
+</head>
+<body>
+    <div>
+        <p>Please wait whilst we process your transaction...</p>
+      
+            <script type="text/javascript">
+                parent.close3DMessageAndSubmitForm(@(Model.ResId));
+            </script>
+       
+
+
+    </div>
+</body>
+</html>

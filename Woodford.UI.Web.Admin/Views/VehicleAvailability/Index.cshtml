@@ -1,0 +1,86 @@
+﻿@model VehicleAvailabilityFilterAndUpdateModel
+@{
+    ViewBag.Title = "Vehicle Availability";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Vehicle Availability</h1>
+}
+
+@using (Html.BeginForm("Filter", "VehicleAvailability", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Filter</h3>
+        </div><!-- /.box-header -->
+
+        <div id="filter" class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Filter.BranchId, "Branch", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.BranchFor(m => m.Filter.BranchId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Filter.BranchId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+@if (Model.Filtered) {
+
+    if (Model.Updated) {
+        <p>Updated successfully</p>
+    }
+
+    using (Html.BeginForm("Index", "VehicleAvailability", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+        @Html.HiddenFor(m => m.Filter.BranchId)
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Vehicles available at branch</h3>
+            </div><!-- /.box-header -->
+
+            <div id="results" class="box-body">
+
+                @foreach (var vehicle in Model.AllVehicles.Items) {
+
+                    BranchVehicleModel bv = Model.BranchVehicles.Items.Where(x => x.VehicleId == vehicle.Id && x.BranchId == Model.Filter.BranchId).SingleOrDefault();
+                    string checkboxName = "vehicle_" + vehicle.Id;
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="@checkboxName">
+                                    @if (bv == null) {
+                                        @Html.CheckBox(checkboxName, false) @vehicle.Title
+                                    } else {
+                                        @Html.CheckBox(checkboxName, true) @vehicle.Title
+                                        @Html.Hidden("bvid_for_" + vehicle.Id, bv.Id)
+                                    }
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+}

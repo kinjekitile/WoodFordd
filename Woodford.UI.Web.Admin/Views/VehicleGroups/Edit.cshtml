@@ -1,0 +1,127 @@
+﻿@model VehicleGroupViewModel
+@{
+    ViewBag.Title = "Edit Vehicle Group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Vehicle Groups</h1>
+}
+
+@{ Html.RenderAction("RenderAuditContainer", "Audit", new { entityType = Model.VehicleGroup.GetType(), entityIdValue = Model.VehicleGroup.Id }); }
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Vehicle Group</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Edit", "VehicleGroups", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+        @Html.HiddenFor(m => m.VehicleGroup.Id)
+        @Html.HiddenFor(m => m.VehicleGroup.PageContent.Id)
+        @Html.HiddenFor(m => m.VehicleGroup.IsArchived)
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleGroup.GroupType, "Vehicle Group Type", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.VehicleGroupTypeFor(m => m.VehicleGroup.GroupType, new { placeholder = "Group Type", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.VehicleGroup.GroupType)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleGroup.Title, "Vehicle Group Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.VehicleGroup.Title, new { placeholder = "Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.VehicleGroup.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleGroup.TitleDescription, "Vehicle Group Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.VehicleGroup.TitleDescription, new { placeholder = "Vehicle Group Description", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.VehicleGroup.TitleDescription)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleGroup.PageUrl, "Page Url", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.VehicleGroup.PageUrl, new { placeholder = "Page Url", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.VehicleGroup.PageUrl)
+                </div>
+            </div>
+
+            @Html.HiddenFor(m => m.VehicleGroup.FileUploadId)            
+
+            @*<div class="form-group">
+                @Html.LabelFor(m => m.VehicleGroupImage, "Vehicle Group Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <p class="help-block">
+                        @if (Model.VehicleGroup.FileUploadId.HasValue) {
+                            <img src="@Url.Action("Index", "Uploads", new { id = Model.VehicleGroup.VehicleGroupImage.Id, filename = Model.VehicleGroup.VehicleGroupImage.Title + Model.VehicleGroup.VehicleGroupImage.FileExtension, width = 100, height = 100, crop = 1 })" alt="@Model.VehicleGroup.Title" />
+                        }
+                        Please upload a valid image file if you would like the image to change.
+                    </p>
+                    <input type="file" id="VehicleGroupImage" name="VehicleGroupImage" />
+                    @Html.ValidationMessageFor(m => m.VehicleGroupImage)
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleGroup.PageContent.PageTitle, "Page Title", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.VehicleGroup.PageContent.PageTitle, new { placeholder = "Page Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.VehicleGroup.PageContent.PageTitle)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleGroup.PageContent.MetaKeywords, "Meta Keywords", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.VehicleGroup.PageContent.MetaKeywords, new { placeholder = "Meta Keywords", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.VehicleGroup.PageContent.MetaKeywords)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleGroup.PageContent.MetaDescription, "Meta Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.VehicleGroup.PageContent.MetaDescription, new { placeholder = "Meta Description", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.VehicleGroup.PageContent.MetaDescription)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleGroup.PageContent.PageContent, "Page Content", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.VehicleGroup.PageContent.PageContent, new { @class = "form-control", rows = "10", cols = "80" })
+                    @Html.ValidationMessageFor(m => m.VehicleGroup.PageContent.PageContent)
+                </div>
+            </div>
+
+            
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+
+        </div>
+        
+    }
+</div>
+
+@section scripts {
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+    <script types="text/javascript">
+        $(function () {
+            CKEDITOR.replace('VehicleGroup_PageContent_PageContent');
+        });
+    </script>
+}

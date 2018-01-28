@@ -1,0 +1,409 @@
+﻿@model UserSearchViewModel
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Woodford Users</h1>
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Search</h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm("Filter", "Users", FormMethod.Get, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.DateFilterType, "Date Search", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.UserDateFilterTypeFor(m => m.Filter.DateFilterType, new { placeholder = "Date Search", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.DateCreatedStart, "Start Date", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.DateCreatedStart, new { placeholder = "Start Date", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Filter.DateCreatedStart)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.DateCreatedEnd, "End Date", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.DateCreatedEnd, new { placeholder = "End Date", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Filter.DateCreatedEnd)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.Email, "Email", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.Email, new { placeholder = "Email", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.FirstName, "First name", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.FirstName, new { placeholder = "First name", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.LastName, "Last name", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.LastName, new { placeholder = "Last name", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            if (Roles.IsUserInRole("Administrator")) {
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Filter.LoyaltyLevel, "Loyalty Tier", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.LoyaltyBenefitTierFor(m => m.Filter.LoyaltyLevel, new { placeholder = "Loyalty Tier", @class = "form-control" }, showAll: true)
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Filter.CorporateId, "Corporate", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.CorporateFor(m => m.Filter.CorporateId, new { placeholder = "Corporate", @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Filter.HasSpentPoints, "Has Spent Points", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.EditorFor(m => m.Filter.HasSpentPoints, new { placeholder = "Has Spent Points", @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.SortField, "Sort Field", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.UserSortFieldFor(m => m.Filter.SortField, new { placeholder = "Sort Field", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.SortDirection, "Sort Direction", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.UserSortDirectionFor(m => m.Filter.SortDirection, new { placeholder = "Sort Direction", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@using (Html.BeginForm("SaveReport", "Users", FormMethod.Get, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+
+    @Html.HiddenFor(x => x.Filter.Id)
+    @Html.HiddenFor(x => x.Filter.DateFilterType)
+    @Html.HiddenFor(x => x.Filter.DateCreatedStart)
+    @Html.HiddenFor(x => x.Filter.DateCreatedEnd)
+    @Html.HiddenFor(x => x.Filter.CorporateId)
+    @Html.HiddenFor(x => x.Filter.LoyaltyLevel)
+    @Html.HiddenFor(x => x.Filter.Email)
+    @Html.HiddenFor(x => x.Filter.FirstName)
+    @Html.HiddenFor(x => x.Filter.LastName)
+    @Html.HiddenFor(x => x.Filter.HasSpentPoints)
+
+
+
+
+    <div class="box box-primary collapsed-box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Report Options</h3>
+            <div class="box-tools pull-right">
+
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+
+            </div>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            @Html.LabelFor(m => m.Report.Title, "Title", new { @class = "form-label" })
+                        </div>
+
+
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Report.Title, new { placeholder = "Title", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Report.Title)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-10">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+
+                            @Html.LabelFor(m => m.Report.UseCurrentDateAsStartDate, "Use Current Date as End Date", new { @class = "form-label" })
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.CheckBoxFor(m => m.Report.UseCurrentDateAsStartDate, new { style = "margin-top: 10px;" })
+                            @Html.ValidationMessageFor(x => x.Report.UseCurrentDateAsStartDate)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-10">
+                            Leaving this option unchecked will mean the report will use the start and end dates set in the search tool
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            Start Date
+
+                        </div>
+
+                        <div class="col-sm-6">
+                            Current Date minus:
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(m => m.Report.DateUnitsToAdd)
+                            @Html.ValidationMessageFor(x => x.Report.DateUnitsToAdd)
+
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.ReportDateUnitTypeFor(m => m.Report.DateUnitType)
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-2">
+
+                            @Html.ValidationMessageFor(x => x.Report.DateUnitType)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+
+                        <div class="col-sm-2">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-10">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Save Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Users</h3>
+
+    </div><!-- /.box-header -->
+
+    <p>@Html.ActionLink("Add User", "Add")</p>
+
+    @if (Model.Items.Count > 0) {
+        <p>
+            @{ Html.RenderPartial("_ExportAsExcelPartial", Model.Filter); }
+        </p>
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Cell Number</th>
+                    <th scope="col">Tier</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Advance Total</th>
+                    <th scope="col">Advance Remaining</th>
+                    <th scope="col">Advance Spent</th>
+                </tr>
+
+                @foreach (var u in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Details", "Details", "Users", new { id = u.Id }, null)</td>
+                        <td><a href="mailto:@(u.Email)">@u.Email</a></td>
+                        <td>@u.FirstName @u.LastName</td>
+                        <td>@u.MobileNumber</td>
+                        <td>
+                            @if (u.IsLoyaltyMember) {
+                                <text>@u.LoyaltyTier.GetDescription()</text>
+                            }
+
+                        </td>
+                        <td>
+                            @if (u.IsLoyaltyMember) {
+                                <text> @u.LoyaltyNumberFull </text>
+                            }
+                        </td>
+                        <td>
+                            @if (u.IsLoyaltyMember) {
+                                if (u.LoyaltyPointsEarned.HasValue) {
+                                    <text>@decimal.Round(u.LoyaltyPointsEarned.Value, 2)</text>
+                                }
+                                else {
+                                    <text>0.00</text>
+                                }
+}
+                            
+
+                        </td>
+                        <td>
+                            @if (u.IsLoyaltyMember) {
+                                <text> @decimal.Round(u.LoyaltyPointsRemaining, 2) </text>
+                            }
+                            
+                        </td>
+                        <td>
+                            @if (u.IsLoyaltyMember) {
+                                <text> @(u.LoyaltyPointsSpent.HasValue ? decimal.Round(u.LoyaltyPointsSpent.Value, 2).ToString() : "") </text>
+                            }
+                            
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+                }
+
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+
+            $('#Filter_DateCreatedStart,#Filter_DateCreatedEnd').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+
+
+
+
+        });
+
+
+    </script>
+}

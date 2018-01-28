@@ -1,0 +1,94 @@
+﻿@model ContactViewModel
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Contact</h1>
+    </div>
+</div>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="input-form">
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.ContactUs.FullName, "Full Name")
+            </div>
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.ContactUs.FullName, new { placeholder = "Full Name" })
+                @Html.ValidationMessageFor(m => m.ContactUs.FullName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.ContactUs.Email, "Email")
+            </div>
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.ContactUs.Email, new { placeholder = "Email" })
+                @Html.ValidationMessageFor(m => m.ContactUs.Email)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.ContactUs.ContactNumber, "Contact Number")
+            </div>
+
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.ContactUs.ContactNumber, new { placeholder = "Contact Number" })
+                @Html.ValidationMessageFor(m => m.ContactUs.ContactNumber)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.ContactUs.Country, "Country")
+            </div>
+
+            <div class="eight columns">
+                @Html.CountryDropListFor(m => m.ContactUs.Country)
+                @Html.ValidationMessageFor(m => m.ContactUs.Country)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.ContactUs.Branch, "Branch")
+            </div>
+            <div class="eight columns">
+                @Html.BranchStringFor(m => m.ContactUs.Branch)
+                @Html.ValidationMessageFor(m => m.ContactUs.Branch)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.ContactUs.Subject, "Subject of Enquiry")
+            </div>
+
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.ContactUs.Subject, new { placeholder = "Subject of Enquiry" })
+                @Html.ValidationMessageFor(m => m.ContactUs.Subject)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="four columns">@Html.LabelFor(m => m.ContactUs.Message, "Message")</div>
+            <div class="eight columns">
+                @Html.TextAreaFor(m => m.ContactUs.Message, new { placeholder = "Message" })
+                @Html.ValidationMessageFor(m => m.ContactUs.Message)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="four columns empty-column">&nbsp;</div>
+            <div class="eight columns">
+                <input type="submit" value="Submit" />
+                or @Html.ActionLink("Request a callback", "RequestCallback", "Contact")
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,2168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Woodford2015Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Woodford2015Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AppSettings" EntityType="Woodford2015Model.AppSetting" />
+    <EntitySet Name="BranchVehicleExclusions" EntityType="Woodford2015Model.BranchVehicleExclusion" />
+    <EntitySet Name="BranchVehicles" EntityType="Woodford2015Model.BranchVehicle" />
+    <EntitySet Name="Campaigns" EntityType="Woodford2015Model.Campaign" />
+    <EntitySet Name="Corporates" EntityType="Woodford2015Model.Corporate" />
+    <EntitySet Name="DynamicPages" EntityType="Woodford2015Model.DynamicPage" />
+    <EntitySet Name="FileUploads" EntityType="Woodford2015Model.FileUpload" />
+    <EntitySet Name="HerospaceItems" EntityType="Woodford2015Model.HerospaceItem" />
+    <EntitySet Name="InterBranchDropOffFees" EntityType="Woodford2015Model.InterBranchDropOffFee" />
+    <EntitySet Name="Invoices" EntityType="Woodford2015Model.Invoice" />
+    <EntitySet Name="LoyaltyTierBenefits" EntityType="Woodford2015Model.LoyaltyTierBenefit" />
+    <EntitySet Name="PageContents" EntityType="Woodford2015Model.PageContent" />
+    <EntitySet Name="RateAdjustments" EntityType="Woodford2015Model.RateAdjustment" />
+    <EntitySet Name="ReservationsLoyaltyTierBenefits" EntityType="Woodford2015Model.ReservationsLoyaltyTierBenefit" />
+    <EntitySet Name="ReservationsVehicleExtras" EntityType="Woodford2015Model.ReservationsVehicleExtra" />
+    <EntitySet Name="VehicleExtras" EntityType="Woodford2015Model.VehicleExtra" />
+    <EntitySet Name="VehicleGroups" EntityType="Woodford2015Model.VehicleGroup" />
+    <EntitySet Name="Vehicles" EntityType="Woodford2015Model.Vehicle" />
+    <EntitySet Name="Vouchers" EntityType="Woodford2015Model.Voucher" />
+    <AssociationSet Name="FK_BranchVehicleExclusions_BranchVehicles" Association="Woodford2015Model.FK_BranchVehicleExclusions_BranchVehicles">
+      <End Role="BranchVehicle" EntitySet="BranchVehicles" />
+      <End Role="BranchVehicleExclusion" EntitySet="BranchVehicleExclusions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BranchVehicles_Vehicles" Association="Woodford2015Model.FK_BranchVehicles_Vehicles">
+      <End Role="Vehicle" EntitySet="Vehicles" />
+      <End Role="BranchVehicle" EntitySet="BranchVehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Campaigns_FileUploads" Association="Woodford2015Model.FK_Campaigns_FileUploads">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="Campaign" EntitySet="Campaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HerospaceItems_FileUploads" Association="Woodford2015Model.FK_HerospaceItems_FileUploads">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="HerospaceItem" EntitySet="HerospaceItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleGroups_FileUploads" Association="Woodford2015Model.FK_VehicleGroups_FileUploads">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="VehicleGroup" EntitySet="VehicleGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicles_FileUploads" Association="Woodford2015Model.FK_Vehicles_FileUploads">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="Vehicle" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicles_FileUploads1" Association="Woodford2015Model.FK_Vehicles_FileUploads1">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="Vehicle" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyaltyTierBenefits_VehicleExtras" Association="Woodford2015Model.FK_LoyaltyTierBenefits_VehicleExtras">
+      <End Role="VehicleExtra" EntitySet="VehicleExtras" />
+      <End Role="LoyaltyTierBenefit" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateAdjustments_VehicleGroups" Association="Woodford2015Model.FK_RateAdjustments_VehicleGroups">
+      <End Role="VehicleGroup" EntitySet="VehicleGroups" />
+      <End Role="RateAdjustment" EntitySet="RateAdjustments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationsVehicleExtras_VehicleExtras" Association="Woodford2015Model.FK_ReservationsVehicleExtras_VehicleExtras">
+      <End Role="VehicleExtra" EntitySet="VehicleExtras" />
+      <End Role="ReservationsVehicleExtra" EntitySet="ReservationsVehicleExtras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicles_VehicleGroups" Association="Woodford2015Model.FK_Vehicles_VehicleGroups">
+      <End Role="VehicleGroup" EntitySet="VehicleGroups" />
+      <End Role="Vehicle" EntitySet="Vehicles" />
+    </AssociationSet>
+    <EntitySet Name="MessageQueues" EntityType="Woodford2015Model.MessageQueue" />
+    <EntitySet Name="Waivers" EntityType="Woodford2015Model.Waiver" />
+    <AssociationSet Name="FK_Waivers_VehicleGroups" Association="Woodford2015Model.FK_Waivers_VehicleGroups">
+      <End Role="VehicleGroup" EntitySet="VehicleGroups" />
+      <End Role="Waiver" EntitySet="Waivers" />
+    </AssociationSet>
+    <EntitySet Name="Branches" EntityType="Woodford2015Model.Branch" />
+    <AssociationSet Name="FK_Branches_FileUploads" Association="Woodford2015Model.FK_Branches_FileUploads">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="Branch" EntitySet="Branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BranchVehicles_Branches" Association="Woodford2015Model.FK_BranchVehicles_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="BranchVehicle" EntitySet="BranchVehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InterBranchDropOffFees_Branches" Association="Woodford2015Model.FK_InterBranchDropOffFees_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="InterBranchDropOffFee" EntitySet="InterBranchDropOffFees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InterBranchDropOffFees_Branches1" Association="Woodford2015Model.FK_InterBranchDropOffFees_Branches1">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="InterBranchDropOffFee" EntitySet="InterBranchDropOffFees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyaltyTierBenefits_BranchesDropOff" Association="Woodford2015Model.FK_LoyaltyTierBenefits_BranchesDropOff">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="LoyaltyTierBenefit" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyaltyTierBenefits_BranchesPickup" Association="Woodford2015Model.FK_LoyaltyTierBenefits_BranchesPickup">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="LoyaltyTierBenefit" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateAdjustments_Branches" Association="Woodford2015Model.FK_RateAdjustments_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="RateAdjustment" EntitySet="RateAdjustments" />
+    </AssociationSet>
+    <EntitySet Name="CountdownSpecials" EntityType="Woodford2015Model.CountdownSpecial" />
+    <EntitySet Name="VehicleUpgrades" EntityType="Woodford2015Model.VehicleUpgrade" />
+    <AssociationSet Name="FK_VehicleUpgrades_Branches" Association="Woodford2015Model.FK_VehicleUpgrades_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="VehicleUpgrade" EntitySet="VehicleUpgrades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CountdownSpecials_VehicleUpgrades" Association="Woodford2015Model.FK_CountdownSpecials_VehicleUpgrades">
+      <End Role="VehicleUpgrade" EntitySet="VehicleUpgrades" />
+      <End Role="CountdownSpecial" EntitySet="CountdownSpecials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyaltyTierBenefits_VehicleUpgrades" Association="Woodford2015Model.FK_LoyaltyTierBenefits_VehicleUpgrades">
+      <End Role="VehicleUpgrade" EntitySet="VehicleUpgrades" />
+      <End Role="LoyaltyTierBenefit" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleUpgrades_Vehicles" Association="Woodford2015Model.FK_VehicleUpgrades_Vehicles">
+      <End Role="Vehicle" EntitySet="Vehicles" />
+      <End Role="VehicleUpgrade" EntitySet="VehicleUpgrades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleUpgrades_Vehicles1" Association="Woodford2015Model.FK_VehicleUpgrades_Vehicles1">
+      <End Role="Vehicle" EntitySet="Vehicles" />
+      <End Role="VehicleUpgrade" EntitySet="VehicleUpgrades" />
+    </AssociationSet>
+    <EntitySet Name="NewsCategories" EntityType="Woodford2015Model.NewsCategory" />
+    <EntitySet Name="News" EntityType="Woodford2015Model.News" />
+    <AssociationSet Name="FK_News_FileUploads" Association="Woodford2015Model.FK_News_FileUploads">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_NewsCategories" Association="Woodford2015Model.FK_News_NewsCategories">
+      <End Role="NewsCategory" EntitySet="NewsCategories" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <EntitySet Name="UrlRedirects" EntityType="Woodford2015Model.UrlRedirect" />
+    <EntitySet Name="AuditItems" EntityType="Woodford2015Model.AuditItem" />
+    <EntitySet Name="AuditItemProperties" EntityType="Woodford2015Model.AuditItemProperty" />
+    <AssociationSet Name="FK_AuditItemProperty_AuditItem" Association="Woodford2015Model.FK_AuditItemProperty_AuditItem">
+      <End Role="AuditItem" EntitySet="AuditItems" />
+      <End Role="AuditItemProperty" EntitySet="AuditItemProperties" />
+    </AssociationSet>
+    <EntitySet Name="RateRules" EntityType="Woodford2015Model.RateRule" />
+    <EntitySet Name="RateCodes" EntityType="Woodford2015Model.RateCode" />
+    <AssociationSet Name="FK_Campaigns_RateCodes" Association="Woodford2015Model.FK_Campaigns_RateCodes">
+      <End Role="RateCode" EntitySet="RateCodes" />
+      <End Role="Campaign" EntitySet="Campaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateAdjustments_RateCodes" Association="Woodford2015Model.FK_RateAdjustments_RateCodes">
+      <End Role="RateCode" EntitySet="RateCodes" />
+      <End Role="RateAdjustment" EntitySet="RateAdjustments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateCodes_RateRules" Association="Woodford2015Model.FK_RateCodes_RateRules">
+      <End Role="RateRule" EntitySet="RateRules" />
+      <End Role="RateCode" EntitySet="RateCodes" />
+    </AssociationSet>
+    <EntitySet Name="BranchSurcharges" EntityType="Woodford2015Model.BranchSurcharge" />
+    <AssociationSet Name="FK_BranchSurcharges_Branches" Association="Woodford2015Model.FK_BranchSurcharges_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="BranchSurcharge" EntitySet="BranchSurcharges" />
+    </AssociationSet>
+    <EntitySet Name="Rates" EntityType="Woodford2015Model.Rate" />
+    <AssociationSet Name="FK_Rates_Branches" Association="Woodford2015Model.FK_Rates_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Rate" EntitySet="Rates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rates_RateCodes" Association="Woodford2015Model.FK_Rates_RateCodes">
+      <End Role="RateCode" EntitySet="RateCodes" />
+      <End Role="Rate" EntitySet="Rates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rates_VehicleGroups" Association="Woodford2015Model.FK_Rates_VehicleGroups">
+      <End Role="VehicleGroup" EntitySet="VehicleGroups" />
+      <End Role="Rate" EntitySet="Rates" />
+    </AssociationSet>
+    <EntitySet Name="CorporateRateCodes" EntityType="Woodford2015Model.CorporateRateCode" />
+    <AssociationSet Name="FK_CorporateRateCodes_Corporates" Association="Woodford2015Model.FK_CorporateRateCodes_Corporates">
+      <End Role="Corporate" EntitySet="Corporates" />
+      <End Role="CorporateRateCode" EntitySet="CorporateRateCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CorporateRateCodes_RateCodes" Association="Woodford2015Model.FK_CorporateRateCodes_RateCodes">
+      <End Role="RateCode" EntitySet="RateCodes" />
+      <End Role="CorporateRateCode" EntitySet="CorporateRateCodes" />
+    </AssociationSet>
+    <EntitySet Name="LoyaltyTiers" EntityType="Woodford2015Model.LoyaltyTier" />
+    <AssociationSet Name="FK_LoyaltyTierBenefits_LoyaltyTiers" Association="Woodford2015Model.FK_LoyaltyTierBenefits_LoyaltyTiers">
+      <End Role="LoyaltyTier" EntitySet="LoyaltyTiers" />
+      <End Role="LoyaltyTierBenefit" EntitySet="LoyaltyTierBenefits" />
+    </AssociationSet>
+    <EntitySet Name="BranchRateCodeExclusions" EntityType="Woodford2015Model.BranchRateCodeExclusion" />
+    <AssociationSet Name="FK_BranchRateCodeExclusions_Branches" Association="Woodford2015Model.FK_BranchRateCodeExclusions_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="BranchRateCodeExclusion" EntitySet="BranchRateCodeExclusions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BranchRateCodeExclusions_RateCodes" Association="Woodford2015Model.FK_BranchRateCodeExclusions_RateCodes">
+      <End Role="RateCode" EntitySet="RateCodes" />
+      <End Role="BranchRateCodeExclusion" EntitySet="BranchRateCodeExclusions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationsVehicleExtras_ReservationsLoyaltyTierBenefits" Association="Woodford2015Model.FK_ReservationsVehicleExtras_ReservationsLoyaltyTierBenefits">
+      <End Role="ReservationsLoyaltyTierBenefit" EntitySet="ReservationsLoyaltyTierBenefits" />
+      <End Role="ReservationsVehicleExtra" EntitySet="ReservationsVehicleExtras" />
+    </AssociationSet>
+    <EntitySet Name="UserProfiles" EntityType="Woodford2015Model.UserProfile" />
+    <AssociationSet Name="FK_UserProfiles_Corporates" Association="Woodford2015Model.FK_UserProfiles_Corporates">
+      <End Role="Corporate" EntitySet="Corporates" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfiles_LoyaltyTiers" Association="Woodford2015Model.FK_UserProfiles_LoyaltyTiers">
+      <End Role="LoyaltyTier" EntitySet="LoyaltyTiers" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <EntitySet Name="ReservationBranchSurcharges" EntityType="Woodford2015Model.ReservationBranchSurcharge" />
+    <AssociationSet Name="FK_ReservationBranchSurcharges_BranchSurcharges" Association="Woodford2015Model.FK_ReservationBranchSurcharges_BranchSurcharges">
+      <End Role="BranchSurcharge" EntitySet="BranchSurcharges" />
+      <End Role="ReservationBranchSurcharge" EntitySet="ReservationBranchSurcharges" />
+    </AssociationSet>
+    <EntitySet Name="BookingHistories" EntityType="Woodford2015Model.BookingHistory" />
+    <EntitySet Name="webpages_Roles" EntityType="Woodford2015Model.webpages_Roles" />
+    <AssociationSet Name="webpages_UsersInRoles" Association="Woodford2015Model.webpages_UsersInRoles">
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <EntitySet Name="Reports" EntityType="Woodford2015Model.Report" />
+    <EntitySet Name="EmailSignatures" EntityType="Woodford2015Model.EmailSignature" />
+    <EntitySet Name="EmailSignatureCampaigns" EntityType="Woodford2015Model.EmailSignatureCampaign" />
+    <AssociationSet Name="FK_EmailSignatureCampaigns_FooterContent" Association="Woodford2015Model.FK_EmailSignatureCampaigns_FooterContent">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaign" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_FooterContentNarrow" Association="Woodford2015Model.FK_EmailSignatureCampaigns_FooterContentNarrow">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaign" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_MainContent" Association="Woodford2015Model.FK_EmailSignatureCampaigns_MainContent">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaign" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_MainContentNarrow" Association="Woodford2015Model.FK_EmailSignatureCampaigns_MainContentNarrow">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaign" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_SidePanelContent" Association="Woodford2015Model.FK_EmailSignatureCampaigns_SidePanelContent">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaign" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSignatureCampaigns_Underline" Association="Woodford2015Model.FK_EmailSignatureCampaigns_Underline">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="EmailSignatureCampaign" EntitySet="EmailSignatureCampaigns" />
+    </AssociationSet>
+    <EntitySet Name="MyGateRefundTransactions" EntityType="Woodford2015Model.MyGateRefundTransaction" />
+    <EntitySet Name="Refunds" EntityType="Woodford2015Model.Refund" />
+    <AssociationSet Name="FK_MyGateRefundTransactions_Invoices" Association="Woodford2015Model.FK_MyGateRefundTransactions_Invoices">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="MyGateRefundTransaction" EntitySet="MyGateRefundTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Refunds_Invoices" Association="Woodford2015Model.FK_Refunds_Invoices">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="Refund" EntitySet="Refunds" />
+    </AssociationSet>
+    <EntitySet Name="BookingClaims" EntityType="Woodford2015Model.BookingClaim" />
+    <AssociationSet Name="FK_BookingClaims_UserProfiles" Association="Woodford2015Model.FK_BookingClaims_UserProfiles">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="BookingClaim" EntitySet="BookingClaims" />
+    </AssociationSet>
+    <EntitySet Name="TrustPilotReviewInvites" EntityType="Woodford2015Model.TrustPilotReviewInvite" />
+    <AssociationSet Name="FK_TrustPilotReviewInvites_Vouchers" Association="Woodford2015Model.FK_TrustPilotReviewInvites_Vouchers">
+      <End Role="Voucher" EntitySet="Vouchers" />
+      <End Role="TrustPilotReviewInvite" EntitySet="TrustPilotReviewInvites" />
+    </AssociationSet>
+    <EntitySet Name="VehicleManufacturers" EntityType="Woodford2015Model.VehicleManufacturer" />
+    <AssociationSet Name="FK_Vehicles_VehicleManufacturers" Association="Woodford2015Model.FK_Vehicles_VehicleManufacturers">
+      <End Role="VehicleManufacturer" EntitySet="VehicleManufacturers" />
+      <End Role="Vehicle" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleManufacturers_FileUploads" Association="Woodford2015Model.FK_VehicleManufacturers_FileUploads">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="VehicleManufacturer" EntitySet="VehicleManufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Campaigns_FileUploadsSearchResultIcon" Association="Woodford2015Model.FK_Campaigns_FileUploadsSearchResultIcon">
+      <End Role="FileUpload" EntitySet="FileUploads" />
+      <End Role="Campaign" EntitySet="Campaigns" />
+    </AssociationSet>
+    <EntitySet Name="Reservations" EntityType="Woodford2015Model.Reservation" />
+    <AssociationSet Name="FK_Reservations_Branches" Association="Woodford2015Model.FK_Reservations_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Branches1" Association="Woodford2015Model.FK_Reservations_Branches1">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoices_Reservations" Association="Woodford2015Model.FK_Invoices_Reservations">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Refunds_Reservations" Association="Woodford2015Model.FK_Refunds_Reservations">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="Refund" EntitySet="Refunds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Refunds_Reservations1" Association="Woodford2015Model.FK_Refunds_Reservations1">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="Refund" EntitySet="Refunds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationBranchSurcharges_Reservations" Association="Woodford2015Model.FK_ReservationBranchSurcharges_Reservations">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="ReservationBranchSurcharge" EntitySet="ReservationBranchSurcharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_UserProfiles" Association="Woodford2015Model.FK_Reservations_UserProfiles">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Vehicles" Association="Woodford2015Model.FK_Reservations_Vehicles">
+      <End Role="Vehicle" EntitySet="Vehicles" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_VehicleUpgrades" Association="Woodford2015Model.FK_Reservations_VehicleUpgrades">
+      <End Role="VehicleUpgrade" EntitySet="VehicleUpgrades" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationsLoyaltyTierBenefits_Reservations" Association="Woodford2015Model.FK_ReservationsLoyaltyTierBenefits_Reservations">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="ReservationsLoyaltyTierBenefit" EntitySet="ReservationsLoyaltyTierBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationsVehicleExtras_Reservations" Association="Woodford2015Model.FK_ReservationsVehicleExtras_Reservations">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="ReservationsVehicleExtra" EntitySet="ReservationsVehicleExtras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrustPilotReviewInvites_Reservations" Association="Woodford2015Model.FK_TrustPilotReviewInvites_Reservations">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="TrustPilotReviewInvite" EntitySet="TrustPilotReviewInvites" />
+    </AssociationSet>
+    <EntitySet Name="MyGateTransactions" EntityType="Woodford2015Model.MyGateTransaction" />
+    <AssociationSet Name="FK_MyGateTransactions_Invoices" Association="Woodford2015Model.FK_MyGateTransactions_Invoices">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="MyGateTransaction" EntitySet="MyGateTransactions" />
+    </AssociationSet>
+    <EntitySet Name="ReservationsAdmins" EntityType="Woodford2015Model.ReservationsAdmin" />
+  </EntityContainer>
+  <EntityType Name="AppSetting">
+    <Key>
+      <PropertyRef Name="Title" />
+    </Key>
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="SettingValue" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="BranchVehicleExclusion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchVehicleId" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BranchVehicle" Relationship="Woodford2015Model.FK_BranchVehicleExclusions_BranchVehicles" FromRole="BranchVehicleExclusion" ToRole="BranchVehicle" />
+  </EntityType>
+  <EntityType Name="BranchVehicle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="VehicleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BranchVehicleExclusions" Relationship="Woodford2015Model.FK_BranchVehicleExclusions_BranchVehicles" FromRole="BranchVehicle" ToRole="BranchVehicleExclusion" />
+    <NavigationProperty Name="Vehicle" Relationship="Woodford2015Model.FK_BranchVehicles_Vehicles" FromRole="BranchVehicle" ToRole="Vehicle" />
+    <NavigationProperty Name="Branch" Relationship="Woodford2015Model.FK_BranchVehicles_Branches" FromRole="BranchVehicle" ToRole="Branch" />
+  </EntityType>
+  <EntityType Name="Campaign">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RateCodeId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PageUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FileUploadId" Type="Int32" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="FileUpload" Relationship="Woodford2015Model.FK_Campaigns_FileUploads" FromRole="Campaign" ToRole="FileUpload" />
+    <NavigationProperty Name="RateCode" Relationship="Woodford2015Model.FK_Campaigns_RateCodes" FromRole="Campaign" ToRole="RateCode" />
+    <Property Name="SearchResultIconFileUploadId" Type="Int32" />
+    <NavigationProperty Name="FileUpload1" Relationship="Woodford2015Model.FK_Campaigns_FileUploadsSearchResultIcon" FromRole="Campaign" ToRole="FileUpload" />
+  </EntityType>
+  <EntityType Name="Corporate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CorporateRateCodes" Relationship="Woodford2015Model.FK_CorporateRateCodes_Corporates" FromRole="Corporate" ToRole="CorporateRateCode" />
+    <NavigationProperty Name="UserProfiles" Relationship="Woodford2015Model.FK_UserProfiles_Corporates" FromRole="Corporate" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="DynamicPage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <Property Name="PageUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FileUpload">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FileContent" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="FileExtension" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DateUploaded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FileContext" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MimeType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IsStandalone" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Campaigns" Relationship="Woodford2015Model.FK_Campaigns_FileUploads" FromRole="FileUpload" ToRole="Campaign" />
+    <NavigationProperty Name="HerospaceItems" Relationship="Woodford2015Model.FK_HerospaceItems_FileUploads" FromRole="FileUpload" ToRole="HerospaceItem" />
+    <NavigationProperty Name="VehicleGroups" Relationship="Woodford2015Model.FK_VehicleGroups_FileUploads" FromRole="FileUpload" ToRole="VehicleGroup" />
+    <NavigationProperty Name="Vehicles" Relationship="Woodford2015Model.FK_Vehicles_FileUploads" FromRole="FileUpload" ToRole="Vehicle" />
+    <NavigationProperty Name="Vehicles1" Relationship="Woodford2015Model.FK_Vehicles_FileUploads1" FromRole="FileUpload" ToRole="Vehicle" />
+    <NavigationProperty Name="Branches" Relationship="Woodford2015Model.FK_Branches_FileUploads" FromRole="FileUpload" ToRole="Branch" />
+    <NavigationProperty Name="News" Relationship="Woodford2015Model.FK_News_FileUploads" FromRole="FileUpload" ToRole="News" />
+    <NavigationProperty Name="EmailSignatureCampaigns" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_FooterContent" FromRole="FileUpload" ToRole="EmailSignatureCampaign" />
+    <NavigationProperty Name="EmailSignatureCampaigns1" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_FooterContentNarrow" FromRole="FileUpload" ToRole="EmailSignatureCampaign" />
+    <NavigationProperty Name="EmailSignatureCampaigns2" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_MainContent" FromRole="FileUpload" ToRole="EmailSignatureCampaign" />
+    <NavigationProperty Name="EmailSignatureCampaigns3" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_MainContentNarrow" FromRole="FileUpload" ToRole="EmailSignatureCampaign" />
+    <NavigationProperty Name="EmailSignatureCampaigns4" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_SidePanelContent" FromRole="FileUpload" ToRole="EmailSignatureCampaign" />
+    <NavigationProperty Name="EmailSignatureCampaigns5" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_Underline" FromRole="FileUpload" ToRole="EmailSignatureCampaign" />
+    <NavigationProperty Name="VehicleManufacturers" Relationship="Woodford2015Model.FK_VehicleManufacturers_FileUploads" FromRole="FileUpload" ToRole="VehicleManufacturer" />
+    <NavigationProperty Name="Campaigns1" Relationship="Woodford2015Model.FK_Campaigns_FileUploadsSearchResultIcon" FromRole="FileUpload" ToRole="Campaign" />
+  </EntityType>
+  <EntityType Name="HerospaceItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FileUploadId" Type="Int32" Nullable="false" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FileUpload" Relationship="Woodford2015Model.FK_HerospaceItems_FileUploads" FromRole="HerospaceItem" ToRole="FileUpload" />
+    <Property Name="SortOrder" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InterBranchDropOffFee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Branch1Id" Type="Int32" Nullable="false" />
+    <Property Name="Branch2Id" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="Woodford2015Model.FK_InterBranchDropOffFees_Branches" FromRole="InterBranchDropOffFee" ToRole="Branch" />
+    <NavigationProperty Name="Branch1" Relationship="Woodford2015Model.FK_InterBranchDropOffFees_Branches1" FromRole="InterBranchDropOffFee" ToRole="Branch" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservationId" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AmountPaid" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="IsMobileCheckout" Type="Boolean" Nullable="false" />
+    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="IsCorporateCheckout" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="MyGateRefundTransactions" Relationship="Woodford2015Model.FK_MyGateRefundTransactions_Invoices" FromRole="Invoice" ToRole="MyGateRefundTransaction" />
+    <NavigationProperty Name="Refunds" Relationship="Woodford2015Model.FK_Refunds_Invoices" FromRole="Invoice" ToRole="Refund" />
+    <Property Name="PaymentErrorCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="HasPaymentError" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Reservation" Relationship="Woodford2015Model.FK_Invoices_Reservations" FromRole="Invoice" ToRole="Reservation" />
+    <NavigationProperty Name="MyGateTransactions" Relationship="Woodford2015Model.FK_MyGateTransactions_Invoices" FromRole="Invoice" ToRole="MyGateTransaction" />
+  </EntityType>
+  <EntityType Name="LoyaltyTierBenefit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoyaltyTierId" Type="Int32" Nullable="false" />
+    <Property Name="BenefitTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DropOffGraceHours" Type="Int32" />
+    <Property Name="PickupLocationId" Type="Int32" />
+    <Property Name="DropOffLocationId" Type="Int32" />
+    <Property Name="FreeKms" Type="Int32" />
+    <Property Name="FreeDays" Type="Int32" />
+    <Property Name="UpgradeId" Type="Int32" />
+    <Property Name="ExtraId" Type="Int32" />
+    <Property Name="ExtraPriceOverride" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="VehicleExtra" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_VehicleExtras" FromRole="LoyaltyTierBenefit" ToRole="VehicleExtra" />
+    <NavigationProperty Name="Branch" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_BranchesDropOff" FromRole="LoyaltyTierBenefit" ToRole="Branch" />
+    <NavigationProperty Name="Branch1" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_BranchesPickup" FromRole="LoyaltyTierBenefit" ToRole="Branch" />
+    <NavigationProperty Name="VehicleUpgrade" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_VehicleUpgrades" FromRole="LoyaltyTierBenefit" ToRole="VehicleUpgrade" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="LoyaltyTier" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_LoyaltyTiers" FromRole="LoyaltyTierBenefit" ToRole="LoyaltyTier" />
+  </EntityType>
+  <EntityType Name="PageContent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PageTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="MetaKeywords" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="MetaDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PageContent1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DynamicPageId" Type="Int32" />
+    <Property Name="VehicleGroupId" Type="Int32" />
+    <Property Name="VehicleId" Type="Int32" />
+    <Property Name="NewsId" Type="Int32" />
+    <Property Name="CampaignId" Type="Int32" />
+    <Property Name="BranchId" Type="Int32" />
+    <Property Name="VehicleManufacturerId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="RateAdjustment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdjustmentTypeEnum" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="VehicleGroupId" Type="Int32" />
+    <Property Name="RateCodeId" Type="Int32" />
+    <Property Name="NumberOfBookings" Type="Int32" />
+    <Property Name="AdjustmentPercentage" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="VehicleGroup" Relationship="Woodford2015Model.FK_RateAdjustments_VehicleGroups" FromRole="RateAdjustment" ToRole="VehicleGroup" />
+    <NavigationProperty Name="Branch" Relationship="Woodford2015Model.FK_RateAdjustments_Branches" FromRole="RateAdjustment" ToRole="Branch" />
+    <NavigationProperty Name="RateCode" Relationship="Woodford2015Model.FK_RateAdjustments_RateCodes" FromRole="RateAdjustment" ToRole="RateCode" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReservationsLoyaltyTierBenefit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservationId" Type="Int32" Nullable="false" />
+    <Property Name="LoyaltyTierBenefitId" Type="Int32" Nullable="false" />
+    <Property Name="BenefitTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DropOffGraceHours" Type="Int32" />
+    <Property Name="FreeKms" Type="Int32" />
+    <Property Name="FreeDays" Type="Int32" />
+    <Property Name="UpgradeId" Type="Int32" />
+    <Property Name="ExtraId" Type="Int32" />
+    <Property Name="ExtraPriceOverride" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="ReservationsVehicleExtras" Relationship="Woodford2015Model.FK_ReservationsVehicleExtras_ReservationsLoyaltyTierBenefits" FromRole="ReservationsLoyaltyTierBenefit" ToRole="ReservationsVehicleExtra" />
+    <NavigationProperty Name="Reservation" Relationship="Woodford2015Model.FK_ReservationsLoyaltyTierBenefits_Reservations" FromRole="ReservationsLoyaltyTierBenefit" ToRole="Reservation" />
+  </EntityType>
+  <EntityType Name="ReservationsVehicleExtra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservationId" Type="Int32" Nullable="false" />
+    <Property Name="VehicleExtraId" Type="Int32" Nullable="false" />
+    <Property Name="ExtraPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="ExtraTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="VehicleExtra" Relationship="Woodford2015Model.FK_ReservationsVehicleExtras_VehicleExtras" FromRole="ReservationsVehicleExtra" ToRole="VehicleExtra" />
+    <Property Name="ReservationLoyaltyTierBenefitId" Type="Int32" />
+    <NavigationProperty Name="ReservationsLoyaltyTierBenefit" Relationship="Woodford2015Model.FK_ReservationsVehicleExtras_ReservationsLoyaltyTierBenefits" FromRole="ReservationsVehicleExtra" ToRole="ReservationsLoyaltyTierBenefit" />
+    <NavigationProperty Name="Reservation" Relationship="Woodford2015Model.FK_ReservationsVehicleExtras_Reservations" FromRole="ReservationsVehicleExtra" ToRole="Reservation" />
+  </EntityType>
+  <EntityType Name="VehicleExtra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="ImageClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LoyaltyTierBenefits" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_VehicleExtras" FromRole="VehicleExtra" ToRole="LoyaltyTierBenefit" />
+    <NavigationProperty Name="ReservationsVehicleExtras" Relationship="Woodford2015Model.FK_ReservationsVehicleExtras_VehicleExtras" FromRole="VehicleExtra" ToRole="ReservationsVehicleExtra" />
+  </EntityType>
+  <EntityType Name="VehicleGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <Property Name="FileUploadId" Type="Int32" />
+    <Property Name="TitleDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PageUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FileUpload" Relationship="Woodford2015Model.FK_VehicleGroups_FileUploads" FromRole="VehicleGroup" ToRole="FileUpload" />
+    <NavigationProperty Name="RateAdjustments" Relationship="Woodford2015Model.FK_RateAdjustments_VehicleGroups" FromRole="VehicleGroup" ToRole="RateAdjustment" />
+    <NavigationProperty Name="Vehicles" Relationship="Woodford2015Model.FK_Vehicles_VehicleGroups" FromRole="VehicleGroup" ToRole="Vehicle" />
+    <NavigationProperty Name="Waivers" Relationship="Woodford2015Model.FK_Waivers_VehicleGroups" FromRole="VehicleGroup" ToRole="Waiver" />
+    <NavigationProperty Name="Rates" Relationship="Woodford2015Model.FK_Rates_VehicleGroups" FromRole="VehicleGroup" ToRole="Rate" />
+    <Property Name="SortOrder" Type="Int32" Nullable="false" />
+    <Property Name="VehicleGroupTypeId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vehicle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VehicleGroupId" Type="Int32" Nullable="false" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <Property Name="FileUploadId" Type="Int32" />
+    <Property Name="FileUploadId2" Type="Int32" />
+    <Property Name="PageUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ShortDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="NumberOfPassengers" Type="Int32" Nullable="false" />
+    <Property Name="NumberOfBaggage" Type="Int32" Nullable="false" />
+    <Property Name="IsPetrol" Type="Boolean" Nullable="false" />
+    <Property Name="HasAircon" Type="Boolean" Nullable="false" />
+    <Property Name="HasRadio" Type="Boolean" Nullable="false" />
+    <Property Name="HasPowerSteering" Type="Boolean" Nullable="false" />
+    <Property Name="IsAutomatic" Type="Boolean" Nullable="false" />
+    <Property Name="ExcessAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="DepositAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="BranchVehicles" Relationship="Woodford2015Model.FK_BranchVehicles_Vehicles" FromRole="Vehicle" ToRole="BranchVehicle" />
+    <NavigationProperty Name="FileUpload" Relationship="Woodford2015Model.FK_Vehicles_FileUploads" FromRole="Vehicle" ToRole="FileUpload" />
+    <NavigationProperty Name="FileUpload1" Relationship="Woodford2015Model.FK_Vehicles_FileUploads1" FromRole="Vehicle" ToRole="FileUpload" />
+    <NavigationProperty Name="VehicleGroup" Relationship="Woodford2015Model.FK_Vehicles_VehicleGroups" FromRole="Vehicle" ToRole="VehicleGroup" />
+    <NavigationProperty Name="VehicleUpgrades" Relationship="Woodford2015Model.FK_VehicleUpgrades_Vehicles" FromRole="Vehicle" ToRole="VehicleUpgrade" />
+    <NavigationProperty Name="VehicleUpgrades1" Relationship="Woodford2015Model.FK_VehicleUpgrades_Vehicles1" FromRole="Vehicle" ToRole="VehicleUpgrade" />
+    <Property Name="SortOrder" Type="Int32" Nullable="false" />
+    <Property Name="VehicleManufacturerId" Type="Int32" />
+    <NavigationProperty Name="VehicleManufacturer" Relationship="Woodford2015Model.FK_Vehicles_VehicleManufacturers" FromRole="Vehicle" ToRole="VehicleManufacturer" />
+    <NavigationProperty Name="Reservations" Relationship="Woodford2015Model.FK_Reservations_Vehicles" FromRole="Vehicle" ToRole="Reservation" />
+  </EntityType>
+  <EntityType Name="Voucher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RequireClientValidation" Type="Boolean" Nullable="false" />
+    <Property Name="ClientName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ClientEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DateIssued" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateExpiry" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateRedeemed" Type="DateTime" Precision="3" />
+    <Property Name="ReservationId" Type="Int32" />
+    <Property Name="VoucherNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="VoucherRewardType" Type="Int32" Nullable="false" />
+    <Property Name="VoucherDiscount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="VoucherReward" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VoucherDiscountPercentage" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="IsMultiUse" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TrustPilotReviewInvites" Relationship="Woodford2015Model.FK_TrustPilotReviewInvites_Vouchers" FromRole="Voucher" ToRole="TrustPilotReviewInvite" />
+  </EntityType>
+  <Association Name="FK_BranchVehicleExclusions_BranchVehicles">
+    <End Type="Woodford2015Model.BranchVehicle" Role="BranchVehicle" Multiplicity="1" />
+    <End Type="Woodford2015Model.BranchVehicleExclusion" Role="BranchVehicleExclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BranchVehicle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchVehicleExclusion">
+        <PropertyRef Name="BranchVehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BranchVehicles_Vehicles">
+    <End Type="Woodford2015Model.Vehicle" Role="Vehicle" Multiplicity="1" />
+    <End Type="Woodford2015Model.BranchVehicle" Role="BranchVehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchVehicle">
+        <PropertyRef Name="VehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Campaigns_FileUploads">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.Campaign" Role="Campaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Campaign">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HerospaceItems_FileUploads">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="1" />
+    <End Type="Woodford2015Model.HerospaceItem" Role="HerospaceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HerospaceItem">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleGroups_FileUploads">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.VehicleGroup" Role="VehicleGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleGroup">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicles_FileUploads">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.Vehicle" Role="Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicles_FileUploads1">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.Vehicle" Role="Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="FileUploadId2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyaltyTierBenefits_VehicleExtras">
+    <End Type="Woodford2015Model.VehicleExtra" Role="VehicleExtra" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.LoyaltyTierBenefit" Role="LoyaltyTierBenefit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleExtra">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefit">
+        <PropertyRef Name="ExtraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateAdjustments_VehicleGroups">
+    <End Type="Woodford2015Model.VehicleGroup" Role="VehicleGroup" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.RateAdjustment" Role="RateAdjustment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RateAdjustment">
+        <PropertyRef Name="VehicleGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationsVehicleExtras_VehicleExtras">
+    <End Type="Woodford2015Model.VehicleExtra" Role="VehicleExtra" Multiplicity="1" />
+    <End Type="Woodford2015Model.ReservationsVehicleExtra" Role="ReservationsVehicleExtra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleExtra">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationsVehicleExtra">
+        <PropertyRef Name="VehicleExtraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicles_VehicleGroups">
+    <End Type="Woodford2015Model.VehicleGroup" Role="VehicleGroup" Multiplicity="1" />
+    <End Type="Woodford2015Model.Vehicle" Role="Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="VehicleGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MessageQueue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SenderProcess" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmailTo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmailCc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmailBcc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmailSubject" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmailBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Sent" Type="Boolean" Nullable="false" />
+    <Property Name="Processing" Type="Boolean" Nullable="false" />
+    <Property Name="DateSent" Type="DateTime" Precision="3" />
+    <Property Name="TimesTried" Type="Int32" Nullable="false" />
+    <Property Name="ErrorOccurred" Type="Boolean" />
+    <Property Name="ErrorMessage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HasAttachment" Type="Boolean" Nullable="false" />
+    <Property Name="AttachementPath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Waiver">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WaiverType" Type="Int32" Nullable="false" />
+    <Property Name="VehicleGroupId" Type="Int32" Nullable="false" />
+    <Property Name="CostPerDay" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Liability" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="VehicleGroup" Relationship="Woodford2015Model.FK_Waivers_VehicleGroups" FromRole="Waiver" ToRole="VehicleGroup" />
+  </EntityType>
+  <Association Name="FK_Waivers_VehicleGroups">
+    <End Type="Woodford2015Model.VehicleGroup" Role="VehicleGroup" Multiplicity="1" />
+    <End Type="Woodford2015Model.Waiver" Role="Waiver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Waiver">
+        <PropertyRef Name="VehicleGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FileUploadId" Type="Int32" />
+    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsAirport" Type="Boolean" Nullable="false" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TelephoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MapEmbed" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="AfterHoursTelephoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PageUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="BranchSubTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BranchAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BranchShortDescription" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="BranchContactPageTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BranchContactMetaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BranchContactMetaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BranchContactPageContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BranchRequestCallbackPageTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BranchRequestCallbackMetaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BranchRequestCallbackMetaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BranchRequestCallbackPageContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FileUpload" Relationship="Woodford2015Model.FK_Branches_FileUploads" FromRole="Branch" ToRole="FileUpload" />
+    <NavigationProperty Name="BranchVehicles" Relationship="Woodford2015Model.FK_BranchVehicles_Branches" FromRole="Branch" ToRole="BranchVehicle" />
+    <NavigationProperty Name="InterBranchDropOffFees" Relationship="Woodford2015Model.FK_InterBranchDropOffFees_Branches" FromRole="Branch" ToRole="InterBranchDropOffFee" />
+    <NavigationProperty Name="InterBranchDropOffFees1" Relationship="Woodford2015Model.FK_InterBranchDropOffFees_Branches1" FromRole="Branch" ToRole="InterBranchDropOffFee" />
+    <NavigationProperty Name="LoyaltyTierBenefits" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_BranchesDropOff" FromRole="Branch" ToRole="LoyaltyTierBenefit" />
+    <NavigationProperty Name="LoyaltyTierBenefits1" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_BranchesPickup" FromRole="Branch" ToRole="LoyaltyTierBenefit" />
+    <NavigationProperty Name="RateAdjustments" Relationship="Woodford2015Model.FK_RateAdjustments_Branches" FromRole="Branch" ToRole="RateAdjustment" />
+    <NavigationProperty Name="VehicleUpgrades" Relationship="Woodford2015Model.FK_VehicleUpgrades_Branches" FromRole="Branch" ToRole="VehicleUpgrade" />
+    <NavigationProperty Name="BranchSurcharge" Relationship="Woodford2015Model.FK_BranchSurcharges_Branches" FromRole="Branch" ToRole="BranchSurcharge" />
+    <NavigationProperty Name="Rates" Relationship="Woodford2015Model.FK_Rates_Branches" FromRole="Branch" ToRole="Rate" />
+    <NavigationProperty Name="BranchRateCodeExclusions" Relationship="Woodford2015Model.FK_BranchRateCodeExclusions_Branches" FromRole="Branch" ToRole="BranchRateCodeExclusion" />
+    <Property Name="WeatherApiId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Reservations" Relationship="Woodford2015Model.FK_Reservations_Branches" FromRole="Branch" ToRole="Reservation" />
+    <NavigationProperty Name="Reservations1" Relationship="Woodford2015Model.FK_Reservations_Branches1" FromRole="Branch" ToRole="Reservation" />
+    <Property Name="BookingLeadTimeDay" Type="Int32" />
+    <Property Name="BookingLeadTimeNight" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_Branches_FileUploads">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Branch">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BranchVehicles_Branches">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.BranchVehicle" Role="BranchVehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchVehicle">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InterBranchDropOffFees_Branches">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.InterBranchDropOffFee" Role="InterBranchDropOffFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterBranchDropOffFee">
+        <PropertyRef Name="Branch1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InterBranchDropOffFees_Branches1">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.InterBranchDropOffFee" Role="InterBranchDropOffFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterBranchDropOffFee">
+        <PropertyRef Name="Branch2Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyaltyTierBenefits_BranchesDropOff">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.LoyaltyTierBenefit" Role="LoyaltyTierBenefit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefit">
+        <PropertyRef Name="DropOffLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyaltyTierBenefits_BranchesPickup">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.LoyaltyTierBenefit" Role="LoyaltyTierBenefit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefit">
+        <PropertyRef Name="PickupLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateAdjustments_Branches">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.RateAdjustment" Role="RateAdjustment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RateAdjustment">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CountdownSpecial">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OfferText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OfferDiscount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="OfferType" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="VehicleUpgradeId" Type="Int32" />
+    <Property Name="VehicleUpgradeAmountOverride" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="VehicleUpgrade" Relationship="Woodford2015Model.FK_CountdownSpecials_VehicleUpgrades" FromRole="CountdownSpecial" ToRole="VehicleUpgrade" />
+  </EntityType>
+  <EntityType Name="VehicleUpgrade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FromVehicleId" Type="Int32" Nullable="false" />
+    <Property Name="ToVehicleId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="Woodford2015Model.FK_VehicleUpgrades_Branches" FromRole="VehicleUpgrade" ToRole="Branch" />
+    <NavigationProperty Name="CountdownSpecials" Relationship="Woodford2015Model.FK_CountdownSpecials_VehicleUpgrades" FromRole="VehicleUpgrade" ToRole="CountdownSpecial" />
+    <NavigationProperty Name="LoyaltyTierBenefits" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_VehicleUpgrades" FromRole="VehicleUpgrade" ToRole="LoyaltyTierBenefit" />
+    <NavigationProperty Name="Vehicle" Relationship="Woodford2015Model.FK_VehicleUpgrades_Vehicles" FromRole="VehicleUpgrade" ToRole="Vehicle" />
+    <NavigationProperty Name="Vehicle1" Relationship="Woodford2015Model.FK_VehicleUpgrades_Vehicles1" FromRole="VehicleUpgrade" ToRole="Vehicle" />
+    <NavigationProperty Name="Reservations" Relationship="Woodford2015Model.FK_Reservations_VehicleUpgrades" FromRole="VehicleUpgrade" ToRole="Reservation" />
+  </EntityType>
+  <Association Name="FK_VehicleUpgrades_Branches">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.VehicleUpgrade" Role="VehicleUpgrade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleUpgrade">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CountdownSpecials_VehicleUpgrades">
+    <End Type="Woodford2015Model.VehicleUpgrade" Role="VehicleUpgrade" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.CountdownSpecial" Role="CountdownSpecial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleUpgrade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CountdownSpecial">
+        <PropertyRef Name="VehicleUpgradeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyaltyTierBenefits_VehicleUpgrades">
+    <End Type="Woodford2015Model.VehicleUpgrade" Role="VehicleUpgrade" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.LoyaltyTierBenefit" Role="LoyaltyTierBenefit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleUpgrade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefit">
+        <PropertyRef Name="UpgradeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleUpgrades_Vehicles">
+    <End Type="Woodford2015Model.Vehicle" Role="Vehicle" Multiplicity="1" />
+    <End Type="Woodford2015Model.VehicleUpgrade" Role="VehicleUpgrade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleUpgrade">
+        <PropertyRef Name="FromVehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleUpgrades_Vehicles1">
+    <End Type="Woodford2015Model.Vehicle" Role="Vehicle" Multiplicity="1" />
+    <End Type="Woodford2015Model.VehicleUpgrade" Role="VehicleUpgrade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleUpgrade">
+        <PropertyRef Name="ToVehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="NewsCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <Property Name="PageUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="News" Relationship="Woodford2015Model.FK_News_NewsCategories" FromRole="NewsCategory" ToRole="News" />
+    <Property Name="PageTitle" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Headline" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="SubHeadline" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ShortDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="FileUploadId" Type="Int32" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Author" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <Property Name="NewsCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="PageUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FileUpload" Relationship="Woodford2015Model.FK_News_FileUploads" FromRole="News" ToRole="FileUpload" />
+    <NavigationProperty Name="NewsCategory" Relationship="Woodford2015Model.FK_News_NewsCategories" FromRole="News" ToRole="NewsCategory" />
+  </EntityType>
+  <Association Name="FK_News_FileUploads">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.News" Role="News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_NewsCategories">
+    <End Type="Woodford2015Model.NewsCategory" Role="NewsCategory" Multiplicity="1" />
+    <End Type="Woodford2015Model.News" Role="News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="NewsCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UrlRedirect">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OldUrl" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="NewUrl" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="HttpStatusCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AuditItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Action" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntityId" Type="Int32" Nullable="false" />
+    <Property Name="EntityType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="ActionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AuditItemProperties" Relationship="Woodford2015Model.FK_AuditItemProperty_AuditItem" FromRole="AuditItem" ToRole="AuditItemProperty" />
+  </EntityType>
+  <EntityType Name="AuditItemProperty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuditEntityId" Type="Int32" Nullable="false" />
+    <Property Name="AuditField" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CurrentValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OriginalValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FieldType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AuditItem" Relationship="Woodford2015Model.FK_AuditItemProperty_AuditItem" FromRole="AuditItemProperty" ToRole="AuditItem" />
+  </EntityType>
+  <Association Name="FK_AuditItemProperty_AuditItem">
+    <End Type="Woodford2015Model.AuditItem" Role="AuditItem" Multiplicity="1" />
+    <End Type="Woodford2015Model.AuditItemProperty" Role="AuditItemProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuditItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AuditItemProperty">
+        <PropertyRef Name="AuditEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RateRule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DaysOfWeek" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="MinDays" Type="Int32" Nullable="false" />
+    <Property Name="MaxDays" Type="Int32" Nullable="false" />
+    <Property Name="FreeKmsPerDay" Type="Int32" />
+    <Property Name="RateTypeId" Type="Int32" />
+    <NavigationProperty Name="RateCodes" Relationship="Woodford2015Model.FK_RateCodes_RateRules" FromRole="RateRule" ToRole="RateCode" />
+  </EntityType>
+  <EntityType Name="RateCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AvailableToPublic" Type="Boolean" Nullable="false" />
+    <Property Name="AvailableToLoyalty" Type="Boolean" Nullable="false" />
+    <Property Name="AvailableToCorporate" Type="Boolean" Nullable="false" />
+    <Property Name="IsNotAdjustable" Type="Boolean" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="RateRuleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Campaigns" Relationship="Woodford2015Model.FK_Campaigns_RateCodes" FromRole="RateCode" ToRole="Campaign" />
+    <NavigationProperty Name="RateAdjustments" Relationship="Woodford2015Model.FK_RateAdjustments_RateCodes" FromRole="RateCode" ToRole="RateAdjustment" />
+    <NavigationProperty Name="RateRule" Relationship="Woodford2015Model.FK_RateCodes_RateRules" FromRole="RateCode" ToRole="RateRule" />
+    <Property Name="CanHaveUpgradeApplied" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Rates" Relationship="Woodford2015Model.FK_Rates_RateCodes" FromRole="RateCode" ToRole="Rate" />
+    <NavigationProperty Name="CorporateRateCodes" Relationship="Woodford2015Model.FK_CorporateRateCodes_RateCodes" FromRole="RateCode" ToRole="CorporateRateCode" />
+    <NavigationProperty Name="BranchRateCodeExclusions" Relationship="Woodford2015Model.FK_BranchRateCodeExclusions_RateCodes" FromRole="RateCode" ToRole="BranchRateCodeExclusion" />
+    <Property Name="IsSticky" Type="Boolean" Nullable="false" />
+    <Property Name="ColorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Campaigns_RateCodes">
+    <End Type="Woodford2015Model.RateCode" Role="RateCode" Multiplicity="1" />
+    <End Type="Woodford2015Model.Campaign" Role="Campaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCode">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Campaign">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateAdjustments_RateCodes">
+    <End Type="Woodford2015Model.RateCode" Role="RateCode" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.RateAdjustment" Role="RateAdjustment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCode">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RateAdjustment">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateCodes_RateRules">
+    <End Type="Woodford2015Model.RateRule" Role="RateRule" Multiplicity="1" />
+    <End Type="Woodford2015Model.RateCode" Role="RateCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateRule">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RateCode">
+        <PropertyRef Name="RateRuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BranchSurcharge">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="SurchargeAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="IsOnceOff" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="Woodford2015Model.FK_BranchSurcharges_Branches" FromRole="BranchSurcharge" ToRole="Branch" />
+    <NavigationProperty Name="ReservationBranchSurcharges" Relationship="Woodford2015Model.FK_ReservationBranchSurcharges_BranchSurcharges" FromRole="BranchSurcharge" ToRole="ReservationBranchSurcharge" />
+    <Property Name="MaximumCharge" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <Association Name="FK_BranchSurcharges_Branches">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.BranchSurcharge" Role="BranchSurcharge" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchSurcharge">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Rate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VehicleGroupId" Type="Int32" Nullable="false" />
+    <Property Name="RateCodeId" Type="Int32" Nullable="false" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="ValidStartDate" Type="DateTime" Precision="3" />
+    <Property Name="ValidEndDate" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="IsOpenEnded" Type="Boolean" Nullable="false" />
+    <Property Name="CostPerKm" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="FreeKms" Type="Int32" Nullable="false" />
+    <Property Name="HasUnlimitedKms" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="Woodford2015Model.FK_Rates_Branches" FromRole="Rate" ToRole="Branch" />
+    <NavigationProperty Name="RateCode" Relationship="Woodford2015Model.FK_Rates_RateCodes" FromRole="Rate" ToRole="RateCode" />
+    <NavigationProperty Name="VehicleGroup" Relationship="Woodford2015Model.FK_Rates_VehicleGroups" FromRole="Rate" ToRole="VehicleGroup" />
+  </EntityType>
+  <Association Name="FK_Rates_Branches">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.Rate" Role="Rate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rate">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rates_RateCodes">
+    <End Type="Woodford2015Model.RateCode" Role="RateCode" Multiplicity="1" />
+    <End Type="Woodford2015Model.Rate" Role="Rate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCode">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rate">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rates_VehicleGroups">
+    <End Type="Woodford2015Model.VehicleGroup" Role="VehicleGroup" Multiplicity="1" />
+    <End Type="Woodford2015Model.Rate" Role="Rate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rate">
+        <PropertyRef Name="VehicleGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CorporateRateCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CorporateId" Type="Int32" Nullable="false" />
+    <Property Name="RateCodeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Corporate" Relationship="Woodford2015Model.FK_CorporateRateCodes_Corporates" FromRole="CorporateRateCode" ToRole="Corporate" />
+    <NavigationProperty Name="RateCode" Relationship="Woodford2015Model.FK_CorporateRateCodes_RateCodes" FromRole="CorporateRateCode" ToRole="RateCode" />
+  </EntityType>
+  <Association Name="FK_CorporateRateCodes_Corporates">
+    <End Type="Woodford2015Model.Corporate" Role="Corporate" Multiplicity="1" />
+    <End Type="Woodford2015Model.CorporateRateCode" Role="CorporateRateCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Corporate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CorporateRateCode">
+        <PropertyRef Name="CorporateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CorporateRateCodes_RateCodes">
+    <End Type="Woodford2015Model.RateCode" Role="RateCode" Multiplicity="1" />
+    <End Type="Woodford2015Model.CorporateRateCode" Role="CorporateRateCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCode">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CorporateRateCode">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LoyaltyTier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BookingThresholdPerPeriod" Type="Int32" Nullable="false" />
+    <Property Name="RandSpent" Type="Int32" Nullable="false" />
+    <Property Name="PointsEarnedPerRandSpent" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="LoyaltyTierBenefits" Relationship="Woodford2015Model.FK_LoyaltyTierBenefits_LoyaltyTiers" FromRole="LoyaltyTier" ToRole="LoyaltyTierBenefit" />
+    <NavigationProperty Name="UserProfiles" Relationship="Woodford2015Model.FK_UserProfiles_LoyaltyTiers" FromRole="LoyaltyTier" ToRole="UserProfile" />
+  </EntityType>
+  <Association Name="FK_LoyaltyTierBenefits_LoyaltyTiers">
+    <End Type="Woodford2015Model.LoyaltyTier" Role="LoyaltyTier" Multiplicity="1" />
+    <End Type="Woodford2015Model.LoyaltyTierBenefit" Role="LoyaltyTierBenefit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoyaltyTier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoyaltyTierBenefit">
+        <PropertyRef Name="LoyaltyTierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BranchRateCodeExclusion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="RateCodeId" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Branch" Relationship="Woodford2015Model.FK_BranchRateCodeExclusions_Branches" FromRole="BranchRateCodeExclusion" ToRole="Branch" />
+    <NavigationProperty Name="RateCode" Relationship="Woodford2015Model.FK_BranchRateCodeExclusions_RateCodes" FromRole="BranchRateCodeExclusion" ToRole="RateCode" />
+  </EntityType>
+  <Association Name="FK_BranchRateCodeExclusions_Branches">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.BranchRateCodeExclusion" Role="BranchRateCodeExclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchRateCodeExclusion">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BranchRateCodeExclusions_RateCodes">
+    <End Type="Woodford2015Model.RateCode" Role="RateCode" Multiplicity="1" />
+    <End Type="Woodford2015Model.BranchRateCodeExclusion" Role="BranchRateCodeExclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RateCode">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchRateCodeExclusion">
+        <PropertyRef Name="RateCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationsVehicleExtras_ReservationsLoyaltyTierBenefits">
+    <End Type="Woodford2015Model.ReservationsLoyaltyTierBenefit" Role="ReservationsLoyaltyTierBenefit" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.ReservationsVehicleExtra" Role="ReservationsVehicleExtra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservationsLoyaltyTierBenefit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationsVehicleExtra">
+        <PropertyRef Name="ReservationLoyaltyTierBenefitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CorporateId" Type="Int32" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LoyaltyTierId" Type="Int32" Nullable="false" />
+    <Property Name="LoyaltyPeriodStart" Type="DateTime" Precision="3" />
+    <Property Name="LoyaltyPeriodEnd" Type="DateTime" Precision="3" />
+    <Property Name="IdNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsLoyaltyMember" Type="Boolean" Nullable="false" />
+    <Property Name="LoyaltySignUpDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Corporate" Relationship="Woodford2015Model.FK_UserProfiles_Corporates" FromRole="UserProfile" ToRole="Corporate" />
+    <NavigationProperty Name="LoyaltyTier" Relationship="Woodford2015Model.FK_UserProfiles_LoyaltyTiers" FromRole="UserProfile" ToRole="LoyaltyTier" />
+    <Property Name="ExistingLoyaltyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HasExistingLoyaltyNumber" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="webpages_Roles" Relationship="Woodford2015Model.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+    <Property Name="IsAccountDisabled" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BookingClaims" Relationship="Woodford2015Model.FK_BookingClaims_UserProfiles" FromRole="UserProfile" ToRole="BookingClaim" />
+    <Property Name="IsLoyaltyTierLocked" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Reservations" Relationship="Woodford2015Model.FK_Reservations_UserProfiles" FromRole="UserProfile" ToRole="Reservation" />
+  </EntityType>
+  <Association Name="FK_UserProfiles_Corporates">
+    <End Type="Woodford2015Model.Corporate" Role="Corporate" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.UserProfile" Role="UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Corporate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="CorporateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfiles_LoyaltyTiers">
+    <End Type="Woodford2015Model.LoyaltyTier" Role="LoyaltyTier" Multiplicity="1" />
+    <End Type="Woodford2015Model.UserProfile" Role="UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoyaltyTier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="LoyaltyTierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ReservationBranchSurcharge">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservationId" Type="Int32" Nullable="false" />
+    <Property Name="BranchSurchargeId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsOnceOff" Type="Boolean" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="BranchSurcharge" Relationship="Woodford2015Model.FK_ReservationBranchSurcharges_BranchSurcharges" FromRole="ReservationBranchSurcharge" ToRole="BranchSurcharge" />
+    <Property Name="MaximumCharge" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Reservation" Relationship="Woodford2015Model.FK_ReservationBranchSurcharges_Reservations" FromRole="ReservationBranchSurcharge" ToRole="Reservation" />
+  </EntityType>
+  <Association Name="FK_ReservationBranchSurcharges_BranchSurcharges">
+    <End Type="Woodford2015Model.BranchSurcharge" Role="BranchSurcharge" Multiplicity="1" />
+    <End Type="Woodford2015Model.ReservationBranchSurcharge" Role="ReservationBranchSurcharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BranchSurcharge">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationBranchSurcharge">
+        <PropertyRef Name="BranchSurchargeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BookingHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExternalId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="LicenseNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LicenseState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LicenseExpiration" Type="DateTime" Precision="3" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AlternateId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PickupBranchId" Type="Int32" Nullable="false" />
+    <Property Name="DropoffBranchId" Type="Int32" Nullable="false" />
+    <Property Name="DateBooked" Type="DateTime" Precision="3" />
+    <Property Name="PickupDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DropOffDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EstimatedKms" Type="Int32" />
+    <Property Name="RateClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VehicleGroupId" Type="Int32" />
+    <Property Name="RateCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RateCodeId" Type="Int32" />
+    <Property Name="RentalDays" Type="Int32" />
+    <Property Name="KmsDriven" Type="Int32" />
+    <Property Name="FreeKms" Type="Int32" />
+    <Property Name="KmsRate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="TotalBill" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="LoyaltyPointsEarned" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="TotalForLoyaltyAward" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="LoyaltyPointTier" Type="Int32" />
+    <Property Name="CanEarnPoints" Type="Boolean" Nullable="false" />
+    <Property Name="LoyaltyPointsEarnedEmailSent" Type="Boolean" Nullable="false" />
+    <Property Name="SendLoyaltyPointsEarnedEmail" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserProfiles" Relationship="Woodford2015Model.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+  </EntityType>
+  <Association Name="webpages_UsersInRoles">
+    <End Type="Woodford2015Model.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+    <End Type="Woodford2015Model.UserProfile" Role="UserProfile" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ReportType" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="UseCurrentDateAsStartDate" Type="Boolean" Nullable="false" />
+    <Property Name="DateUnitsToAdd" Type="Int32" />
+    <Property Name="DateUnitType" Type="Int32" />
+    <Property Name="ReportFilter" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EmailSignature">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FixedContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CellContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SeniorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SeniorFixedContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SeniorCellContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SeniorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DirectorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DirectorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShowSidePanel" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmailSignatureCampaign">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampaignName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MainContentNarrowFileUploadId" Type="Int32" Nullable="false" />
+    <Property Name="MainContentFileUploadId" Type="Int32" Nullable="false" />
+    <Property Name="FooterContentNarrowFileUploadId" Type="Int32" Nullable="false" />
+    <Property Name="FooterContentFileUploadId" Type="Int32" Nullable="false" />
+    <Property Name="SidePanelContentFileUploadId" Type="Int32" Nullable="false" />
+    <Property Name="UnderlineContentFileUploadId" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="IsLive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="FileUploadFooter" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_FooterContent" FromRole="EmailSignatureCampaign" ToRole="FileUpload" />
+    <NavigationProperty Name="FileUploadFooterNarrow" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_FooterContentNarrow" FromRole="EmailSignatureCampaign" ToRole="FileUpload" />
+    <NavigationProperty Name="FileUploadMainContent" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_MainContent" FromRole="EmailSignatureCampaign" ToRole="FileUpload" />
+    <NavigationProperty Name="FileUploadMainContentNarrow" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_MainContentNarrow" FromRole="EmailSignatureCampaign" ToRole="FileUpload" />
+    <NavigationProperty Name="FileUploadSidePanel" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_SidePanelContent" FromRole="EmailSignatureCampaign" ToRole="FileUpload" />
+    <NavigationProperty Name="FileUploadUnderline" Relationship="Woodford2015Model.FK_EmailSignatureCampaigns_Underline" FromRole="EmailSignatureCampaign" ToRole="FileUpload" />
+  </EntityType>
+  <Association Name="FK_EmailSignatureCampaigns_FooterContent">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="1" />
+    <End Type="Woodford2015Model.EmailSignatureCampaign" Role="EmailSignatureCampaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaign">
+        <PropertyRef Name="FooterContentFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_FooterContentNarrow">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="1" />
+    <End Type="Woodford2015Model.EmailSignatureCampaign" Role="EmailSignatureCampaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaign">
+        <PropertyRef Name="FooterContentNarrowFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_MainContent">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="1" />
+    <End Type="Woodford2015Model.EmailSignatureCampaign" Role="EmailSignatureCampaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaign">
+        <PropertyRef Name="MainContentFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_MainContentNarrow">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="1" />
+    <End Type="Woodford2015Model.EmailSignatureCampaign" Role="EmailSignatureCampaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaign">
+        <PropertyRef Name="MainContentNarrowFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_SidePanelContent">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="1" />
+    <End Type="Woodford2015Model.EmailSignatureCampaign" Role="EmailSignatureCampaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaign">
+        <PropertyRef Name="SidePanelContentFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSignatureCampaigns_Underline">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="1" />
+    <End Type="Woodford2015Model.EmailSignatureCampaign" Role="EmailSignatureCampaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSignatureCampaign">
+        <PropertyRef Name="UnderlineContentFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MyGateRefundTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="MyGateTransactionID" Type="Guid" />
+    <Property Name="FSPMessage" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Invoice" Relationship="Woodford2015Model.FK_MyGateRefundTransactions_Invoices" FromRole="MyGateRefundTransaction" ToRole="Invoice" />
+  </EntityType>
+  <EntityType Name="Refund">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="ReservationId" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="RefundedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Invoice" Relationship="Woodford2015Model.FK_Refunds_Invoices" FromRole="Refund" ToRole="Invoice" />
+    <NavigationProperty Name="Reservation" Relationship="Woodford2015Model.FK_Refunds_Reservations" FromRole="Refund" ToRole="Reservation" />
+    <NavigationProperty Name="Reservation1" Relationship="Woodford2015Model.FK_Refunds_Reservations1" FromRole="Refund" ToRole="Reservation" />
+  </EntityType>
+  <Association Name="FK_MyGateRefundTransactions_Invoices">
+    <End Type="Woodford2015Model.Invoice" Role="Invoice" Multiplicity="1" />
+    <End Type="Woodford2015Model.MyGateRefundTransaction" Role="MyGateRefundTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MyGateRefundTransaction">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Refunds_Invoices">
+    <End Type="Woodford2015Model.Invoice" Role="Invoice" Multiplicity="1" />
+    <End Type="Woodford2015Model.Refund" Role="Refund" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Refund">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BookingClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ClaimState" Type="Int32" Nullable="false" />
+    <Property Name="BookingPickupDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BookingDropoffDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BookingPickupBranchId" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IdNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserProfile" Relationship="Woodford2015Model.FK_BookingClaims_UserProfiles" FromRole="BookingClaim" ToRole="UserProfile" />
+    <Property Name="BookingDropOffBranchId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BookingClaims_UserProfiles">
+    <End Type="Woodford2015Model.UserProfile" Role="UserProfile" Multiplicity="1" />
+    <End Type="Woodford2015Model.BookingClaim" Role="BookingClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookingClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TrustPilotReviewInvite">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservationId" Type="Int32" />
+    <Property Name="VoucherId" Type="Int32" />
+    <Property Name="VoucherSent" Type="Boolean" Nullable="false" />
+    <Property Name="VoucherSentDate" Type="DateTime" Precision="3" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Voucher" Relationship="Woodford2015Model.FK_TrustPilotReviewInvites_Vouchers" FromRole="TrustPilotReviewInvite" ToRole="Voucher" />
+    <NavigationProperty Name="Reservation" Relationship="Woodford2015Model.FK_TrustPilotReviewInvites_Reservations" FromRole="TrustPilotReviewInvite" ToRole="Reservation" />
+  </EntityType>
+  <Association Name="FK_TrustPilotReviewInvites_Vouchers">
+    <End Type="Woodford2015Model.Voucher" Role="Voucher" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.TrustPilotReviewInvite" Role="TrustPilotReviewInvite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Voucher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrustPilotReviewInvite">
+        <PropertyRef Name="VoucherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="VehicleManufacturer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SortOrder" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Vehicles" Relationship="Woodford2015Model.FK_Vehicles_VehicleManufacturers" FromRole="VehicleManufacturer" ToRole="Vehicle" />
+    <Property Name="PageUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FileUploadId" Type="Int32" />
+    <NavigationProperty Name="FileUpload" Relationship="Woodford2015Model.FK_VehicleManufacturers_FileUploads" FromRole="VehicleManufacturer" ToRole="FileUpload" />
+  </EntityType>
+  <Association Name="FK_Vehicles_VehicleManufacturers">
+    <End Type="Woodford2015Model.VehicleManufacturer" Role="VehicleManufacturer" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.Vehicle" Role="Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleManufacturer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="VehicleManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleManufacturers_FileUploads">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.VehicleManufacturer" Role="VehicleManufacturer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleManufacturer">
+        <PropertyRef Name="FileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Campaigns_FileUploadsSearchResultIcon">
+    <End Type="Woodford2015Model.FileUpload" Role="FileUpload" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.Campaign" Role="Campaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FileUpload">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Campaign">
+        <PropertyRef Name="SearchResultIconFileUploadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PickupDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DropOffDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PickupBranchId" Type="Int32" Nullable="false" />
+    <Property Name="DropOffBranchId" Type="Int32" Nullable="false" />
+    <Property Name="VehicleId" Type="Int32" Nullable="false" />
+    <Property Name="VehicleExcess" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="VehicleDeposit" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="RateId" Type="Int32" Nullable="false" />
+    <Property Name="RateCodeId" Type="Int32" Nullable="false" />
+    <Property Name="RateCodeTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="RatePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="RateAdjustmentId" Type="Int32" />
+    <Property Name="RateAdjustmentType" Type="Int32" />
+    <Property Name="RateAdjustmentPercentage" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ContractFee" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="DropOffFee" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="VehicleUpgradeId" Type="Int32" />
+    <Property Name="UpgradedVehicleId" Type="Int32" />
+    <Property Name="VehicleUpgradePrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CountdownSpecialId" Type="Int32" />
+    <Property Name="CountdownSpecialType" Type="Int32" />
+    <Property Name="CountdownSpecialOfferText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CountdownSpecialDiscount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CountdownSpecialVehicleUpgradePriceOverride" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VoucherId" Type="Int32" />
+    <Property Name="VoucherNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VoucherRewardType" Type="Int32" />
+    <Property Name="VoucherRewardText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VoucherRewardDiscount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="VoucherRewardDiscountPercentage" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ReservationState" Type="Int32" Nullable="false" />
+    <Property Name="TaxRate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="BranchSurchargeId" Type="Int32" />
+    <Property Name="BranchSurchageText" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BranchSurchageTotalPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="IsCorporate" Type="Boolean" Nullable="false" />
+    <Property Name="CorporateId" Type="Int32" />
+    <Property Name="ReminderSent" Type="Boolean" Nullable="false" />
+    <Property Name="ReminderSMSSent" Type="Boolean" Nullable="false" />
+    <Property Name="ThankYouSent" Type="Boolean" Nullable="false" />
+    <Property Name="LoyaltyPointsAssigned" Type="Boolean" Nullable="false" />
+    <Property Name="LoyaltyPointsEarned" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="LoyaltyPointsSpent" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="LoyaltyTierAtTimeOfBooking" Type="Int32" />
+    <Property Name="QuoteReference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuoteSentDate" Type="DateTime" Precision="3" />
+    <Property Name="HasBeenModified" Type="Boolean" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsQuote" Type="Boolean" Nullable="false" />
+    <Property Name="QuoteReminderSent" Type="Boolean" Nullable="false" />
+    <Property Name="AddedToExternalSystem" Type="Boolean" Nullable="false" />
+    <Property Name="ConfirmedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
+    <Property Name="CancellationFee" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="RefundedAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PaymentProviderType" Type="Int32" Nullable="false" />
+    <Property Name="PaymentErrorCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="HasPaymentError" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="Woodford2015Model.FK_Reservations_Branches" FromRole="Reservation" ToRole="Branch" />
+    <NavigationProperty Name="Branch1" Relationship="Woodford2015Model.FK_Reservations_Branches1" FromRole="Reservation" ToRole="Branch" />
+    <NavigationProperty Name="Invoices" Relationship="Woodford2015Model.FK_Invoices_Reservations" FromRole="Reservation" ToRole="Invoice" />
+    <NavigationProperty Name="Refunds" Relationship="Woodford2015Model.FK_Refunds_Reservations" FromRole="Reservation" ToRole="Refund" />
+    <NavigationProperty Name="Refunds1" Relationship="Woodford2015Model.FK_Refunds_Reservations1" FromRole="Reservation" ToRole="Refund" />
+    <NavigationProperty Name="ReservationBranchSurcharges" Relationship="Woodford2015Model.FK_ReservationBranchSurcharges_Reservations" FromRole="Reservation" ToRole="ReservationBranchSurcharge" />
+    <NavigationProperty Name="UserProfile" Relationship="Woodford2015Model.FK_Reservations_UserProfiles" FromRole="Reservation" ToRole="UserProfile" />
+    <NavigationProperty Name="Vehicle" Relationship="Woodford2015Model.FK_Reservations_Vehicles" FromRole="Reservation" ToRole="Vehicle" />
+    <NavigationProperty Name="VehicleUpgrade" Relationship="Woodford2015Model.FK_Reservations_VehicleUpgrades" FromRole="Reservation" ToRole="VehicleUpgrade" />
+    <NavigationProperty Name="ReservationsLoyaltyTierBenefits" Relationship="Woodford2015Model.FK_ReservationsLoyaltyTierBenefits_Reservations" FromRole="Reservation" ToRole="ReservationsLoyaltyTierBenefit" />
+    <NavigationProperty Name="ReservationsVehicleExtras" Relationship="Woodford2015Model.FK_ReservationsVehicleExtras_Reservations" FromRole="Reservation" ToRole="ReservationsVehicleExtra" />
+    <NavigationProperty Name="TrustPilotReviewInvites" Relationship="Woodford2015Model.FK_TrustPilotReviewInvites_Reservations" FromRole="Reservation" ToRole="TrustPilotReviewInvite" />
+    <Property Name="PaymentErrorMessage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Reservations_Branches">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="PickupBranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Branches1">
+    <End Type="Woodford2015Model.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="DropOffBranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoices_Reservations">
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="1" />
+    <End Type="Woodford2015Model.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Refunds_Reservations">
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="1" />
+    <End Type="Woodford2015Model.Refund" Role="Refund" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Refund">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Refunds_Reservations1">
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="1" />
+    <End Type="Woodford2015Model.Refund" Role="Refund" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Refund">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationBranchSurcharges_Reservations">
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="1" />
+    <End Type="Woodford2015Model.ReservationBranchSurcharge" Role="ReservationBranchSurcharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationBranchSurcharge">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_UserProfiles">
+    <End Type="Woodford2015Model.UserProfile" Role="UserProfile" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Vehicles">
+    <End Type="Woodford2015Model.Vehicle" Role="Vehicle" Multiplicity="1" />
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="VehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_VehicleUpgrades">
+    <End Type="Woodford2015Model.VehicleUpgrade" Role="VehicleUpgrade" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleUpgrade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="VehicleUpgradeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationsLoyaltyTierBenefits_Reservations">
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="1" />
+    <End Type="Woodford2015Model.ReservationsLoyaltyTierBenefit" Role="ReservationsLoyaltyTierBenefit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationsLoyaltyTierBenefit">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationsVehicleExtras_Reservations">
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="1" />
+    <End Type="Woodford2015Model.ReservationsVehicleExtra" Role="ReservationsVehicleExtra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReservationsVehicleExtra">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrustPilotReviewInvites_Reservations">
+    <End Type="Woodford2015Model.Reservation" Role="Reservation" Multiplicity="0..1" />
+    <End Type="Woodford2015Model.TrustPilotReviewInvite" Role="TrustPilotReviewInvite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrustPilotReviewInvite">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MyGateTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="MyGateAuthorisationIDAuth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MyGateAuthorisationIDCapt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MyGateTransactionID" Type="Guid" />
+    <Property Name="MyGate3DParEq" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Invoice" Relationship="Woodford2015Model.FK_MyGateTransactions_Invoices" FromRole="MyGateTransaction" ToRole="Invoice" />
+  </EntityType>
+  <Association Name="FK_MyGateTransactions_Invoices">
+    <End Type="Woodford2015Model.Invoice" Role="Invoice" Multiplicity="1" />
+    <End Type="Woodford2015Model.MyGateTransaction" Role="MyGateTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MyGateTransaction">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ReservationsAdmin">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="PickupDate" />
+      <PropertyRef Name="DropOffDate" />
+      <PropertyRef Name="PickupBranchId" />
+      <PropertyRef Name="DropOffBranchId" />
+      <PropertyRef Name="VehicleId" />
+      <PropertyRef Name="VehicleExcess" />
+      <PropertyRef Name="VehicleDeposit" />
+      <PropertyRef Name="RateId" />
+      <PropertyRef Name="RateCodeId" />
+      <PropertyRef Name="RateCodeTitle" />
+      <PropertyRef Name="RatePrice" />
+      <PropertyRef Name="ContractFee" />
+      <PropertyRef Name="DropOffFee" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="ReservationState" />
+      <PropertyRef Name="TaxRate" />
+      <PropertyRef Name="IsCorporate" />
+      <PropertyRef Name="ReminderSent" />
+      <PropertyRef Name="ThankYouSent" />
+      <PropertyRef Name="LoyaltyPointsAssigned" />
+      <PropertyRef Name="HasBeenModified" />
+      <PropertyRef Name="IsQuote" />
+      <PropertyRef Name="ReminderSMSSent" />
+      <PropertyRef Name="QuoteReminderSent" />
+      <PropertyRef Name="AddedToExternalSystem" />
+      <PropertyRef Name="IsArchived" />
+      <PropertyRef Name="IsCancelled" />
+      <PropertyRef Name="HasPaymentError" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="PickupDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DropOffDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PickupBranchId" Type="Int32" Nullable="false" />
+    <Property Name="DropOffBranchId" Type="Int32" Nullable="false" />
+    <Property Name="VehicleId" Type="Int32" Nullable="false" />
+    <Property Name="VehicleExcess" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="VehicleDeposit" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="RateId" Type="Int32" Nullable="false" />
+    <Property Name="RateCodeId" Type="Int32" Nullable="false" />
+    <Property Name="RateCodeTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="RatePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="RateAdjustmentId" Type="Int32" />
+    <Property Name="RateAdjustmentType" Type="Int32" />
+    <Property Name="RateAdjustmentPercentage" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ContractFee" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="DropOffFee" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="VehicleUpgradeId" Type="Int32" />
+    <Property Name="VehicleUpgradePrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CountdownSpecialId" Type="Int32" />
+    <Property Name="CountdownSpecialType" Type="Int32" />
+    <Property Name="CountdownSpecialOfferText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CountdownSpecialDiscount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CountdownSpecialVehicleUpgradePriceOverride" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VoucherId" Type="Int32" />
+    <Property Name="VoucherNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VoucherRewardType" Type="Int32" />
+    <Property Name="VoucherRewardText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VoucherRewardDiscount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="VoucherRewardDiscountPercentage" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ReservationState" Type="Int32" Nullable="false" />
+    <Property Name="TaxRate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="BranchSurchargeId" Type="Int32" />
+    <Property Name="BranchSurchageText" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BranchSurchageTotalPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="IsCorporate" Type="Boolean" Nullable="false" />
+    <Property Name="CorporateId" Type="Int32" />
+    <Property Name="ReminderSent" Type="Boolean" Nullable="false" />
+    <Property Name="ThankYouSent" Type="Boolean" Nullable="false" />
+    <Property Name="LoyaltyPointsAssigned" Type="Boolean" Nullable="false" />
+    <Property Name="LoyaltyPointsEarned" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="LoyaltyPointsSpent" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="LoyaltyTierAtTimeOfBooking" Type="Int32" />
+    <Property Name="QuoteReference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuoteSentDate" Type="DateTime" Precision="3" />
+    <Property Name="HasBeenModified" Type="Boolean" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="InvoiceId" Type="Int32" />
+    <Property Name="ReservationId" Type="Int32" />
+    <Property Name="AmountPaid" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="InvoiceDateCreated" Type="DateTime" Precision="3" />
+    <Property Name="IsMobileCheckout" Type="Boolean" />
+    <Property Name="IsCompleted" Type="Boolean" />
+    <Property Name="IsCorporateCheckout" Type="Boolean" />
+    <Property Name="TransactionId" Type="Int32" />
+    <Property Name="MyGateAuthorisationIDAuth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MyGateAuthorisationIDCapt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MyGateTransactionID" Type="Guid" />
+    <Property Name="MyGate3DParEq" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsQuote" Type="Boolean" Nullable="false" />
+    <Property Name="ReminderSMSSent" Type="Boolean" Nullable="false" />
+    <Property Name="UpgradedVehicleId" Type="Int32" />
+    <Property Name="QuoteReminderSent" Type="Boolean" Nullable="false" />
+    <Property Name="AddedToExternalSystem" Type="Boolean" Nullable="false" />
+    <Property Name="ConfirmedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+    <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
+    <Property Name="CancellationFee" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="RefundedAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="HasPaymentError" Type="Boolean" Nullable="false" />
+    <Property Name="PaymentErrorCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PaymentErrorMessage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

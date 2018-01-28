@@ -1,0 +1,56 @@
+﻿@model RequestCallbackViewModel
+@{
+    ViewBag.Title = "Request Callback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Contact</h1>
+    </div>
+</div>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="input-form">
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.RequestCallback.FullName, "Full Name")
+            </div>
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.RequestCallback.FullName, new { placeholder = "Full Name" })
+                @Html.ValidationMessageFor(m => m.RequestCallback.FullName)
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.RequestCallback.PhoneNumber, "Phone Number")
+            </div>
+
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.RequestCallback.PhoneNumber, new { placeholder = "Phone Number" })
+                @Html.ValidationMessageFor(m => m.RequestCallback.PhoneNumber)
+            </div>
+        </div>        
+
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.RequestCallback.Branch, "Branch")
+            </div>
+            <div class="eight columns">
+                @Html.BranchStringFor(m => m.RequestCallback.Branch)
+                @Html.ValidationMessageFor(m => m.RequestCallback.Branch)
+            </div>
+        </div>        
+
+        <div class="row">
+            <div class="four columns empty-column">&nbsp;</div>
+            <div class="eight columns">
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
+    </div>
+}
+

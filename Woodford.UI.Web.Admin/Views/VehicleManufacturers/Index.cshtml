@@ -1,0 +1,52 @@
+﻿@model ListOf<VehicleManufacturerModel>
+@{
+    ViewBag.Title = "Vehicle Manufacturers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Vehicle Manufacturers</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Manufacturers</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Vehicle Manufacturer", "Add", "VehicleManufacturers")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+                <tr>
+                    <td></td>
+                    @*<td></td>*@
+                    <th scope="col">Vehicle Manufacturer Name</th>                    
+                    
+                    <th scope="col">Page Url</th>                    
+                    <th scope="col">Sort Order</th>
+                </tr>
+
+                @foreach (var g in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "VehicleManufacturers", new { id = g.Id }, null)</td>
+                        
+                        <td>@g.Title</td>                        
+                        <td>@g.PageUrl</td>
+                        <td>@g.SortOrder</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No vehicle manufacturers have been created yet</p>
+        </div>
+    }
+
+</div>

@@ -1,0 +1,110 @@
+﻿@model RateAdjustmentViewModel
+@{
+    ViewBag.Title = "Edit | Rate Adjustments By Demand";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Rate Adjustments by Demand</h1>
+}
+
+@{ Html.RenderAction("RenderAuditContainer", "Audit", new { entityType = Model.RateAdjustment.GetType(), entityIdValue = Model.RateAdjustment.Id }); }
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Rate Adjustment by Demand</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("AdjustmentsByDemandEdit", "RateAdjustments", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+
+        @Html.HiddenFor(m => m.RateAdjustment.Id)
+
+        <div class="box-body">                       
+            <div id="dates-range">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RateAdjustment.StartDate, "Start Date", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.RateAdjustment.StartDate, new { placeholder = "Start Date", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.RateAdjustment.StartDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RateAdjustment.EndDate, "End Date", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.RateAdjustment.EndDate, new { placeholder = "End Date", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.RateAdjustment.EndDate)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateAdjustment.BranchId, "Branch", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.BranchFor(m => m.RateAdjustment.BranchId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.RateAdjustment.BranchId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateAdjustment.VehicleGroupId, "Vehicle Group", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.VehicleGroupFor(m => m.RateAdjustment.VehicleGroupId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.RateAdjustment.VehicleGroupId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateAdjustment.NumberOfBookings, "Number of Bookings", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.RateAdjustment.NumberOfBookings, new { placeholder = "Number of Bookings", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.RateAdjustment.NumberOfBookings)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateAdjustment.AdjustmentPercentage, "Adjustment Percentage", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.RateAdjustment.AdjustmentPercentage, new { placeholder = "Adjustment Percentage", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.RateAdjustment.AdjustmentPercentage)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="@Html.IdFor(m=>m.RateAdjustment.IsArchived)">
+                            @Html.CheckBoxFor(m => m.RateAdjustment.IsArchived) Is Archived
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.RateAdjustment.IsArchived)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Demand Adjustment</button>
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            cleanDate('RateAdjustment_StartDate');
+            cleanDate('RateAdjustment_EndDate');
+
+            $('#RateAdjustment_StartDate,#RateAdjustment_EndDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });                        
+        });
+
+    </script>
+}

@@ -1,0 +1,14 @@
+﻿@model BranchRequestCallbackViewModel
+@{
+    ViewBag.Title = Model.Branch.BranchRequestCallbackPageTitle;
+    ViewBag.MetaKeywords = Model.Branch.BranchRequestCallbackMetaKeywords;
+    ViewBag.MetaDescription = Model.Branch.BranchRequestCallbackMetaDescription;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Request a Callback</h1>
+        <p>Thank you for contacting the @Model.Branch.Title branch. We will be in touch with you shortly.</p>
+    </div>
+</div>

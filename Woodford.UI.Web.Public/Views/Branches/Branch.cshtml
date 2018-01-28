@@ -1,0 +1,48 @@
+﻿@model BranchModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.PageContent.PageTitle;
+    ViewBag.MetaKeywords = Model.PageContent.MetaKeywords;
+    ViewBag.MetaDescription = Model.PageContent.MetaDescription;
+}
+
+<h1>@Model.Title</h1>
+<div class="row">
+    <div class="four columns">
+        @if (Model.FileUploadId.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.BranchImage.Id, filename = Model.BranchImage.Title + Model.BranchImage.FileExtension, width = 1000})" alt="@Model.Title" />
+        }
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.MapEmbed)) {
+        <div class="eight columns" style="height: 340px;">
+            <div style="height: 140px;">
+                @Html.Raw(Model.MapEmbed)
+            </div>
+        </div>
+    }
+   
+</div>
+<div class="row">
+    <div class="twelve columns">
+        @Html.ActionLink("Contact Branch", "Contact", "Branches", new { branchUrl = Model.PageUrl }, new { @class = "button" })
+        @Html.ActionLink("Request Callback", "RequestCallback", "Branches", new { branchUrl = Model.PageUrl }, new { @class = "button" })
+    </div> 
+</div>
+<div class="row">
+    <div class="twelve columns">
+        <div class="rich-text">
+            @Html.Raw(Model.PageContent.PageContent)
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //document.getElementsByTagName("frame")[0].height = "340px";
+        $('iframe').css('height', "306px");
+    });
+    
+
+</script>

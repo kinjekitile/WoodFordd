@@ -1,0 +1,45 @@
+﻿@model UserSetDisabledViewModel
+@{
+    ViewBag.Title = "Set Account Disabled";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Set Account Disabled</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Set Account Disabled</h3>
+
+    </div><!-- /.box-header -->
+
+
+
+    @using (Html.BeginForm("SetDisabled", "Users", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+        <div class="box-body">
+            <p>Are you sure you wish to disabled the account for: @Model.User.FirstName @Model.User.LastName ?</p>
+
+            @Html.ValidationSummary()
+
+            @Html.HiddenFor(x => x.User.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.User.IsAccountDisabled, "Is Disabled", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.CheckBoxFor(m => m.User.IsAccountDisabled)
+                    @Html.ValidationMessageFor(m => m.User.IsAccountDisabled)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Set User as Disabled</button>
+                </div>
+            </div>
+
+
+        </div>
+    }
+</div>

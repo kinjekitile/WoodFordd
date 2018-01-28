@@ -1,0 +1,253 @@
+﻿@model ReservationViewModel
+@{
+    ViewBag.Title = "Reservation Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    @*<div class="three columns">
+        <div class="nav-block">
+            @{Html.RenderPartial("_UserNavigationPartial"); }
+        </div>
+    </div>*@
+
+
+    <div class="seven columns">
+        <ul>
+            <li>
+                @Html.ActionLink("Change Dates", "ChangeDates", new { id = Model.Reservation.Id, pin = Model.Reservation.QuoteReference })
+            </li>
+            <li>
+                @Html.ActionLink("Change Vehicle", "ChangeVehicle", new { id = Model.Reservation.Id, pin = Model.Reservation.QuoteReference })
+            </li>
+        </ul>
+        <div class="reservation-number">
+            <h2>Reservation Number: <span>@Model.Reservation.Id</span></h2>
+        </div>
+
+        <p class="thank-you-message">Thank you for choosing Woodford Car Hire. We look forward to meeting you.</p>
+
+        <h2>Booking Details</h2>
+
+        @if (Model.Reservation.UserId == null) {
+            if (!string.IsNullOrEmpty(Model.Reservation.FirstName) || (!string.IsNullOrEmpty(Model.Reservation.LastName))) {
+                <text>Full Name: </text><strong>@Model.Reservation.FirstName @Model.Reservation.LastName</strong><br />
+            }
+            <text> Email: </text> <strong>@Model.Reservation.Email</strong><br />
+            if (!string.IsNullOrEmpty(Model.Reservation.MobileNumber)) {
+                <text>Cell: </text><strong>@Model.Reservation.MobileNumber</strong><br />
+            }
+            if (!string.IsNullOrEmpty(Model.Reservation.IdNumber)) {
+                <text>ID No: </text><strong>@Model.Reservation.IdNumber</strong>
+            }
+        } else {
+            if (!string.IsNullOrEmpty(Model.Reservation.User.FirstName) || (!string.IsNullOrEmpty(Model.Reservation.User.LastName))) {
+                <text>Full Name: </text><strong>@Model.Reservation.FirstName @Model.Reservation.LastName</strong><br />
+            }
+            <text> Email: </text> <strong>@Model.Reservation.User.Email</strong><br />
+            if (!string.IsNullOrEmpty(Model.Reservation.User.MobileNumber)) {
+                <text>Cell: </text><strong>@Model.Reservation.User.MobileNumber</strong><br />
+            }
+            if (!string.IsNullOrEmpty(Model.Reservation.User.IdNumber)) {
+                <text>ID No: </text><strong>@Model.Reservation.User.IdNumber</strong>
+            }
+        }
+
+        <h3>Vehicle</h3>
+        @if (Model.Reservation.VehicleUpgrade != null) {
+            <p><strong>@Model.Reservation.VehicleUpgrade.Title</strong></p>
+            <p>Upgraded from @Model.Reservation.Vehicle.Title</p>
+
+        } else {
+            <p><strong>@Model.Reservation.Vehicle.Title</strong></p>
+        }
+
+        <h2>Hire Dates</h2>
+        <p>
+            Pick Up <strong style="margin: 0 10px;">@Model.Reservation.PickupDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Reservation.PickupBranch.Title
+            <br />
+            Drop Off <strong style="margin: 0 10px;">@Model.Reservation.DropOffDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Reservation.DropOffBranch.Title
+        </p>
+
+        <h3>@Model.Reservation.RateCodeTitle</h3>
+
+        <h4>Cost Summary</h4>
+        <table class="cost-summary">
+            <tr>
+                <th scope="row">Rental</th>
+                <td>@String.Format("{0:c}", Model.Reservation.AdjustedPrice)</td>
+            </tr>
+            <tr>
+                <th scope="row">Tax</th>
+                <td>@String.Format("{0:c}", Model.Reservation.TaxAmount)</td>
+            </tr>
+            <tr>
+                <th scope="row"><strong>Total</strong></th>
+                <td><strong>@String.Format("{0:c}", Model.Reservation.AdjustedPrice + Model.Reservation.TaxAmount)</strong></td>
+            </tr>
+            @if (Model.Reservation.DropOffFee > 0) {
+                <tr>
+                    <th scope="row">Drop Off Fee</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.DropOffFee)</td>
+                </tr>
+            }
+            <tr>
+                <th scope="row">Admin Fee</th>
+                <td>@String.Format("{0:c}", Model.Reservation.ContractFee)</td>
+            </tr>
+
+            @foreach (var x in Model.Reservation.VehicleExtras) {
+                <tr>
+                    <th scope="row">@x.ExtraTitle</th>
+                    @if (x.ReservationLoyaltyBenefitId.HasValue) {
+                        <td>Advance - Free</td>
+                    } else {
+
+                        <td>@String.Format("{0:c}", x.ExtraPrice * Model.Reservation.NumberOfDays)</td>
+                    }
+
+                </tr>
+            }
+            @if (Model.Reservation.VehicleUpgradeId != null) {
+                <tr>
+                    <th scope="row">Upgrade to @Model.Reservation.VehicleUpgrade.Title</th>
+                    @if (Model.Reservation.Benefits.Select(x => x.UpgradeId).Contains(Model.Reservation.VehicleUpgradeId)) {
+                        <td>Advance - Free</td>
+                    } else {
+                        <td>@String.Format("{0:c}", Model.Reservation.VehicleUpgradePriceAmount)</td>
+                    }
+
+                </tr>
+            }
+
+            <tr class="total total-row">
+                <th scope="row"><strong>Final</strong></th>
+                <td id="total-price">
+                    @String.Format("{0:c}", Model.Reservation.BookingPrice)
+                </td>
+            </tr>
+            <tr class="total-days">
+                <td></td>
+                <td class="numeric-field">For @Model.Reservation.NumberOfDays.ToString() Days</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Paid Upon Booking</th>
+                <td style="text-align: right;">R @Model.Reservation.Invoice.AmountPaid.ToString("#,##0.00")</td>
+            </tr>
+
+            @if (Model.Reservation.BookingPrice - Model.Reservation.Invoice.AmountPaid > 0.01m) {
+                <tr>
+                    <th scope="row">To be Paid Upon Collection</th>
+                    <td style="text-align: right;">R @((Model.Reservation.BookingPrice - Model.Reservation.Invoice.AmountPaid).ToString("#,##0.00"))</td>
+                </tr>
+            }
+
+        </table>
+        <h4>Authorisation Upon Collection</h4>
+        <p>
+            The insurance excess on this vehicle is R @Model.Reservation.Vehicle.ExcessAmount.ToString("#,##0.00").<br />
+
+            Upon collection you would be required to pay a credit card deposit of R @Model.Reservation.Vehicle.DepositAmount.ToString("#,##0.00") for the duration. Upon return of the vehicle in the same condition the deposit will be refunded.
+
+        </p>
+        <p style="margin: 10px 0;">If you would like peace of mind, we offer top up waivers, super waivers and tire & glass cover. Please enquire at the rental counter.</p>
+
+        @if (Model.Waivers.Count > 0) {
+            <table class="waivers-list">
+                <thead>
+                    <tr>
+                        <th style="width: auto;" scope="col"></th>
+                        <th class="numeric-field" style="width: auto;" scope="col">Cost per day</th>
+                        <th class="numeric-field" style="width: auto;" scope="col">Max Liability</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (WaiverModel w in Model.Waivers) {
+                        <tr>
+                            <th scope="row">@w.WaiverType.ToString().Replace("_", " ")</th>
+                            <td class="numeric-field">
+                                @if (w.CostPerDay.HasValue) {
+                                    <text>R @w.CostPerDay.Value.ToString("#,##0.##")</text>
+                                } else {
+                                    <text>n/a</text>
+                                }
+                            </td>
+                            <td class="numeric-field">
+                                @if (w.Liability.HasValue) {
+                                    <text>R @w.Liability.Value.ToString("#,##0.##")</text>
+                                } else {
+                                    <text>n/a</text>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        <div class="print-message">
+            This confirmation has been emailed to @Model.Reservation.Email
+            <br />
+            <a href="#" class="printquote">Print this Document</a>
+        </div>
+        <br />
+      
+    </div>
+
+    <div class="five columns">
+
+        @if (Model.Reservation.VehicleUpgrade != null) {
+            <h2>@Model.Reservation.VehicleUpgrade.Title</h2>
+            <p>@Model.Reservation.VehicleUpgrade.VehicleGroup.TitleDescription</p>
+            if (Model.Reservation.VehicleUpgrade.FileUploadId.HasValue) {
+                <img src="@Url.Action("Index", "Uploads", new { id = Model.Reservation.VehicleUpgrade.VehicleImage.Id, filename = Model.Reservation.VehicleUpgrade.VehicleImage.Title + Model.Reservation.VehicleUpgrade.VehicleImage.FileExtension, width = 300})" alt="@Model.Reservation.VehicleUpgrade.Title" />
+            }
+
+            if (Model.Reservation.VehicleUpgrade.FileUploadId2.HasValue) {
+                <img src="@Url.Action("Index", "Uploads", new { id = Model.Reservation.VehicleUpgrade.VehicleImage2.Id, filename = Model.Reservation.VehicleUpgrade.VehicleImage2.Title + Model.Reservation.VehicleUpgrade.VehicleImage2.FileExtension, width = 300})" alt="@Model.Reservation.VehicleUpgrade.Title Interior" />
+            }
+
+        } else {
+            <h2>@Model.Reservation.Vehicle.Title</h2>
+            <p>@Model.Reservation.Vehicle.VehicleGroup.TitleDescription</p>
+            if (Model.Reservation.Vehicle.FileUploadId.HasValue) {
+                <img src="@Url.Action("Index", "Uploads", new { id = Model.Reservation.Vehicle.VehicleImage.Id, filename = Model.Reservation.Vehicle.VehicleImage.Title + Model.Reservation.Vehicle.VehicleImage.FileExtension, width = 300})" alt="@Model.Reservation.Vehicle.Title" />
+            }
+
+            if (Model.Reservation.Vehicle.FileUploadId2.HasValue) {
+                <img src="@Url.Action("Index", "Uploads", new { id = Model.Reservation.Vehicle.VehicleImage2.Id, filename = Model.Reservation.Vehicle.VehicleImage2.Title + Model.Reservation.Vehicle.VehicleImage2.FileExtension, width = 300})" alt="@Model.Reservation.Vehicle.Title Interior" />
+            }
+        }
+
+
+
+
+
+        <h2 style="color: #19963C; border-bottom: 1px solid #999; margin: 0; padding: 5px 0 4px 0;">Important Information</h2>
+        <p>Drivers must be 23 years or older, and must have a driver's license valid for at least 3 years.</p>
+
+        <table style="width: 100%; font-size: 12px; margin-bottom: 10px;" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td style="width: 50%;">
+                        <strong>Rental Price Includes:</strong><br />
+                        Insurance against damage or theft<br />
+                        Airport Surcharge<br />
+                        Tourism Levy / VAT
+                    </td>
+                    <td style="text-align: right; width: 50%;">
+                        <strong>Rental Price Excludes:</strong><br />
+                        Security Deposit<br />
+                        Fuel top up on drop off
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+       
+    </div>
+
+
+    </div>

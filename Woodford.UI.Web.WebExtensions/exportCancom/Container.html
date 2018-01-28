@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+    function parentFunc() {
+        document.getElementById("resultFrame").contentWindow.childfunc();
+    }
+
+
+    </script>
+</head>
+<body>
+    <input type="button" id="btnDo" value="Go" onclick="parentFunc()" />
+    <iframe id="resultFrame" name="resultFrame" src="Frame.html" style="height: 800px; width: 800px;" />
+
+</body>
+</html>

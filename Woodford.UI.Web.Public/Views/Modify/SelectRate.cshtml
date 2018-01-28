@@ -1,0 +1,42 @@
+﻿@model ReservationModifyDateViewModel
+@{
+    ViewBag.Title = "Select Rate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="four columns">
+        <div class="nav-block">
+            @{Html.RenderPartial("_UserNavigationPartial"); }
+        </div>
+    </div>
+
+
+    <div class="eight columns">
+        <h1>Select Rate</h1>
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.ReservationId)
+
+            <div class="input-form vertical-form">
+
+               
+                <p>Select rate</p>
+                @*<div class="row">
+                    @Html.LabelFor(m => m.DropOffDate, "Drop Off Date")
+                    @Html.DatePickerFor(m => m.DropOffDate, new { @class = "datefield" })
+                    @Html.HourOfDayDropDownListFor(m => m.DropOffTime, new { @class = "timefield" })
+                </div>*@
+
+                <div class="row">
+                    <div class="four columns empty-column">&nbsp;</div>
+                    <div class="eight columns">
+                        <input type="submit" value="Update" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

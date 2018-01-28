@@ -1,0 +1,289 @@
+﻿@model RateSearchAndUpdateViewModel
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Delete Rates</h1>
+}
+
+
+
+
+@using (Html.BeginForm("Delete", "RateUpdate", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Filter</h3>
+        </div><!-- /.box-header -->
+
+        <div id="rate-filter" class="box-body">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SelectedBranchIds, "Branches", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.CheckBoxListFor(m => m.SelectedBranchIds, m => m.AllBranches, x => x.Id, x => x.Title, m => m.SelectedBranches)
+                    @Html.ValidationMessageFor(m => m.SelectedBranchIds)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Search.RateCodeId, "Rate Code", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.RateCodeFor(m => m.Search.RateCodeId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Search.RateCodeId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Search_IsOpenEnded">
+                            @Html.CheckBoxFor(m => m.Search.IsOpenEnded) Is Open Ended
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Search.IsOpenEnded)
+
+                </div>
+            </div>
+
+            <div id="rate-dates">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Search.StartDate, "Start Date", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Search.StartDate, new { placeholder = "Start Date", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Search.StartDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Search.EndDate, "End Date", new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Search.EndDate, new { placeholder = "End Date", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Search.EndDate)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+
+@if (Model.Results != null) {
+    using (Html.BeginForm("Delete", "RateUpdate", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Rates to be deleted</h3>
+
+            </div><!-- /.box-header -->
+            @*@Html.HiddenFor(x => x.Search.BranchIds)*@
+            @Html.HiddenFor(x => x.Search.StartDate)
+            @Html.HiddenFor(x => x.Search.EndDate)
+            @Html.HiddenFor(x => x.Search.RateCodeId)
+            @Html.HiddenFor(x => x.Search.IsOpenEnded)
+            @*@Html.HiddenFor(x => x.SelectedBranchIds)
+                @Html.HiddenFor(x => x.SelectedBranchIdsString)*@
+
+            <div style="display: none;">
+                @Html.CheckBoxListFor(m => m.SelectedBranchIds, m => m.AllBranches, x => x.Id, x => x.Title, m => m.SelectedBranches)
+            </div>
+
+
+            @foreach (var b in Model.Results.Branches) {
+
+                if (Model.Results.Branches.IndexOf(b) != Model.Results.Branches.Count - 1) {
+                   
+
+                } else {
+                  
+                        <button type="submit" class="btn btn-primary">Delete Rates</button>
+                    
+                }
+            }
+
+            <input type="hidden" name="rateCodeId" id="rateCodeId" value="@Model.Search.RateCodeId" />
+
+
+
+            <div class="box-body no-padding">
+                @if (Model.Results != null) {
+                    if (Model.Results.VehicleGroups.Count > 0 && Model.Results.Branches.Count > 0) {
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td align="center"></td>
+                                    @foreach (var bHeader in Model.Results.Branches) {
+                                        <td align="center">@bHeader.Title</td>
+                                        if (Model.Results.Branches.IndexOf(bHeader) != Model.Results.Branches.Count - 1) {
+                                            int idNext = Model.Results.Branches[Model.Results.Branches.IndexOf(bHeader) + 1].Id;
+                                            <td align="center">
+                                                <button class="btn" type="button" onclick="copyAllRatesColumn('@(bHeader.Id)','@(idNext)')"><i class="fa fa-fw fa-angle-double-right"></i></button>
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                                <tr>
+                                    <td align="center"></td>
+                                    @foreach (var bHeader in Model.Results.Branches) {
+                                        <td align="center">Rate \ Per Km \ Free Kms</td>
+                                        if (Model.Results.Branches.IndexOf(bHeader) != Model.Results.Branches.Count - 1) {
+                                            <td align="center"></td>
+                                        }
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var vg in Model.Results.VehicleGroups) {
+                                var groupRates = Model.Results.Rates.Where(x => x.VehicleGroupId == vg.Id).ToList();
+
+                                    <tr>
+                                        <th scope="row" align="center">@vg.Title </th>
+                                        @foreach (var b in Model.Results.Branches) {
+                                            var vehicleGroupBranchRate = groupRates.Where(x => x.BranchId == b.Id).SingleOrDefault();
+
+                                            <td align="center">
+                                                @if (vehicleGroupBranchRate == null) {
+                                                    <input type="text" id="vehicleBranch_@(vg.Id)_@(b.Id)" name="vehicleBranch_@(vg.Id)_@(b.Id)" placeholder="Rate" class="input-sm" />
+                                                    <input type="text" id="vehicleBranch_@(vg.Id)_@(b.Id)_freekms" name="vehicleBranch_@(vg.Id)_@(b.Id)_freekms" placeholder="Free Km" class="input-sm" />
+                                                    <input type="text" id="vehicleBranch_@(vg.Id)_@(b.Id)_perkm" name="vehicleBranch_@(vg.Id)_@(b.Id)_perkm" placeholder="Per Km" class="input-sm" />
+
+
+                                                } else {
+                                                    <input type="text" id="vehicleBranch_@(vg.Id)_@(b.Id)" name="vehicleBranch_@(vg.Id)_@(b.Id)" value="@decimal.Round(vehicleGroupBranchRate.Price, 2)" class="input-sm" />
+                                                    <input type="hidden" id="vehicleBranch_@(vg.Id)_@(b.Id)_rateid" name="vehicleBranch_@(vg.Id)_@(b.Id)_rateid" value="@vehicleGroupBranchRate.Id" class="input-sm" />
+                                                    if (vehicleGroupBranchRate.HasUnlimitedKms) {
+                                                        <input type="text" id="vehicleBranch_@(vg.Id)_@(b.Id)_freekms" name="vehicleBranch_@(vg.Id)_@(b.Id)_freekms" value="ulm" class="input-sm" />
+                                                    } else {
+                                                        <input type="text" id="vehicleBranch_@(vg.Id)_@(b.Id)_freekms" name="vehicleBranch_@(vg.Id)_@(b.Id)_freekms" value="@vehicleGroupBranchRate.FreeKms" class="input-sm" />
+                                                    }
+                                                    <input type="text" id="vehicleBranch_@(vg.Id)_@(b.Id)_perkm" name="vehicleBranch_@(vg.Id)_@(b.Id)_perkm" value="@decimal.Round(vehicleGroupBranchRate.CostPerKm, 2)" class="input-sm" />
+
+
+
+                                                }
+
+
+                                            </td>
+
+                                            if (Model.Results.Branches.IndexOf(b) != Model.Results.Branches.Count - 1) {
+                                                <td align="center">
+                                                    @{  int idNext = Model.Results.Branches[Model.Results.Branches.IndexOf(b) + 1].Id; }
+                                                    @{  string nextBranchName = Model.Results.Branches[Model.Results.Branches.IndexOf(b) + 1].Title; }
+                                                    <button class="btn" type="button" title="Copy @(vg.Title) values to @(nextBranchName)" onclick="copyRatesColumn('@(vg.Id)_@(b.Id)','@(vg.Id)_@(idNext)')"><i class="fa fa-fw fa-long-arrow-right"></i></button>
+                                                </td>
+
+                                                            }
+
+
+                                                        }
+                                    </tr>
+                                                        }
+                                <tr>
+                                    <td></td>
+
+                                    @foreach (var b in Model.Results.Branches) {
+
+                                        if (Model.Results.Branches.IndexOf(b) != Model.Results.Branches.Count - 1) {
+                                            <td></td>
+                                            <td></td>
+
+                                        } else {
+                                            <td>
+                                                <button type="submit" class="btn btn-primary">Delete Rates</button>
+                                            </td>
+                                        }
+                                    }
+
+                                </tr>
+                            </tbody>
+                        </table>
+                                                            }
+                                                        }
+
+            </div>
+
+        </div>
+                                                            }
+                                                        }
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            cleanDate('Search_StartDate');
+            cleanDate('Search_EndDate');
+
+            @if (Model.Results != null) {
+
+                   <text>cleanDate('UpdateDateRange_ValidStartDate');</text>
+                   <text>cleanDate('UpdateDateRange_ValidEndDate');</text>
+
+           }
+
+            showHideDates('Search_IsOpenEnded', 'Search_StartDate', 'Search_EndDate', 'rate-dates');
+            showHideDates('UpdateDateRange_IsOpenEnded', 'UpdateDateRange_ValidStartDate', 'UpdateDateRange_ValidEndDate', 'update-rate-dates');
+
+            $('#Search_StartDate,#Search_EndDate,#UpdateDateRange_ValidStartDate,#UpdateDateRange_ValidEndDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+            $("#Search_IsOpenEnded").on("change", function () {
+                showHideDates('Search_IsOpenEnded', 'Search_StartDate', 'Search_EndDate', 'rate-dates');
+            });
+            $("#UpdateDateRange_IsOpenEnded").on("change", function () {
+                showHideDates('UpdateDateRange_IsOpenEnded', 'UpdateDateRange_ValidStartDate', 'UpdateDateRange_ValidEndDate', 'update-rate-dates');
+            });
+
+            function showHideDates(isOpenededCheckboxId, startDateId, endDateId, datesContainerId) {
+                var checked = $("#" + isOpenededCheckboxId).is(":checked");
+                if (checked) {
+                    $('#' + startDateId + ',#' + endDateId).val("");
+                    $("#" + datesContainerId).hide();
+                } else {
+                    $("#" + datesContainerId).show();
+                }
+            }
+
+
+
+        });
+
+        function copyAllRatesColumn(fromBranch, toBranch) {
+            var from = "";
+            var to = "";
+            @if (Model.Results != null) {
+                foreach (var vg in Model.Results.VehicleGroups) {
+                    <text> from = "@(vg.Id)_" + fromBranch;</text>
+                    <text>  to = "@(vg.Id)_" + toBranch;</text>
+                    <text> copyRatesColumn(from, to);</text>
+                }
+            }
+
+        }
+        function copyRatesColumn(copyFromColumnIdentifier, copyToColumnIdentifier) {
+
+
+            var copyFromRate = $("#vehicleBranch_" + copyFromColumnIdentifier).val();
+
+            $("#vehicleBranch_" + copyToColumnIdentifier).val(copyFromRate);
+
+            var copyFromPerKm = $("#vehicleBranch_" + copyFromColumnIdentifier + "_perkm").val();
+
+            $("#vehicleBranch_" + copyToColumnIdentifier + "_perkm").val(copyFromPerKm);
+
+            var copyFromFreeKm = $("#vehicleBranch_" + copyFromColumnIdentifier + "_freekms").val();
+
+            $("#vehicleBranch_" + copyToColumnIdentifier + "_freekms").val(copyFromFreeKm);
+            return false;
+        }
+    </script>
+}

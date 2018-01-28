@@ -1,0 +1,94 @@
+﻿@model ReservationModel
+
+<h3>Vehicle</h3>
+@if (Model.VehicleUpgrade != null) {
+    <p><strong>@Model.VehicleUpgrade.Title</strong></p>
+            <p>Upgraded from @Model.Vehicle.Title</p>
+
+} else {
+    <p><strong>@Model.Vehicle.Title</strong></p>
+}
+
+<h2>Hire Dates</h2>
+<p>
+    Pick Up <strong style="margin: 0 10px;">@Model.PickupDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.PickupBranch.Title
+    <br />
+    Drop Off <strong style="margin: 0 10px;">@Model.DropOffDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.DropOffBranch.Title
+</p>
+
+<h3>@Model.RateCodeTitle</h3>
+
+<h4>Cost Summary</h4>
+<table class="cost-summary">
+    <tr>
+        <th scope="row">Rental</th>
+        <td>@String.Format("{0:c}", Model.AdjustedPrice)</td>
+    </tr>
+    <tr>
+        <th scope="row">Tax</th>
+        <td>@String.Format("{0:c}", Model.TaxAmount)</td>
+    </tr>
+    <tr>
+        <th scope="row"><strong>Total</strong></th>
+        <td><strong>@String.Format("{0:c}", Model.AdjustedPrice + Model.TaxAmount)</strong></td>
+    </tr>
+    @if (Model.DropOffFee > 0) {
+        <tr>
+            <th scope="row">Drop Off Fee</th>
+            <td>@String.Format("{0:c}", Model.DropOffFee)</td>
+        </tr>
+    }
+    <tr>
+        <th scope="row">Admin Fee</th>
+        <td>@String.Format("{0:c}", Model.ContractFee)</td>
+    </tr>
+
+    @foreach (var x in Model.VehicleExtras) {
+        <tr>
+            <th scope="row">@x.ExtraTitle</th>
+            @if (x.ReservationLoyaltyBenefitId.HasValue) {
+                <td>Advance - Free</td>
+            } else {
+
+                <td>@String.Format("{0:c}", x.ExtraPrice * Model.NumberOfDays)</td>
+            }
+
+        </tr>
+    }
+    @if (Model.VehicleUpgradeId != null) {
+        <tr>
+            <th scope="row">Upgrade to @Model.VehicleUpgrade.Title</th>
+            @if (Model.Benefits.Select(x => x.UpgradeId).Contains(Model.VehicleUpgradeId)) {
+                <td>Advance - Free</td>
+            } else {
+                <td>@String.Format("{0:c}", Model.VehicleUpgradePriceAmount)</td>
+            }
+
+        </tr>
+    }
+
+    <tr class="total total-row">
+        <th scope="row"><strong>Final</strong></th>
+        <td id="total-price">
+            @String.Format("{0:c}", Model.BookingPrice)
+        </td>
+    </tr>
+    <tr class="total-days">
+        <td></td>
+        <td class="numeric-field">For @Model.NumberOfDays.ToString() Days</td>
+    </tr>
+
+    <tr>
+        <th scope="row">Paid Upon Booking</th>
+        <td style="text-align: right;">R @Model.Invoice.AmountPaid.ToString("#,##0.00")</td>
+    </tr>
+
+    @if (Model.BookingPrice - Model.Invoice.AmountPaid > 0.01m) {
+        <tr>
+            <th scope="row">To be Paid Upon Collection</th>
+            <td style="text-align: right;">R @((Model.BookingPrice - Model.Invoice.AmountPaid).ToString("#,##0.00"))</td>
+        </tr>
+    }
+
+</table>
+

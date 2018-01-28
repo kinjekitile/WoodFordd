@@ -1,0 +1,66 @@
+﻿@model ReservationViewModel
+@{
+    ViewBag.Title = "Modify Reservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="three columns">
+        <div class="nav-block">
+
+            @if (Request.IsAuthenticated) {
+                Html.RenderPartial("_UserNavigationPartial");
+            }
+
+        </div>
+    </div>
+
+
+    <div class="five columns">
+       @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="input-form">
+            <div class="row">
+                <div class="four columns">
+                    @Html.LabelFor(m => m.Reservation.Id, "Reservation Number")
+                </div>
+                <div class="eight columns">
+                    @Html.TextBoxFor(m => m.Reservation.Id, new { placeholder = "Reservation Number" })
+                    @Html.ValidationMessageFor(m => m.Reservation.Id)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="four columns">
+                    @Html.LabelFor(m => m.Reservation.QuoteReference, "Booking PIN")
+                </div>
+                <div class="eight columns">
+                    @Html.TextBoxFor(m => m.Reservation.QuoteReference, new { placeholder = "Reference" })
+                    @Html.ValidationMessageFor(m => m.Reservation.QuoteReference)
+                </div>
+            </div>
+            <div class="row">
+                @Html.ValidationSummary()
+            </div>
+            
+            <div class="row">
+                <div class="four columns empty-column">&nbsp;</div>
+                <div class="eight columns"><input type="submit" value="Next" /></div>
+            </div>
+        
+        </div>
+
+
+       }
+    </div>
+
+    <div class="four columns">
+
+
+
+    </div>
+
+
+</div>

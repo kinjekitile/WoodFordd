@@ -1,0 +1,19 @@
+﻿@model List<ReservationModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table>
+
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>Id: @item.Id</td>
+                <td>User: @item.Email</td>
+                <td>Pickup: @item.PickupDate.ToString()</td>
+                <td>Reminder Sent: @item.ReminderEmailSent</td>
+            </tr>
+        }
+    </tbody>
+</table>

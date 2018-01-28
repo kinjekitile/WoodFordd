@@ -1,0 +1,50 @@
+﻿@model CorporateViewModel
+@{
+    ViewBag.Title = "Add Corporate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Corporates</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Corporate</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Add", "Corporates", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+        
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Corporate.Title, "Corporate Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Corporate.Title, new { placeholder = "Corporate Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Corporate.Title)
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Add Corporate</button>
+                </div>
+            </div>
+
+        </div>
+        
+    }
+</div>
+
+@section scripts {
+    <!-- CK Editor -->
+    @*<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+    <script types="text/javascript">
+        $(function () {
+            CKEDITOR.replace('Branch_PageContent_PageContent');
+        });
+    </script>*@
+}

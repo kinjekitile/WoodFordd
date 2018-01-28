@@ -1,0 +1,29 @@
+﻿{
+  "name": "TSD Login",
+  "description": "Add test123 to body",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "nativeMessaging",
+    "https://www.woodford.co.za/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [ "https://www.tsdrms.net/" ],
+      "js": [ "jquery-3.1.1.min.js", "content.js" ],
+      "run_at": "document_end"
+
+    }
+  ],
+  "background": {
+    "scripts": [ "jquery-3.1.1.min.js", "popup.js" ]
+  },
+  "browser_action": {
+    "default_title": "Manipulate tab DOM",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
+//asklngpids

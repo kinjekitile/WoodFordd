@@ -1,0 +1,212 @@
+﻿@model CheckoutPaymentViewModel
+
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="twelve columns">
+
+            <ul class="progressbar desktop-view">
+                <li class="active">Search</li>
+                <li class="active">Customer Details</li>
+                <li class="active">Extras</li>
+                <li class="active">Confirm</li>
+                <li class="active">Payment</li>
+          
+            </ul>
+       
+            <ul class="progressbar mobile-view">
+                <li class="active">&nbsp;</li>
+                <li class="active">&nbsp;</li>
+                <li class="active">&nbsp;</li>
+                <li class="active">&nbsp;</li>
+                <li class="active">Payment</li>
+           
+            </ul>
+      
+    </div>
+</div>
+
+@*<div class="row">
+    <div class="twelve columns">
+        <h1>Payment</h1>
+    </div>
+</div>*@
+
+@if (!ViewBag.InvoiceAlreadyPaid) {
+    if (ViewBag.show3Dsecure) {
+
+        <div id="container3DSecure" style="display: none;">
+            <form action="@(ViewBag.acsUrl)" name="frmSubmit" id="frmSubmit" method="post" target="iframeID">
+                @foreach (var item in ViewBag.FrameParams) {
+                    <input type="hidden" name="@item.Key" value="@item.Value" />
+                }
+        
+            </form>
+            <iframe src="" id="iframeID" name="iframeID" scrollbar="auto"  style="width:600px;height:500px;border: none;background-color: #dbdbdb;"></iframe>
+
+            @*<iframe src="/Checkout/PostTo3DSecure?acs=@(ViewBag.acsUrl)&parEqMsg=@(ViewBag.parEq)&tindex=@(ViewBag.transactionIndex)" style='width:600px;height:500px;border: none;background-color: #dbdbdb;'></iframe>*@
+        </div>
+
+
+        <script type="text/javascript">
+            $("#container3DSecure").modal({ close: false, autoResize: true, minHeight: 510, minWidth: 610 });
+        </script>
+
+    }
+
+    <div class="row">
+        <div class="eight columns">
+            @using (Html.BeginForm("Payment", "Checkout", new { type = ViewBag.RequestType, id = Model.Reservation.Id }, FormMethod.Post, new { name = "paymentForm" })) {
+
+                <div class="input-form vertical-form">
+                    @if (ViewBag.ShowError) {
+                        <p>Payment could not be processed</p>
+                        <p>@Model.Reservation.PaymentErrorMessage</p>
+                    }
+                    @Html.ValidationSummary()
+                    <input type="hidden" id="requestType" name="requestType" value="@(ViewBag.RequestType)" />
+                    @Html.HiddenFor(x => x.IsDepositPayment)
+
+
+                    @Html.HiddenFor(m => m.Reservation.Id)
+                    @*<p>We do not accept AMEX cards.</p>*@
+                    <div class="row inline-input">
+                        @Html.CardTypeRadioButtonListFor(m => m.CardType)
+                        <div class="clear"></div>
+                        @Html.ValidationMessageFor(m => m.CardType)
+                    </div>
+
+
+                    <div class="row">
+                        @Html.LabelFor(m => m.CardNumber, "Card Number")
+                        @Html.TextBoxFor(m => m.CardNumber)
+                        @Html.ValidationMessageFor(m => m.CardNumber)
+                        @*<p>4012001036298889</p>
+    <p>5200000000000015</p>*@
+                    </div>
+
+                    <div class="row">
+                        @Html.LabelFor(m => m.CardHolderName, "Card Holder's Name")
+                        @Html.TextBoxFor(m => m.CardHolderName)
+                        @Html.ValidationMessageFor(m => m.CardHolderName)
+                    </div>
+
+                    <div class="row">
+                        @Html.LabelFor(m => m.ExpiryYear, "Expiry Year")
+                        @Html.CardExpiryYearFor(m => m.ExpiryYear)
+                        @Html.ValidationMessageFor(m => m.ExpiryYear)
+                    </div>
+
+
+                    <div class="row">
+                        @Html.LabelFor(m => m.ExpiryMonth, "Expiry Month")
+                        @Html.CardExpiryMonthFor(m => m.ExpiryMonth)
+                        @Html.ValidationMessageFor(m => m.ExpiryMonth)
+                    </div>
+
+                    <div class="row">
+                        @Html.LabelFor(m => m.CVV, "CCV Number")
+                        @Html.TextBoxFor(m => m.CVV)
+                        @Html.ValidationMessageFor(m => m.CVV)
+                    </div>
+
+                    <div class="row">
+                        @Html.LabelFor(m => m.Amount)
+                        @Html.TextBoxFor(m => m.Amount, new { disabled = "disabled" })
+                        
+                    </div>
+
+                    <div class="row align-right">
+                        <input type="submit" value="Pay" name="paymentButton" id="paymentButton" />
+                    </div>
+
+                    <input type="hidden" id="Is3DPostback" name="Is3DPostback" value="0" />
+                </div>
+            }
+        </div>
+        <div class="four columns">
+            <div style="border: 1px solid #a4a4a4; padding: 20px;">
+                <img src="@Url.Content("~/Content/images/3dsecure.jpg")" alt="3D Secure" style="width: auto; max-width: 100%;" /><br />
+                <p>3D Secure is an additional layer of security that verifies that the person entering the card details is the legitimate owner of the card.</p>
+
+                <p>When you are making your vehicle booking, after you have entered your Card Number, expiry date and CCV an SMS will be sent to your cellphone from your bank with the One Time Pin. You will be asked to enter this number in order to finalise your booking. 3D Secure means that you can be confident that no one is going to use your card without your permission.</p>
+            </div>
+        </div>
+    </div>
+} else {
+    <div class="row">
+        <div class="twelve columns">
+            <p>This booking has already been paid for.</p>
+        </div>
+    </div>
+
+}
+
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+            var is_explorer = navigator.userAgent.indexOf('MSIE') > -1;
+            var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+            var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+            var is_opera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
+            if ((is_chrome) && (is_safari)) { is_safari = false; }
+            if ((is_chrome) && (is_opera)) { is_chrome = false; }
+
+            if (is_safari || is_chrome) {
+                $("#paymentButton").click(function () {
+                    $("#paymentButton").val("Please wait while we process your payment. Do not fresh the page whilst payment is processing.");
+                    //$("#paymentButton").prop('disabled', true);
+                });
+            } else {
+                $("#paymentButton").click(function () {
+                    $("#paymentButton").val("Please wait while we process your payment. Do not fresh the page whilst payment is processing.");
+                    $("#paymentButton").prop('disabled', true);
+                });
+            }
+            
+        });
+
+        $(document).ready(function () {
+            $("#frmSubmit").submit();
+        });
+
+
+        function close3DMessageAndSubmitForm(resId) {
+
+            var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+            var is_explorer = navigator.userAgent.indexOf('MSIE') > -1;
+            var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+            var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+            var is_opera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
+            if ((is_chrome) && (is_safari)) { is_safari = false; }
+            if ((is_chrome) && (is_opera)) { is_chrome = false; }
+
+            if (is_safari || is_chrome) {
+                window.location.href = "https://www.woodford.co.za/checkout/Success/" + resId;
+            } else {
+                window.location = "Success/" + resId;
+            }
+            
+
+            
+        }
+
+        function close3DMessagePaymentFailed(resId) {
+            window.location = "Payment/" + resId + "?error=1";
+        }
+        //function close3DMessageAndSubmitForm() {
+
+        //    $("#Is3DPostback").val("1");
+        //    document.forms["paymentForm"].submit();
+        //}
+
+    </script>
+}

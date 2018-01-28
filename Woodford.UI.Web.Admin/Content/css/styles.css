@@ -1,0 +1,16 @@
+﻿.field-validation-error {
+  color: #ff0000; }
+
+.validation-summary-errors {
+  background-color: #ffcccc;
+  border: 1px solid #ff0000;
+  margin-bottom: 20px;
+  padding: 10px 0; }
+
+.validation-summary-errors ul {
+  margin: 0; }
+
+.validation-summary-errors ul li {
+  list-style: none;
+  line-height: 1.5; }
+

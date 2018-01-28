@@ -1,0 +1,11 @@
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\bin\Debug\Woodford.Infrastructure.MailChimpBulkMailing.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\bin\Debug\Woodford.Infrastructure.MailChimpBulkMailing.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\bin\Debug\Woodford.Core.Interfaces.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\bin\Debug\Woodford.Infrastructure.Settings.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\bin\Debug\Woodford.Core.DomainModel.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\bin\Debug\Woodford.Core.Interfaces.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\bin\Debug\Woodford.Infrastructure.Settings.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\bin\Debug\Woodford.Core.DomainModel.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\obj\Debug\Woodford.Infrastructure.MailChimpBulkMailing.csprojResolveAssemblyReference.cache
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\obj\Debug\Woodford.Infrastructure.MailChimpBulkMailing.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.BulkMailing\obj\Debug\Woodford.Infrastructure.MailChimpBulkMailing.pdb

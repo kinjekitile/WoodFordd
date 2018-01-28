@@ -1,0 +1,31 @@
+﻿@model CorporateViewModel
+@{
+    ViewBag.Title = "Corporate Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Corporate Details</h1>
+}
+
+@{ Html.RenderAction("RenderAuditContainer", "Audit", new { entityType = Model.Corporate.GetType(), entityIdValue = Model.Corporate.Id }); }
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Details</h3>
+    </div><!-- /.box-header -->
+
+   
+        
+        <div class="box-body">
+
+
+          
+
+        </div>
+
+</div>
+
+@section scripts {
+
+}

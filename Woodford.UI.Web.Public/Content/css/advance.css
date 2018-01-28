@@ -1,0 +1,41 @@
+﻿
+.advance-info-box {
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  border-right: 1px solid #999;
+  border-bottom: 1px solid #999;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.loyalty-tier-gold {
+    color: #b8860b;
+   
+}
+
+.loyalty-tier-silver {
+     color: #a9a9a9
+
+}
+
+.loyalty-tier-green {
+    color: #187546
+}
+
+.advance-info-box img {
+    width: 95px;
+}
+
+.advance-info-box a.gold {
+    color: #b8860b;
+}
+
+.advance-info-box a.silver {
+    color: #a9a9a9;
+}
+
+.advance-info-box a.green {
+    color: #187546;
+}

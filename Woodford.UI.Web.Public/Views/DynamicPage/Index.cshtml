@@ -1,0 +1,21 @@
+﻿@model DynamicPageModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.PageContent.PageTitle;
+    ViewBag.MetaKeywords = Model.PageContent.MetaKeywords;
+    ViewBag.MetaDescription = Model.PageContent.MetaDescription;
+}
+
+@section searchpanel {
+     
+@{Html.RenderPartial("_SearchPanelPartial", SearchCriteriaViewModelFactory.CreateInstance());}
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <div class="rich-text">
+            @Html.Raw(Model.PageContent.PageContent)
+        </div>
+    </div>
+</div>
+

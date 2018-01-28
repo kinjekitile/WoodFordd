@@ -1,0 +1,31 @@
+﻿@model ReservationModel
+@{
+    ViewBag.Title = "Email Quote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Quote</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="eight columns">
+
+        <div class="reservation-number">
+            Reservation Number: <span>@Model.Id</span>
+        </div>
+
+        <p class="thank-you-message">Thank you for choosing Woodford Car Hire. We have emailed your booking quote.</p>
+
+      
+
+    </div>
+
+
+
+  
+</div>

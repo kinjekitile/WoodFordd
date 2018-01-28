@@ -1,0 +1,31 @@
+﻿@model NewsModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.PageContent.PageTitle;
+    ViewBag.MetaKeywords = Model.PageContent.MetaKeywords;
+    ViewBag.MetaDescription = Model.PageContent.MetaDescription;
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>@Model.Headline</h1>
+        <div class="article-meta">
+            @Model.DateCreated.ToString("dd/MM/yyyy") - 
+            by @Model.Author
+        </div>
+
+        @if (Model.FileUploadId.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.NewsImage.Id, filename = Model.NewsImage.Title + Model.NewsImage.FileExtension, width = 1000})" alt="@Model.Headline" />
+        }
+
+        @if (!string.IsNullOrEmpty(Model.SubHeadline)) {
+            <p><strong>@Html.Raw(Model.SubHeadline)</strong></p>
+        }
+
+        <div class="rich-text">
+            @Html.Raw(Model.PageContent.PageContent)
+        </div>
+
+    </div>
+</div>
+

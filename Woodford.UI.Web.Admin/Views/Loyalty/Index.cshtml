@@ -1,0 +1,80 @@
+﻿@model ListOf<LoyaltyTierBenefitModel>
+@{
+    ViewBag.Title = "Loyalty Benefits";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Loyalty Benefits</h1>
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Loyalty Benefits</h3>
+    </div><!-- /.box-header -->
+    <div class="box-body no-padding">
+        <ul>
+            <li>
+                @Html.ActionLink("Edit " + Woodford.Core.DomainModel.Enums.LoyaltyTierLevel.Green.GetDescription(), "Edit", new { id = (int)Woodford.Core.DomainModel.Enums.LoyaltyTierLevel.Green })
+            </li>
+            <li>
+                @Html.ActionLink("Edit " + Woodford.Core.DomainModel.Enums.LoyaltyTierLevel.Silver.GetDescription(), "Edit", new { id = (int)Woodford.Core.DomainModel.Enums.LoyaltyTierLevel.Silver })
+            </li>
+
+            <li>
+                @Html.ActionLink("Edit " + Woodford.Core.DomainModel.Enums.LoyaltyTierLevel.Gold.GetDescription(), "Edit", new { id = (int)Woodford.Core.DomainModel.Enums.LoyaltyTierLevel.Gold })
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Loyalty Benefits</h3>
+    </div><!-- /.box-header -->
+
+    
+
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Benefit", "AddBenefit", "Loyalty")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+                <tr>
+                    <td></td>
+                    <th>Title</th>
+                    <th scope="col">Benefit Type</th>
+                    <th scope="col">Loyalty Tier</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">End</th>
+                </tr>
+
+                @foreach (var c in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "EditBenefit", "Loyalty", new { id = c.Id }, null)</td>
+                        <td>@c.Title</td>
+                        <td>@c.BenefitType.GetDescription()</td>
+                        <td>@c.Tier.GetDescription()</td>
+                        <td>@c.StartDate.Value.ToString("d MMM yyyy")</td>
+                        <td>@c.EndDate.Value.ToString("d MMM yyyy")</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No Benefits have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

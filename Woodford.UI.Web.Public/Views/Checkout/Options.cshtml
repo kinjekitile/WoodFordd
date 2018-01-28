@@ -1,0 +1,312 @@
+﻿@model CheckoutOptionsViewModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section searchpanel {
+    @{Html.RenderPartial("_SearchPanelPartial", Model.Criteria);}
+}
+
+
+<style type="text/css">
+
+
+</style>
+@*<div class="row">
+        <div class="twelve columns">
+            <h1>@Model.Reservation.Vehicle.Title</h1>
+        </div>
+    </div>*@
+
+<div class="row">
+    <div class="twelve columns">
+
+
+        @if (ViewBag.IsMobile) {
+            <ul class="progressbar-mobile-view">
+                <li class="active">&nbsp;</li>
+                <li class="active">&nbsp;</li>
+                <li class="active">Extras</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+
+            </ul>
+        }
+        else {
+            <ul class="progressbar">
+                <li class="active">Search</li>
+                <li class="active">Customer Details</li>
+                <li class="active">Extras</li>
+                <li>Confirm</li>
+                <li>Payment</li>
+
+            </ul>
+        }
+
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="four columns">
+        <h2>@Model.Reservation.Vehicle.Title</h2>
+
+        @if (Model.Vehicle.FileUploadId.HasValue) {
+        <img src="@Url.Action("Index", "Uploads", new { id = Model.Vehicle.VehicleImage.Id, filename = Model.Vehicle.VehicleImage.Title + Model.Vehicle.VehicleImage.FileExtension, width = 300})" alt="@Model.Vehicle.Title" />
+        }
+
+        @if (Model.Vehicle.FileUploadId2.HasValue) {
+        <img src="@Url.Action("Index", "Uploads", new { id = Model.Vehicle.VehicleImage2.Id, filename = Model.Vehicle.VehicleImage2.Title + Model.Vehicle.VehicleImage2.FileExtension, width = 300})" alt="@Model.Vehicle.Title Interior" />
+        }
+
+    </div>
+
+    <div class="four columns">
+        <h2>Extras</h2>
+        <p class="graytext">Are there any added little extras, to help you on your way in comfort and safety?</p>
+
+
+        @foreach (var e in Model.Extras) {
+        <div class="inline-input vehicle-extra">
+            @{ string dataPrice = (e.Price * Model.Criteria.Criteria.NumberOfDays).ToString("#,##0.00"); }
+            @if (e.LoyaltyBenefit != null) {
+                    dataPrice = "0.00";
+                }
+            @{  bool isSelected = Model.Reservation.VehicleExtras.Select(x => x.VehicleExtraId).Contains(e.Id); }
+
+            @Html.CheckBox("chkExtras_" + e.Id, isSelected, new { id = "chkExtras_" + e.Id, @class = "vehicle-extra", data_vehicle_extra_id = e.Id, data_vehicle_extra_title = e.Title, data_price = dataPrice })
+
+
+            <label for="chkExtras_@e.Id" class="@e.ImageClass">
+                @e.Title
+                @if (e.LoyaltyBenefit != null) {
+                    <span>
+                        Advance - Free
+                    </span>
+                    } else {
+                    <span>R@(e.Price.ToString("#,##0")) per day</span>
+                    }
+
+
+            </label>
+
+        </div>
+                    }
+        <div class="inline-input vehicle-extra">
+            <input type="checkbox" id="chkNoExtras" data-price="0" class="vehicle-extra" data-vehicle-extra-id="-1" />
+            <label for="chkNoExtras" class="no-extras">No Extras<span>R0 per day</span></label>
+        </div>
+    </div>
+
+    <div class="four columns">
+        <h3>@Model.Reservation.RateCodeTitle</h3>
+
+        <h4>Cost Summary</h4>
+
+        @using (Html.BeginForm("Options", "Checkout",  new { id = Model.Reservation.Id }, FormMethod.Post, null)) {
+        <div class="input-form">
+            <table class="cost-summary">
+                <tr class="graytext">
+                    <th scope="row">Rental</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.AdjustedPrice)</td>
+                </tr>
+                <tr class="graytext">
+                    <th scope="row">Tax</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.TaxAmount)</td>
+                </tr>
+                <tr class="graytext">
+                    <th scope="row"><strong>Total</strong></th>
+                    <td><strong>@String.Format("{0:c}", Model.Reservation.AdjustedPrice + Model.Reservation.TaxAmount)</strong></td>
+                </tr>
+                @if (Model.Reservation.DropOffFee > 0) {
+                    <tr class="graytext">
+                        <th scope="row">Drop Off Fee</th>
+                        <td>@String.Format("{0:c}", Model.Reservation.DropOffFee)</td>
+                    </tr>
+                    }
+                <tr class="graytext">
+                    <th scope="row">Admin Fee</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.ContractFee)</td>
+                </tr>
+                @foreach (var surcharge in Model.Reservation.BranchSurcharges) {
+
+                        if (surcharge.IsOnceOff) {
+                    <tr class="graytext">
+                        <th scope="row">@surcharge.Title</th>
+                        <td>@String.Format("{0:c}", surcharge.SurchargePrice)</td>
+                    </tr>
+                        } else {
+                            if (surcharge.SurchargePrice * Model.Reservation.NumberOfDays > surcharge.MaximumCharge) {
+                    <tr class="graytext">
+                        <th scope="row">@surcharge.Title (@String.Format("{0:c}", surcharge.MaximumCharge) maximum charge)</th>
+                        <td>@String.Format("{0:c}", surcharge.MaximumCharge)</td>
+                    </tr>
+                            } else {
+                    <tr class="graytext">
+                        <th scope="row">@surcharge.Title (@String.Format("{0:c}", surcharge.SurchargePrice) per day)</th>
+                        <td>@String.Format("{0:c}", surcharge.SurchargePrice * Model.Reservation.NumberOfDays)</td>
+                    </tr>
+                            }
+
+
+
+                        }
+                    }
+                @if (Model.IsLoyaltyUserWithPoints) {
+                    <tr>
+                        <th scope="row" style="border-top: 1px solid #ccc;color:#187546;">
+                            Advance Points Available
+                        </th>
+                        <td class="graytext" style="border-top: 1px solid #ccc;">
+                            @Html.DisplayFor(x => x.LoyaltyPointsAvailable, new { style = "height: 30px;margin-top:5px;" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row" class="align-left">
+                            <label style="text-align:left !important;color:#187546;" for="@Html.IdFor(x=>x.Reservation.LoyaltyPointsSpent)">Do you wish to use any?</label>
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(x => x.Reservation.LoyaltyPointsSpent, "{0:0.00}",new { style = "height: 30px;margin-top:5px;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            @Html.ValidationMessageFor(x => x.Reservation.LoyaltyPointsSpent)
+                        </td>
+                    </tr>
+                        }
+                <tr class="total total-row">
+                    <th scope="row"><strong>Final Payment</strong></th>
+                    <td id="total-price" data-total-price-excluding-extras="@Model.Reservation.BookingPriceWithoutExtras.ToString("#.##").Replace(",", ".")">
+                        @String.Format("{0:c}", Model.Reservation.BookingPriceWithoutExtras)
+                    </td>
+                </tr>
+                <tr class="total-days">
+                    <td></td>
+                    <td class="numeric-field">For @Model.Reservation.NumberOfDays.ToString() Days</td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label style="text-align:left !important;" for="@Html.IdFor(x=>x.Reservation.VoucherNumber)">Voucher</label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.Reservation.VoucherNumber, new { style = "height: 30px;margin-top:5px;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(x => x.Reservation.VoucherNumber)
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+
+        @*hidden checkboxes*@
+        <div style="display: none;">
+            @foreach (var e in Model.Extras) {
+                            @Html.CheckBox("chkVehicleExtras_" + e.Id, false, new { id = "chkVehicleExtras_" + e.Id, @class = "hid-vehicle-extra" })
+                            }
+        </div>
+
+
+
+
+        <div class="submit-button-container align-right">
+            <input type="submit" value="Next" />
+        </div>
+
+        <div>
+            @{Html.RenderPartial("_CheckoutCountdownSpecialPartial", Model.CountdownSpecial);}
+        </div>
+                                }
+
+    </div>
+
+</div>
+
+<div class="row">
+    <hr />
+</div>
+
+<div class="row" style="padding-top: 10px;">
+    <!-- TrustBox widget - 0 -->
+    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="54620ca500006400057b77fe" data-style-height="130px" data-style-width="100%" data-theme="light" data-stars="4,5">
+        <a href="https://uk.trustpilot.com/review/www.woodford.co.za" target="_blank">Trustpilot</a>
+    </div>
+    <!-- End TrustBox widget -->
+</div>
+
+
+@section scripts {
+
+    @{Html.RenderPartial("_CheckoutCountdownSpecialJavascriptPartial", Model.CountdownSpecial);}
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.format-1.3.min.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function setVehicleExtra(chk) {
+                var extraId = chk.attr("data-vehicle-extra-id");
+                var extraTitle = chk.attr("data-vehicle-extra-title");
+                var price = chk.attr("data-price");
+                var selected = chk.is(":checked");
+                var hiddenChk = $("#chkVehicleExtras_" + extraId);
+
+                hiddenChk.prop("checked", selected);
+
+                if (selected) {
+                    if (extraId == "-1") {
+                        $(".vehicle-extra").not(chk).prop("checked", false);
+                        $(".hid-vehicle-extra").not(hiddenChk).prop("checked", false);
+                        $(".summary-extra").remove();
+                    } else {
+                        $("#chkNoExtras").prop("checked", false);
+                        if ($("#selected-extra-" + extraId).length == 0) {
+
+                            $("<tr class='summary-extra' id='selected-extra-" + extraId + "'><th scope='row'>" + extraTitle + "</th><td>R " + price + "</td><tr>").insertBefore("tr.total-row");
+                        }
+                    }
+
+                } else {
+                    $("#selected-extra-" + extraId).remove();
+                }
+            }
+
+            function calculateTotal() {
+                var totalAmountExcludingExtras = parseFloat($("#total-price").attr("data-total-price-excluding-extras"));
+                var newTotal = totalAmountExcludingExtras;
+
+                //not a normal space. space is 32
+                var replaceSpaceCode = String.fromCharCode(160);
+
+                $(".vehicle-extra:checked").each(function () {
+                    var priceText = $(this).attr("data-price") + "";
+                    priceText = priceText.replace(' ', '').replace(replaceSpaceCode, '');
+                    var price = parseFloat(priceText);
+                    newTotal += price;
+                });
+
+                $("#total-price").html("R " + $.format.number(newTotal, '#,##0.00'));
+            }
+
+            $(".vehicle-extra").on("change", function () {
+                setVehicleExtra($(this));
+                calculateTotal();
+            });
+
+            $(".vehicle-extra").each(function () {
+                setVehicleExtra($(this));
+            });
+
+            calculateTotal();
+        });
+
+
+    </script>
+}

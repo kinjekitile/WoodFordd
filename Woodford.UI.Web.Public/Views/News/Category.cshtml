@@ -1,0 +1,45 @@
+﻿@model NewsCategoryModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.PageTitle;
+    ViewBag.MetaKeywords = Model.MetaKeywords;
+    ViewBag.MetaDescription = Model.MetaDescription;
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>@Model.Title</h1>
+    </div>
+</div>
+
+@if (Model.Articles.Items.Count > 0) {
+    <div class="list-articles">
+        @foreach (var a in Model.Articles.Items.OrderByDescending(x => x.DateCreated).ToList()) {
+            <div class="row">
+                <div class="four columns">
+                    @if (a.FileUploadId.HasValue) {
+                        <img src="@Url.Action("Index", "Uploads", new { id = a.NewsImage.Id, filename = a.NewsImage.Title + a.NewsImage.FileExtension, width = 300})" alt="@Model.Title" />
+                    }
+                </div>
+                <div class="eight columns">
+                    <h2><a href="/news/article/@a.PageUrl">@a.Headline</a></h2>
+                    @if (!string.IsNullOrEmpty(a.SubHeadline)) {
+                        <p><strong>@a.SubHeadline</strong></p>
+                    }
+                    <p>@a.ShortDescription</p>
+                    <a href="/news/article/@a.PageUrl">Read more</a>
+                </div>
+            </div>
+
+        }
+
+    </div>
+} else {
+    <div class="row">
+        <div class="twelve columns">
+            <p>There are no articles in this category. Please check back later</p>
+        </div>
+    </div>
+
+}
+

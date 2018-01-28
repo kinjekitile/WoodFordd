@@ -1,0 +1,28 @@
+﻿{
+  "name": "Woodford Import Into TSD",
+  "description": "Woodford Import Into TSD",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "nativeMessaging",
+    "https://www.woodford.co.za/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [ "http://*/*", "https://*/*" ],
+      "js": [ "jquery-3.1.1.min.js", "content.js" ]
+
+    }
+  ],
+  "background": {
+    "scripts": [ "jquery-3.1.1.min.js", "popup.js" ]
+  },
+  "browser_action": {
+    "default_title": "Manipulate tab DOM",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
+//asklngpids

@@ -1,0 +1,379 @@
+﻿@model SearchResultsViewModel
+@{
+    ViewBag.Title = "Modify Reservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="six columns">
+        <h1>Modify Reservation</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="six columns">
+        
+
+            <h2><strong>Current Reservation</strong></h2>
+            @if (Model.Reservation.VehicleUpgrade != null) {
+                <p>Current Vehicle: <strong>@Model.Reservation.VehicleUpgrade.Title</strong></p>
+                <p>Upgraded from @Model.Reservation.Vehicle.Title</p>
+
+            } else {
+                <p>Current Vehicle: <strong>@Model.Reservation.Vehicle.Title</strong></p>
+            }
+
+            
+            <p>
+                Hire Dates: <strong style="margin: 0 10px;">@Model.Reservation.PickupDate.ToString("dd MMMM yyyy h:mm tt")</strong> - <strong style="margin: 0 10px;">@Model.Reservation.DropOffDate.ToString("dd MMMM yyyy h:mm tt")</strong> 
+            </p>
+
+            <p>Rate: @Model.Reservation.RateCodeTitle</p>
+
+            
+            <table class="cost-summary">
+                <tr>
+                    <th scope="row">Rental</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.AdjustedPrice)</td>
+                </tr>
+                @if (Model.Reservation.VoucherId.HasValue) {
+                    <tr>
+                        <th scope="row">Voucher</th>
+
+                        @switch (Model.Reservation.VoucherRewardType) {
+                            default:
+                                <td>
+                                    @(String.Format("{0:c}", -1 * Model.Reservation.VoucherDiscountAmount))
+                                </td>
+                                break;
+                            case VoucherRewardType.TextReward:
+                                <td>
+                                    @(Model.Reservation.VoucherRewardText)
+                                </td>
+                                break;
+                        }
+
+                    </tr>
+                }
+                <tr>
+                    <th scope="row">Tax</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.TaxAmount)</td>
+                </tr>
+                <tr>
+                    <th scope="row"><strong>Total</strong></th>
+                    <td><strong>@String.Format("{0:c}", Model.Reservation.AdjustedPrice + Model.Reservation.TaxAmount)</strong></td>
+                </tr>
+                @if (Model.Reservation.DropOffFee > 0) {
+                    <tr>
+                        <th scope="row">Drop Off Fee</th>
+                        <td>@String.Format("{0:c}", Model.Reservation.DropOffFee)</td>
+                    </tr>
+                }
+                <tr>
+                    <th scope="row">Admin Fee</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.ContractFee)</td>
+                </tr>
+                @if (Model.Reservation.LoyaltyPointsSpent.HasValue) {
+                    <tr>
+                        <th scope="row" style="border-top: 1px solid #ccc;color:#187546;">Advance Points Used</th>
+                        <td style="border-top: 1px solid #ccc;">@decimal.Round(Model.Reservation.LoyaltyPointsSpent.Value, 2)</td>
+                    </tr>
+                }
+                @foreach (var x in Model.Reservation.VehicleExtras) {
+                    <tr>
+                        <th scope="row">@x.ExtraTitle</th>
+                        @if (x.ReservationLoyaltyBenefitId.HasValue) {
+                            <td>Advance - Free</td>
+                        } else {
+
+                            <td>@String.Format("{0:c}", x.ExtraPrice * Model.Reservation.NumberOfDays)</td>
+                        }
+
+                    </tr>
+                }
+                @if (Model.Reservation.VehicleUpgradeId != null) {
+                    <tr>
+                        <th scope="row">Upgrade to @Model.Reservation.VehicleUpgrade.Title</th>
+                        @if (Model.Reservation.Benefits.Select(x => x.UpgradeId).Contains(Model.Reservation.VehicleUpgradeId)) {
+                            <td>Advance - Free</td>
+                        } else {
+                            <td>@String.Format("{0:c}", Model.Reservation.VehicleUpgradePriceAmount)</td>
+                        }
+
+                    </tr>
+                }
+
+                <tr class="total total-row">
+                    <th scope="row"><strong>Final</strong></th>
+                    <td id="total-price">
+                        @String.Format("{0:c}", Model.Reservation.BookingPrice)
+                    </td>
+                </tr>
+                <tr class="total-days">
+                    <td></td>
+                    <td class="numeric-field">For @Model.Reservation.NumberOfDays.ToString() Days</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Paid Upon Booking</th>
+                    <td style="text-align: right;">R @Model.Reservation.Invoice.AmountPaid.ToString("#,##0.00")</td>
+                </tr>
+
+                @if (Model.Reservation.BookingPrice - Model.Reservation.Invoice.AmountPaid > 0.01m) {
+                    <tr>
+                        <th scope="row">To be Paid Upon Collection</th>
+                        <td style="text-align: right;">R @((Model.Reservation.BookingPrice - Model.Reservation.Invoice.AmountPaid).ToString("#,##0.00"))</td>
+                    </tr>
+                }
+
+            </table>
+
+        
+    </div>
+
+
+    <div class="six columns">
+       
+        <h2><strong>New Location or Date</strong></h2>
+
+        @using (Html.BeginForm("Modify", "Modify", new { id = Model.Reservation.Id, pin = Model.Reservation.QuoteReference }, FormMethod.Post, null)) {
+
+            @Html.HiddenFor(m => m.Criteria.AirportLocationIds)
+            @Html.HiddenFor(m => m.Reservation.Id)
+            <div class="input-form vertical-form">
+
+                <div class="row">
+                    @Html.LabelFor(m => m.Criteria.Criteria.PickUpLocationId, "Pickup Location")
+                    @Html.BranchFor(m => m.Criteria.Criteria.PickUpLocationId)
+                    @Html.ValidationMessageFor(m => m.Criteria.Criteria.PickUpLocationId)
+                </div>
+                <div class="row inline-input">
+                    <input type="checkbox" id="chk-book-return-at-different-location" />
+                    <label class="for-checkbox" for="chk-book-return-at-different-location">Return at a different location</label>
+                </div>
+                <div class="row" id="book-different-return-location" style="display: none;">
+                    @Html.LabelFor(m => m.Criteria.Criteria.DropOffLocationId, "Drop Off Location")
+                    @Html.BranchFor(m => m.Criteria.Criteria.DropOffLocationId)
+                    @Html.ValidationMessageFor(m => m.Criteria.Criteria.DropOffLocationId)
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.Criteria.Criteria.PickupDateTime, "Pickup Date")
+                    @Html.DatePickerFor(m => m.Criteria.PickupDate, new { @class = "datefield" })
+                    @Html.TextBoxFor(x => x.Criteria.Criteria.PickupTimeFull, new { style = "width: 100%;margin-top: 36px;" })
+                    @*@Html.HourOfDayDropDownListFor(m => m.Criteria.Criteria.PickupTime, new { @class = "timefield" })*@
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.Criteria.Criteria.DropOffDateTime, "Drop Off Date")
+                    @Html.DatePickerFor(m => m.Criteria.DropOffDate, new { @class = "datefield" })
+                    @Html.TextBoxFor(x => x.Criteria.Criteria.DropOffTimeFull, new { style = "width: 100%;margin-top: 36px;" })
+                    @*@Html.HourOfDayDropDownListFor(m => m.Criteria.Criteria.DropOffTime, new { @class = "timefield" })*@
+                </div>
+                <div class="row align-right">
+                    <input type="submit" value="Search" />
+                </div>
+            </div>
+
+        }
+    </div>
+   
+</div>
+
+<div class="row">
+    <div class="twelve columns">
+        <hr style="border-top:1px solid #999;">
+    </div>
+</div>
+
+<div class="row">
+    <div class="twelve">
+        <h2>Select your preferred vehicle or rate</h2>
+        <p>Price differences will be paid / refunded on collection.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="twelve columns">
+
+
+        @if (Model.Results.Items.Count() > 0) {
+            foreach (var result in Model.Results.Items) {
+                <div class="row search-result">
+                    <div class="three columns">
+                        <h3>@result.Vehicle.Title</h3>
+                        @if (result.Vehicle.FileUploadId.HasValue) {
+                            <img src="@Url.Action("Index", "Uploads", new { id = result.Vehicle.VehicleImage.Id, filename = result.Vehicle.VehicleImage.Title + result.Vehicle.VehicleImage.FileExtension, width = 200 })" alt="@result.Vehicle.Title" />
+                        }
+                    </div>
+                    <div class="three columns">
+                        <h4>@result.VehicleGroupName</h4>
+                        @if (!string.IsNullOrEmpty(result.Vehicle.ShortDescription)) {
+                            <p>@result.Vehicle.ShortDescription</p>
+                        }
+                        <p>
+                            Fuel: Pick up full, return full<br />
+                            Insurance: Standard Cover Included
+                        </p>
+                        @{Html.RenderPartial("_VehicleAttributesPartial", result.Vehicle);}
+
+                    </div>
+                    @if (result.Rates.Count() > 0) {
+
+
+                        SearchResultItemRateModel firstRate = result.Rates.First();
+
+
+
+                        using (Html.BeginForm("Confirm", "Modify", new { id = Model.Reservation.Id, pin = Model.Reservation.QuoteReference },FormMethod.Post, null)) {
+                            @*@Html.HiddenFor( x => x.Criteria.Criteria.PickUpLocationId)
+                                @Html.HiddenFor(x => x.Criteria.Criteria.DropOffLocationId)
+                                @Html.HiddenFor(x => x.Criteria.Criteria.PickupDateTime)
+                                @Html.HiddenFor(x => x.Criteria.Criteria.DropOffDateTime)*@
+                            @Html.Hidden("reservationId", Model.Reservation.Id)
+                            @Html.Hidden("vehicleId", result.Vehicle.Id)
+                            @Html.Hidden("pickupBranchId", Model.Criteria.Criteria.PickUpLocationId)
+                            @Html.Hidden("dropOffBranchId", Model.Criteria.Criteria.DropOffLocationId)
+                            @Html.Hidden("pickupDate", Model.Criteria.Criteria.PickupDate)
+                            @Html.Hidden("pickupTime", Model.Criteria.Criteria.PickUpTimeFullInt)
+                            @Html.Hidden("dropOffDate", Model.Criteria.Criteria.DropOffDate)
+                            @Html.Hidden("dropOffTime", Model.Criteria.Criteria.DropOffTimeFullInt)
+
+                            <div class="three columns">
+                                <h4>Select your Rate</h4>
+                                <div class="rates-selection" data-vehicle-id="@result.Vehicle.Id">
+                                    @foreach (var r in result.Rates) {
+                                bool isCountdownRate = false;
+                                if (Model.CountdownSpecial != null) {
+                                    if (Model.CountdownSpecial.SpecialType == CountdownSpecialType.TextOnInvoice) {
+                                        isCountdownRate = r.CanUseCountdownSpecial;
+                                    }
+                                }
+
+                                <div class="inline-input">
+                                   
+                                    @Html.RadioButton("radRates_" + result.Vehicle.Id, "radRates_" + r.RateId, r.RateId == firstRate.RateId, new { id = "radRates_" + r.RateId + "_" + result.Vehicle.Id, data_total = decimal.Round(r.PriceCalculation.BookingPrice + firstRate.PriceCalculation.AdminFee - Model.Reservation.Invoice.AmountPaid - (Model.Reservation.LoyaltyPointsSpent.HasValue ? Model.Reservation.LoyaltyPointsSpent.Value : 0m), 2), data_cost = decimal.Round(r.PriceCalculation.AdjustedPrice , 2), data_days = r.PriceCalculation.NumberOfDays, data_tax = decimal.Round(r.PriceCalculation.TaxAmount, 2), data_dropOffFee = r.PriceCalculation.DropOffFee, data_vehicle_id = result.Vehicle.Id, @class = "rate-selector" })
+                                    <label for="radRates_@(r.RateId)_@result.Vehicle.Id" class="@(isCountdownRate ? "count-down-special-rate" : null)">@r.RateCodeTitle</label>
+                                    @if (isCountdownRate) {
+                                        @Html.Hidden("countDownSpecialRate", r.RateId)
+                                        <div class="count-down-special-container">
+                                            Book in the next
+                                            <span class="count-down-special"></span>
+                                            and you will receive <em>@Model.CountdownSpecial.OfferText</em>
+                                        </div>
+                                    }
+                                </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="three columns align-right">
+                                @if (Model.CountdownSpecial != null) {
+                                    @Html.Hidden("countDownSpecialId", Model.CountdownSpecial.Id)
+                                }
+                                <span class="price" id="rate-price-@result.Vehicle.Id"></span>
+                                <span class="price-context">for @Model.Criteria.Criteria.NumberOfDays day/s</span>
+
+                                <input type="submit" value="Select" />
+
+                                <span class="price-fine">Excl @firstRate.PriceCalculation.AdminFee.ToString("R #,##0") Contract Fee</span>
+
+
+
+
+                            </div>
+                        }
+                    }
+
+                </div>
+                                }
+                            } else {
+                                <div class="row">
+                                    <div class="twelve columns">
+                                        <p>No results found</p>
+                                    </div>
+                                </div>
+                            }
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        cleanDate("Criteria_PickupDate");
+        cleanDate("Criteria_DropOffDate");
+        setUpDatePicker($("#Criteria_PickupDate"));
+        setUpDatePicker($("#Criteria_DropOffDate"));
+
+        setupTimePicker($("#Criteria_Criteria_PickupTimeFull"));
+        setupTimePicker($("#Criteria_Criteria_DropOffTimeFull"));
+
+        $("#chk-book-return-at-different-location").on("change", function () {
+            if ($("#chk-book-return-at-different-location").is(":checked")) {
+                $("#book-different-return-location").show();
+            } else {
+                $("#book-different-return-location").hide();
+            }
+        });
+        $(document).ready(function () {
+            if ($("#@(Html.IdFor(x=>x.Criteria.Criteria.PickUpLocationId))").val() != $("#@(Html.IdFor(x=>x.Criteria.Criteria.DropOffLocationId))").val()) {
+                $("#book-different-return-location").show();
+                $("#chk-book-return-at-different-location").prop('checked', true);
+            } else {
+                $("#book-different-return-location").hide();
+                $("#chk-book-return-at-different-location").prop('checked', false);
+            }
+        });
+    </script>
+
+
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.format-1.3.min.js")"></script>
+
+    @if (Model.Results != null) {
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+
+
+                function setPriceForVehicle(selectedRate) {
+                    var vehicleId = selectedRate.attr("data-vehicle-id");
+                    var total = selectedRate.attr("data-total");
+                    var cost = selectedRate.attr("data-cost");
+                    if (parseInt(total) > 0) {
+                        total = "+" + total;
+                    }
+                    var days = selectedRate.attr("data-days");
+                    var tax = selectedRate.attr("data-tax");
+                    var dropOffFee = selectedRate.attr("data-dropOffFee");
+
+
+                    var tooltipText = "Rental: R " + $.format.number(cost, '#,##0.00') + " x " + days + " days\n";
+                    tooltipText += " + Tax: R " + $.format.number(tax, '#,##0.00') + "\n";
+                    if (dropOffFee > 0) {
+                        tooltipText += " + Drop Off fee: R " + $.format.number(dropOffFee, '#,##0.00') + "\n";
+                        
+                    }
+                    tooltipText += "=================\n"
+                    tooltipText += "R " + $.format.number(total, '#,##0.00');
+
+                    //$("#rate-price-" + vehicleId).html("R " + $.format.number(total, '#,##0.00')).attr("title", tooltipText);;
+                    $("#rate-price-" + vehicleId).html("R " + total).attr("title", tooltipText);;
+                }
+
+                $("input[type='radio'].rate-selector").on("change", function () {
+                    var vehicleId = $(this).attr("data-vehicle-id");
+                    setPriceForVehicle($(this));
+                    //var cost = $(this).attr("data-cost");
+                    //$("#rate-price-" + vehicleId).html("R " + $.format.number(cost, '#,##0.00'));
+                });
+
+                $("div.rates-selection").each(function () {
+                    var vehicleId = $(this).attr("data-vehicle-id");
+                    var selectedRate = $("input[name='radRates_" + vehicleId + "']:checked");
+                    setPriceForVehicle(selectedRate);
+
+
+                    //var cost = selectedRate.attr("data-cost");
+                    //$("#rate-price-" + vehicleId).html("R " + $.format.number(cost, '#,##0.00'));
+                });
+
+            });
+        </script>
+    }
+}

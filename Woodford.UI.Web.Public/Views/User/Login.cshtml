@@ -1,0 +1,49 @@
+﻿@model UserLoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Login</h1>
+    </div>
+</div>
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+
+    <div class="input-form">
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.Email, "Email")
+            </div>
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.Password, "Password")
+            </div>
+            <div class="eight columns">
+                @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns empty-column">&nbsp;</div>
+            <div class="eight columns"><input type="submit" value="Log in" /></div>
+        </div>
+        <div class="row">
+            <div class="four columns empty-column">&nbsp;</div>
+            <div class="eight columns">
+                <p>@Html.ActionLink("Forgot Password?", "ForgotPassword", "User")</p>
+            </div>
+        </div>
+    </div>
+
+    
+}
+

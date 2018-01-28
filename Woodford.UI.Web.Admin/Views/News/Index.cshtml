@@ -1,0 +1,108 @@
+﻿@model NewsListViewModel
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>News</h1>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "NewsCategory")"> News</a></li>
+    <li class="active">@Model.NewsCategory.Title</li>
+</ol>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Articles in <strong>@Model.NewsCategory.Title</strong></h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new News Article", "Add", "News", new { categoryId = Model.NewsCategory.Id }, null)
+        </div>
+    </div>
+    @if (Model.Articles.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <th scope="col">Headline</th>                                        
+                    <th scope="col">Page Url</th>
+                    <th scope="col">Archived?</th>
+                </tr>
+
+                @foreach (var a in Model.Articles.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "News", new { id = a.Id }, null)</td>                        
+                        <td>
+                            @if (a.FileUploadId.HasValue) {
+                                <img src="@Url.Action("Index", "Uploads", new { id = a.NewsImage.Id, filename = a.NewsImage.Title + a.NewsImage.FileExtension, width = 100, height = 100, crop = 1 })" alt="@a.Headline" />
+                            }
+                        </td>
+
+                        <td>@a.Headline.</td>                       
+                        <td>@a.PageUrl</td>
+                        <td>
+                            @if (a.IsArchived) {
+                                <text>Archived</text>
+                                using (Html.BeginForm("MarkAsActive", "News")) {
+                                    @Html.Hidden("id", a.Id)
+                                    @Html.Hidden("categoryId", Model.NewsCategory.Id)
+                                    @Html.Hidden("p", Model.Articles.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Active</button>
+                                }
+                            } else {
+                                <text>Active</text>
+                                using (Html.BeginForm("MarkAsArchived", "News")) {
+                                    @Html.Hidden("id", a.Id)
+                                    @Html.Hidden("categoryId", Model.NewsCategory.Id)
+                                    @Html.Hidden("p", Model.Articles.Pagination.CurrentPage)
+                                    <button type="submit" class="btn btn-primary">Mark As Archived</button>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No news articles have been created in the <strong>@Model.NewsCategory.Title</strong> Category yet</p>
+        </div>
+    }
+    @if (Model.Articles.Items.Count() > 0) {
+
+        if (Model.Articles.Pagination != null) {
+            if (Model.Articles.Pagination.ShowPagination) {
+
+                <div class="box-footer clearfix">
+
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        @if (Model.Articles.Pagination.CurrentPage > 1) {
+                            <li><a href="@Url.Action("Index", new { categoryId = Model.NewsCategory.Id, p = Model.Articles.Pagination.CurrentPage - 1 })">&laquo;</a></li>
+                        }
+                        @for (int p = 0; p < Model.Articles.Pagination.TotalPages; p++) {
+                            if (p + 1 == Model.Articles.Pagination.CurrentPage) {
+                                <li class="paginate_button active" ><a href="@Url.Action("Index", new { categoryId = Model.NewsCategory.Id, p = (p + 1) })">@(p + 1)</a></li>
+                            } else {
+                                <li><a href="@Url.Action("Index", new { categoryId = Model.NewsCategory.Id, p = (p + 1) })">@(p + 1)</a></li>
+                            }
+
+                        }
+                        @if (Model.Articles.Pagination.CurrentPage < Model.Articles.Pagination.TotalPages) {
+                            <li><a href="@Url.Action("Index", new { categoryId = Model.NewsCategory.Id, p = Model.Articles.Pagination.CurrentPage + 1 })">&raquo;</a></li>
+                        }
+                    </ul>
+
+                </div>
+            }
+        }
+
+        @*@Html.Partial("_PaginationPartial", Model.Articles.Pagination)*@
+    }
+</div>

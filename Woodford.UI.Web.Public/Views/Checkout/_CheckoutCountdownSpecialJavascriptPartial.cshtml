@@ -1,0 +1,39 @@
+﻿@model CheckoutCountdownSpecialModel
+@if (Model.IsValidCountdownSpecial) {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.countdown.js")"></script>
+    int expirySeconds = 0;
+    if (Model != null) {
+        try {
+            expirySeconds = Convert.ToInt32((Model.Expires - DateTime.Now).TotalSeconds);
+        } catch (Exception) {
+
+        }
+
+
+    }
+
+    if (expirySeconds > 0) {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".count-down-special-container").show();
+
+                $('.count-down-special').countdown({
+                    until: +@expirySeconds,
+                    format: 'MS',
+                    compact: true,
+                    onExpiry: function () {
+                        $('.count-down-special-container').hide();
+                        $("label").removeClass("count-down-special-rate");
+                    }
+                });
+            });
+        </script>
+    } else {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".count-down-special-container").hide();
+                $("label").removeClass("count-down-special-rate");
+            });
+        </script>
+    }
+}

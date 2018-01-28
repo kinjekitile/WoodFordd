@@ -1,0 +1,9 @@
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.ApplicationServices\bin\Debug\Woodford.Core.ApplicationServices.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.ApplicationServices\bin\Debug\Woodford.Core.ApplicationServices.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.ApplicationServices\bin\Debug\Woodford.Core.DomainModel.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.ApplicationServices\bin\Debug\Woodford.Core.Interfaces.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.ApplicationServices\bin\Debug\Woodford.Core.DomainModel.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.ApplicationServices\bin\Debug\Woodford.Core.Interfaces.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.ApplicationServices\obj\Debug\Woodford.Core.ApplicationServices.csprojResolveAssemblyReference.cache
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.ApplicationServices\obj\Debug\Woodford.Core.ApplicationServices.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Core.ApplicationServices\obj\Debug\Woodford.Core.ApplicationServices.pdb

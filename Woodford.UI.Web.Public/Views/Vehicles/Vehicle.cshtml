@@ -1,0 +1,30 @@
+﻿@model VehicleModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.PageContent.PageTitle;
+    ViewBag.MetaKeywords = Model.PageContent.MetaKeywords;
+    ViewBag.MetaDescription = Model.PageContent.MetaDescription;
+}
+
+<h1>@Model.Title</h1>
+<h4>@Html.ActionLink(Model.VehicleGroup.Title, "VehicleGroup", "VehicleGroups", new { vehicleGroupUrl = Model.VehicleGroup.PageUrl }, null)</h4>
+<p><strong>@Model.VehicleGroup.TitleDescription</strong></p>
+<div class="row">
+    <div class="six columns">
+        @if (Model.FileUploadId.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.VehicleImage.Id, filename = Model.VehicleImage.Title + Model.VehicleImage.FileExtension, width = 500})" alt="@Model.Title" />
+        }
+    </div>
+    <div class="six columns">
+        @if (Model.FileUploadId2.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.VehicleImage2.Id, filename = Model.VehicleImage2.Title + Model.VehicleImage2.FileExtension, width = 500})" alt="@Model.Title Interior" />
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="twelve columns">
+        @{Html.RenderPartial("_VehicleAttributesPartial", Model);}
+        @Html.Raw(Model.PageContent.PageContent)
+    </div>
+</div>

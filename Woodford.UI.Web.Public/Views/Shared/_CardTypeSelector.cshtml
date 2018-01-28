@@ -1,0 +1,78 @@
+﻿@{ string fieldName = ViewBag.inputName;
+   int inputValue = ViewBag.currentPropertyValue;
+
+   string amexSelected = "";
+   string discoverSelected = "";
+   string masterCardSelected = "";
+   string visaSelected = "";
+   string dinersSelected = "";
+
+   switch (inputValue) {
+       case 1:
+           amexSelected = "checked='checked'";
+           discoverSelected = "";
+           masterCardSelected = "";
+           visaSelected = "";
+           dinersSelected = "";
+           break;
+       case 2:
+           amexSelected = "";
+           discoverSelected = "checked='checked'";
+           masterCardSelected = "";
+           visaSelected = "";
+           dinersSelected = "";
+           break;
+       case 3:
+           amexSelected = "";
+           discoverSelected = "";
+           masterCardSelected = "checked='checked'";
+           visaSelected = "";
+           dinersSelected = "";
+           break;
+       case 4:
+           amexSelected = "";
+           discoverSelected = "";
+           masterCardSelected = "";
+           visaSelected = "checked='checked'";
+           dinersSelected = "";
+           break;
+       case 5:
+           amexSelected = "";
+           discoverSelected = "";
+           masterCardSelected = "";
+           visaSelected = "";
+           dinersSelected = "checked='checked'";
+           break;
+   }
+ 
+}
+
+
+
+<ul class="radio-list">
+    <li>
+        <input type="radio" id="radAmex" name="@(fieldName)" value="1" />
+        <label for="radAmex" class="">
+            <img src="@Url.Content("/Content/images/card-types/amex.png")" @(amexSelected) /></label>
+    </li>
+    <li>
+        <input type="radio" id="radDiscover" name="@(fieldName)" value="2" @(discoverSelected)/>
+        <label for="radDiscover">
+            <img src="@Url.Content("/Content/images/card-types/discover.png")" /></label>
+    </li>
+    <li>
+        <input type="radio" id="radMasterCard" name="@(fieldName)" value="3" @(masterCardSelected)/>
+        <label for="radMasterCard">
+            <img src="@Url.Content("/Content/images/card-types/master-card.png")" /></label>
+    </li>
+    <li>
+        <input type="radio" id="radVisa" name="@(fieldName)" value="4" @(visaSelected)/>
+        <label for="radVisa">
+            <img src="@Url.Content("/Content/images/card-types/visa.png")" /></label>
+    </li>
+    <li>
+        <input type="radio" id="radDiners" name="@(fieldName)" value="5" @(dinersSelected)/>
+        <label for="radDiners">
+            <img src="@Url.Content("/Content/images/card-types/diners.png")" /></label>
+    </li>
+</ul>

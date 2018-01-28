@@ -1,0 +1,25 @@
+﻿@model DashboardRecentBookingsModel
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2 class="box-title">Recent Bookings</h2>
+
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+
+    <div class="box-body list">
+        @foreach (var item in Model.RecentBookings) {
+            <div class="item">
+                <p class="message">
+                    <a href="#" class="name">
+                        @item.FirstName @item.LastName
+                    </a>
+                    @item.PickupDate.ToString("dd MMMM yyyy") | @item.PickupDate.ToString("h:mm tt") @item.PickupBranch.Title
+                </p>
+            </div><!-- /.item -->
+        }
+        
+    </div>
+</div>

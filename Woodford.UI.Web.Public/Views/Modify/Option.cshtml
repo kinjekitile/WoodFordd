@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Modify or Cancel Reservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="three columns">
+        <div class="nav-block">
+
+            @if (Request.IsAuthenticated) {
+                Html.RenderPartial("_UserNavigationPartial");
+            }
+
+        </div>
+    </div>
+
+
+    <div class="five columns">
+        <p>Please select one of the options below:</p>
+        <p>@Html.ActionLink("Modify Reservation", "Index", null, new { @class = "button" })</p>
+
+        <p>OR</p>
+
+        <p>@Html.ActionLink("Cancel Reservation", "Index", "Cancel", null, new { @class = "button" })</p>
+    </div>
+
+
+    <div class="four columns">
+       
+
+
+    </div>
+
+
+</div>

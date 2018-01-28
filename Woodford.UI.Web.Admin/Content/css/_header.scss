@@ -1,0 +1,22 @@
+﻿@import "vars";
+
+.header {
+    background-color: $brand-colour-dark;
+    padding-top: 5px;
+}
+
+.header a {
+    color: #fff;
+}
+
+.header a:hover {
+    color: #ccc;
+}
+
+.header span {
+    color: #fff;
+}
+
+.header .login-header {
+    text-align: right;
+}

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="https://3dsecure.mygateglobal.com/3DSecure.cfc" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rpc.xml.coldfusion" xmlns:impl="https://3dsecure.mygateglobal.com/3DSecure.cfc" targetNamespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="https://3dsecure.mygateglobal.com/3DSecure.cfc">
+      <xsd:import namespace="http://xml.apache.org/xml-soap" />
+      <xsd:import namespace="http://rpc.xml.coldfusion" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="ArrayOf_xsd_anyType">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:anyType[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOf_xsd_string">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfArrayOf_xsd_anyType">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:anyType[][]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://rpc.xml.coldfusion">
+      <xsd:import namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" />
+      <xsd:import namespace="http://xml.apache.org/xml-soap" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="CFCInvocationException">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:complexType name="QueryBean">
+        <xsd:sequence>
+          <xsd:element name="columnList" nillable="true" type="impl:ArrayOf_xsd_string" />
+          <xsd:element name="data" nillable="true" type="impl:ArrayOfArrayOf_xsd_anyType" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.apache.org/xml-soap">
+      <xsd:import namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" />
+      <xsd:import namespace="http://rpc.xml.coldfusion" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="mapItem">
+        <xsd:sequence>
+          <xsd:element name="key" nillable="true" type="xsd:anyType" />
+          <xsd:element name="value" nillable="true" type="xsd:anyType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Map">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="apachesoap:mapItem" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="lookupResponse">
+    <wsdl:part name="lookupReturn" type="impl:ArrayOf_xsd_anyType" />
+  </wsdl:message>
+  <wsdl:message name="authenticateResponse">
+    <wsdl:part name="authenticateReturn" type="impl:ArrayOf_xsd_anyType" />
+  </wsdl:message>
+  <wsdl:message name="lookupRequest">
+    <wsdl:part name="MerchantID" type="xsd:string" />
+    <wsdl:part name="ApplicationID" type="xsd:string" />
+    <wsdl:part name="Mode" type="xsd:double" />
+    <wsdl:part name="PAN" type="xsd:string" />
+    <wsdl:part name="PANExpr" type="xsd:string" />
+    <wsdl:part name="PurchaseAmount" type="xsd:string" />
+    <wsdl:part name="UserAgent" type="xsd:string" />
+    <wsdl:part name="BrowserHeader" type="xsd:string" />
+    <wsdl:part name="OrderNumber" type="xsd:string" />
+    <wsdl:part name="OrderDesc" type="xsd:string" />
+    <wsdl:part name="Recurring" type="xsd:string" />
+    <wsdl:part name="RecurringFrequency" type="xsd:string" />
+    <wsdl:part name="RecurringEnd" type="xsd:string" />
+    <wsdl:part name="Installment" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="tokenLookupRequest">
+    <wsdl:part name="MerchantID" type="xsd:string" />
+    <wsdl:part name="ApplicationID" type="xsd:string" />
+    <wsdl:part name="Mode" type="xsd:double" />
+    <wsdl:part name="ClientToken" type="xsd:string" />
+    <wsdl:part name="PurchaseAmount" type="xsd:string" />
+    <wsdl:part name="UserAgent" type="xsd:string" />
+    <wsdl:part name="BrowserHeader" type="xsd:string" />
+    <wsdl:part name="OrderNumber" type="xsd:string" />
+    <wsdl:part name="OrderDesc" type="xsd:string" />
+    <wsdl:part name="Recurring" type="xsd:string" />
+    <wsdl:part name="RecurringFrequency" type="xsd:string" />
+    <wsdl:part name="RecurringEnd" type="xsd:string" />
+    <wsdl:part name="Installment" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="authenticateRequest">
+    <wsdl:part name="TransactionIndex" type="xsd:string" />
+    <wsdl:part name="PAResPayload" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="CFCInvocationException">
+    <wsdl:part name="fault" type="tns1:CFCInvocationException" />
+  </wsdl:message>
+  <wsdl:message name="tokenLookupResponse">
+    <wsdl:part name="tokenLookupReturn" type="impl:ArrayOf_xsd_anyType" />
+  </wsdl:message>
+  <wsdl:portType name="_3DSecure">
+    <wsdl:operation name="lookup" parameterOrder="MerchantID ApplicationID Mode PAN PANExpr PurchaseAmount UserAgent BrowserHeader OrderNumber OrderDesc Recurring RecurringFrequency RecurringEnd Installment">
+      <wsdl:input name="lookupRequest" message="impl:lookupRequest" />
+      <wsdl:output name="lookupResponse" message="impl:lookupResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="authenticate" parameterOrder="TransactionIndex PAResPayload">
+      <wsdl:input name="authenticateRequest" message="impl:authenticateRequest" />
+      <wsdl:output name="authenticateResponse" message="impl:authenticateResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="tokenLookup" parameterOrder="MerchantID ApplicationID Mode ClientToken PurchaseAmount UserAgent BrowserHeader OrderNumber OrderDesc Recurring RecurringFrequency RecurringEnd Installment">
+      <wsdl:input name="tokenLookupRequest" message="impl:tokenLookupRequest" />
+      <wsdl:output name="tokenLookupResponse" message="impl:tokenLookupResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="3DSecure.cfcSoapBinding" type="impl:_3DSecure">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="lookup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="lookupRequest">
+        <wsdlsoap:body use="encoded" namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="lookupResponse">
+        <wsdlsoap:body use="encoded" namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="authenticate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="authenticateRequest">
+        <wsdlsoap:body use="encoded" namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="authenticateResponse">
+        <wsdlsoap:body use="encoded" namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="tokenLookup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="tokenLookupRequest">
+        <wsdlsoap:body use="encoded" namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="tokenLookupResponse">
+        <wsdlsoap:body use="encoded" namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="https://3dsecure.mygateglobal.com/3DSecure.cfc" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="3DSecure1">
+    <wsdl:port name="3DSecure.cfc" binding="impl:3DSecure.cfcSoapBinding">
+      <wsdlsoap:address location="https://3dsecure.mygateglobal.com/3DSecure.cfc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

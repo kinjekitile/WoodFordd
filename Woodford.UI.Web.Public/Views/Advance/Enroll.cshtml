@@ -1,0 +1,106 @@
+﻿@model UserRegistrationViewModel
+@{
+    ViewBag.Title = "Advance Loyalty Program";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="two columns">
+        &nbsp;
+    </div>
+    <div class="eight columns">
+        <img src="~/Content/images/advance_cards_register.png" />
+    </div>
+    <div class="two columns">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="twelve columns">
+        <h1>Register for Advance Loyalty Program</h1>
+    </div>
+</div>
+
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    <div class="input-form">
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.User.Email, "Email")
+            </div>
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.User.Email, new { placeholder = "Email" })
+                @Html.ValidationMessageFor(m => m.User.Email)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.User.FirstName, "First Name")
+            </div>
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.User.FirstName, new { placeholder = "First Name" })
+                @Html.ValidationMessageFor(m => m.User.FirstName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.User.LastName, "Last Name")
+            </div>
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.User.LastName, new { placeholder = "Last Name" })
+                @Html.ValidationMessageFor(m => m.User.LastName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.User.MobileNumber, "Cell")
+            </div>
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.User.MobileNumber, new { placeholder = "Cell" })
+                @Html.ValidationMessageFor(m => m.User.MobileNumber)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.User.IdNumber, "Id Number")
+            </div>
+            <div class="eight columns">
+                @Html.TextBoxFor(m => m.User.IdNumber, new { placeholder = "Id Number" })
+                @Html.ValidationMessageFor(m => m.User.IdNumber)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.UserPassword, "Password")
+            </div>
+            <div class="eight columns">
+                @Html.PasswordFor(m => m.UserPassword, new { placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.UserPassword)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password")
+            </div>
+            <div class="eight columns">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns">
+                @Html.LabelFor(m => m.User.IsLoyaltyMember, "Enroll in Advance Loyalty Program")
+            </div>
+            <div class="eight columns">
+                @Html.CheckBoxFor(m => m.User.IsLoyaltyMember, new { placeholder = "Enroll in Advance Loyalty Program", style = "margin-top:10px;" })
+                @Html.ValidationMessageFor(m => m.User.IsLoyaltyMember)
+            </div>
+        </div>
+        <div class="row">
+            <div class="four columns empty-column">&nbsp;</div>
+            <div class="eight columns"><input type="submit" value="Register" /></div>
+        </div>
+    </div>
+}
+
+

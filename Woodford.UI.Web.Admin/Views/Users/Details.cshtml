@@ -1,0 +1,81 @@
+﻿@model UserViewModel
+@{
+    ViewBag.Title = "User Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Woodford Users</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">User Details</h3>
+
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        
+            <div class="col-lg-4 pull-left">
+                <p>@Model.User.FirstName @Model.User.LastName</p>
+
+
+                @if (Model.User.IsLoyaltyMember) {
+                    <p>Advance Tier: @ViewBag.LoyaltyTier </p>
+                    <p>Advance Number: @Model.User.LoyaltyNumberFull</p>
+                    <p>Advance Period Start: @Model.User.LoyaltyPeriodStart</p>
+                    <p>Loyalty Period End: @Model.User.LoyaltyPeriodEnd</p>
+                    <p>Bookings per period: @Model.LoyaltyOverview.BookingPerLoyaltyPeriod  (@Model.BookingsRequiredForNextLoyaltyTier required for next level)</p>
+                    <p>Points Earned per period: @string.Format("{0:c}", Model.LoyaltyOverview.PointsEarnedPerPeriod)</p>
+                    <p>Total points earnerd: @decimal.Round(Model.LoyaltyOverview.TotalPointsEarned, 2)</p>
+                    <p>Total points spent: @decimal.Round(Model.LoyaltyOverview.TotalPointsSpent, 2)</p>
+                    <p>Points remaining: @decimal.Round(Model.LoyaltyOverview.PointsRemaining, 2)</p>
+                }
+                else {
+                    <p>User is not yet enrolled in Advance.</p>
+                }
+                @if (Roles.IsUserInRole("Administrator")) {
+                if (Model.User.Roles.Count() > 0) {
+                        <ul>
+                            @foreach (var role in Model.User.Roles) {
+                                <li>@role.Title</li>
+                            }
+                        </ul>
+
+                    }
+                }
+            </div>
+
+            <div class="pull-right col-lg-4" style="text-align: left;">
+                <p>Email: @Model.User.Email</p>
+                <p>Mobile: @Model.User.MobileNumber</p>
+                <p>ID: @Model.User.IdNumber</p>
+                @if (Model.User.CorporateId.HasValue) {
+                    <p>Corporate: @Model.User.Corporate.Title </p>
+                }
+                <p>User Blocked: @Model.User.IsAccountDisabled</p>
+                <p>Loyalty Tier Locked: @Model.User.IsLoyaltyTierLocked</p>
+            </div>
+
+        </div>
+        
+      <div class="row">
+          <ul>
+              <li>@Html.ActionLink("Reservations", "Reservations", new { id = Model.User.Id })</li>
+              @if (Roles.IsUserInRole("Administrator") || Roles.IsUserInRole("SystemAdministrator")) {
+                  <li>@Html.ActionLink("Set Loyalty Tier", "SetLoyaltyTier", new { id = Model.User.Id })</li>
+                <li>@Html.ActionLink("Set Loyalty Tier No Drop in Tier", "FixLoyaltyTier", new { id = Model.User.Id })</li>
+                  <li>@Html.ActionLink("Set Corporate", "SetCorporate", new { id = Model.User.Id })</li>
+                  <li>@Html.ActionLink("Booking History", "BookingHistory", new { id = Model.User.Id })</li>
+                  <li>@Html.ActionLink("Set Roles", "SetRoles", new { id = Model.User.Id })</li>
+                  <li>@Html.ActionLink("Update Email", "ChangeEmail", new { id = Model.User.Id })</li>
+                <li>@Html.ActionLink("Update Password", "ChangePassword", new { id = Model.User.Id })</li>
+                <li>@Html.ActionLink("Set Account Disabled", "SetDisabled", new { id = Model.User.Id })</li>
+                <li>@Html.ActionLink("Create Booking Claim", "AddBookingHistory", "BookingCLaims", new { userId = Model.User.Id }, null)</li>
+              }
+
+
+
+          </ul>
+      </div>
+    
+</div>

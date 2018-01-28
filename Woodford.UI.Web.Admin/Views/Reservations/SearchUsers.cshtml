@@ -1,0 +1,397 @@
+﻿@model ReservationSearchUsersViewModel
+@{
+    ViewBag.Title = "User Reservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>User Reservations Search</h1>
+}
+
+
+@using (Html.BeginForm("SearchUsersFilter", "Reservations", FormMethod.Get, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Search</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        
+                        <div class="col-sm-10">
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.StartDate, "Start Date", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.StartDate, new { placeholder = "Start Date", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Filter.StartDate)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.EndDate, "End Date", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.EndDate, new { placeholder = "End Date", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Filter.EndDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.Email, "Email", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.Email, new { placeholder = "Email", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.Name, "Name", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.Name, new { placeholder = "Name", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.IdNumber, "ID Number", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.IdNumber, new { placeholder = "ID Number", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.BranchId, "Pickup Branch", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.BranchFor(m => m.Filter.BranchId, new { placeholder = "Pickup Branch", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.VehicleGroupId, "Class", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.VehicleGroupFor(m => m.Filter.VehicleGroupId, new { placeholder = "Class", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="Filter_IsMobileBooking">
+                                    @Html.EditorFor(m => m.Filter.IsMobileBooking) Is Mobile Booking
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Filter.IsMobileBooking)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @*<div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="Filter_SortBy">
+                                    @Html.ReservationSortByFor(m => m.Filter.SortBy) Sort By
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Filter.SortBy)
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @*<div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label for="Filter_ExportedToExternalSystem">
+                                    @Html.EditorFor(m => m.Filter.ExportedToExternalSystem) Is Exported
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Filter.ExportedToExternalSystem)
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("SaveUserReport", "Reservations", FormMethod.Get, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+    @Html.HiddenFor(x => x.Filter.StartDate)
+    @Html.HiddenFor(x => x.Filter.EndDate)
+    @Html.HiddenFor(x => x.Filter.BranchId)
+    @Html.HiddenFor(x => x.Filter.VehicleGroupId)
+    @Html.HiddenFor(x => x.Filter.IsMobileBooking)
+    @Html.HiddenFor(x => x.Filter.Name)
+    @Html.HiddenFor(x => x.Filter.Email)
+    @Html.HiddenFor(x => x.Filter.IdNumber)
+    
+    
+
+    <div class="box box-primary collapsed-box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Report Options</h3>
+            <div class="box-tools pull-right">
+
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+
+            </div>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            @Html.LabelFor(m => m.Report.Title, "Title", new { @class = "form-label" })
+                        </div>
+
+
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Report.Title, new { placeholder = "Title", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Report.Title)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-10">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+
+                            @Html.LabelFor(m => m.Report.UseCurrentDateAsStartDate, "Use Current Date as Start Date", new { @class = "form-label" })
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.CheckBoxFor(m => m.Report.UseCurrentDateAsStartDate, new { style = "margin-top: 10px;" })
+                            @Html.ValidationMessageFor(x => x.Report.UseCurrentDateAsStartDate)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-10">
+                            Leaving this option unchecked will mean the report will use the start and end dates set in the search tool
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            Start Date
+
+                        </div>
+
+                        <div class="col-sm-6">
+                            Current Date plus:
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(m => m.Report.DateUnitsToAdd)
+                            @Html.ValidationMessageFor(x => x.Report.DateUnitsToAdd)
+
+                        </div>
+                        <div class="col-sm-6">
+                            @Html.ReportDateUnitTypeFor(m => m.Report.DateUnitType)
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-2">
+
+                            @Html.ValidationMessageFor(x => x.Report.DateUnitType)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+
+                        <div class="col-sm-2">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+
+                        <div class="col-sm-10">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Save Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Reservations</h3>
+    </div><!-- /.box-header -->
+    @if (Model.Items != null) {
+                if (Model.Items.Count > 0) {
+            <p>
+                @{ Html.RenderPartial("_ExportUsersAsExcelPartial", Model.Filter); }
+            </p>
+            <div class="box-body no-padding">
+                <table class="table table-bordered table-striped dataTable">
+
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">ID Number</th>
+                        <th scope="col">No. of Bookings</th>
+                        
+
+
+                    </tr>
+
+                    @foreach (var item in Model.Items) {
+                        <tr>
+                            
+                            <td>@Html.ActionLink("Details", "Details", "Users", new { id = item.Id }, null)</td>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            <td>@item.IdNumber</td>
+                            <td>@item.NumberOfBookings</td>
+                           
+                        
+
+                    </tr>
+                                }
+
+                </table>
+            </div>
+                                }
+                                if (Model.Items.Count() > 0) {
+                                    @Html.Partial("_PaginationPartial", Model.Pagination)
+                                    }
+
+                                }
+
+
+
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            @*cleanDate('Search_StartDate');
+            cleanDate('Search_EndDate');
+
+            @if (Model.Results != null) {
+
+                   <text>cleanDate('UpdateDateRange_ValidStartDate');</text>
+                   <text>cleanDate('UpdateDateRange_ValidEndDate');</text>
+
+           }*@
+
+
+            $('#Filter_StartDate,Filter_EndDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+
+
+
+
+        });
+
+      
+    </script>
+}

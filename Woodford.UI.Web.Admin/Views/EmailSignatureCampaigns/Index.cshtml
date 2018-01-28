@@ -1,0 +1,60 @@
+﻿@model ListOf<EmailSignatureCampaignModel>
+
+@{
+    ViewBag.Title = "Email Signatures Campaign";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Email Signatures</h1>
+    <ol class="breadcrumb">
+        <li class="active"><a href="@Url.Action("Index", "EmailSignatureCampaigns")"> Email Signatures Campaign</a></li>
+    </ol>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Email Signature Campaigns</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add Email Signature Campaign", "Add", "EmailSignatureCampaigns")
+        </div>
+    </div>
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <td></td>
+                    <th scope="col">Name</th>
+                    <th>Default</th>
+                    <th>Live</th>
+                </tr>
+
+                @foreach (var item in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "EmailSignatureCampaigns", new { id = item.Id }, null)</td>
+                       
+                        <td>
+                           @item.CampaignName
+                        </td>
+                        <td>@item.IsDefault</td>
+                        <td>@item.IsLive</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    }
+    else {
+        <div class="box-body">
+            <p>No email signature campaigns have been created yet</p>
+        </div>
+    }
+    @if (Model.Items.Count() > 0 && Model.Pagination != null) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

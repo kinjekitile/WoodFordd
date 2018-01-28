@@ -1,0 +1,124 @@
+﻿@model RateCodeViewModel
+@{
+    ViewBag.Title = "Add Rate Code";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Rate Codes</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Rate Code</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Add", "RateCodes", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+
+        <div class="box-body">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Code.Title, "Rate Code", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Code.Title, new { placeholder = "Rate Code", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Code.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Code_IsNotAdjustable">
+                            @Html.CheckBoxFor(m => m.Code.IsNotAdjustable) Is Not Adjustable
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Code.IsNotAdjustable)
+
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Code.RateRuleId, "Rate Rule", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.RateRuleFor(m => m.Code.RateRuleId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Code.RateRuleId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Code_AvailableToPublic">
+                            @Html.CheckBoxFor(m => m.Code.AvailableToPublic) Available To Public
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Code.AvailableToPublic)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Code_AvailableToLoyalty">
+                            @Html.CheckBoxFor(m => m.Code.AvailableToLoyalty) Available To Advance
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Code.AvailableToLoyalty)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Code_AvailableToCorporate">
+                            @Html.CheckBoxFor(m => m.Code.AvailableToCorporate) Available To Corporate Users
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Code.AvailableToCorporate)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Code_CanHaveUpgradeApplied">
+                            @Html.CheckBoxFor(m => m.Code.CanHaveUpgradeApplied) Can Have Upgrade Applied
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Code.CanHaveUpgradeApplied)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Code_IsSticky">
+                            @Html.CheckBoxFor(m => m.Code.IsSticky) Is Sticky
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Code.IsSticky) 
+
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Code.ColorCode, "Color", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.ColorFor(m => m.Code.ColorCode, new { placeholder = "Color", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Code.ColorCode)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Add Rate Code</button>
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>

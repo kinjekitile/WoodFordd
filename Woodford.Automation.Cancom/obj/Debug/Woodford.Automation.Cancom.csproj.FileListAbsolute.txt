@@ -1,0 +1,6 @@
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Automation.Cancom\obj\Debug\Woodford.Automation.Cancom.csprojResolveAssemblyReference.cache
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Automation.Cancom\obj\Debug\Woodford.Automation.Cancom.Form1.resources
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Automation.Cancom\obj\Debug\Woodford.Automation.Cancom.Properties.Resources.resources
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Automation.Cancom\obj\Debug\Woodford.Automation.Cancom.csproj.GenerateResource.Cache
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Automation.Cancom\obj\Debug\Woodford.Automation.Cancom.exe
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Automation.Cancom\obj\Debug\Woodford.Automation.Cancom.pdb

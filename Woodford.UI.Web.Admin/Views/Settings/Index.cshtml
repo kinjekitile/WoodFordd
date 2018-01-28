@@ -1,0 +1,40 @@
+﻿@model List<Woodford.Core.DomainModel.Models.SettingModel>
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Application Settings</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Settings</h3>
+    </div><!-- /.box-header -->
+
+    @if (Model.Count > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Setting</th>
+                    <th scope="col">Value</th>
+                </tr>
+
+
+                @foreach (var u in Model) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "Settings", new { type = u.Type.ToString() }, null)</td>
+
+                        <td>@u.Type.ToString().Replace("_", " ")</td>
+                        <td>@u.Value</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    }
+
+</div>

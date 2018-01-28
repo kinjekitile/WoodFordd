@@ -1,0 +1,36 @@
+﻿@model ListOf<VehicleGroupModel>
+@{
+    ViewBag.Title = "Vehicle Groups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.MetaKeywords = "";
+    ViewBag.MetaDescription = "";
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Vehicle Groups</h1>
+    </div>
+</div>
+
+@if (Model.Items.Count > 0) {
+    <div class="row">
+        @foreach (var g in Model.Items) {
+            <div class="four columns">
+                <h3>@g.Title</h3>
+                @if (g.FileUploadId.HasValue) {
+                    <img src="@Url.Action("Index", "Uploads", new { id = g.VehicleGroupImage.Id, filename = g.VehicleGroupImage.Title + g.VehicleGroupImage.FileExtension, width = 200, height = 200, crop = 1 })" alt="@g.Title" />
+                }
+                @Html.ActionLink("View Vehicle Group", "VehicleGroup", "VehicleGroups", new { vehicleGroupUrl = g.PageUrl }, null)
+            </div>
+        }
+
+    </div>
+
+} else {
+    <div class="row">
+        <div class="twelve columns">
+            <p>No vehicle groups have been found</p>
+        </div>
+    </div>
+
+}

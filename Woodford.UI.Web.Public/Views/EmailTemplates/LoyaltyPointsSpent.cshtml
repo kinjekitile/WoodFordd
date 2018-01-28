@@ -1,0 +1,27 @@
+﻿@model LoyaltyPointsSpentNotificationModel
+
+
+<strong>Dear @Model.User.FirstName</strong>
+
+<p></p>Thank you for choosing Woodford Car Hire and for using Woodford Advance - your premier loyalty programme that offers benefits and rewards every time you book.</p>
+
+<p>
+    We’re pleased to let you know that <strong>@decimal.Round(Model.PointsSpent, 2)</strong> points have been converted for your rental between <strong>@Model.PickupDate.ToString("dd MMMM yyyy h:mm tt") @Model.DropoffDate.ToString("dd MMMM yyyy h:mm tt")</strong>, and that you have received a discount of <strong>R @decimal.Round(Model.PointsSpent, 2)</strong>.
+</p>
+
+<p>Your total points remaining has been updated to:</p>
+
+
+<div style="color: #30693F; font-size: 16px; margin-bottom: 10px;">
+    <strong>@decimal.Round(Model.PointsRemaining, 2)</strong> points
+</div>
+
+<p>Please take note that you may only redeem points when booking on your online profile.</p>
+
+<p>
+    Please also feel free to contact Woodford at advance@woodford.co.za for any queries or suggestions.
+</p>
+
+<p><strong>Sincerely</strong></p>
+
+<p><strong>The Woodford Advance Team</strong></p>

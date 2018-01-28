@@ -1,0 +1,55 @@
+﻿@model ListOfDynamicPageModel
+@{
+    ViewBag.Title = "Dynamic Pages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Dynamic Pages</h1>
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Pages</h3>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="admin-buttons">
+            @Html.ActionLink("Add new Dynamic Page", "Add", "DynamicPages")
+        </div>
+    </div>
+
+    @if (Model.Pages.Count > 0) {
+
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <td></td>
+                    <th scope="col">Admin Description</th>
+                    <th scope="col">Page Url</th>
+                    <th scope="col">Archived?</th>
+                </tr>
+
+                @foreach (var d in Model.Pages) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "DynamicPages", new { id = d.Id }, null)</td>
+                        <td>@d.AdminDescription</td>
+                        <td>@d.PageUrl</td>
+                        <td>@(d.IsArchived ? "Archived" : "Live")</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    } else {
+        <div class="box-body">
+            <p>No dynamic pages have been created yet</p>
+        </div>
+    }
+    @if (Model.Pages.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>

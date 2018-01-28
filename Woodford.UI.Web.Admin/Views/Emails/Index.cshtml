@@ -1,0 +1,54 @@
+﻿@model ListOf<MessageQueueModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Email Queue</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Emails</h3>
+        <div class="box-tools">
+            Search
+        </div>
+    </div><!-- /.box-header -->
+
+    @if (Model.Items.Count() > 0) {
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <td></td>
+                    <th>Date Created</th>
+                    <th>Is Sent</th>
+                    <th>Sending Process</th>
+                    <th>Error on sending?</th>
+                </tr>
+
+                @foreach (var m in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", "Emails")</td>
+                        <td>@m.DateCreated.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@(m.Sent ? "Yes" : "No")</td>
+                        <td>@m.SenderProcess</td>
+                        <td>@((m.ErrorOccurred ?? false) ? "Yes" : "No")</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        
+    } else {
+        <div class="box-body">
+            <p>There are no emails in the queue</p>
+        </div>
+    }
+
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+
+</div>

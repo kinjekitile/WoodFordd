@@ -1,0 +1,49 @@
+﻿@model ListOf<ReservationModel>
+@{
+    ViewBag.Title = "User Reservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>User Reservations</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">User Reservations</h3>
+
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        
+        
+        <table class="table table-bordered table-striped dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Id</th>
+                    <th>Booking Date</th>
+                    <th>Pickup Date</th>
+                    <th>Pickup Location</th>
+                    <th>DropOff Location</th>
+                    <th>Vehicle</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Details", "Details", "Reservations", new { id = item.Id }, null)</td>
+                        <td>@item.Id</td>
+                        <td>@item.DateCreated.ToString("d MMM yyyy")</td>
+                        <td>@item.PickupDate.ToString("d MMM yyyy")</td>
+                        <td>@item.PickupBranch.Title</td>
+                        <td>@item.DropOffBranch.Title</td>
+                        <td>@item.Vehicle.Title - @item.Vehicle.VehicleGroup.Title</td>
+                        <td>@String.Format("{0:c}", item.BookingPrice)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

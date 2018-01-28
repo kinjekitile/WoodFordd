@@ -1,0 +1,58 @@
+﻿@{
+    string currentSubSectionFromUrl = "";
+    string currentUrl = Request.Url.PathAndQuery;
+    string[] urlSplit = currentUrl.Split('/');
+    if (urlSplit.Length > 1) {
+        if (urlSplit.Length > 2) {
+            currentSubSectionFromUrl = urlSplit[2].ToLower();
+        }
+
+    }
+
+}
+
+@helper  IsActive(string linkSection, string currentSectionFromUrl, string otherClass) {    
+if (linkSection.Contains(",") && currentSectionFromUrl != "") {
+    if (linkSection.Contains(currentSectionFromUrl)) {
+            <text>class="active@(string.IsNullOrEmpty(otherClass) ? "" : " " + otherClass)"</text>
+    } else {
+            <text>class="@otherClass"</text>
+    }
+} else {
+    if (linkSection == currentSectionFromUrl) {
+            <text>class="active@(string.IsNullOrEmpty(otherClass) ? "" : " " + otherClass)"</text>
+    } else {
+            <text>class="@otherClass"</text>
+    }
+}
+}
+
+<ul>
+    
+    
+    <li @IsActive("advance", currentSubSectionFromUrl, "")>
+        @Html.ActionLink("My Account", "Advance", "User")
+    </li>
+    <li @IsActive("reservations", currentSubSectionFromUrl, "")>
+        @Html.ActionLink("Current Reservations", "Index", "Reservations")
+    </li>
+    <li @IsActive("reservations", currentSubSectionFromUrl, "")>
+        @Html.ActionLink("Past Reservations", "Past", "Reservations")
+    </li>
+    <li @IsActive("changeemailaddress", currentSubSectionFromUrl, "")>
+        @Html.ActionLink("Change Email Address", "ChangeEmailAddress", "User")
+    </li>
+    <li @IsActive("changepassword", currentSubSectionFromUrl, "")>
+        @Html.ActionLink("Change Password", "ChangePassword", "User")
+    </li>
+    <li @IsActive("profile", currentSubSectionFromUrl, "")>
+        @Html.ActionLink("User Profile", "Profile", "User")
+    </li>
+    <li @IsActive("profile", currentSubSectionFromUrl, "")>
+        @Html.ActionLink("Claim Booking for Advance", "ClaimBooking", "User")
+    </li>
+    @*<li @IsActive("bookinghistory", currentSubSectionFromUrl, "")>
+        @Html.ActionLink("Booking History", "BookingHistory", "User")
+    </li>*@
+    
+</ul>

@@ -1,0 +1,14 @@
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\Woodford.Infrastructure.Authenticate.dll.config
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\Woodford.Infrastructure.Authenticate.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\Woodford.Infrastructure.Authenticate.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\WebMatrix.Data.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\WebMatrix.WebData.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\Woodford.Core.DomainModel.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\Woodford.Core.Interfaces.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\Woodford.Core.DomainModel.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\Woodford.Core.Interfaces.pdb
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\WebMatrix.Data.xml
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\bin\Debug\WebMatrix.WebData.xml
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\obj\Debug\Woodford.Infrastructure.Authenticate.csprojResolveAssemblyReference.cache
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\obj\Debug\Woodford.Infrastructure.Authenticate.dll
+C:\Users\VICTOR OKOTH\Desktop\woodford web\trunk\Woodford2015\Woodford.Infrastructure.Authenticate\obj\Debug\Woodford.Infrastructure.Authenticate.pdb

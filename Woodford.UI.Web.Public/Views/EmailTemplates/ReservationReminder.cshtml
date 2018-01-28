@@ -1,0 +1,584 @@
+﻿@model ReservationInvoiceNotificationModel
+
+
+<table>
+    <tr>
+        <td>
+            <p><a href="@(Model.SiteDomain)checkout/print/@Model.Reservation.Id">Click here</a> to print your reservation.</p>
+        </td>
+    </tr>
+</table>
+<table style="width:100%;margin-top:0px;">
+    <tbody>
+        <tr style="padding-bottom:0px;">
+            <td width="25%" style="text-align:center;padding-top: 15px;">
+                <div style="border:solid 1px #0B8255;padding: 25px 10px 25px 10px;margin-bottom:0px;height: 60px;">
+                    <p style="text-align: center;font-size:x-large;margin-bottom: -5px;margin-top:2px;">@Model.Reservation.Id</p>
+                    <p style="color: #30693F;text-align: center;font-size:medium;margin-bottom: 0px;">Reservation<br /> Number</p>
+                </div>
+
+
+            </td>
+            <td width="25%" style="text-align:center;padding-top: 15px;">
+                <div style="border:solid 1px #0B8255;padding: 25px 10px 25px 10px;height: 60px;">
+                    <p style="text-align: center;font-size:x-large;margin-bottom: -5px;margin-top:2px;">@(Model.Reservation.QuoteReference.ToUpper())</p>
+                    <p style="color: #30693F;text-align: center;font-size:medium;margin-bottom: 0px;">Booking<br /> Pin</p>
+                </div>
+
+            </td>
+            <td style="text-align: center; width: 50%;">
+                <img src="@(Model.SiteDomain)uploads/index/@(Model.Reservation.Vehicle.VehicleImage.Id)?filename=@(Model.Reservation.Vehicle.Title.ToLower()).jpg&height=120" style="" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p>We’re thrilled to have you book with Woodford Car Hire.</p>
+
+<p>With Woodford, we try to keep things as simple as possible.</p>
+
+@{  string vehicleTitle = Model.Reservation.VehicleUpgrade == null ? Model.Reservation.Vehicle.Title : Model.Reservation.VehicleUpgrade.Title; }
+
+<p>Below are a few things you’re going to need when picking up your @vehicleTitle at <strong>@Model.Reservation.PickupBranch.Title</strong> Branch on <strong>@Model.Reservation.PickupDate.ToString("dd MMM yyyy hh:mm tt")</strong></p>
+
+<h2 style="color: #d0d441; border-bottom: 1px solid #999; margin: 0; padding: 5px 0 4px 0;">Weather On Arrival</h2>
+
+<table style="width: 100%; font-size: 12px; margin-bottom: 10px;" cellpadding="0" cellspacing="0">
+    <tbody>
+        <tr>
+            @foreach (var item in Model.Weather.Items) {
+                <td>
+                    @item.ReportDate.ToString("ddd dd MMM")
+                    <br />
+                    @decimal.Round(item.ReportTempMin, 0)<text>&deg;C</text> / @decimal.Round(item.ReportTempMax, 0)<text>&deg;C</text>
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>
+
+<table style="width:100%;">
+    <tbody>
+        <tr style="height: 250px;">
+            <td width="270px" style="vertical-align: top;height:200px;font-size: smaller;">
+                <div style="border:solid 1px #0B8255;padding: 5px 5px 25px 5px;height:100%;">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <p style="color: #30693F;text-align: left;font-size:small;margin-top: 0px;display: inline;float:left;"><strong>RESERVATION DETAILS</strong></p>
+                                    <img src="@(Model.SiteDomain)Content/images/email/ic-user.png" style="float:right;display:inline;margin-left: 20px;" />
+                                </td>
+                            </tr>
+                            @if (!string.IsNullOrEmpty(Model.Reservation.FirstName) || (!string.IsNullOrEmpty(Model.Reservation.LastName))) {
+                                <tr>
+                                    <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Full Name:</td>
+                                    <td width="60%" style="text-align: left;">@Model.Reservation.FirstName.ToUpper() @Model.Reservation.LastName.ToUpper()</td>
+                                </tr>
+                            }
+
+                            <tr>
+                                <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Email:</td>
+                                <td width="60%" style="text-align: left;">@Model.Reservation.Email.ToUpper()</td>
+                            </tr>
+
+                            @if (Model.Reservation.UserId == null) {
+                                <tr>
+                                    <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Cell:</td>
+                                    <td width="60%" style="text-align: left;">@Model.Reservation.MobileNumber</td>
+                                </tr>
+                                if (!string.IsNullOrEmpty(Model.Reservation.IdNumber)) {
+                                    <tr>
+                                        <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Id:</td>
+                                        <td width="60%" style="text-align: left;">@Model.Reservation.IdNumber</td>
+                                    </tr>
+                                }
+
+                            }
+                            else {
+                                <tr>
+                                    <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Cell:</td>
+                                    <td width="60%" style="text-align: left;">@Model.Reservation.User.MobileNumber</td>
+                                </tr>
+                                if (!string.IsNullOrEmpty(Model.Reservation.User.IdNumber)) {
+                                    <tr>
+                                        <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Id:</td>
+                                        <td width="60%" style="text-align: left;">@Model.Reservation.User.IdNumber</td>
+                                    </tr>
+                                }
+
+
+                            }
+
+                            @if (Model.Reservation.VehicleUpgrade != null) {
+                                <tr>
+                                    <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Vehicle:</td>
+                                    <td width="60%" style="text-align: left;">@Model.Reservation.VehicleUpgrade.Title</td>
+                                </tr>
+                                        <tr>
+                                            <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Upgraded From:</td>
+                                            <td width="60%" style="text-align: left;">@Model.Reservation.Vehicle.Title</td>
+                                        </tr>
+                            }
+                            else {
+                                <tr>
+                                    <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Vehicle:</td>
+                                    <td width="60%" style="text-align: left;">@Model.Reservation.Vehicle.Title</td>
+                                </tr>
+                            }
+
+                            <tr>
+                                <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Rate Code:</td>
+                                <td width="60%" style="text-align: left;">@Model.Reservation.RateCodeTitle</td>
+                            </tr>
+                            @if (Model.Reservation.UserId != null) {
+
+
+                                if (Model.User.IsLoyaltyMember) {
+                                    if (!string.IsNullOrEmpty(Model.User.LoyaltyNumberFull)) {
+                                        <tr>
+                                            <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Advance:</td>
+                                            <td width="60%" style="text-align: left;">@Model.User.LoyaltyNumberFull</td>
+                                        </tr>
+                                                <tr>
+                                                    <td style="color: #30693F;text-align: left;margin-top: 0px;" width="40%">Advance<br /> Tier:</td>
+                                                    <td width="60%" style="text-align: left;">@Model.UserLoyaltyTier</td>
+                                                </tr>
+                                    }
+
+                                }
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </td>
+            <td width="180px" style="vertical-align: top;height:200px;font-size: smaller;">
+                <div style="border:solid 1px #0B8255;padding: 5px 5px 25px 5px;height:100%;">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <p style="color: #30693F;text-align: left;font-size:small;margin-top: 0px;display: inline;float:left;"><strong>PICK UP/DROP OFF</strong></p>
+                                    <img src="@(Model.SiteDomain)Content/images/email/ic-pickup.png" style="float:right;display:inline;margin-left: 2px;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color: #30693F;text-align: left;margin-top: 0px;" width="30%">Pick Up:</td>
+                                <td width="70%">@Model.Reservation.PickupDate.ToString("d MMMM yyyy")</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #30693F;text-align: left;margin-top: 0px;" width="30%"></td>
+                                <td width="70%">@Model.Reservation.PickupDate.ToString("h:mm tt")</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #30693F;text-align: left;margin-top: 0px;" width="30%"></td>
+                                <td width="70%">@Model.Reservation.PickupBranch.Title</td>
+                            </tr>
+                            <tr style="margin-top: 10px;">
+                                <td style="color: #30693F;text-align: left;margin-top: 0px;padding-top: 10px;" width="30%">Drop Off:</td>
+                                <td width="70%0" style="padding-top: 10px;">@Model.Reservation.DropOffDate.ToString("d MMMM yyyy")</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #30693F;text-align: left;margin-top: 0px;" width="30%"></td>
+                                <td width="70%">@Model.Reservation.DropOffDate.ToString("h:mm tt")</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #30693F;text-align: left;margin-top: 0px;" width="30%"></td>
+                                <td width="70%">@Model.Reservation.DropOffBranch.Title</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </td>
+            <td width="150px" style="vertical-align: top;height:200px;font-size: small;">
+                <div style="border:solid 1px #0B8255;padding: 5px 5px 25px 5px;height:100%;">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p style="color: #30693F;text-align: left;font-size:small;margin-top: 0px;display: inline;float:left;"><strong>LOCATION</strong></p>
+                                    <img src="@(Model.SiteDomain)Content/images/email/ic-location.png" style="float:right;display:inline;margin-left: 12px;" />
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>@Model.PickupBranch.Title</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Model.PickupBranch.TelephoneNumber
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Model.PickupBranch.Email
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table style="width:100%;margin: 3px 3px 3px 3px;border:solid 1px #0B8255;padding-left: 6px;padding-top: 6px;font-size: small;">
+    <tbody>
+        <tr>
+            <td colspan="2">
+
+                <p style="color: #30693F;text-align: left;font-size:small;margin-top: 0px;display: inline;float:left;"><strong>BREAKDOWN OF CHARGES</strong></p>
+                <img src="@(Model.SiteDomain)Content/images/email/ic-breakdown.png" style="float:right;display:inline;margin-left: 12px;margin-right: 10px;" />
+            </td>
+        </tr>
+        <tr>
+            <td style="color: #30693F;text-align: left;">
+
+                @Model.Reservation.NumberOfDays @(Model.Reservation.NumberOfDays == 1 ? "Day" : "Days") &#64; <span style="color: black;">R @Model.Reservation.AdjustedPricePerDay.ToString("#,##0.00")</span>
+
+            </td>
+            <td style="text-align: right;padding-right: 10px;">
+                R @Model.Reservation.AdjustedPrice.ToString("#,##0.00")
+            </td>
+
+        </tr>
+        @if (Model.Reservation.VoucherId.HasValue) {
+            <tr>
+                <td style="color: #30693F;text-align: left;">Voucher:</td>
+                <td style="text-align: right;padding-right: 10px;">R - @Model.Reservation.VoucherDiscountAmount.ToString("#,##0.00")</td>
+            </tr>
+        }
+
+        <tr>
+            <td style="color: #30693F;text-align: left;">
+                Tax
+            </td>
+            <td style="text-align: right;padding-right: 10px;">
+                @String.Format("{0:c}", Model.Reservation.TaxAmount)
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <hr style="color: #0B8255;" />
+            </td>
+        </tr>
+        <tr>
+            <td style="color: #30693F;text-align: left;padding-top: 0px;margin-top: 0px;">
+                Total
+            </td>
+            <td style="text-align: right;padding-right: 10px;padding-top: 0px;margin-top: 0px;">
+                R @((Model.Reservation.AdjustedPrice - Model.Reservation.VoucherDiscountAmount + Model.Reservation.TaxAmount).ToString("#,##0.00"))
+            </td>
+        </tr>
+        @if (Model.Reservation.DropOffFee > 0) {
+            <tr>
+                <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                    Drop Off Fee
+                </td>
+                <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                    R @Model.Reservation.DropOffFee.ToString("#,##0.00")
+                </td>
+            </tr>
+        }
+        <tr>
+            <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                Admin
+            </td>
+            <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                R @Model.Reservation.ContractFee.ToString("#,##0.00")
+            </td>
+        </tr>
+        @if (Model.Reservation.LoyaltyPointsSpent.HasValue) {
+            <tr>
+                <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                    Advance Points Used
+                </td>
+                <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                    @String.Format("{0:c}", Model.Reservation.LoyaltyPointsSpent)
+                </td>
+            </tr>
+        }
+        @foreach (var surcharge in Model.Reservation.BranchSurcharges) {
+
+            if (surcharge.IsOnceOff) {
+                <tr>
+                    <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                        @surcharge.Title
+                    </td>
+                    <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                        @String.Format("{0:c}", surcharge.SurchargePrice)
+                    </td>
+                </tr>
+            }
+            else {
+                <tr>
+                    <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                        @surcharge.Title (@String.Format("{0:c}", surcharge.SurchargePrice) per day)
+                    </td>
+                    <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                        @String.Format("{0:c}", surcharge.SurchargePrice * Model.Reservation.NumberOfDays)
+                    </td>
+                </tr>
+            }
+
+        }
+
+        @foreach (var e in Model.Reservation.VehicleExtras) {
+            <tr>
+                <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                    @e.ExtraTitle
+                </td>
+                @if (e.ReservationLoyaltyBenefitId.HasValue) {
+                    <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                        Advance - Free
+                    </td>
+                }
+                else {
+                    <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                        R @((e.ExtraPrice * Model.Reservation.NumberOfDays).ToString("#,##0.00"))
+                    </td>
+                }
+
+            </tr>
+        }
+
+        @if (Model.Reservation.VehicleUpgradeId != null) {
+            <tr>
+                <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                    Upgrade to @Model.Reservation.VehicleUpgrade.Title
+                </td>
+                @if (Model.Reservation.Benefits.Select(x => x.UpgradeId).Contains(Model.Reservation.VehicleUpgradeId)) {
+                    <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                        Advance - Free
+                    </td>
+                }
+                else {
+                    <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                        @String.Format("{0:c}", Model.Reservation.VehicleUpgradePriceAmount)
+                    </td>
+                }
+
+            </tr>
+        }
+
+        @if (Model.Reservation.CountdownSpecialId.HasValue) {
+            if (Model.Reservation.CountdownSpecialType.HasValue) {
+                if (Model.Reservation.CountdownSpecialType.Value == Woodford.Core.DomainModel.Enums.CountdownSpecialType.TextOnInvoice) {
+                    <tr>
+                        <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                            Countdown Special
+                        </td>
+                        <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                            @Model.Reservation.CountdownSpecialOfferText
+                        </td>
+                    </tr>
+                }
+                if (Model.Reservation.CountdownSpecialType.Value == Woodford.Core.DomainModel.Enums.CountdownSpecialType.VehicleUpgrade) {
+                    <tr>
+                        <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                            Countdown Special Upgrade
+                        </td>
+                        <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                            @Model.Reservation.CountdownSpecialOfferText
+                        </td>
+                    </tr>
+                }
+            }
+        }
+
+        <tr>
+            <td colspan="2">
+                <hr style="color: #0B8255;" />
+            </td>
+        </tr>
+
+        <tr>
+            <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                <strong>Final Payment</strong>
+            </td>
+            <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                <strong>R @Model.Reservation.BookingPrice.ToString("#,##0.00")</strong>
+            </td>
+        </tr>
+
+
+        @if (Model.Reservation.Invoice != null) {
+            <tr>
+                <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                    Paid Upon Booking
+                </td>
+                <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                    R @Model.Invoice.AmountPaid.ToString("#,##0.00")
+                </td>
+            </tr>
+
+            if (Model.Reservation.BookingPrice - Model.Invoice.AmountPaid > 0.01m) {
+                <tr>
+                    <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                        To be Paid Upon Collection
+                    </td>
+                    <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                        R @((Model.Reservation.BookingPrice - Model.Invoice.AmountPaid).ToString("#,##0.00"))
+                    </td>
+                </tr>
+            }
+
+
+            if (Model.Reservation.BookingPrice - Model.Reservation.Invoice.AmountPaid < 0.00m) {
+                <tr>
+                    <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                        To be Refunded Upon Collection
+                    </td>
+                    <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                        R @((Model.Reservation.Invoice.AmountPaid - Model.Reservation.BookingPrice).ToString("#,##0.00"))
+                    </td>
+                </tr>
+            }
+        }
+        else {
+            <tr>
+                <td style="color: #30693F;text-align: left;padding-top: 5px;">
+                    To be Paid Upon Collection
+                </td>
+                <td style="text-align: right;padding-right: 10px;padding-top: 5px;">
+                    R @(Model.Reservation.BookingPrice.ToString("#,##0.00"))
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<table style="width:100%;margin: 3px 3px 3px 3px;border:solid 1px #0B8255;padding-left: 6px;padding-top: 6px;font-size: small">
+    <tbody>
+        <tr>
+            <td>
+
+
+                <p style="color: #30693F;text-align: left;font-size:small;margin-top: 0px;margin-bottom: 0px; display: inline;float:left;">
+                    <strong>
+                        CREDIT CARD AUTHORISATION (NOT APPLICABLE TO CORPORATE USERS)
+                    </strong>
+
+                </p>
+                <img src="@(Model.SiteDomain)Content/images/email/ic-creditcard.png" style="float:right;display:inline;margin-left: 12px;margin-right: 10px;" />
+
+
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">
+
+                @if (Model.Reservation.VehicleUpgradeId != null) {
+
+                    <p>
+                        The insurance excess on this vehicle is R @Model.Reservation.VehicleUpgrade.ExcessAmount.ToString("#,##0.00").<br />
+
+                        Upon collection you would be required to pay a credit card deposit of R @Model.Reservation.VehicleUpgrade.DepositAmount.ToString("#,##0.00") for the duration.<br />
+                        Upon return of the vehicle in the same condition the deposit will be refunded.
+
+                    </p>
+                }
+                else {
+                    <p>
+                        The insurance excess on this vehicle is R @Model.Reservation.Vehicle.ExcessAmount.ToString("#,##0.00").<br />
+
+                        Upon collection you would be required to pay a credit card deposit of R @Model.Reservation.Vehicle.DepositAmount.ToString("#,##0.00") for the duration.<br />
+                        Upon return of the vehicle in the same condition the deposit will be refunded.
+
+
+                    </p>
+                }
+
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
+<table style="width:100%;margin: 3px 3px 3px 3px;border:solid 1px #0B8255;padding-left: 6px;padding-top: 6px;font-size: small;">
+    <tbody>
+        <tr>
+            <td colspan="4">
+
+                <p style="color: #30693F;text-align: left;font-size:small;margin-top: 0px;display:inline;float:left;">
+                    <strong>
+                        IMPORTANT INFORMATION
+                    </strong>
+                </p>
+                <img src="@(Model.SiteDomain)Content/images/email/ic-exclaimation.png" style="float:right;display:inline;margin-left: 12px;margin-right: 10px;" />
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top">
+                <img src="@(Model.SiteDomain)Content/images/email/ic-includes.png" style="float:right;padding-right: 5px;margin-top: 4px;" />
+            </td>
+            <td width="45%" style="color: #30693F;text-align: left;" valign="top">
+
+                Rental Price Includes<br />
+                <span style="color: black;">Insurance against damange or theft</span><br />
+                <span style="color: black;">Airport surcharge</span><br />
+                <span style="color: black;">Tourism Levy/VAT</span>
+
+            </td>
+            <td width="5%" valign="top">
+                <img src="@(Model.SiteDomain)Content/images/email/ic-excludes.png" style="float:right;padding-right: 5px;margin-top: 4px;" />
+            </td>
+            <td width="45%" style="color: #30693F;text-align: left;" valign="top">
+
+                Rental Price Excludes<br />
+                <span style="color: black;">Security Deposit</span><br />
+                <span style="color: black;">Fuel top up on drop off </span>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <p style="font-size:large;padding-left: 140px;margin-bottom:0px;"><strong>Thank you for choosing Woodford Car Hire.</strong></p>
+                <p style="color: #30693F;padding-left: 100px;margin-top: 5px;">For a full list of our <strong>Terms and Conditions</strong> please visit: <a href="@Model.SiteDomain/terms-and-conditions">www.woodford.co.za/terms-and-conditions</a></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@*<table style="width:100%;margin: 3px 3px 3px 3px;border:solid 1px #0B8255;padding-left: 6px;padding-top: 6px;">
+        <tbody>
+            <tr>
+                <td colspan="@(Model.Weather.Items.Count())">
+
+                    <p style="color: #30693F;text-align: left;font-size:large;margin-top: 0px;">
+                        <strong>
+                            WEATHER
+                        </strong>
+                    </p>
+
+                </td>
+            </tr>
+            <tr>
+                @foreach (var item in Model.Weather.Items) {
+                    <td style="color: #30693F;">
+
+                        @decimal.Round(item.ReportTempAverage, 0)
+
+                    </td>
+                }
+
+
+            </tr>
+        </tbody>
+    </table>*@
+
+

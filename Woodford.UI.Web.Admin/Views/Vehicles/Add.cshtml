@@ -1,0 +1,217 @@
+﻿@model VehicleViewModel
+@{
+    ViewBag.Title = "Add Vehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Vehicles</h1>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Vehicle</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Add", "Vehicles", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+        
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.Title, "Vehicle Name", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Vehicle.Title, new { placeholder = "Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.VehicleGroupId, "Vehicle Group", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.VehicleGroupFor(m => m.Vehicle.VehicleGroupId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.VehicleGroupId)
+                </div>
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.VehicleManufacturerId, "Vehicle Manufacturer", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.VehicleManufacaturerFor(m => m.Vehicle.VehicleManufacturerId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.VehicleManufacturerId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.PageUrl, "Page Url", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Vehicle.PageUrl, new { placeholder = "Page Url", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.PageUrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleImage, "Vehicle Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <input type="file" id="VehicleImage" name="VehicleImage" />
+                    <p class="help-block">Please upload a valid image file.</p>
+                    @Html.ValidationMessageFor(m => m.VehicleImage)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VehicleImage2, "Interior Vehicle Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <input type="file" id="VehicleImage2" name="VehicleImage2" />
+                    <p class="help-block">Please upload a valid image file.</p>
+                    @Html.ValidationMessageFor(m => m.VehicleImage2)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.ShortDescription, "Short Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Vehicle.ShortDescription, new { placeholder = "Short Description", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.ShortDescription)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.NumberOfPassengers, "Number of Passengers", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Vehicle.NumberOfPassengers, new { placeholder = "Number Of Passengers", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.NumberOfPassengers)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.NumberOfBaggage, "Number of Baggage", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Vehicle.NumberOfBaggage, new { placeholder = "Number Of Baggage", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.NumberOfBaggage)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Vehicle_IsPetrol">                            
+                            @Html.CheckBoxFor(m => m.Vehicle.IsPetrol) Is Petrol
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Vehicle.IsPetrol)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Vehicle_HasAircon">
+                            @Html.CheckBoxFor(m => m.Vehicle.HasAircon) Has Aircon
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Vehicle.HasAircon)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Vehicle_HasRadio">
+                            @Html.CheckBoxFor(m => m.Vehicle.HasRadio) Has Radio
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Vehicle.HasRadio)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Vehicle_HasPowerSteering">
+                            @Html.CheckBoxFor(m => m.Vehicle.HasPowerSteering) Has Power Steering
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Vehicle.HasPowerSteering)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="Vehicle_IsAutomatic">
+                            @Html.CheckBoxFor(m => m.Vehicle.IsAutomatic) Is Automatic
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Vehicle.IsAutomatic)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.ExcessAmount, "Excess Amount", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Vehicle.ExcessAmount, new { placeholder = "Excess Amount", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.ExcessAmount)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.DepositAmount, "Deposit Amount", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Vehicle.DepositAmount, new { placeholder = "Deposit Amount", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.DepositAmount)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.PageContent.PageTitle, "Page Title", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Vehicle.PageContent.PageTitle, new { placeholder = "Page Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.PageContent.PageTitle)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.PageContent.MetaKeywords, "Meta Keywords", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Vehicle.PageContent.MetaKeywords, new { placeholder = "Meta Keywords", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.PageContent.MetaKeywords)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.PageContent.MetaDescription, "Meta Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Vehicle.PageContent.MetaDescription, new { placeholder = "Meta Description", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.PageContent.MetaDescription)
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Vehicle.PageContent.PageContent, "Page Content", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Vehicle.PageContent.PageContent, new { @class = "form-control", rows = "10", cols = "80" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.PageContent.PageContent)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Add Vehicle</button>
+                </div>
+            </div>
+
+        </div>
+        
+    }
+</div>
+
+@section scripts {
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+    <script types="text/javascript">
+        $(function () {
+            CKEDITOR.replace('Vehicle_PageContent_PageContent');
+        });
+    </script>
+}

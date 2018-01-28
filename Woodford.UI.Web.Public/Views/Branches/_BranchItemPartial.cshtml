@@ -1,0 +1,62 @@
+﻿@model BranchModel
+
+<div class="grid-item">
+    <h2>
+        <a href="@Url.Action("Branch", "Branches", new { branchUrl = Model.PageUrl }, null)">
+            @Model.Title
+        </a>
+    </h2>
+    <div class="row">
+        @if (Model.FileUploadId.HasValue) {
+            <div class="four columns">
+                @*<div class="branch-image">*@
+                @*class="small-image"*@
+                <img src="@Url.Action("Index", "Uploads", new { id = Model.BranchImage.Id, filename = Model.BranchImage.Title + Model.BranchImage.FileExtension,  height = 350, crop = 0 })" alt="@Model.Title" />
+                @*</div>*@
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.MapEmbed)) {
+            <div class="four columns">
+                
+                    @Html.Raw(Model.MapEmbed)
+                
+            </div>
+        }
+
+        <div class="four columns">
+            @if (!string.IsNullOrEmpty(Model.BranchSubTitle)) {
+                <p><strong>@Model.BranchSubTitle</strong></p>
+            }
+            @if (!string.IsNullOrEmpty(Model.BranchAddress)) {
+                <p class="allow-line-breaks">@Model.BranchAddress</p>
+            }
+
+            <p>
+                @if (!string.IsNullOrEmpty(Model.TelephoneNumber)) {
+                    <span class="faux-table-header">Tel:</span>
+                    @Model.TelephoneNumber<br />
+                }
+                @if (!string.IsNullOrEmpty(Model.FaxNumber)) {
+                    <span class="faux-table-header">Fax:</span>
+                    @Model.FaxNumber<br />
+                }
+                @if (!string.IsNullOrEmpty(Model.AfterHoursTelephoneNumber)) {
+                    <span class="faux-table-header">Tel (A/H):</span>
+                    @Model.AfterHoursTelephoneNumber<br />
+                }
+                @if (!string.IsNullOrEmpty(Model.Email)) {
+                    <span class="faux-table-header">Email:</span>
+                    <a href="mailto:@Model.Email">@Model.Email</a><br />
+                }
+            </p>
+
+            @*@if (!string.IsNullOrEmpty(Model.BranchShortDescription)) {
+                @Html.Raw(Model.BranchShortDescription)
+            }*@
+
+            @Html.ActionLink("Contact Branch", "Contact", "Branches", new { branchUrl = Model.PageUrl }, new { @class = "button", style = "padding: 5px 6px;" })
+            @Html.ActionLink("Request Callback", "RequestCallback", "Branches", new { branchUrl = Model.PageUrl }, new { @class = "button", style = "padding: 5px 6px;" })
+        </div>
+    </div>
+</div>

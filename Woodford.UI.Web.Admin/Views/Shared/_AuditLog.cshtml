@@ -1,0 +1,39 @@
+﻿@model ListOf<AuditItemModel>
+
+
+
+    @foreach (AuditItemModel item in Model.Items) {
+
+        @*<fieldset>*@
+        //<legend></legend>
+        <p> <strong>@item.Action</strong> at <strong>@item.ActionDate</strong> by: <strong>@item.UserId</strong></p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Field Name</th>
+                    <th>Field Type</th>
+                    <th>CurrentValue</th>
+                    <th>Original Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (AuditItemPropertyModel prop in item.Properties) {
+                    string rowStyle = "";
+                    //if (prop.OriginalValue != prop.CurrentValue) {
+                    //    rowStyle = @"background-color: Yellow";
+                    //} else {
+                    //    rowStyle = @"background-color: Gray";
+                    //}
+                    <tr style="@rowStyle">
+                        <td>@prop.AuditField</td>
+                        <td>@prop.FieldType</td>
+                        <td>@prop.CurrentValue</td>
+                        <td>@prop.OriginalValue</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    @*</fieldset>*@
+    }
+

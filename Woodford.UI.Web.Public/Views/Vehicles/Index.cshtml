@@ -1,0 +1,67 @@
+﻿@model ListOf<VehicleModel>
+@{
+    ViewBag.Title = "Vehicles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.MetaKeywords = "";
+    ViewBag.MetaDescription = "";
+    int itemIndex = 0;
+    int itemsPerRow = 3;
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Vehicles</h1>
+    </div>
+</div>
+
+@helper RenderIf(bool ifCondition, string renderHtml) {
+if (ifCondition) {
+        <text>@Html.Raw(renderHtml)</text>
+}
+}
+
+@if (Model.Items.Count > 0) {
+    <div class="grid-of-items">
+        @{
+            bool newRow = false;
+        }
+
+        @foreach (var v in Model.Items) {
+
+            newRow = (itemIndex % itemsPerRow == 0);
+            @RenderIf(newRow, "<div class='row'>")
+
+            <div class="four columns grid-item">
+                <h3 style="height: 53px;">
+                    <a href="@Url.Action("Vehicle", "Vehicles", new { vehicleUrl = v.PageUrl }, null)">@v.Title</a>
+                </h3>
+                <p style="height: 30px;">
+                    <strong>@Html.ActionLink(v.VehicleGroup.TitleDescription, "VehicleGroup", "VehicleGroups", new { vehicleGroupUrl = v.VehicleGroup.PageUrl }, null)</strong>
+                    @if (!string.IsNullOrEmpty(v.ShortDescription)) {
+                        <br />@v.ShortDescription
+                    }
+                </p>
+                @if (v.FileUploadId.HasValue) {
+                    <a href="@Url.Action("Vehicle", "Vehicles", new { vehicleUrl = v.PageUrl }, null)">
+                        <img src="@Url.Action("Index", "Uploads", new { id = v.VehicleImage.Id, filename = v.VehicleImage.Title + v.VehicleImage.FileExtension, height = 120 })" alt="@v.Title" />
+                    </a>
+                }
+                @{Html.RenderPartial("_VehicleAttributesPartial", v);}
+
+                @Html.ActionLink("Book Vehicle", "Book", "Vehicles", new { vehicleUrl = v.PageUrl }, new { @class = "button" })
+            </div>
+                    itemIndex++;
+                    bool newRowNext = (itemIndex % itemsPerRow == 0);
+                    @RenderIf(newRowNext, "</div>")
+                    }
+
+        @RenderIf(newRow, "</div>")
+    </div>
+                    } else {
+                        <div class="row">
+                            <div class="twelve columns">
+                                <p>No vehicles have been found</p>
+                            </div>
+                        </div>
+
+                    }

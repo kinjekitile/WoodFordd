@@ -1,0 +1,123 @@
+﻿@model ReviewSearchViewModels
+@{
+    ViewBag.Title = "Review Invites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Review Invites</h1>
+}
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Search</h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm("Filter", "Users", FormMethod.Get, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.Email, "Email", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.Email, new { placeholder = "Email", @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Filter.ReservationId, "Reservation Id", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Filter.ReservationId, new { placeholder = "Reservation Id", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Filter.ReservationId)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        
+                    </div>
+                </div>
+            </div>
+            
+        }
+    </div>
+</div>
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Review Invites</h3>
+
+    </div><!-- /.box-header -->
+
+    <p>@Html.ActionLink("Add Invite", "Add")</p>
+
+    @if (Model.Items.Count > 0) {
+        
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Voucher</th>
+                    <th scope="col">Reservation</th>
+                    <th scope="col">Voucher Sent</th>
+                </tr>
+
+                @foreach (var u in Model.Items) {
+                    <tr>
+                        <td>@Html.ActionLink("Details", "Details", "ReviewInvites", new { id = u.Id }, null)</td>
+                        <td><a href="mailto:@(u.Email)">@u.Email</a></td>
+                        <td>
+                            @if (u.VoucherId.HasValue) {
+                                <text>@Html.ActionLink("Voucher Details", "Details", "Vouchers", new { id = u.VoucherId.Value }, null)
+</text>
+                                }
+</td>
+                        <td>
+                            @if (u.ReservationId.HasValue) {
+                                <text>@Html.ActionLink("Reservation Details", "Details", "Reservations", new { id = u.ReservationId.Value }, null) </text>
+                            }
+                        </td>
+                        <td>
+                            @if (u.VoucherSentDate.HasValue) {
+                                <text>@u.VoucherSentDate.Value.ToString("dd MMM yyyy HH:ss tt")</text>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+                }
+
+    @if (Model.Items.Count() > 0) {
+        @Html.Partial("_PaginationPartial", Model.Pagination)
+    }
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+
+            $('#Filter_DateCreatedStart,#Filter_DateCreatedEnd').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy/mm/dd',
+            });
+
+
+
+
+        });
+
+
+    </script>
+}

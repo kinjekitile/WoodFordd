@@ -1,0 +1,484 @@
+﻿@model ReservationViewModel
+@{
+    ViewBag.Title = "Reservation Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>Reservation Details</h1>
+}
+
+@*<div class="row">
+        <div class="col-lg-6">
+            <p>
+                <a class="printquote" href="#">Print</a>
+            </p>
+        </div>
+    </div>*@
+
+
+<div class="row">
+    <ul>
+        <li><a class="printquote" href="#">Print</a></li>
+        <li>@Html.ActionLink("Cancel", "Cancel", new { id = Model.Reservation.Id })</li>
+        @if (Roles.IsUserInRole("Adminstrator") || Roles.IsUserInRole("SystemAdministrator")) {
+
+        }
+
+
+
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Customer Details</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                @if (Model.Reservation.UserId == null) {
+                if (!string.IsNullOrEmpty(Model.Reservation.FirstName) || (!string.IsNullOrEmpty(Model.Reservation.LastName))) {
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p>Full Name: </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p><strong>@Model.Reservation.FirstName @Model.Reservation.LastName</strong></p>
+                    </div>
+
+
+                </div>
+                    }
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p> Email: </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p><strong>@Model.Reservation.Email</strong></p>
+                    </div>
+
+
+                </div>
+
+                    if (!string.IsNullOrEmpty(Model.Reservation.MobileNumber)) {
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p>Cell: </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p><strong>@Model.Reservation.MobileNumber</strong></p>
+                    </div>
+
+
+                </div>
+
+                    }
+                    if (!string.IsNullOrEmpty(Model.Reservation.IdNumber)) {
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p>ID No: </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p><strong>@Model.Reservation.IdNumber</strong></p>
+                    </div>
+
+
+                </div>
+
+                    }
+                } else {
+                    if (!string.IsNullOrEmpty(Model.Reservation.User.FirstName) || (!string.IsNullOrEmpty(Model.Reservation.User.LastName))) {
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p>Full Name: </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p> <strong>@Model.Reservation.FirstName @Model.Reservation.LastName</strong> </p>
+                    </div>
+
+
+                </div>
+
+                    }
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p> Email: </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p><strong>@Model.Reservation.User.Email</strong></p>
+                    </div>
+
+
+                </div>
+
+                    if (!string.IsNullOrEmpty(Model.Reservation.User.MobileNumber)) {
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p>Cell: </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p> <strong>@Model.Reservation.User.MobileNumber</strong></p>
+                    </div>
+
+
+                </div>
+
+                    }
+                    if (!string.IsNullOrEmpty(Model.Reservation.User.IdNumber)) {
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p>ID No: </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p><strong>@Model.Reservation.User.IdNumber</strong></p>
+                    </div>
+
+
+                </div>
+
+                    }
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Booking Details</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <p>Is Cancelled:</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <p><strong>@Model.Reservation.IsCancelled</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <p>Is Archived:</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <p><strong>@Model.Reservation.IsArchived</strong></p>
+                    </div>
+                </div><div class="row">
+
+                    <div class="col-lg-4">
+                        <p>Pickup Branch:</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <p><strong>@Model.Reservation.PickupBranch.Title</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <p> Drop Off Branch:</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <p><strong>@Model.Reservation.DropOffBranch.Title</strong></p>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <p> Pickup Date:</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <p><strong>@Model.Reservation.PickupDate.ToString("dd MMMM yyyy h:mm tt")</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <p>Drop Off Date:</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <p><strong>@Model.Reservation.DropOffDate.ToString("dd MMMM yyyy h:mm tt")</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <p>Vehicle:</p>
+                    </div>
+                    <div class="col-lg-6">
+                        @if (Model.Reservation.VehicleUpgrade != null) {
+                            <p><strong>@Model.Reservation.VehicleUpgrade.Title - @Model.Reservation.VehicleUpgrade.VehicleGroup.Title</strong></p>
+                            <p>Upgraded from @Model.Reservation.Vehicle.Title</p>
+
+                        }
+                        else {
+                            <p><strong>@Model.Reservation.Vehicle.Title - @Model.Reservation.Vehicle.VehicleGroup.Title</strong></p>
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <p>Rate:</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <p><strong>@Model.Reservation.RateCodeTitle</strong></p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Invoice Details</h3>
+            </div><!-- /.box-header -->
+
+
+            <div class="box-body">
+                <div class="four columns">
+
+
+
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <p>Rental: </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <p> <strong>@String.Format("{0:c}", Model.Reservation.AdjustedPrice)</strong></p>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <p>Tax: </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <p> <strong>@String.Format("{0:c}", Model.Reservation.TaxAmount)</strong></p>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <p>Total: </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <p> <strong>@String.Format("{0:c}", (Model.Reservation.AdjustedPrice + Model.Reservation.TaxAmount))</strong></p>
+                        </div>
+                    </div>
+
+                    @if (Model.Reservation.DropOffFee > 0) {
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <p>Drop Off Fee: </p>
+                            </div>
+                            <div class="col-lg-4">
+                                <p> <strong>@String.Format("{0:c}", Model.Reservation.DropOffFee)</strong></p>
+                            </div>
+                        </div>
+
+                    }
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <p>Admin Fee: </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <p> <strong>@String.Format("{0:c}", Model.Reservation.ContractFee)</strong></p>
+                        </div>
+                    </div>
+
+                    @foreach (var x in Model.Reservation.VehicleExtras) {
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <p>@x.ExtraTitle: </p>
+                            </div>
+                            <div class="col-lg-4">
+                                @if (x.ReservationLoyaltyBenefitId.HasValue) {
+                                    <strong>Advance - Free</strong>
+                                }
+                                else {
+
+                                    <strong>@String.Format("{0:c}", x.ExtraPrice * Model.Reservation.NumberOfDays)</strong>
+                                }
+
+                            </div>
+                        </div>
+
+                    }
+
+                    @if (Model.Reservation.VehicleUpgradeId != null) {
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <p>Upgrade to @Model.Reservation.VehicleUpgrade.Title: </p>
+                            </div>
+                            <div class="col-lg-4">
+                                <p>
+                                    @if (Model.Reservation.Benefits.Select(x => x.UpgradeId).Contains(Model.Reservation.VehicleUpgradeId)) {
+                                        <strong>Advance - Free</strong>
+                                    }
+                                    else {
+                                        <strong>@String.Format("{0:c}", Model.Reservation.VehicleUpgradePriceAmount)</strong>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+
+                    }
+
+                    @if (Model.Reservation.LoyaltyPointsSpent.HasValue) {
+                        if (Model.Reservation.LoyaltyPointsSpent.Value > 0) {
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p>Loyalty Points Spent: </p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <p> <strong>@String.Format("{0:c}", Model.Reservation.LoyaltyPointsSpent.Value)</strong></p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <p>Final: </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <p> <strong>@String.Format("{0:c}", Model.Reservation.BookingPrice)</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <p>Total Days: </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <p> <strong>@Model.Reservation.NumberOfDays.ToString() Days</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <p>Amount Paid: </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <p>
+                                @if (Model.Reservation.Invoice != null) {
+                                    if (Model.Reservation.Invoice.HasPayment) {
+                                        <strong>@String.Format("{0:c}", Model.Reservation.Invoice.AmountPaid)</strong>
+                                    }
+
+                                }
+
+                            </p>
+                        </div>
+                    </div>
+
+                    @if (Model.Reservation.IsCancelled) {
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <p>Cancellation Fee: </p>
+                            </div>
+                            <div class="col-lg-4">
+                                <p>
+                                    <strong>@String.Format("{0:c}", Model.Reservation.CancellationFee)</strong>
+
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <p>Refunded Amount: </p>
+                            </div>
+                            <div class="col-lg-4">
+                                <p>
+                                    <strong>@String.Format("{0:c}", Model.Reservation.RefundedAmount)</strong>
+
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+@*@if (Model.Reservation.VehicleUpgrade != null) {
+        <h2>@Model.Reservation.VehicleUpgrade.Title</h2>
+        if (Model.Reservation.VehicleUpgrade.FileUploadId.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.Reservation.VehicleUpgrade.VehicleImage.Id, filename = Model.Reservation.VehicleUpgrade.VehicleImage.Title + Model.Reservation.VehicleUpgrade.VehicleImage.FileExtension, width = 300})" alt="@Model.Reservation.VehicleUpgrade.Title" />
+        }
+
+        if (Model.Reservation.VehicleUpgrade.FileUploadId2.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.Reservation.VehicleUpgrade.VehicleImage2.Id, filename = Model.Reservation.VehicleUpgrade.VehicleImage2.Title + Model.Reservation.VehicleUpgrade.VehicleImage2.FileExtension, width = 300})" alt="@Model.Reservation.VehicleUpgrade.Title Interior" />
+        }
+
+        <h4>Upgraded from @Model.Reservation.Vehicle.Title</h4>
+        if (Model.Reservation.Vehicle.FileUploadId.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.Reservation.Vehicle.VehicleImage.Id, filename = Model.Reservation.Vehicle.VehicleImage.Title + Model.Reservation.Vehicle.VehicleImage.FileExtension, width = 300})" alt="@Model.Reservation.Vehicle.Title" />
+        }
+    } else {
+        <h2>@Model.Reservation.Vehicle.Title</h2>
+        if (Model.Reservation.Vehicle.FileUploadId.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.Reservation.Vehicle.VehicleImage.Id, filename = Model.Reservation.Vehicle.VehicleImage.Title + Model.Reservation.Vehicle.VehicleImage.FileExtension, width = 300})" alt="@Model.Reservation.Vehicle.Title" />
+        }
+
+        if (Model.Reservation.Vehicle.FileUploadId2.HasValue) {
+            <img src="@Url.Action("Index", "Uploads", new { id = Model.Reservation.Vehicle.VehicleImage2.Id, filename = Model.Reservation.Vehicle.VehicleImage2.Title + Model.Reservation.Vehicle.VehicleImage2.FileExtension, width = 300})" alt="@Model.Reservation.Vehicle.Title Interior" />
+        }
+    }*@
+
+
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".printquote").on("click", function (e) {
+                var url = "@Url.Action("Print", new { id = Model.Reservation.Id })";
+                var windowName = "";
+                var win = window.open(url, windowName, 'width=700,height=800,scrollbars=yes');
+                win.focus();
+                e.preventDefault();
+                return false;
+            });
+        });
+    </script>
+
+
+}

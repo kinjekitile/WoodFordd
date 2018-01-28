@@ -1,0 +1,60 @@
+﻿.info-box-icon.bg-woodford {
+    background-color: #00a65a;
+}
+
+.info-box-icon>img {
+    vertical-align: top !important;
+}
+
+.small-box.bg-white {
+    background-color: #fff;
+}
+
+.small-box:hover.bg-white {
+    color: #333;
+    }
+
+.small-box > .inner {
+    display: inline-block;
+    width: 50%;    
+}
+
+.small-box > .inner-img {
+    background-color: #04a75d;
+    display: inline-block;
+    
+    min-height:108px;
+    min-width: 90px;
+    text-align: center;
+    vertical-align: top;
+    width: 40%;
+}
+
+.small-box > .inner-img > img {
+    margin-top: 10px;
+}
+
+.small-box {
+    text-transform: uppercase;
+}
+
+.chart-legend li {
+    list-style-type: none;
+}
+
+.chart-legend li span {
+    display: inline-block;    
+    height: 15px;
+    margin: 2px 10px;
+    vertical-align: middle;
+    width: 15px;
+}
+
+.progress-bar {
+    background-color: #e4e01f !important;
+}
+
+.list .name {
+    display: block;
+    font-weight: 600;
+}

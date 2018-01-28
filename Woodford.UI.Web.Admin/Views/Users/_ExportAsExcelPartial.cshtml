@@ -1,0 +1,19 @@
+﻿@model UserFilterModel
+@using (Html.BeginForm("ExportAsExcel", "Users", FormMethod.Post)) {
+
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.DateFilterType)
+    @Html.HiddenFor(x => x.DateCreatedStart)
+    @Html.HiddenFor(x => x.DateCreatedEnd)
+    @Html.HiddenFor(x => x.CorporateId)
+    @Html.HiddenFor(x => x.LoyaltyLevel)
+    @Html.HiddenFor(x => x.Email)
+    @Html.HiddenFor(x => x.FirstName)
+    @Html.HiddenFor(x => x.LastName)
+    @Html.HiddenFor(x => x.SortField)
+    @Html.HiddenFor(x => x.SortDirection)
+    @Html.HiddenFor(x => x.HasSpentPoints)
+
+    <input type="submit" value="Export as Excel" />
+}

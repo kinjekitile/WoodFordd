@@ -1,0 +1,147 @@
+﻿@model NewsViewModel
+@{
+    ViewBag.Title = "Edit News Article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section H1 {
+    <h1>News</h1>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "NewsCategory")"> News</a></li>
+    <li><a href="@Url.Action("Index", "News", new { categoryId = Model.NewsCategory.Id })">@Model.NewsCategory.Title</a></li>
+    <li class="active">Edit</li>
+</ol>
+}
+
+
+@{ Html.RenderAction("RenderAuditContainer", "Audit", new { entityType = Model.News.GetType(), entityIdValue = Model.News.Id }); }
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Article</h3>
+    </div><!-- /.box-header -->
+
+    @using (Html.BeginForm("Edit", "News", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" })) {
+        @Html.HiddenFor(m => m.News.Id)
+        @*@Html.HiddenFor(m => m.NewsCategory.Id)*@
+        @Html.HiddenFor(m => m.News.PageContent.Id);
+        <div class="box-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.NewsCategoryId, "Category", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.NewsCategoryFor(m => m.News.NewsCategoryId, new { placeholder = "Category", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.News.NewsCategoryId)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.Headline, "Headline", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.News.Headline, new { placeholder = "Headline", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.News.Headline)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.SubHeadline, "Sub Headline", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.News.SubHeadline, new { placeholder = "Sub Headline", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.News.SubHeadline)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.ShortDescription, "Short Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.News.ShortDescription, new { placeholder = "Short Description", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.News.ShortDescription)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.Author, "Author", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.News.Author, new { placeholder = "Author", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.News.Author)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.HiddenFor(m => m.News.FileUploadId)
+                @Html.LabelFor(m => m.NewsImage, "News Image", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+
+                    <p class="help-block">
+                        @if (Model.News.FileUploadId.HasValue) {
+                            <img src="@Url.Action("Index", "Uploads", new { id = Model.News.NewsImage.Id, filename = Model.News.NewsImage.Title + Model.News.NewsImage.FileExtension, width = 100, height = 100, crop = 1 })" alt="@Model.News.Headline" />
+                        }
+                        Please upload a valid image file if you would like the image to change.
+                    </p>
+                    <input type="file" id="NewsImage" name="NewsImage" />
+                    @Html.ValidationMessageFor(m => m.NewsImage)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.PageUrl, "Page Url", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.News.PageUrl, new { placeholder = "Page Url", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.News.PageUrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.PageContent.PageTitle, "Page Title", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.News.PageContent.PageTitle, new { placeholder = "Page Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.News.PageContent.PageTitle)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.PageContent.MetaKeywords, "Meta Keywords", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.News.PageContent.MetaKeywords, new { placeholder = "Meta Keywords", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.News.PageContent.MetaKeywords)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.PageContent.MetaDescription, "Meta Description", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.News.PageContent.MetaDescription, new { placeholder = "Meta Description", @class = "form-control", rows = "3", cols = "20" })
+                    @Html.ValidationMessageFor(m => m.News.PageContent.MetaDescription)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.News.PageContent.PageContent, "Article", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.News.PageContent.PageContent, new { @class = "form-control", rows = "10", cols = "80" })
+                    @Html.ValidationMessageFor(m => m.News.PageContent.PageContent)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Article</button>
+                </div>
+            </div>
+
+        </div>
+        
+    }
+</div>
+
+@section scripts {
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+    <script types="text/javascript">
+        $(function () {
+            CKEDITOR.replace('News_PageContent_PageContent');            
+        });
+    </script>
+}

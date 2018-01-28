@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+
+<p>Your card is enrolled in 3D secure for extra peace of mind when transacting online.</p>
+<p>Please wait while your bank provides their security form.</p>
+<form name='frmLaunchACS' id='frmLaunchACS' method='POST' action='@(ViewBag.ACSUrl)'>
+
+    <input type="hidden" name='PaReq' value='@(ViewBag.ParEqMsg)' />
+
+    <input type='hidden' name='TermUrl' value='@(ViewBag.ACSCallbackUrl)' />
+
+    <input type='hidden' name='MD' value='@(ViewBag.TransactionIndex)' />
+    @*<input type="submit" value="send" />*@
+
+</form>
+<script type='text/javascript'>document.getElementById('frmLaunchACS').submit();</script>

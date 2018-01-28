@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="http://_5x0x0" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rpc.xml.coldfusion" xmlns:impl="http://_5x0x0" targetNamespace="http://_5x0x0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://_5x0x0">
+      <xsd:import namespace="http://xml.apache.org/xml-soap" />
+      <xsd:import namespace="http://rpc.xml.coldfusion" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="ArrayOf_xsd_anyType">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:anyType[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOf_xsd_string">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfArrayOf_xsd_anyType">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:anyType[][]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://rpc.xml.coldfusion">
+      <xsd:import namespace="http://_5x0x0" />
+      <xsd:import namespace="http://xml.apache.org/xml-soap" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="CFCInvocationException">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:complexType name="QueryBean">
+        <xsd:sequence>
+          <xsd:element name="columnList" nillable="true" type="impl:ArrayOf_xsd_string" />
+          <xsd:element name="data" nillable="true" type="impl:ArrayOfArrayOf_xsd_anyType" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.apache.org/xml-soap">
+      <xsd:import namespace="http://_5x0x0" />
+      <xsd:import namespace="http://rpc.xml.coldfusion" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="mapItem">
+        <xsd:sequence>
+          <xsd:element name="key" nillable="true" type="xsd:anyType" />
+          <xsd:element name="value" nillable="true" type="xsd:anyType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Map">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="apachesoap:mapItem" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IsAliveRequest">
+    <wsdl:part name="strRemoteAddress" type="xsd:string" />
+    <wsdl:part name="strApplicationID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="IsAliveResponse">
+    <wsdl:part name="IsAliveReturn" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="CFCInvocationException">
+    <wsdl:part name="fault" type="tns1:CFCInvocationException" />
+  </wsdl:message>
+  <wsdl:message name="fProcessResponse">
+    <wsdl:part name="fProcessReturn" type="impl:ArrayOf_xsd_anyType" />
+  </wsdl:message>
+  <wsdl:message name="fProcessAndSettleRequest">
+    <wsdl:part name="GatewayID" type="xsd:string" />
+    <wsdl:part name="MerchantID" type="xsd:string" />
+    <wsdl:part name="ApplicationID" type="xsd:string" />
+    <wsdl:part name="TransactionIndex" type="xsd:string" />
+    <wsdl:part name="Terminal" type="xsd:string" />
+    <wsdl:part name="Mode" type="xsd:string" />
+    <wsdl:part name="MerchantReference" type="xsd:string" />
+    <wsdl:part name="Amount" type="xsd:string" />
+    <wsdl:part name="Currency" type="xsd:string" />
+    <wsdl:part name="CashBackAmount" type="xsd:string" />
+    <wsdl:part name="CardType" type="xsd:string" />
+    <wsdl:part name="AccountType" type="xsd:string" />
+    <wsdl:part name="CardNumber" type="xsd:string" />
+    <wsdl:part name="CardHolder" type="xsd:string" />
+    <wsdl:part name="CVVNumber" type="xsd:string" />
+    <wsdl:part name="ExpiryMonth" type="xsd:string" />
+    <wsdl:part name="ExpiryYear" type="xsd:string" />
+    <wsdl:part name="Budget" type="xsd:string" />
+    <wsdl:part name="BudgetPeriod" type="xsd:string" />
+    <wsdl:part name="AuthorisationNumber" type="xsd:string" />
+    <wsdl:part name="PIN" type="xsd:string" />
+    <wsdl:part name="DebugMode" type="xsd:string" />
+    <wsdl:part name="eCommerceIndicator" type="xsd:string" />
+    <wsdl:part name="verifiedByVisaXID" type="xsd:string" />
+    <wsdl:part name="verifiedByVisaCAFF" type="xsd:string" />
+    <wsdl:part name="secureCodeUCAF" type="xsd:string" />
+    <wsdl:part name="UCI" type="xsd:string" />
+    <wsdl:part name="IPAddress" type="xsd:string" />
+    <wsdl:part name="ShippingCountryCode" type="xsd:string" />
+    <wsdl:part name="PurchaseItemsID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="fProcessRequest">
+    <wsdl:part name="GatewayID" type="xsd:string" />
+    <wsdl:part name="MerchantID" type="xsd:string" />
+    <wsdl:part name="ApplicationID" type="xsd:string" />
+    <wsdl:part name="Action" type="xsd:string" />
+    <wsdl:part name="TransactionIndex" type="xsd:string" />
+    <wsdl:part name="Terminal" type="xsd:string" />
+    <wsdl:part name="Mode" type="xsd:string" />
+    <wsdl:part name="MerchantReference" type="xsd:string" />
+    <wsdl:part name="Amount" type="xsd:string" />
+    <wsdl:part name="Currency" type="xsd:string" />
+    <wsdl:part name="CashBackAmount" type="xsd:string" />
+    <wsdl:part name="CardType" type="xsd:string" />
+    <wsdl:part name="AccountType" type="xsd:string" />
+    <wsdl:part name="CardNumber" type="xsd:string" />
+    <wsdl:part name="CardHolder" type="xsd:string" />
+    <wsdl:part name="CVVNumber" type="xsd:string" />
+    <wsdl:part name="ExpiryMonth" type="xsd:string" />
+    <wsdl:part name="ExpiryYear" type="xsd:string" />
+    <wsdl:part name="Budget" type="xsd:string" />
+    <wsdl:part name="BudgetPeriod" type="xsd:string" />
+    <wsdl:part name="AuthorisationNumber" type="xsd:string" />
+    <wsdl:part name="PIN" type="xsd:string" />
+    <wsdl:part name="DebugMode" type="xsd:string" />
+    <wsdl:part name="eCommerceIndicator" type="xsd:string" />
+    <wsdl:part name="verifiedByVisaXID" type="xsd:string" />
+    <wsdl:part name="verifiedByVisaCAFF" type="xsd:string" />
+    <wsdl:part name="secureCodeUCAF" type="xsd:string" />
+    <wsdl:part name="UCI" type="xsd:string" />
+    <wsdl:part name="IPAddress" type="xsd:string" />
+    <wsdl:part name="ShippingCountryCode" type="xsd:string" />
+    <wsdl:part name="PurchaseItemsID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="fProcessAndSettleResponse">
+    <wsdl:part name="fProcessAndSettleReturn" type="impl:ArrayOf_xsd_anyType" />
+  </wsdl:message>
+  <wsdl:portType name="ePayService">
+    <wsdl:operation name="fProcess" parameterOrder="GatewayID MerchantID ApplicationID Action TransactionIndex Terminal Mode MerchantReference Amount Currency CashBackAmount CardType AccountType CardNumber CardHolder CVVNumber ExpiryMonth ExpiryYear Budget BudgetPeriod AuthorisationNumber PIN DebugMode eCommerceIndicator verifiedByVisaXID verifiedByVisaCAFF secureCodeUCAF UCI IPAddress ShippingCountryCode PurchaseItemsID">
+      <wsdl:input name="fProcessRequest" message="impl:fProcessRequest" />
+      <wsdl:output name="fProcessResponse" message="impl:fProcessResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="fProcessAndSettle" parameterOrder="GatewayID MerchantID ApplicationID TransactionIndex Terminal Mode MerchantReference Amount Currency CashBackAmount CardType AccountType CardNumber CardHolder CVVNumber ExpiryMonth ExpiryYear Budget BudgetPeriod AuthorisationNumber PIN DebugMode eCommerceIndicator verifiedByVisaXID verifiedByVisaCAFF secureCodeUCAF UCI IPAddress ShippingCountryCode PurchaseItemsID">
+      <wsdl:input name="fProcessAndSettleRequest" message="impl:fProcessAndSettleRequest" />
+      <wsdl:output name="fProcessAndSettleResponse" message="impl:fProcessAndSettleResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="IsAlive" parameterOrder="strRemoteAddress strApplicationID">
+      <wsdl:input name="IsAliveRequest" message="impl:IsAliveRequest" />
+      <wsdl:output name="IsAliveResponse" message="impl:IsAliveResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ePayService.cfcSoapBinding" type="impl:ePayService">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="fProcess">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="fProcessRequest">
+        <wsdlsoap:body use="encoded" namespace="http://_5x0x0" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="fProcessResponse">
+        <wsdlsoap:body use="encoded" namespace="http://_5x0x0" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://_5x0x0" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="fProcessAndSettle">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="fProcessAndSettleRequest">
+        <wsdlsoap:body use="encoded" namespace="http://_5x0x0" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="fProcessAndSettleResponse">
+        <wsdlsoap:body use="encoded" namespace="http://_5x0x0" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://_5x0x0" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IsAlive">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="IsAliveRequest">
+        <wsdlsoap:body use="encoded" namespace="http://_5x0x0" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="IsAliveResponse">
+        <wsdlsoap:body use="encoded" namespace="http://_5x0x0" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://_5x0x0" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ePayService.5x0x2">
+    <wsdl:port name="ePayService.cfc" binding="impl:ePayService.cfcSoapBinding">
+      <wsdlsoap:address location="https://www.mygate.co.za/enterprise/5x0x0/ePayService.cfc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

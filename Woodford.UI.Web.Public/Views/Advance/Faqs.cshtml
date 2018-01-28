@@ -1,0 +1,400 @@
+﻿
+@{
+    ViewBag.Title = "Woodford Advance Frequently asked questions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @*<img src="~/Content/images/advance/advance_header.png" style="display: block;margin: auto auto;" />*@
+
+    <img src="~/Content/images/advance/advance_header.png" style="width:100%;" />
+</div>
+
+<div class="row" style="padding-top: 50px;">
+
+    <div class="twelve columns">
+
+        <p style="text-align: center;"><a href="@Url.Action("Enroll", "Advance")" class="button">Register for Advance</a></p>
+
+        <h2 style="color: #108254;text-align:center;"><strong>Join the Journey with Woodford Advance Loyalty Program.</strong></h2>
+        <br />
+        <h3 style="text-align:center;"><strong>Earn and redeem points on every rental with Woodford Car Hire<br /> by signing up for Woodford Advance.</strong></h3>
+    </div>
+
+</div>
+
+<style type="text/css">
+    .advance-steps table {
+        margin: 0 auto 0 auto;
+        width: 70%;
+    }
+
+    .advance-steps td {
+        text-align: center;
+    }
+
+    .advance-number td {
+    }
+
+    .advance-number strong {
+        font-size: xx-large;
+        color: #D8D92A;
+    }
+
+    .advance-border-right {
+        border-right: 1px solid #D8D92A;
+    }
+
+    .advance-small-image {
+        width: 62px;
+        height: 62px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .advance-benefits tbody img {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .advance-benefits {
+        border: 1px solid #108254;
+    }
+
+        .advance-benefits tbody td {
+            border: 1px solid black;
+        }
+
+        .advance-benefits td.green-column, th.green-column {
+            background-color: #108254;
+            color: white;
+            padding-left: 10px;
+            width: 300px;
+            text-align: left;
+        }
+
+        .advance-benefits td, th {
+            text-align: center;
+        }
+
+    /*.advance-benefits tr {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }*/
+
+    .advance-list strong {
+        color: #108254;
+    }
+
+    .advance-list ul {
+        list-style-type: disc;
+        display: block !important;
+    }
+
+    .advance-list li {
+        list-style-type: disc;
+        display: block !important;
+    }
+</style>
+
+<div class="row" style="padding-top: 50px;">
+
+    <div class="twelve columns" style="width: 100%;height: 100%;">
+
+        <table class="advance-steps">
+            <tbody>
+
+                <tr>
+                    <td class="advance-number" valign="top" width="15px"><strong>1.</strong></td>
+                    <td width="200px;">
+                        <img src="~/Content/images/advance/qrcode.png" />
+                    </td>
+                    <td class="advance-border-right" width="15px">&nbsp;</td>
+
+                    <td class="advance-number" valign="top" width="15px;" style="padding-left: 10px;"><strong>2.</strong></td>
+                    <td width="200px;">
+                        <img src="~/Content/images/advance/dollars.png" />
+                    </td>
+                    <td class="advance-border-right" width="15px">&nbsp;</td>
+
+                    <td class="advance-number" valign="top" width="15px" style="padding-left: 10px;"><strong>3.</strong></td>
+                    <td width="200px;">
+                        <img src="~/Content/images/advance/advance_arrow.png" />
+                    </td>
+                    <td width="15px">&nbsp;</td>
+                </tr>
+                <tr>
+
+                    <td colspan="3" class="advance-border-right" style="font-size: xx-large;">
+                        <h3><strong>Register</strong></h3>
+                    </td>
+
+                    <td colspan="3" class="advance-border-right" style="font-size: xx-large;">
+                        <h3><strong>Earn</strong></h3>
+                    </td>
+
+                    <td colspan="3" style="font-size: xx-large;">
+                        <h3><strong>Spend</strong></h3>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td colspan="3" class="advance-border-right" valign="top" style="padding: 0px 10px 0 10px;">
+                        <p>
+                            Complete the Woodford Advance registration by visiting <a href="@Url.Action("Enroll","Advance")">www.woodford.co.za/advance</a> or scanning the QR Code. Provide your details and Woodford will send you your personalised card for your next rental.
+                        </p>
+                    </td>
+
+                    <td colspan="3" class="advance-border-right" valign="top" style="padding: 0px 10px 0 10px;">
+                        <p>
+                            Earn a percentage of your total rental value (excluding tax) on each rental. The points you earn will be based on the frequency of your rentals during a three-month period. The more you rent, the higher your rewards.
+                        </p>
+                    </td>
+
+                    <td colspan="3" valign="top" style="padding: 0px 10px 0 10px;">
+                        <p>
+                            You can then spend your points to pay - in part or in full - when making an online booking for your next rental. Points never expire, so you can accumulate points and spend them when you wish.
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<div class="row" style="padding-top: 50px;">
+
+    <div class="twelve columns">
+
+        <h3 style="text-align:center;"><strong>The more often you rent, the more points you earn.</strong></h3>
+    </div>
+
+</div>
+
+<div class="row" style="padding-top: 50px;">
+
+    <div class="twelve columns" style="width: 100%;height: 100%;">
+        <table class="advance-steps">
+            <tbody>
+                <tr>
+                    <td class="advance-border-right">
+                        <img src="~/Content/images/advance/green_tier.png" />
+                    </td>
+                    <td class="advance-border-right">
+                        <img src="~/Content/images/advance/silver_tier.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/gold_tier.png" />
+                    </td>
+                </tr>
+                <tr>
+
+                    <td class="advance-border-right" style="font-size: xx-large;">
+                        <h3><strong>Green</strong></h3>
+                    </td>
+
+                    <td class="advance-border-right" style="font-size: xx-large;">
+                        <h3><strong>Silver</strong></h3>
+                    </td>
+
+                    <td style="font-size: xx-large;">
+                        <h3><strong>Gold</strong></h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="advance-border-right" style="padding: 0px 10px 0 10px;">
+                        <p>
+                            1 - 8 Rentals per quarter Earns you 5% of the total value of your rental*
+                        </p>
+                    </td>
+                    <td class="advance-border-right" style="padding: 0px 10px 0 10px;">
+                        <p>
+                            9 - 14 rentals per quarter Earns you 10% of the total value of your rental*
+                        </p>
+                    </td>
+                    <td style="padding: 0px 10px 0 10px;">
+                        <p>
+                            15+ retnals per quarter Earns you 12,5% of the total valye of your rental*
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="row" style="padding-top: 50px;">
+    <div class="twelve columns">
+
+        <table class="advance-benefits">
+            <thead>
+                <tr>
+                    <th class="green-column" style="font-size: x-large;">
+                        Added Benefits
+                    </th>
+                    <th>
+                        <img src="~/Content/images/advance/green_tier.png" class="advance-small-image" />
+                    </th>
+                    <th style="border-left: 1px solid black;border-right: 1px solid black;">
+                        <img src="~/Content/images/advance/silver_tier.png" class="advance-small-image" />
+                    </th>
+                    <th>
+                        <img src="~/Content/images/advance/gold_tier.png" class="advance-small-image" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="green-column">Single upgrade upon availability</td>
+                    <td>
+                        <img src="~/Content/images/advance/cross.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/tick.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/tick.png" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="green-column">Single upgrade gauraunteed</td>
+                    <td>
+                        <img src="~/Content/images/advance/cross.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/cross.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/tick.png" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="green-column">Free additional driver</td>
+                    <td>
+                        <img src="~/Content/images/advance/cross.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/cross.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/tick.png" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="green-column">Free GPS</td>
+                    <td>
+                        <img src="~/Content/images/advance/cross.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/tick.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/tick.png" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="green-column">Priority for car availability</td>
+                    <td>
+                        <img src="~/Content/images/advance/cross.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/tick.png" />
+                    </td>
+                    <td>
+                        <img src="~/Content/images/advance/tick.png" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="twelve columns">
+
+        <div class="faqs">
+
+            <ul class="advance-list">
+                <li>
+                    <a herf="#" class="question"><strong>What is Woodford Advance?</strong></a>
+
+                    <div class="answer">
+
+                        <ul class="answer">
+                            <li>Woodford Advance is a loyalty programme for exclusive use by Woodford Car Hire customers. It allows for points to be earned on rentals that is calculated as a percentage of the total rental value (excluding tax). The points equate to a rand value (1 point = R1) that can be used towards your next rental.</li>
+                            <li>A greater percentage of points can be earned the more you rent with Woodford. Find out more about the rewards tiers here.</li>
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li>
+                    <a herf="#" class="question">
+                        <strong>Do I earn points on just the rental value of the vehicle or on other extras and spend as well?</strong>
+                    </a>
+                    <div class="answer">
+                        <ul>
+                            <li>Points are calculated on the total value of the rental, excluding tax. That means that extras, such as rental of GPS, a car-seat, or an additional driver (amongst others) will also earn you points.</li>
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li>
+                    <a herf="#" class="question">
+                        <strong>How does the tier system work? What is the difference between Green, Silver and Gold levels of Woodford Advance?</strong>
+                    </a>
+
+                    <div class="answer">
+
+                        <ul>
+                            <li>Woodford Advance rewards customers for the frequency of their rentals. The more you rent with Woodford Car Hire, the higher your earning percentage on the total value of your rental (excluding tax). The tiers are considered against a time period of three months from the date of your first booking as an Advance member.</li>
+                            <li>Green is the entry level of the programme and rewards customers with an earning of 5% of their total rental value. The Green tier is limited to 8 rentals per quarter or less.</li>
+                            <li>Silver is the intermediate level of the programme and rewards customers with an earning of 10% of their total rental value. Customers need to rent with Woodford at least 9 times per quarter to gain entry into this tier.</li>
+                            <li>Gold is the highest tier and unlocks a host of added benefits, including an earning of 12.5% of their total rental value. Customers need to rent with Woodford at least 15 times per quarter to gain entry into this tier.</li>
+                            <li>Customers will be evaluated every three months to consider whether they remain in the same tier; are promoted to a higher tier or; demoted to a lower tier &ndash; based on the frequency of their rentals during the quarter.</li>
+                        </ul>
+
+                    </div>
+                    
+                </li>
+                <li>
+                    <a herf="#" class="question"><strong>How do I know when I&rsquo;ve earned points and what my points balance is?</strong></a>
+
+                    <div class="answer">
+
+                        <ul>
+                            <li>Your online profile provides a dashboard that shows you how many points you&rsquo;ve earned for each rental along with your total points earned and spent. The dashboard will also indicate how close you are to promotion to a new tier.</li>
+                            <li>Woodford Car Hire will also send out monthly emails informing you of your balance and your tier status.</li>
+                        </ul>
+
+                    </div>
+                    
+                </li>
+                <li>
+                    <a herf="#" class="question"><strong>Do I earn points on rentals that have been paid for by redeemed points?</strong></a>
+
+                    <div class="answer">
+
+                        <ul>
+                            <li>Unfortunately, points cannot be earned on rentals that have been paid for in part or in full with redeemed points.</li>
+                            <li>&nbsp;</li>
+                            <li><strong>Can points be exchanged for cash or cash equivalents?</strong></li>
+                            <li>Like most rewards programmes, points earned cannot be exchanged for cash or cash equivalents. You are, however, welcome to spend your points with Woodford for upgrades to another vehicle category or for extras such as a GPS.</li>
+                            <li>&nbsp;</li>
+                            <li><strong>Can I earn or redeem points in-branch and online?</strong></li>
+                            <li>Woodford Advance runs exclusively online. You may only redeem points in advance by logging in when making a booking. Points cannot be redeemed in-branch or at the counter.</li>
+                        </ul>
+
+                    </div>
+                    
+                </li>
+            </ul>
+
+        </div>
+
+     
+
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@model ListOf<CampaignModel>
+@{
+    ViewBag.Title = "Campaigns";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int itemIndex = 0;
+    int itemsPerRow = 2;
+}
+
+@helper RenderIf(bool ifCondition, string renderHtml) {
+if (ifCondition) {
+        <text>@Html.Raw(renderHtml)</text>
+}
+}
+
+<div class="row">
+    <div class="twelve columns">
+        <h1>Campaigns</h1>
+    </div>
+</div>
+
+@if (Model.Items.Count > 0) {
+    bool newRow = false;
+    foreach (var c in Model.Items) {
+        newRow = (itemIndex % itemsPerRow == 0);
+        @RenderIf(newRow, "<div class='row'>")
+        <div class="six columns">
+            @if (c.FileUploadId.HasValue) {
+                <img src="@Url.Action("Index", "Uploads", new { id = c.CampaignImage.Id, filename = c.CampaignImage.Title + c.CampaignImage.FileExtension })" alt="@c.Title" />
+            }
+            <h3>@c.Title</h3>
+           
+            @Html.ActionLink("View Campaign", "Campaign", "Campaigns", new { campaignUrl = c.PageUrl }, null)
+        </div>
+        itemIndex++;
+        bool newRowNext = (itemIndex % itemsPerRow == 0);
+        @RenderIf(newRowNext, "</div>")
+    }   
+    //if only 1 or 2 on last row
+    @RenderIf(newRow, "</div>")
+
+} else {
+    <div class="row">
+        <div class="twelve columns">
+            <p>No campaigns have been found</p>
+        </div>
+    </div>
+
+}

@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D581ACC6-01EA-46D5-8905-42D958EBB456}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Woodford.Core.ApplicationServices</RootNamespace>
+    <AssemblyName>Woodford.Core.ApplicationServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandDecorators\ExceptionLoggingCommandHandlerDecorator.cs" />
+    <Compile Include="CommandDecorators\TransactionCommandHandler.cs" />
+    <Compile Include="Commands\BookingHistory\BookingHistoryAddCommand.cs" />
+    <Compile Include="Commands\BookingHistory\BookingHistoryDeleteCommand.cs" />
+    <Compile Include="Commands\BookingHistory\ImportBookingHistoryCommand.cs" />
+    <Compile Include="Commands\Branches\BranchEditCommand.cs" />
+    <Compile Include="Commands\Branches\BranchAddCommand.cs" />
+    <Compile Include="Commands\BranchRateCodeExclusions\BranchRateCodeExclusionsAddCommand.cs" />
+    <Compile Include="Commands\BranchRateCodeExclusions\BranchRateCodeExclusionsDeleteCommand.cs" />
+    <Compile Include="Commands\BranchRateCodeExclusions\BranchRateCodeExclusionsEditCommand.cs" />
+    <Compile Include="Commands\BranchSurcharges\BranchSurchargeAddCommand.cs" />
+    <Compile Include="Commands\BranchSurcharges\BranchSurchargeEditCommand.cs" />
+    <Compile Include="Commands\BranchVehicleExclusions\BranchVehicleExclusionsDeleteCommand.cs" />
+    <Compile Include="Commands\BranchVehicleExclusions\BranchVehicleExclusionsEditCommand.cs" />
+    <Compile Include="Commands\BranchVehicleExclusions\BranchVehicleExclusionsAddCommand.cs" />
+    <Compile Include="Commands\BranchVehicles\BranchVehicleInsertDeleteCommand.cs" />
+    <Compile Include="Commands\BulkMailing\BulkMailingSignupCommand.cs" />
+    <Compile Include="Commands\Campaigns\CampaignAddCommand.cs" />
+    <Compile Include="Commands\Campaigns\CampaignEditCommand.cs" />
+    <Compile Include="Commands\ClaimBooking\ClaimBookingAddCommand.cs" />
+    <Compile Include="Commands\ClaimBooking\ClaimBookingConfirmCommand.cs" />
+    <Compile Include="Commands\Corporates\CorporateUpdateRateCodesCommand.cs" />
+    <Compile Include="Commands\Corporates\CorporateAddCommand.cs" />
+    <Compile Include="Commands\Corporates\CorporateEditCommand.cs" />
+    <Compile Include="Commands\CountdownSpecials\CountdownSpecialMarkAsCommand.cs" />
+    <Compile Include="Commands\CountdownSpecials\CountdownSpecialEditCommand.cs" />
+    <Compile Include="Commands\CountdownSpecials\CountdownSpecialAddCommand.cs" />
+    <Compile Include="Commands\DynamicPages\DynamicPageUnarchiveCommand.cs" />
+    <Compile Include="Commands\DynamicPages\DynamicPageArchiveCommand.cs" />
+    <Compile Include="Commands\DynamicPages\DynamicPageEditCommand.cs" />
+    <Compile Include="Commands\DynamicPages\DynamicPageAddCommand.cs" />
+    <Compile Include="Commands\EmailCampaignSignatures\EmailSignatureCampaignAddCommand.cs" />
+    <Compile Include="Commands\EmailCampaignSignatures\EmailSignatureCampaignEditCommand.cs" />
+    <Compile Include="Commands\EmailSignatures\EmailSignatureAddCommand.cs" />
+    <Compile Include="Commands\EmailSignatures\EmailSignatureSendToUserCommand.cs" />
+    <Compile Include="Commands\EmailSignatures\EmailSignatureEditCommand.cs" />
+    <Compile Include="Commands\FileUploads\FileUploadEditCommand.cs" />
+    <Compile Include="Commands\FileUploads\FileUploadAddCommand.cs" />
+    <Compile Include="Commands\Herospace\HerospaceEditCommand.cs" />
+    <Compile Include="Commands\Herospace\HerospaceAddCommand.cs" />
+    <Compile Include="Commands\InterBranchDropOffFees\InterBranchDropOffFeeMarkAsCommand.cs" />
+    <Compile Include="Commands\InterBranchDropOffFees\InterBranchDropOffFeeEditCommand.cs" />
+    <Compile Include="Commands\InterBranchDropOffFees\InterBranchDropOffFeeAddCommand.cs" />
+    <Compile Include="Commands\Invoices\InvoiceUpsertCommand.cs" />
+    <Compile Include="Commands\LoyaltyTiers\LoyaltyTierBenefitAddCommand.cs" />
+    <Compile Include="Commands\LoyaltyTiers\LoyaltyTierBenefitEditCommand.cs" />
+    <Compile Include="Commands\LoyaltyTiers\LoyaltyTierEditCommand.cs" />
+    <Compile Include="Commands\Loyalty\ImportLoyaltyUsersCommand.cs" />
+    <Compile Include="Commands\News\NewsMarkAsCommand.cs" />
+    <Compile Include="Commands\News\NewsEditCommand.cs" />
+    <Compile Include="Commands\News\NewsAddCommand.cs" />
+    <Compile Include="Commands\News\NewsCategoryMarkAsCommand.cs" />
+    <Compile Include="Commands\News\NewsCategoryEditCommand.cs" />
+    <Compile Include="Commands\News\NewsCategoryAddCommand.cs" />
+    <Compile Include="Commands\Notifications\NotifyBookingClaimCommand.cs" />
+    <Compile Include="Commands\Notifications\NotifyAdvanceReportCommand.cs" />
+    <Compile Include="Commands\Notifications\NotifyReservationRemindersJobCommand.cs" />
+    <Compile Include="Commands\Notifications\NotifyReservationQuoteCommand.cs" />
+    <Compile Include="Commands\Notifications\NotifyRequestCallbackCommand.cs" />
+    <Compile Include="Commands\Notifications\NotifyContactUsCommand.cs" />
+    <Compile Include="Commands\Notifications\NotifyUserPasswordResetTokenCommand.cs" />
+    <Compile Include="Commands\Payments\Payment3DSecureLookupCommand.cs" />
+    <Compile Include="Commands\Payments\PaymentAuthenticate3DSecureCommand.cs" />
+    <Compile Include="Commands\Payments\PaymentProcessCommand.cs" />
+    <Compile Include="Commands\RateAdjustments\RateAdjustmentAddCommand.cs" />
+    <Compile Include="Commands\RateAdjustments\RateAdjustmentUpdateCommand.cs" />
+    <Compile Include="Commands\RateCodes\RateCodeAddCommand.cs" />
+    <Compile Include="Commands\RateCodes\RateCodeEditCommand.cs" />
+    <Compile Include="Commands\RateRules\RateRuleAddCommand.cs" />
+    <Compile Include="Commands\RateRules\RateRuleEditCommand.cs" />
+    <Compile Include="Commands\Rates\RateUpsertCommand.cs" />
+    <Compile Include="Commands\Rates\RateAddCommand.cs" />
+    <Compile Include="Commands\Reports\ReportDeleteCommand.cs" />
+    <Compile Include="Commands\Reports\ReportAddCommand.cs" />
+    <Compile Include="Commands\Reports\ReportEditCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationAddBenefitsCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationAddBranchSurchargesCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationArchiveCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationCancelCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationModifyCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationMarkAsPaidCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationAssignGuestUserDetailsCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationAssignUserCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationAddExtrasCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationAddCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationSetAsAddedToExternalSystemCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationSetVoucherCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationSetCountdownSpecialCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationSetUpgradeCommand.cs" />
+    <Compile Include="Commands\Reservations\ReservationEditCommand.cs" />
+    <Compile Include="Commands\Reviews\ReviewEditCommand.cs" />
+    <Compile Include="Commands\Reviews\ReviewAddCommand.cs" />
+    <Compile Include="Commands\Settings\SettingEditCommand.cs" />
+    <Compile Include="Commands\UrlRedirects\UrlRedirectAddCommand.cs" />
+    <Compile Include="Commands\UrlRedirects\UrlRedirectDeleteCommand.cs" />
+    <Compile Include="Commands\UrlRedirects\UrlRedirectEditCommand.cs" />
+    <Compile Include="Commands\Users\UserAssignRolesCommand.cs" />
+    <Compile Include="Commands\Users\UserAuthenticateCommand.cs" />
+    <Compile Include="Commands\Users\UserChangePasswordCommand.cs" />
+    <Compile Include="Commands\Users\UserChangeUsernameCommand.cs" />
+    <Compile Include="Commands\Users\UserCreateCommand.cs" />
+    <Compile Include="Commands\Users\UserLogOffCommand.cs" />
+    <Compile Include="Commands\Users\UserModifyReservationCommand.cs" />
+    <Compile Include="Commands\Users\UserResetPasswordFromTokenCommand.cs" />
+    <Compile Include="Commands\Users\UserSetAccountDisabledCommand.cs" />
+    <Compile Include="Commands\Users\UserSetLoyaltyTierFixedCommand.cs" />
+    <Compile Include="Commands\Users\UserSetPasswordCommand.cs" />
+    <Compile Include="Commands\Users\UserSetEmailCommand.cs" />
+    <Compile Include="Commands\Users\UserSetCorporateCommand.cs" />
+    <Compile Include="Commands\Users\UserSetLoyaltyCommand.cs" />
+    <Compile Include="Commands\Users\UserEnrollLoyaltyCommand.cs" />
+    <Compile Include="Commands\Users\UserUpdateCurrentCommand.cs" />
+    <Compile Include="Commands\Users\UserRegisterCommand.cs" />
+    <Compile Include="Commands\Users\UserUpdateCommand.cs" />
+    <Compile Include="Commands\VehicleExtras\VehicleExtraEditCommand.cs" />
+    <Compile Include="Commands\VehicleGroups\VehicleGroupEditCommand.cs" />
+    <Compile Include="Commands\VehicleGroups\VehicleGroupAddCommand.cs" />
+    <Compile Include="Commands\VehicleManufacturers\VehicleManufacturerAddCommand.cs" />
+    <Compile Include="Commands\VehicleManufacturers\VehicleManufacturerEditCommand.cs" />
+    <Compile Include="Commands\Vehicles\VehicleAddCommand.cs" />
+    <Compile Include="Commands\Vehicles\VehicleEditCommand.cs" />
+    <Compile Include="Commands\VehicleUpgrades\VehicleUpgradeMarkAsCommand.cs" />
+    <Compile Include="Commands\VehicleUpgrades\VehicleUpgradeEditCommand.cs" />
+    <Compile Include="Commands\VehicleUpgrades\VehicleUpgradeAddCommand.cs" />
+    <Compile Include="Commands\Vouchers\VoucherEditCommand.cs" />
+    <Compile Include="Commands\Vouchers\VoucherAddCommand.cs" />
+    <Compile Include="Commands\Vouchers\VoucherEmailToUserCommand.cs" />
+    <Compile Include="Commands\Waivers\WaiverDeleteCommand.cs" />
+    <Compile Include="Commands\Waivers\WaiverEditCommand.cs" />
+    <Compile Include="Commands\Waivers\WaiverAddCommand.cs" />
+    <Compile Include="NotifcationBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\Audit\AuditGetByIdQuery.cs" />
+    <Compile Include="Queries\Audit\AuditGetQuery.cs" />
+    <Compile Include="Queries\BookingHistory\BookingHistoryByExternalIdQuery.cs" />
+    <Compile Include="Queries\BookingHistory\BookingHistoryByIdQuery.cs" />
+    <Compile Include="Queries\BookingHistory\BookingHistoryGetQuery.cs" />
+    <Compile Include="Queries\Branches\BranchGetByUrlQuery.cs" />
+    <Compile Include="Queries\Branches\BranchGetByIdQuery.cs" />
+    <Compile Include="Queries\Branches\BranchesGetQuery.cs" />
+    <Compile Include="Queries\BranchRateCodeExclusions\BranchRateCodeExclusionsGetByIdQuery.cs" />
+    <Compile Include="Queries\BranchSurcharges\BranchSurchargesGetQuery.cs" />
+    <Compile Include="Queries\BranchSurcharges\BranchSurchargeGetByIdQuery.cs" />
+    <Compile Include="Queries\BranchRateCodeExclusions\BranchRateCodeExclusionsGetQuery.cs" />
+    <Compile Include="Queries\BranchVehicleExclusions\BranchVehicleExclusionsGetByIdQuery.cs" />
+    <Compile Include="Queries\BranchVehicles\BranchVehiclesGetQuery.cs" />
+    <Compile Include="Queries\Campaigns\CampaignGetByUrlQuery.cs" />
+    <Compile Include="Queries\Campaigns\CampaignGetQuery.cs" />
+    <Compile Include="Queries\Campaigns\CampaignGetByIdQuery.cs" />
+    <Compile Include="Queries\ClaimBooking\ClaimBookingGetByIdQuery.cs" />
+    <Compile Include="Queries\Corporates\CorporateGetByIdQuery.cs" />
+    <Compile Include="Queries\Corporates\CorporatesGetQuery.cs" />
+    <Compile Include="Queries\CountdownSpecials\CountdownSpecialGetByIdQuery.cs" />
+    <Compile Include="Queries\CountdownSpecials\CountdownSpecialsGetQuery.cs" />
+    <Compile Include="Queries\Dashboard\DashboardGetSummaryQuery.cs" />
+    <Compile Include="Queries\Dashboard\DashboardGetQuery.cs" />
+    <Compile Include="Queries\DynamicPages\DynamicPageIdGetByUrlQuery.cs" />
+    <Compile Include="Queries\DynamicPages\DynamicPageGetByIdQuery.cs" />
+    <Compile Include="Queries\DynamicPages\DynamicPagesGetQuery.cs" />
+    <Compile Include="Queries\EmailSignatureCampaigns\EmailSignatureCampaignGetByIdQuery.cs" />
+    <Compile Include="Queries\EmailSignatureCampaigns\EmailSignatureCampaignGetQuery.cs" />
+    <Compile Include="Queries\EmailSignatures\EmailSignatureGetImageQuery.cs" />
+    <Compile Include="Queries\EmailSignatures\EmailSignatureGetRenderedSignatureQuery.cs" />
+    <Compile Include="Queries\EmailSignatures\EmailSignatureGetQuery.cs" />
+    <Compile Include="Queries\EmailSignatures\EmailSignatureGetByIdQuery.cs" />
+    <Compile Include="Queries\Files\FileUploadGetByIdQuery.cs" />
+    <Compile Include="Queries\Files\FileGetByIdQuery.cs" />
+    <Compile Include="Queries\Files\FilesGetQuery.cs" />
+    <Compile Include="Queries\Herospace\HerospaceItemGetByIdQuery.cs" />
+    <Compile Include="Queries\Herospace\HerospaceItemsGetQuery.cs" />
+    <Compile Include="Queries\InterBranchDropOffFees\InterBranchDropOffFeesGetQuery.cs" />
+    <Compile Include="Queries\InterBranchDropOffFees\InterBranchDropOffFeeGetByIdQuery.cs" />
+    <Compile Include="Queries\Invoices\InvoiceGetByReservationIdQuery.cs" />
+    <Compile Include="Queries\Loyalty\LoyaltyListOverviewByUserIdQuery.cs" />
+    <Compile Include="Queries\Loyalty\LoyaltyTierGetBenefitByIdQuery.cs" />
+    <Compile Include="Queries\Loyalty\LoyaltyTierGetBenefitsQuery.cs" />
+    <Compile Include="Queries\Loyalty\LoyaltyOverviewByUserIdQuery.cs" />
+    <Compile Include="Queries\Loyalty\LoyaltyTierGetByLevelQuery.cs" />
+    <Compile Include="Queries\MessageQueue\MessageQueueGetByIdQuery.cs" />
+    <Compile Include="Queries\MessageQueue\MessageQueueGetQuery.cs" />
+    <Compile Include="Queries\News\NewsCategoryGetByUrlQuery.cs" />
+    <Compile Include="Queries\News\NewsCategoryGetByIdQuery.cs" />
+    <Compile Include="Queries\News\NewsCategoryGetQuery.cs" />
+    <Compile Include="Queries\News\NewsGetByUrlQuery.cs" />
+    <Compile Include="Queries\News\NewsGetByIdQuery.cs" />
+    <Compile Include="Queries\News\NewsGetQuery.cs" />
+    <Compile Include="Queries\Payments\PaymentCheck3DSecureQuery.cs" />
+    <Compile Include="Queries\RateAdjustments\RateAdjustmentGetByIdQuery.cs" />
+    <Compile Include="Queries\RateAdjustments\RateAdjustmentGetQuery.cs" />
+    <Compile Include="Queries\RateCodes\RateCodeGetByIdQuery.cs" />
+    <Compile Include="Queries\RateCodes\RateCodeGetQuery.cs" />
+    <Compile Include="Queries\RateRules\RateRuleGetByIdQuery.cs" />
+    <Compile Include="Queries\RateRules\RateRuleGetQuery.cs" />
+    <Compile Include="Queries\Rates\RateGetByIdQuery.cs" />
+    <Compile Include="Queries\Rates\RateGetQuery.cs" />
+    <Compile Include="Queries\Rates\RateFindDatesQuery.cs" />
+    <Compile Include="Queries\Rates\RateSearchQuery.cs" />
+    <Compile Include="Queries\Reports\ReportsGetQuery.cs" />
+    <Compile Include="Queries\Reports\ReportGetByIdQuery.cs" />
+    <Compile Include="Queries\Reservations\ReservationDateChangeValidQuery.cs" />
+    <Compile Include="Queries\Reservations\ReservationGetByIdAndPINQuery.cs" />
+    <Compile Include="Queries\Reservations\ReservationGetByIdQuery.cs" />
+    <Compile Include="Queries\Reservations\ReservationsGetQuery.cs" />
+    <Compile Include="Queries\Reviews\ReviewGetQuery.cs" />
+    <Compile Include="Queries\Reviews\ReviewGetByReservationIdQuery.cs" />
+    <Compile Include="Queries\Roles\RolesGetQuery.cs" />
+    <Compile Include="Queries\Search\BookingSearchQuery.cs" />
+    <Compile Include="Queries\Settings\SettingGetByNameQuery.cs" />
+    <Compile Include="Queries\Settings\SettingGetAllQuery.cs" />
+    <Compile Include="Queries\UrlRedirects\UrlRedirectGetByIdQuery.cs" />
+    <Compile Include="Queries\UrlRedirects\UrlRedirectGetByUrlQuery.cs" />
+    <Compile Include="Queries\UrlRedirects\UrlRedirectGetQuery.cs" />
+    <Compile Include="Queries\Users\UsersGetQuery.cs" />
+    <Compile Include="Queries\Users\UserGetByIdQuery.cs" />
+    <Compile Include="Queries\Users\UserGetByUsernameQuery.cs" />
+    <Compile Include="Queries\Users\UserGetCurrentQuery.cs" />
+    <Compile Include="Queries\Users\UserGetAllQuery.cs" />
+    <Compile Include="Queries\VehicleExtras\VehicleExtraGetByIdQuery.cs" />
+    <Compile Include="Queries\VehicleExtras\VehicleExtrasGetQuery.cs" />
+    <Compile Include="Queries\VehicleGroups\VehicleGroupGetByUrlQuery.cs" />
+    <Compile Include="Queries\VehicleGroups\VehicleGroupsGetQuery.cs" />
+    <Compile Include="Queries\VehicleGroups\VehicleGroupGetByIdQuery.cs" />
+    <Compile Include="Queries\VehicleManufacturers\VehicleManufacturerGetByIdQuery.cs" />
+    <Compile Include="Queries\VehicleManufacturers\VehicleManufacturerGetByUrlQuery.cs" />
+    <Compile Include="Queries\VehicleManufacturers\VehicleManufacturerGetQuery.cs" />
+    <Compile Include="Queries\Vehicles\VehicleGetByUrlQuery.cs" />
+    <Compile Include="Queries\Vehicles\VehicleGetByIdQuery.cs" />
+    <Compile Include="Queries\Vehicles\VehiclesGetQuery.cs" />
+    <Compile Include="Queries\VehicleUpgrades\VehicleUpgradeGetByIdQuery.cs" />
+    <Compile Include="Queries\VehicleUpgrades\VehicleUpgradesGetQuery.cs" />
+    <Compile Include="Queries\Vouchers\VoucherGetByIdQuery.cs" />
+    <Compile Include="Queries\Vouchers\VouchersGetQuery.cs" />
+    <Compile Include="Queries\Waivers\WaiverGetByIdQuery.cs" />
+    <Compile Include="Queries\Waivers\WaiversGetQuery.cs" />
+    <Compile Include="ReservationBuilder.cs" />
+    <Compile Include="SearchService.cs" />
+    <Compile Include="Utilities\Helpers.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Woodford.Core.DomainModel\Woodford.Core.DomainModel.csproj">
+      <Project>{03d766e6-9b26-4d48-9bce-5a3d592c009f}</Project>
+      <Name>Woodford.Core.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Woodford.Core.Interfaces\Woodford.Core.Interfaces.csproj">
+      <Project>{dff3dbdf-3c76-4622-8829-281ef407f716}</Project>
+      <Name>Woodford.Core.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

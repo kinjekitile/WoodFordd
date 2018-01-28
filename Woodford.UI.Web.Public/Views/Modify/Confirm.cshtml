@@ -1,0 +1,265 @@
+﻿@model ReservationModifyViewModel
+@{
+    ViewBag.Title = "Confirm Changes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="six columns">
+        <div class="reservation-number">
+            <h2>Reservation Number: <span>@Model.Reservation.Id</span></h2>
+        </div>
+
+        <p class="thank-you-message">Thank you for choosing Woodford Car Hire. We look forward to meeting you.</p>
+
+    </div>
+</div>
+<div class="row">
+
+
+
+    <div class="six columns">
+
+        <h2>Current Details</h2>
+
+        <h3>Vehicle</h3>
+        @if (Model.Reservation.VehicleUpgrade != null) {
+            <p><strong>@Model.Reservation.VehicleUpgrade.Title</strong></p>
+            <p>Upgraded from @Model.Reservation.Vehicle.Title</p>
+
+        } else {
+            <p><strong>@Model.Reservation.Vehicle.Title</strong></p>
+        }
+
+        <h2>Hire Dates</h2>
+        <p>
+            Pick Up <strong style="margin: 0 10px;">@Model.Reservation.PickupDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Reservation.PickupBranch.Title
+            <br />
+            Drop Off <strong style="margin: 0 10px;">@Model.Reservation.DropOffDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Reservation.DropOffBranch.Title
+        </p>
+
+        <h3>@Model.Reservation.RateCodeTitle</h3>
+
+        <h4>Cost Summary</h4>
+        <table class="cost-summary">
+            <tr>
+                <th scope="row">Rental</th>
+                <td>@String.Format("{0:c}", Model.Reservation.AdjustedPrice)</td>
+            </tr>
+            <tr>
+                <th scope="row">Tax</th>
+                <td>@String.Format("{0:c}", Model.Reservation.TaxAmount)</td>
+            </tr>
+            <tr>
+                <th scope="row"><strong>Total</strong></th>
+                <td><strong>@String.Format("{0:c}", Model.Reservation.AdjustedPrice + Model.Reservation.TaxAmount)</strong></td>
+            </tr>
+            @if (Model.Reservation.DropOffFee > 0) {
+                <tr>
+                    <th scope="row">Drop Off Fee</th>
+                    <td>@String.Format("{0:c}", Model.Reservation.DropOffFee)</td>
+                </tr>
+            }
+            <tr>
+                <th scope="row">Admin Fee</th>
+                <td>@String.Format("{0:c}", Model.Reservation.ContractFee)</td>
+            </tr>
+
+            @foreach (var x in Model.Reservation.VehicleExtras) {
+                <tr>
+                    <th scope="row">@x.ExtraTitle</th>
+                    @if (x.ReservationLoyaltyBenefitId.HasValue) {
+                        <td>Advance - Free</td>
+                    } else {
+
+                        <td>@String.Format("{0:c}", x.ExtraPrice * Model.Reservation.NumberOfDays)</td>
+                    }
+
+                </tr>
+            }
+            @if (Model.Reservation.VehicleUpgradeId != null) {
+                <tr>
+                    <th scope="row">Upgrade to @Model.Reservation.VehicleUpgrade.Title</th>
+                    @if (Model.Reservation.Benefits.Select(x => x.UpgradeId).Contains(Model.Reservation.VehicleUpgradeId)) {
+                        <td>Advance - Free</td>
+                    } else {
+                        <td>@String.Format("{0:c}", Model.Reservation.VehicleUpgradePriceAmount)</td>
+                    }
+
+                </tr>
+            }
+
+            <tr class="total total-row">
+                <th scope="row"><strong>Final</strong></th>
+                <td id="total-price">
+                    @String.Format("{0:c}", Model.Reservation.BookingPrice)
+                </td>
+            </tr>
+            <tr class="total-days">
+                <td></td>
+                <td class="numeric-field">For @Model.Reservation.NumberOfDays.ToString() Days</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Paid Upon Booking</th>
+                <td style="text-align: right;">R @Model.Reservation.Invoice.AmountPaid.ToString("#,##0.00")</td>
+            </tr>
+
+            @if (Model.Reservation.BookingPrice - Model.Reservation.Invoice.AmountPaid > 0.01m) {
+                <tr>
+                    <th scope="row">To be Paid Upon Collection</th>
+                    <td style="text-align: right;">R @((Model.Reservation.BookingPrice - Model.Reservation.Invoice.AmountPaid).ToString("#,##0.00"))</td>
+                </tr>
+            }
+
+        </table>
+
+
+
+
+    </div>
+
+    <div class="six columns">
+
+        <h2>New Details</h2>
+
+
+        <h3>Vehicle</h3>
+        @if (Model.Modified.VehicleUpgrade != null) {
+            <p><strong>@Model.Modified.VehicleUpgrade.Title</strong></p>
+            <p>Upgraded from @Model.Modified.Vehicle.Title</p>
+
+        } else {
+            <p><strong>@Model.Modified.Vehicle.Title</strong></p>
+        }
+
+        <h2>Hire Dates</h2>
+        <p>
+            Pick Up <strong style="margin: 0 10px;">@Model.Modified.PickupDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Modified.PickupBranch.Title
+            <br />
+            Drop Off <strong style="margin: 0 10px;">@Model.Modified.DropOffDate.ToString("dd MMMM yyyy h:mm tt")</strong> @Model.Modified.DropOffBranch.Title
+        </p>
+
+        <h3>@Model.Modified.RateCodeTitle</h3>
+
+        <h4>Cost Summary</h4>
+        <table class="cost-summary">
+            <tr>
+                <th scope="row">Rental</th>
+                <td>@String.Format("{0:c}", Model.Modified.AdjustedPrice)</td>
+            </tr>
+            <tr>
+                <th scope="row">Tax</th>
+                <td>@String.Format("{0:c}", Model.Modified.TaxAmount)</td>
+            </tr>
+            <tr>
+                <th scope="row"><strong>Total</strong></th>
+                <td><strong>@String.Format("{0:c}", Model.Modified.AdjustedPrice + Model.Modified.TaxAmount)</strong></td>
+            </tr>
+            @if (Model.Modified.DropOffFee > 0) {
+                <tr>
+                    <th scope="row">Drop Off Fee</th>
+                    <td>@String.Format("{0:c}", Model.Modified.DropOffFee)</td>
+                </tr>
+            }
+            <tr>
+                <th scope="row">Admin Fee</th>
+                <td>@String.Format("{0:c}", Model.Modified.ContractFee)</td>
+            </tr>
+
+            @foreach (var x in Model.Modified.VehicleExtras) {
+                <tr>
+                    <th scope="row">@x.ExtraTitle</th>
+                    @if (x.ReservationLoyaltyBenefitId.HasValue) {
+                        <td>Advance - Free</td>
+                    } else {
+
+                        <td>@String.Format("{0:c}", x.ExtraPrice * Model.Modified.NumberOfDays)</td>
+                    }
+
+                </tr>
+            }
+            @if (Model.Modified.VehicleUpgradeId != null) {
+                <tr>
+                    <th scope="row">Upgrade to @Model.Modified.VehicleUpgrade.Title</th>
+                    @if (Model.Modified.Benefits.Select(x => x.UpgradeId).Contains(Model.Modified.VehicleUpgradeId)) {
+                        <td>Advance - Free</td>
+                    } else {
+                        <td>@String.Format("{0:c}", Model.Modified.VehicleUpgradePriceAmount)</td>
+                    }
+
+                </tr>
+            }
+
+            <tr class="total total-row">
+                <th scope="row"><strong>Final</strong></th>
+                <td id="total-price">
+                    @String.Format("{0:c}", Model.Modified.BookingPrice)
+                </td>
+            </tr>
+            <tr class="total-days">
+                <td></td>
+                <td class="numeric-field">For @Model.Modified.NumberOfDays.ToString() Days</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Paid Upon Booking</th>
+                <td style="text-align: right;">R @Model.Modified.Invoice.AmountPaid.ToString("#,##0.00")</td>
+            </tr>
+
+            @if (Model.Modified.BookingPrice - Model.Modified.Invoice.AmountPaid > 0.01m) {
+                <tr>
+                    <th scope="row">To be Paid Upon Collection</th>
+                    <td style="text-align: right;">R @((Model.Modified.BookingPrice - Model.Modified.Invoice.AmountPaid).ToString("#,##0.00"))</td>
+                </tr>
+            }
+
+            @if (Model.Modified.BookingPrice - Model.Modified.Invoice.AmountPaid < 0.00m) {
+                <tr>
+                    <th scope="row">To be Refunded Upon Collection</th>
+                    <td style="text-align: right;">R @((Model.Modified.Invoice.AmountPaid - Model.Modified.BookingPrice).ToString("#,##0.00"))</td>
+                </tr>
+            }
+
+        </table>
+        <div class="align-right">
+            @using (Html.BeginForm("Complete", "Modify", new { id = Model.Reservation.Id, pin = Model.Reservation.QuoteReference }, FormMethod.Post, null)) {
+                @Html.HiddenFor(x => x.Modified.Id);
+                @Html.HiddenFor(x => x.Modified.VehicleId);
+                @Html.HiddenFor(x => x.Modified.PickupBranchId);
+                @Html.HiddenFor(x => x.Modified.DropOffBranchId);
+                @Html.HiddenFor(x => x.Modified.PickupDate);
+                @Html.HiddenFor(x => x.Modified.DropOffDate);
+                @Html.HiddenFor(x => x.Modified.RateId);
+
+                <input type="submit" value="Confirm" />
+            }
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="row">
+    <div class="six columns">
+        <h4>Authorisation Upon Collection</h4>
+        <p>
+            The insurance excess on this vehicle is R @Model.Reservation.Vehicle.ExcessAmount.ToString("#,##0.00").<br />
+
+            Upon collection you would be required to pay a credit card deposit of R @Model.Reservation.Vehicle.DepositAmount.ToString("#,##0.00") for the duration. Upon return of the vehicle in the same condition the deposit will be refunded.
+
+        </p>
+    </div>
+
+    <div class="six columns">
+        <h4>Authorisation Upon Collection</h4>
+        <p>
+            The insurance excess on this vehicle is R @Model.Modified.Vehicle.ExcessAmount.ToString("#,##0.00").<br />
+
+            Upon collection you would be required to pay a credit card deposit of R @Model.Modified.Vehicle.DepositAmount.ToString("#,##0.00") for the duration. Upon return of the vehicle in the same condition the deposit will be refunded.
+
+        </p>
+    </div>
+</div>
